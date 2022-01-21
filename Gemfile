@@ -19,6 +19,9 @@ gem 'annotate',
   git:   'https://github.com/sleepingkingstudios/annotate_models'
 gem 'bcrypt', '~> 3.1.7'
 
+### Commands
+gem 'cuprum', '~> 1.0'
+
 group :development, :test do
   gem 'byebug'
 
