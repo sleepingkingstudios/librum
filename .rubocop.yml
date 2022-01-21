@@ -34,6 +34,9 @@ RSpec:
         - xinclude_examples
         - xwrap_examples
 
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
 Layout/HashAlignment:
   EnforcedColonStyle: table
   EnforcedHashRocketStyle: table
@@ -46,3 +49,26 @@ Layout/LineLength:
 Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
   IndentationWidth: ~
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_contract*.rb
+    - spec/**/*_spec.rb
+
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/HookArgument:
+  EnforcedStyle: example
+
+RSpec/NamedSubject:
+  Exclude:
+    - spec/**/*_contract*.rb
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - db/migrate/*
+    - spec/**/*

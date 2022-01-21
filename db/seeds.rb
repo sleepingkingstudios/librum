@@ -7,3 +7,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+[
+  Publisher.create!(
+    name:    'Crystal Sphere Publications',
+    slug:    'crystal-sphere-publications',
+    website: 'www.example.com/crystal-sphere-publications'
+  ),
+  Publisher.create!(
+    name:    'Flumph Free Press',
+    slug:    'flumph-free-press',
+    website: 'www.example.com/flumph-free-press'
+  ),
+  Publisher.create!(
+    name:    'Spelljammer Monthly',
+    slug:    'spelljammer-monthly',
+    website: 'www.example.com/spelljammer-monthly'
+  )
+]

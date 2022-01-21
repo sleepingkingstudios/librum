@@ -6,6 +6,7 @@ unless ENV['COVERAGE'] == 'false'
   SimpleCov.start
 end
 
+require 'byebug'
 require 'rspec/sleeping_king_studios/all'
 
 # Isolated namespace for defining spec-only or transient objects.
