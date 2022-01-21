@@ -55,7 +55,14 @@ Metrics/BlockLength:
     - spec/**/*_contract*.rb
     - spec/**/*_spec.rb
 
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*
+
 RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/FactoryBot/SyntaxMethods:
   Enabled: false
 
 RSpec/HookArgument:

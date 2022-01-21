@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'support/contracts'
+require 'support/contracts/models'
 
-module Spec::Support::Contracts
+module Spec::Support::Contracts::Models
   module ValidationHelpers
     # :nocov:
     def extract_message(maybe_hash, default)

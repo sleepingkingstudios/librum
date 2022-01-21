@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_195620) do
+ActiveRecord::Schema.define(version: 2022_01_21_212017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.string "edition", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "publisher_id"
+    t.index ["name", "edition"], name: "index_game_systems_on_name_and_edition", unique: true
+    t.index ["publisher_id"], name: "index_game_systems_on_publisher_id"
+    t.index ["slug"], name: "index_game_systems_on_slug", unique: true
+  end
 
   create_table "publishers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", default: "", null: false

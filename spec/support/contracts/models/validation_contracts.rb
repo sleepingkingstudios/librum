@@ -2,10 +2,10 @@
 
 require 'rspec/sleeping_king_studios/contract'
 
-require 'support/contracts'
-require 'support/contracts/validation_helpers'
+require 'support/contracts/models'
+require 'support/contracts/models/validation_helpers'
 
-module Spec::Support::Contracts
+module Spec::Support::Contracts::Models
   module ValidationContracts
     module ShouldValidateTheFormatOfContract
       extend RSpec::SleepingKingStudios::Contract
@@ -84,12 +84,79 @@ module Spec::Support::Contracts
       end
     end
 
+    module ShouldValidateTheScopedUniquenessOfContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |attr_name, scope:, attributes: {}|
+        context "when a #{described_class} exists with the same #{attr_name}" do
+          let(:value)   { subject.send(attr_name) }
+          let(:message) { 'has already been taken' }
+
+          scoped_contexts =
+            scope.reduce([{}]) do |ary, (attribute, values)|
+              values
+                .map do |value|
+                  ary.dup.map { |hsh| hsh.merge(attribute => value) }
+                end
+                .flatten
+            end
+          tools = SleepingKingStudios::Tools::Toolbelt.instance
+
+          scoped_contexts.each do |scope_attributes|
+            attributes_list =
+              scope_attributes
+              .map { |attr, value| "#{attr}: #{value.inspect}" }
+              .yield_self { |list| tools.array_tools.humanize_list(list) }
+
+            context "with #{attributes_list}" do
+              let(:injected_attributes) do
+                # :nocov:
+                if attributes.is_a?(Proc)
+                  instance_exec(&attributes)
+                else
+                  attributes
+                end
+                # :nocov:
+              end
+
+              before(:example) do
+                described_class.create!(
+                  injected_attributes
+                    .merge(attr_name => value)
+                    .merge(scope_attributes)
+                )
+              end
+
+              # rubocop:disable RSpec/ExampleLength
+              # rubocop:disable RSpec/MultipleExpectations
+              it 'should check the scope' do
+                scopes_match =
+                  scope_attributes
+                  .reduce(true) do |memo, (scope_attribute, scope_value)|
+                    memo && subject.send(scope_attribute) == scope_value
+                  end
+
+                if scopes_match
+                  expect(subject)
+                    .to have_errors
+                    .on(attr_name)
+                    .with_message(message)
+                else
+                  expect(subject).not_to have_errors.on(attr_name)
+                end
+              end
+              # rubocop:enable RSpec/ExampleLength
+              # rubocop:enable RSpec/MultipleExpectations
+            end
+          end
+        end
+      end
+    end
+
     module ShouldValidateTheUniquenessOfContract
       extend RSpec::SleepingKingStudios::Contract
 
       contract do |attr_name, attributes: {}|
-        injected_attributes = attributes
-
         context "when a #{described_class} exists with the same #{attr_name}" do
           let(:value)        { subject.send(attr_name) }
           let(:message)      { 'has already been taken' }
@@ -97,6 +164,13 @@ module Spec::Support::Contracts
             return super() if defined?(super())
 
             described_class.name.split('::').last.underscore.intern
+          end
+          let(:injected_attributes) do
+            if attributes.is_a?(Proc)
+              instance_exec(&attributes)
+            else
+              attributes
+            end
           end
 
           before(:example) do

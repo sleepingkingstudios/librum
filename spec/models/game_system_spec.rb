@@ -4,16 +4,16 @@ require 'rails_helper'
 
 require 'support/contracts/model_contracts'
 
-RSpec.describe Publisher, type: :model do
+RSpec.describe GameSystem, type: :model do
   include Spec::Support::Contracts::ModelContracts
 
-  subject(:publisher) { described_class.new(attributes) }
+  subject(:game_system) { described_class.new(attributes) }
 
   let(:attributes) do
     {
-      name:    'Example Publisher',
-      slug:    'example-publisher',
-      website: 'www.example.com'
+      name:    'Example Game System',
+      slug:    'example-game-system',
+      edition: ''
     }
   end
 
@@ -21,20 +21,31 @@ RSpec.describe Publisher, type: :model do
 
   ### Attributes
   include_contract 'should define attribute',
-    :name,
-    default: ''
+    :edition,
+    default: '',
+    value:   '1st Edition'
   include_contract 'should define attribute',
-    :website,
+    :name,
     default: ''
 
   ### Associations
-  include_contract 'should have many', :game_systems
+  include_contract 'should belong to', :publisher
 
   describe '#valid?' do
-    it { expect(publisher.valid?).to be true }
+    let(:publisher) { FactoryBot.create(:publisher) }
 
-    include_contract 'should validate the presence of',   :name, type: String
-    include_contract 'should validate the uniqueness of', :name
+    context 'when the game system has a publisher' do
+      let(:attributes) { super().merge(publisher: publisher) }
+
+      it { expect(game_system.valid?).to be true }
+    end
+
+    include_contract 'should validate the scoped uniqueness of',
+      :name,
+      scope:      { edition: ['', '1st Edition', '2nd Edition'] },
+      attributes: lambda {
+        FactoryBot.attributes_for(:game_system, publisher: publisher)
+      }
 
     include_contract 'should validate the format of',
       :slug,
@@ -52,7 +63,9 @@ RSpec.describe Publisher, type: :model do
         '-invalid-slug' => 'a string with leading dash',
         'invalid-slug-' => 'a string with trailing dash'
       }
-    include_contract 'should validate the presence of',   :slug, type: String
-    include_contract 'should validate the uniqueness of', :slug
+    include_contract 'should validate the presence of', :slug, type: String
+    include_contract 'should validate the uniqueness of',
+      :slug,
+      attributes: -> { { publisher: FactoryBot.create(:publisher) } }
   end
 end

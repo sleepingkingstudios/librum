@@ -2,6 +2,10 @@
 
 # A publisher of game systems or materials.
 class Publisher < ApplicationRecord
+  ### Associations
+  has_many :game_systems,
+    dependent: :nullify
+
   ### Validations
   validates :name,
     presence:   true,
