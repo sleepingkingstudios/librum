@@ -1,0 +1,48 @@
+require:
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.0
+
+RSpec:
+  Language:
+    ExampleGroups:
+      Regular:
+        - context
+        - describe
+        - wrap_context
+      Skipped:
+        - xcontext
+        - xdescribe
+        - xwrap_context
+      Focused:
+        - fcontext
+        - fdescribe
+        - fwrap_context
+    Includes:
+      Examples:
+        - finclude_contract
+        - finclude_examples
+        - fwrap_examples
+        - include_contract
+        - include_examples
+        - wrap_examples
+        - xinclude_contract
+        - xinclude_examples
+        - xwrap_examples
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Layout/LineLength:
+  IgnoredPatterns:
+    - '\A\s*#'
+  Max: 80
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+  IndentationWidth: ~
