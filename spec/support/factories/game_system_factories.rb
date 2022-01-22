@@ -10,5 +10,9 @@ FactoryBot.define do
 
     name { "Game System #{game_system_index}" }
     slug { "game-system-#{game_system_index}" }
+
+    trait :with_publisher do
+      publisher { create(:publisher) }
+    end
   end
 end
