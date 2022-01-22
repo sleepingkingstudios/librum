@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    api_resources :game_systems
+
     api_resources :publishers
   end
 end

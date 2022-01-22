@@ -35,13 +35,13 @@ publishers = [
   GameSystem.find_or_create_by!(
     publisher: publishers[1],
     name:      'Nothing To Lose But Your Tentacles',
-    slug:      'nothing-to-lost-but-your-tentacles-1e',
+    slug:      'nothing-to-lose-but-your-tentacles-1e',
     edition:   '1st Edition'
   ),
   GameSystem.find_or_create_by!(
     publisher: publishers[1],
     name:      'Nothing To Lose But Your Tentacles',
-    slug:      'nothing-to-lost-but-your-tentacles-2e',
+    slug:      'nothing-to-lose-but-your-tentacles-2e',
     edition:   '2nd Edition'
   )
 ]
