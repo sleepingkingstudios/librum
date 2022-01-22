@@ -2,8 +2,6 @@
 
 require 'cuprum'
 
-require 'models/attributes'
-
 module Models::Attributes
   # Generates a URL-friendly slug using the configured attribute names.
   class GenerateSlug < Cuprum::Command

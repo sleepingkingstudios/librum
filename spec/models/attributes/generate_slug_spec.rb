@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 require 'models/attributes/generate_slug'
 
 RSpec.describe Models::Attributes::GenerateSlug do
