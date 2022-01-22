@@ -1,3 +1,29 @@
+GIT
+  remote: https://github.com/sleepingkingstudios/annotate_models
+  revision: 86338ceb4ddf110e320b112d051e4aec66d0600c
+  specs:
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
+
+GIT
+  remote: https://github.com/sleepingkingstudios/cuprum-collections
+  revision: d39352afe21cce7236c179b69f1a1cec21fa3794
+  specs:
+    cuprum-collections (0.2.0)
+      cuprum (>= 0.11, < 2.0)
+      stannum (~> 0.2)
+
+GIT
+  remote: https://github.com/sleepingkingstudios/cuprum-rails
+  revision: 775f106fccce98893f6fa9c6bd5888f543ce1945
+  specs:
+    cuprum-rails (0.1.0)
+      cuprum (>= 0.11.0, < 2.0)
+      cuprum-collections (~> 0.2)
+      rails (>= 6.0, < 8)
+      stannum (~> 0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -70,8 +96,11 @@ GEM
     bcrypt (3.1.16)
     bindex (0.8.1)
     builder (3.2.4)
+    byebug (11.1.3)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
+    cuprum (1.0.0)
+      sleeping_king_studios-tools (~> 1.0)
     debug (1.4.0)
       irb (>= 1.3.6)
       reline (>= 0.2.7)
@@ -79,6 +108,11 @@ GEM
     digest (3.1.0)
     docile (1.4.0)
     erubi (1.10.0)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashdiff (0.3.9)
@@ -225,6 +259,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stannum (0.2.0)
+      sleeping_king_studios-tools (~> 1.0, >= 1.0.2)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -246,8 +282,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  annotate!
   bcrypt (~> 3.1.7)
+  byebug
+  cuprum (~> 1.0)
+  cuprum-collections!
+  cuprum-rails!
   debug
+  factory_bot_rails (~> 6.2)
   importmap-rails
   pg (~> 1.1)
   puma (~> 5.0)

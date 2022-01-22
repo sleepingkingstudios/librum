@@ -6,18 +6,24 @@ unless ENV['COVERAGE'] == 'false'
   SimpleCov.start
 end
 
+require 'byebug'
+require 'cuprum/rspec/be_a_result'
 require 'rspec/sleeping_king_studios/all'
 
 # Isolated namespace for defining spec-only or transient objects.
 module Spec; end
 
+require 'support/matchers'
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include Cuprum::RSpec::Matchers
   config.extend  RSpec::SleepingKingStudios::Concerns::ExampleConstants
   config.extend  RSpec::SleepingKingStudios::Concerns::IncludeContract
   config.extend  RSpec::SleepingKingStudios::Concerns::FocusExamples
   config.extend  RSpec::SleepingKingStudios::Concerns::WrapExamples
   config.include RSpec::SleepingKingStudios::Examples::PropertyExamples
+  config.include Spec::Support::Matchers
 
   config.disable_monkey_patching!
 
