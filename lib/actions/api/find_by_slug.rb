@@ -2,7 +2,7 @@
 
 require 'actions'
 
-module Actions
+module Actions::Api
   # Middleware for finding an entity by (unique) slug.
   module FindBySlug
     UUID_PATTERN = /\A\h{8}-\h{4}-\h{4}-\h{4}-\h{12}\z/

@@ -25,7 +25,7 @@ RSpec.describe Actions::Api::Publishers::Show do
     existing_entity:   -> { publisher },
     primary_key_value: -> { SecureRandom.uuid } \
   do
-    describe 'with a slug' do
+    describe 'with id: a slug' do
       let(:params) { { 'id' => publisher.slug } }
 
       include_contract 'should find the entity',

@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe Actions::FindBySlug do
+RSpec.describe Actions::Api::FindBySlug do
   subject(:action) { described_class.new(collection) }
 
   let(:collection)      { instance_double(Cuprum::Rails::Collection) }
   let(:described_class) { Spec::Action }
 
   example_class 'Spec::Action', Cuprum::Command do |klass|
-    klass.prepend(Actions::FindBySlug) # rubocop:disable RSpec/DescribedClass
+    klass.prepend(Actions::Api::FindBySlug) # rubocop:disable RSpec/DescribedClass
 
     klass.define_method(:initialize) do |collection|
       @collection = collection

@@ -5,8 +5,6 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/rspec/actions/create_contracts'
 
-require 'actions/api/publishers/create'
-
 RSpec.describe Actions::Api::Publishers::Create do
   include Cuprum::Rails::RSpec::Actions::CreateContracts
 
