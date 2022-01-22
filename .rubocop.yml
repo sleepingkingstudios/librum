@@ -59,6 +59,10 @@ Metrics/MethodLength:
   Exclude:
     - db/migrate/*
 
+Metrics/ModuleLength:
+  Exclude:
+    - spec/**/*_contract*.rb
+
 RSpec/ExampleWording:
   Enabled: false
 
@@ -67,6 +71,9 @@ RSpec/FactoryBot/SyntaxMethods:
 
 RSpec/HookArgument:
   EnforcedStyle: example
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
 
 RSpec/NamedSubject:
   Exclude:

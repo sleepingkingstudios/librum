@@ -7,8 +7,16 @@ GIT
       rake (>= 10.4, < 14.0)
 
 GIT
+  remote: https://github.com/sleepingkingstudios/cuprum-collections
+  revision: d39352afe21cce7236c179b69f1a1cec21fa3794
+  specs:
+    cuprum-collections (0.2.0)
+      cuprum (>= 0.11, < 2.0)
+      stannum (~> 0.2)
+
+GIT
   remote: https://github.com/sleepingkingstudios/cuprum-rails
-  revision: 93c8cbc7d814701182ff435568089c4c9563fecb
+  revision: 9a5b2075f6d740f0acf8599fa507b56cf7e34fea
   specs:
     cuprum-rails (0.1.0)
       cuprum (>= 0.11.0, < 2.0)
@@ -93,9 +101,6 @@ GEM
     crass (1.0.6)
     cuprum (1.0.0)
       sleeping_king_studios-tools (~> 1.0)
-    cuprum-collections (0.2.0)
-      cuprum (>= 0.11, < 2.0)
-      stannum (~> 0.2)
     debug (1.4.0)
       irb (>= 1.3.6)
       reline (>= 0.2.7)
@@ -281,6 +286,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   cuprum (~> 1.0)
+  cuprum-collections!
   cuprum-rails!
   debug
   factory_bot_rails (~> 6.2)

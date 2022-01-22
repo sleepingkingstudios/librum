@@ -21,6 +21,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 ### Commands
 gem 'cuprum', '~> 1.0'
+gem 'cuprum-collections',
+  git: 'https://github.com/sleepingkingstudios/cuprum-collections'
 gem 'cuprum-rails',
   git: 'https://github.com/sleepingkingstudios/cuprum-rails'
 

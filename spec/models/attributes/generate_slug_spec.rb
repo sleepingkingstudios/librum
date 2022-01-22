@@ -126,7 +126,7 @@ RSpec.describe Models::Attributes::GenerateSlug do
   end
 
   describe '#call' do
-    it 'should be callable' do
+    it 'should define the method' do
       expect(command)
         .to be_callable
         .with(0).arguments
