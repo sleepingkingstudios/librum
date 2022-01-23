@@ -33,7 +33,7 @@ module Spec::Support::Contracts
             # :nocov:
             attr_names.each do |attr_name|
               raw_value = configured_object.attributes.fetch(attr_name.to_s) do
-                configured_object.attributes[attr_name.intern]
+                configured_object.send(attr_name.intern)
               end
 
               values[attr_name.to_s] = configured_context.serialize(raw_value)
@@ -96,6 +96,8 @@ module Spec::Support::Contracts
           :name,
           :slug,
           *attr_names,
+          official: -> { configured_object.official? },
+          playtest: -> { configured_object.playtest? },
           **attr_pairs
       end
     end

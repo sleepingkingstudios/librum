@@ -9,5 +9,8 @@ module Serializers::Json
       :data,
       :name,
       :slug
+
+    attribute(:official, &:present?)
+    attribute(:playtest, &:present?)
   end
 end

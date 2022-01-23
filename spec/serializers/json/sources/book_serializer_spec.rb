@@ -15,5 +15,7 @@ RSpec.describe Serializers::Json::Sources::BookSerializer do
     it { expect(described_class).to be_constructible.with(0).arguments }
   end
 
-  include_contract 'should serialize source attributes', -> { book }
+  include_contract 'should serialize source attributes',
+    -> { book },
+    :publication_date
 end
