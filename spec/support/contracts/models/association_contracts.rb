@@ -34,7 +34,18 @@ module Spec::Support::Contracts::Models
           include_examples 'should define property', association_name
 
           context "when the #{model_name} has a #{display_name}" do
-            let(:association) { FactoryBot.build(association_name) }
+            let(:association) do
+              # :nocov:
+              case options[:association]
+              when Proc
+                instance_exec(&options[:association])
+              when nil
+                FactoryBot.build(association_name)
+              else
+                options[:association]
+              end
+              # :nocov:
+            end
             let(:attributes) do
               super().merge({ association_name => association })
             end

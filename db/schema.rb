@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_212017) do
+ActiveRecord::Schema.define(version: 2022_01_22_213128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,23 @@ ActiveRecord::Schema.define(version: 2022_01_21_212017) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_publishers_on_name", unique: true
     t.index ["slug"], name: "index_publishers_on_slug", unique: true
+  end
+
+  create_table "sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
+    t.jsonb "data", default: {}, null: false
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.string "shortcode", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "game_system_id"
+    t.uuid "publisher_id"
+    t.index ["game_system_id"], name: "index_sources_on_game_system_id"
+    t.index ["name"], name: "index_sources_on_name", unique: true
+    t.index ["publisher_id"], name: "index_sources_on_publisher_id"
+    t.index ["shortcode"], name: "index_sources_on_shortcode", unique: true
+    t.index ["slug"], name: "index_sources_on_slug", unique: true
   end
 
 end
