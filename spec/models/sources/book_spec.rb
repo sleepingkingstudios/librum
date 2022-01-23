@@ -11,10 +11,9 @@ RSpec.describe Sources::Book, type: :model do
 
   let(:attributes) do
     {
-      name:      'Example Book',
-      slug:      'example-book',
-      shortcode: 'eb',
-      data:      {
+      name: 'Example Book',
+      slug: 'example-book',
+      data: {
         'official'         => true,
         'playtest'         => true,
         'publication_date' => '1982-07-09'

@@ -13,7 +13,6 @@ module Api::Sources
           publisher_id
           name
           slug
-          shortcode
           edition
           official
           playtest

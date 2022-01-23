@@ -16,7 +16,6 @@ RSpec.describe Api::Sources::BooksController, type: :controller do
         publisher_id
         name
         slug
-        shortcode
         edition
         official
         playtest

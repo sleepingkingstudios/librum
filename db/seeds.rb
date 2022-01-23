@@ -51,21 +51,18 @@ game_systems = [
     game_system: game_systems[0],
     publisher:   publishers[0],
     name:        'Marble Madness',
-    slug:        'marble-madness',
-    shortcode:   'mm'
+    slug:        'marble-madness'
   ),
   Sources::Book.find_or_create_by!(
     game_system: game_systems[2],
     publisher:   publishers[1],
     name:        'Players Tentaclebook',
-    slug:        'players-tentaclebook',
-    shortcode:   'ptb'
+    slug:        'players-tentaclebook'
   ),
   Sources::Book.find_or_create_by!(
     game_system: game_systems[2],
     publisher:   publishers[2],
     name:        'Flumphs In Space',
-    slug:        'flumphs-in-space',
-    shortcode:   'fis'
+    slug:        'flumphs-in-space'
   )
 ]

@@ -8,7 +8,6 @@ module Serializers::Json
       :publisher_id,
       :data,
       :name,
-      :slug,
-      :shortcode
+      :slug
   end
 end

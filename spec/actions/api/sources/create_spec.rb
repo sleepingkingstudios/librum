@@ -23,7 +23,6 @@ RSpec.describe Actions::Api::Sources::Create do
         publisher_id
         name
         slug
-        shortcode
         official
         playtest
         publication_date
@@ -41,7 +40,6 @@ RSpec.describe Actions::Api::Sources::Create do
       'game_system_id'   => game_system.id,
       'publisher_id'     => publisher.id,
       'name'             => 'Example Book',
-      'shortcode'        => 'eb',
       'official'         => true,
       'playtest'         => false,
       'publication_date' => '1982-07-09'

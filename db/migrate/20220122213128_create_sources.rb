@@ -7,14 +7,12 @@ class CreateSources < ActiveRecord::Migration[7.0]
       t.jsonb  :data,      null: false, default: {}
       t.string :name,      null: false, default: ''
       t.string :slug,      null: false, default: ''
-      t.string :shortcode, null: false, default: ''
 
       t.timestamps
     end
 
     add_index :sources, :name,      unique: true
     add_index :sources, :slug,      unique: true
-    add_index :sources, :shortcode, unique: true
 
     add_reference :sources,
       :game_system,

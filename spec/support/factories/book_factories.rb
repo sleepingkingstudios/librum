@@ -8,7 +8,6 @@ FactoryBot.define do
 
     name { "Book #{book_index}" }
     slug { "book-#{book_index}" }
-    shortcode { "b#{book_index}" }
 
     publication_date { '1982-07-09' }
   end

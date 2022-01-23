@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2022_01_22_213128) do
     t.jsonb "data", default: {}, null: false
     t.string "name", default: "", null: false
     t.string "slug", default: "", null: false
-    t.string "shortcode", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "game_system_id"
@@ -51,7 +50,6 @@ ActiveRecord::Schema.define(version: 2022_01_22_213128) do
     t.index ["game_system_id"], name: "index_sources_on_game_system_id"
     t.index ["name"], name: "index_sources_on_name", unique: true
     t.index ["publisher_id"], name: "index_sources_on_publisher_id"
-    t.index ["shortcode"], name: "index_sources_on_shortcode", unique: true
     t.index ["slug"], name: "index_sources_on_slug", unique: true
   end
 

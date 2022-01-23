@@ -10,7 +10,6 @@ FactoryBot.define do
 
     name { "Source #{source_index}" }
     slug { "source-#{source_index}" }
-    shortcode { "s#{source_index}" }
     official { true }
     playtest { false }
 

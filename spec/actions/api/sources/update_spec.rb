@@ -24,7 +24,6 @@ RSpec.describe Actions::Api::Sources::Update do
         publisher_id
         name
         slug
-        shortcode
         official
         playtest
         publication_date

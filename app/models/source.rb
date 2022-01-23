@@ -43,11 +43,6 @@ class Source < ApplicationRecord
 
   ### Validations
   validates :name, presence: true
-  validates :shortcode,
-    format: {
-      message: 'must be lowercase letters and numbers',
-      with:    /\A[a-z0-9]+\z/
-    }
   validates :slug,
     format:   {
       message: 'must be in kebab-case',
@@ -69,7 +64,6 @@ end
 #  id             :uuid             not null, primary key
 #  data           :jsonb            not null
 #  name           :string           default(""), not null
-#  shortcode      :string           default(""), not null
 #  slug           :string           default(""), not null
 #  type           :string           not null
 #  created_at     :datetime         not null
@@ -82,6 +76,5 @@ end
 #  index_sources_on_game_system_id  (game_system_id)
 #  index_sources_on_name            (name) UNIQUE
 #  index_sources_on_publisher_id    (publisher_id)
-#  index_sources_on_shortcode       (shortcode) UNIQUE
 #  index_sources_on_slug            (slug) UNIQUE
 #

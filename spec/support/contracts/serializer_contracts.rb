@@ -95,7 +95,6 @@ module Spec::Support::Contracts
           :data,
           :name,
           :slug,
-          :shortcode,
           *attr_names,
           **attr_pairs
       end

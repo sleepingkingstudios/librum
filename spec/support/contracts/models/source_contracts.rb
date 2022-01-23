@@ -26,9 +26,6 @@ module Spec::Support::Contracts::Models
           :name,
           default: ''
         include_contract 'should define attribute',
-          :shortcode,
-          default: ''
-        include_contract 'should define attribute',
           :slug,
           default: ''
         include_contract 'should define attribute',
@@ -88,22 +85,6 @@ module Spec::Support::Contracts::Models
           include_contract 'should validate the presence of',
             :name,
             type: String
-
-          include_contract 'should validate the format of',
-            :shortcode,
-            message:     'must be lowercase letters and numbers',
-            matching:    {
-              'es' => 'a lowercase string with letters',
-              '1e' => 'a lowercase string with numbers'
-            },
-            nonmatching: {
-              'invalid-slug'  => 'a kebab-case string',
-              'InvalidSlug'   => 'a string with capital letters',
-              'invalid slug'  => 'a string with whitespace',
-              'invalid_slug'  => 'a string with underscores',
-              '-invalid-slug' => 'a string with leading dash',
-              'invalid-slug-' => 'a string with trailing dash'
-            }
 
           include_contract 'should validate the format of',
             :slug,

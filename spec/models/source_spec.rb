@@ -11,10 +11,9 @@ RSpec.describe Source, type: :model do
 
   let(:attributes) do
     {
-      name:      'Example Source',
-      slug:      'example-source',
-      shortcode: 'es',
-      data:      {
+      name: 'Example Source',
+      slug: 'example-source',
+      data: {
         'official' => true,
         'playtest' => true
       }
