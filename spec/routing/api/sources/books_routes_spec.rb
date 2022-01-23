@@ -4,8 +4,8 @@ require 'rails_helper'
 
 require 'support/contracts/routing_contracts'
 
-RSpec.describe '/api/game_systems' do
+RSpec.describe '/api/sources/books', type: :routing do
   include Spec::Support::Contracts::RoutingContracts
 
-  include_contract 'should route to api resource', 'game_systems'
+  include_contract 'should route to api resource', 'sources/books'
 end
