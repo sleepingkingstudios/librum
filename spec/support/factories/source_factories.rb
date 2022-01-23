@@ -15,9 +15,11 @@ FactoryBot.define do
     playtest { false }
 
     trait :with_game_system do
+      # :nocov:
       game_system do
         create(:game_system, publisher: (publisher || create(:publisher)))
       end
+      # :nocov:
     end
 
     trait :with_publisher do
