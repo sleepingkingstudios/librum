@@ -26,7 +26,7 @@ publishers = [
   )
 ]
 
-[
+game_systems = [
   GameSystem.find_or_create_by!(
     publisher: publishers[0],
     name:      'marbles',
@@ -43,5 +43,29 @@ publishers = [
     name:      'Nothing To Lose But Your Tentacles',
     slug:      'nothing-to-lose-but-your-tentacles-2e',
     edition:   '2nd Edition'
+  )
+]
+
+[
+  Sources::Book.find_or_create_by!(
+    game_system: game_systems[0],
+    publisher:   publishers[0],
+    name:        'Marble Madness',
+    slug:        'marble-madness',
+    shortcode:   'mm'
+  ),
+  Sources::Book.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[1],
+    name:        'Players Tentaclebook',
+    slug:        'players-tentaclebook',
+    shortcode:   'ptb'
+  ),
+  Sources::Book.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[2],
+    name:        'Flumphs In Space',
+    slug:        'flumphs-in-space',
+    shortcode:   'fis'
   )
 ]

@@ -70,12 +70,33 @@ module Spec::Support::Contracts
       extend RSpec::SleepingKingStudios::Contract
 
       contract do |object, *attr_names, **attr_pairs|
+        include Spec::Support::Contracts::SerializerContracts
+
         include_contract 'should serialize attributes',
           object,
           :id,
           *attr_names,
           :created_at,
           :updated_at,
+          **attr_pairs
+      end
+    end
+
+    module ShouldSerializeSourceAttributesContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |object, *attr_names, **attr_pairs|
+        include Spec::Support::Contracts::SerializerContracts
+
+        include_contract 'should serialize record attributes',
+          object,
+          :game_system_id,
+          :publisher_id,
+          :data,
+          :name,
+          :slug,
+          :shortcode,
+          *attr_names,
           **attr_pairs
       end
     end
