@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
     namespace :sources do
       api_resources :books
+
+      api_resources :websites
     end
   end
 end

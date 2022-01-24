@@ -3,8 +3,8 @@
 require 'cuprum/rails/actions/index'
 
 module Api::Sources
-  # API controller for managing Sources::Book entities.
-  class BooksController < ApiController
+  # API controller for managing Sources::Website entities.
+  class WebsitesController < ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
       Cuprum::Rails::Resource.new(
         default_order:        :name,
@@ -16,15 +16,15 @@ module Api::Sources
           edition
           official
           playtest
-          publication_date
+          base_url
         ],
-        resource_class:       ::Sources::Book
+        resource_class:       ::Sources::Website
       )
     end
 
     def self.serializers
       super().merge(
-        ::Sources::Book => Serializers::Json::Sources::BookSerializer
+        ::Sources::Website => Serializers::Json::Sources::WebsiteSerializer
       )
     end
 
