@@ -26,7 +26,7 @@ publishers = [
   )
 ]
 
-[
+game_systems = [
   GameSystem.find_or_create_by!(
     publisher: publishers[0],
     name:      'marbles',
@@ -43,5 +43,77 @@ publishers = [
     name:      'Nothing To Lose But Your Tentacles',
     slug:      'nothing-to-lose-but-your-tentacles-2e',
     edition:   '2nd Edition'
+  )
+]
+
+_books = [
+  Sources::Book.find_or_create_by!(
+    game_system: game_systems[0],
+    publisher:   publishers[0],
+    name:        'Marble Madness',
+    slug:        'marble-madness',
+    data:        {
+      official:         true,
+      playtest:         false,
+      publication_date: '1977-05-25'
+    }
+  ),
+  Sources::Book.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[1],
+    name:        'Players Tentaclebook',
+    slug:        'players-tentaclebook',
+    data:        {
+      official:         true,
+      playtest:         false,
+      publication_date: '1980-05-17'
+    }
+  ),
+  Sources::Book.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[2],
+    name:        'Flumphs In Space',
+    slug:        'flumphs-in-space',
+    data:        {
+      official:         true,
+      playtest:         false,
+      publication_date: '1983-05-25'
+    }
+  )
+]
+
+_websites = [
+  Sources::Website.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[1],
+    name:        'Squamous Reference Document',
+    slug:        'squamous-reference-document',
+    data:        {
+      official: true,
+      playtest: false,
+      base_url: 'www.example.com/squamous-reference-document'
+    }
+  ),
+  Sources::Website.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[1],
+    name:        'Unearthed Abominations',
+    slug:        'unearthed-abominations',
+    data:        {
+      official: true,
+      playtest: true,
+      base_url: 'www.example.com/unearthed-abominations'
+    }
+  ),
+  Sources::Website.find_or_create_by!(
+    game_system: game_systems[2],
+    publisher:   publishers[2],
+    name:        'Secrets of the Flumph',
+    slug:        'secrets-of-the-flumph',
+    data:        {
+      official: false,
+      playtest: false,
+      base_url: 'www.example.com/secrets-of-the-flumph'
+    }
   )
 ]

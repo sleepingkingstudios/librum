@@ -25,5 +25,11 @@ Rails.application.routes.draw do
     api_resources :game_systems
 
     api_resources :publishers
+
+    namespace :sources do
+      api_resources :books
+
+      api_resources :websites
+    end
   end
 end

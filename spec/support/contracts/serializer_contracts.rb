@@ -33,7 +33,7 @@ module Spec::Support::Contracts
             # :nocov:
             attr_names.each do |attr_name|
               raw_value = configured_object.attributes.fetch(attr_name.to_s) do
-                configured_object.attributes[attr_name.intern]
+                configured_object.send(attr_name.intern)
               end
 
               values[attr_name.to_s] = configured_context.serialize(raw_value)
@@ -70,12 +70,34 @@ module Spec::Support::Contracts
       extend RSpec::SleepingKingStudios::Contract
 
       contract do |object, *attr_names, **attr_pairs|
+        include Spec::Support::Contracts::SerializerContracts
+
         include_contract 'should serialize attributes',
           object,
           :id,
           *attr_names,
           :created_at,
           :updated_at,
+          **attr_pairs
+      end
+    end
+
+    module ShouldSerializeSourceAttributesContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |object, *attr_names, **attr_pairs|
+        include Spec::Support::Contracts::SerializerContracts
+
+        include_contract 'should serialize record attributes',
+          object,
+          :game_system_id,
+          :publisher_id,
+          :data,
+          :name,
+          :slug,
+          *attr_names,
+          official: -> { configured_object.official? },
+          playtest: -> { configured_object.playtest? },
           **attr_pairs
       end
     end

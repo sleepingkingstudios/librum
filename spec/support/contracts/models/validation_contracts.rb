@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'cuprum/rails/rspec/contract_helpers'
 require 'rspec/sleeping_king_studios/contract'
 
 require 'support/contracts/models'
@@ -58,14 +59,21 @@ module Spec::Support::Contracts::Models
     module ShouldValidateThePresenceOfContract
       extend RSpec::SleepingKingStudios::Contract
 
-      contract do |attr_name, message: nil, type: nil|
+      contract do |attr_name, attributes: nil, message: nil, type: nil|
         extend ValidationHelpers
 
         attr_type = normalize_attribute_type(type)
         message ||= "can't be blank"
 
         context "when #{attr_name} is nil" do
-          let(:attributes) { super().merge(attr_name => nil) }
+          include Cuprum::Rails::RSpec::ContractHelpers
+
+          let(:attributes) do
+            option_with_default(
+              attributes,
+              default: super().merge(attr_name => nil)
+            )
+          end
 
           it 'should have an error' do
             expect(subject).to have_errors.on(attr_name).with_message(message)
@@ -74,7 +82,14 @@ module Spec::Support::Contracts::Models
 
         if attr_type == 'string'
           context "when #{attr_name} is empty" do
-            let(:attributes) { super().merge(attr_name => '') }
+            include Cuprum::Rails::RSpec::ContractHelpers
+
+            let(:attributes) do
+              option_with_default(
+                attributes,
+                default: super().merge(attr_name => '')
+              )
+            end
 
             it 'should have an error' do
               expect(subject).to have_errors.on(attr_name).with_message(message)
