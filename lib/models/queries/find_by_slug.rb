@@ -20,17 +20,17 @@ module Models::Queries
 
     def not_found_error(slug:)
       Cuprum::Collections::Errors::NotFound.new(
-        collection_name:    collection.collection_name,
-        primary_key_name:   'slug',
-        primary_key_values: slug
+        attribute_name:  'slug',
+        attribute_value: slug,
+        collection_name: collection.collection_name
       )
     end
 
     def not_unique_error(slug:)
       Cuprum::Collections::Errors::NotUnique.new(
-        collection_name:    collection.collection_name,
-        primary_key_name:   'slug',
-        primary_key_values: slug
+        attribute_name:  'slug',
+        attribute_value: slug,
+        collection_name: collection.collection_name
       )
     end
 
