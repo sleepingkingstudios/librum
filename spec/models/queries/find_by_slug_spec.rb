@@ -29,9 +29,9 @@ RSpec.describe Models::Queries::FindBySlug do
       let(:slug) { 'non-existing-slug' }
       let(:expected_error) do
         Cuprum::Collections::Errors::NotFound.new(
-          collection_name:    collection.collection_name,
-          primary_key_name:   'slug',
-          primary_key_values: slug
+          attribute_name:  'slug',
+          attribute_value: slug,
+          collection_name: collection.collection_name
         )
       end
 
@@ -59,9 +59,9 @@ RSpec.describe Models::Queries::FindBySlug do
       let(:mock_command) { instance_double(Cuprum::Command, call: publishers) }
       let(:expected_error) do
         Cuprum::Collections::Errors::NotUnique.new(
-          collection_name:    collection.collection_name,
-          primary_key_name:   'slug',
-          primary_key_values: 'example-publisher'
+          attribute_name:  'slug',
+          attribute_value: 'example-publisher',
+          collection_name: collection.collection_name
         )
       end
 
