@@ -26,6 +26,10 @@ gem 'cuprum',
 gem 'cuprum-collections',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/cuprum-collections'
+gem 'cuprum-collections-loader',
+  branch:  'main',
+  git:     'https://github.com/sleepingkingstudios/cuprum-collections-loader',
+  require: false
 gem 'cuprum-rails',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/cuprum-rails'

@@ -56,6 +56,73 @@ module Spec::Support::Contracts::Models
       end
     end
 
+    module ShouldValidateTheInclusionOfContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |attr_name, attributes:, **options|
+        message = options.fetch(:message, 'is not included in the list')
+        values  = options.fetch(:in)
+
+        context "when #{attr_name} is nil" do
+          include Cuprum::Rails::RSpec::ContractHelpers
+
+          let(:attributes) do
+            option_with_default(
+              attributes,
+              default: super().merge(attr_name => nil)
+            )
+          end
+
+          # :nocov:
+          if options[:allow_nil]
+            it 'should not have an error' do
+              expect(subject)
+                .not_to have_errors
+                .on(attr_name)
+                .with_message(message)
+            end
+          else
+            it 'should have an error' do
+              expect(subject).to have_errors.on(attr_name).with_message(message)
+            end
+          end
+          # :nocov:
+        end
+
+        context "when #{attr_name} is an invalid value" do
+          include Cuprum::Rails::RSpec::ContractHelpers
+
+          let(:attributes) do
+            option_with_default(
+              attributes,
+              default: super().merge(attr_name => Object.new)
+            )
+          end
+
+          it 'should have an error' do
+            expect(subject).to have_errors.on(attr_name).with_message(message)
+          end
+        end
+
+        values.each do |value|
+          context "when #{attr_name} is #{value}" do
+            include Cuprum::Rails::RSpec::ContractHelpers
+
+            let(:attributes) do
+              option_with_default(
+                attributes,
+                default: super().merge(attr_name => value)
+              )
+            end
+
+            it 'should not have an error' do
+              expect(subject).not_to have_errors.on(attr_name)
+            end
+          end
+        end
+      end
+    end
+
     module ShouldValidateThePresenceOfContract
       extend RSpec::SleepingKingStudios::Contract
 

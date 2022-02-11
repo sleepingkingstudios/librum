@@ -1,0 +1,11 @@
+---
+- name:      Marbles
+  publisher: crystal-sphere-publications
+- name:      Nothing To Lose But Your Tentacles
+  slug:      nothing-to-lose-but-your-tentacles-1e
+  edition:   1st Edition
+  publisher: flumph-free-press
+- name:      Nothing To Lose But Your Tentacles
+  slug:      nothing-to-lose-but-your-tentacles-2e
+  edition:   2nd Edition
+  publisher: flumph-free-press

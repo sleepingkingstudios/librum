@@ -1,0 +1,19 @@
+---
+- name:        Squamous Reference Document
+  game_system: nothing-to-lose-but-your-tentacles-2e
+  publisher:   flumph-free-press
+  official:    true
+  playtest:    false
+  base_url:    www.example.com/squamous-reference-document
+- name:        Unearthed Abominations
+  game_system: nothing-to-lose-but-your-tentacles-2e
+  publisher:   flumph-free-press
+  official:    true
+  playtest:    true
+  base_url:    www.example.com/unearthed-abominations
+- name:        Secrets of the Flumph
+  game_system: nothing-to-lose-but-your-tentacles-2e
+  publisher:   spelljammer-monthly
+  official:    false
+  playtest:    false
+  base_url:    www.example.com/unearthed-abominations

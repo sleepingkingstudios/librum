@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A specific edition of a game system.
 class GameSystem < ApplicationRecord
   ### Associations
   belongs_to :publisher

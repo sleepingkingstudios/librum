@@ -1,0 +1,5 @@
+---
+- name:      Dungeons & Dragons
+  edition:   5th Edition
+  slug:      dnd-5
+  publisher: wizards-of-the-coast

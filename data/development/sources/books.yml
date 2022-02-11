@@ -1,0 +1,22 @@
+---
+- name:             Marble Madness
+  game_system:      marbles
+  publisher:        crystal-sphere-publications
+  category:         sourcebook
+  official:         true
+  playtest:         false
+  publication_date: '1977-05-25'
+- name:             Players Tentaclebook
+  game_system:      nothing-to-lose-but-your-tentacles-2e
+  publisher:        flumph-free-press
+  category:         sourcebook
+  official:         true
+  playtest:         false
+  publication_date: '1980-05-17'
+- name:             Flumphs In Space
+  game_system:      nothing-to-lose-but-your-tentacles-2e
+  publisher:        spelljammer-monthly
+  category:         adventure
+  official:         false
+  playtest:         false
+  publication_date: '1983-05-25'
