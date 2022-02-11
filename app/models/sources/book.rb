@@ -1,8 +1,25 @@
 # frozen_string_literal: true
 
+require 'sleeping_king_studios/tools/toolbox/constant_map'
+
+# A discrete published work, either physical or electronic.
 class Sources::Book < Source
+  Categories = SleepingKingStudios::Tools::Toolbox::ConstantMap.new(
+    ADVENTURE:  'adventure',
+    SOURCEBOOK: 'sourcebook'
+  ).freeze
+
   ### Attributes
+  data_property :category
   data_property :publication_date
+
+  ### Validations
+  validates :category,
+    inclusion: {
+      allow_nil: true,
+      in:        Categories.values
+    },
+    presence:  true
 end
 
 # == Schema Information

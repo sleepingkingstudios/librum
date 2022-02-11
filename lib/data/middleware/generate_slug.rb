@@ -9,7 +9,7 @@ module Data::Middleware
 
     def generate_slug(attributes)
       Models::Attributes::GenerateSlug
-        .new(attribute_names: options['attribute_name'])
+        .new(attribute_names: options[:attribute_name])
         .call(attributes: attributes)
     end
 

@@ -25,6 +25,7 @@ RSpec.describe Actions::Api::Sources::Create do
         slug
         official
         playtest
+        category
         publication_date
       ],
       resource_class:       Sources::Book
@@ -42,6 +43,7 @@ RSpec.describe Actions::Api::Sources::Create do
       'name'             => 'Example Book',
       'official'         => true,
       'playtest'         => false,
+      'category'         => Sources::Book::Categories::ADVENTURE,
       'publication_date' => '1982-07-09'
     }
   end
@@ -58,12 +60,13 @@ RSpec.describe Actions::Api::Sources::Create do
     hsh
       .merge(
         'data' => hsh.slice(
+          'category',
           'official',
           'playtest',
           'publication_date'
         )
       )
-      .except('official', 'playtest', 'publication_date')
+      .except('category', 'official', 'playtest', 'publication_date')
   end
 
   include_contract 'create action contract',

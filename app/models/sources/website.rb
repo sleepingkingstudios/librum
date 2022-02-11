@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# An online source for game references.
 class Sources::Website < Source
   ### Attributes
   data_property :base_url

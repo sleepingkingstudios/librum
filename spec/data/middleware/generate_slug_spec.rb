@@ -6,7 +6,7 @@ RSpec.describe Data::Middleware::GenerateSlug do
   subject(:middleware) { described_class.new(**constructor_options) }
 
   let(:attribute_name)      { 'title' }
-  let(:constructor_options) { { 'attribute_name' => attribute_name } }
+  let(:constructor_options) { { attribute_name: attribute_name } }
 
   describe '.new' do
     it 'should define the constructor' do

@@ -9,6 +9,15 @@ FactoryBot.define do
     name { "Book #{book_index}" }
     slug { "book-#{book_index}" }
 
+    category         { Sources::Book::Categories::SOURCEBOOK }
     publication_date { '1982-07-09' }
+
+    trait :adventure do
+      category { Sources::Book::Categories::ADVENTURE }
+    end
+
+    trait :sourcebook do
+      category { Sources::Book::Categories::SOURCEBOOK }
+    end
   end
 end
