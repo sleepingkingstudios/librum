@@ -1,13 +1,13 @@
 ---
 - name:        System Reference Document
-  game_system: dnd-5
+  game_system: dnd5e
   publisher:   wizards-of-the-coast
   official:    true
   playtest:    false
   base_url: |
     https://dnd.wizards.com/articles/features/systems-reference-document-srd
 - name:        Unearthed Arcana
-  game_system: dnd-5
+  game_system: dnd5e
   publisher:   wizards-of-the-coast
   official:    true
   playtest:    true

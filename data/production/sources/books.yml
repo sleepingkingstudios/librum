@@ -1,20 +1,20 @@
 ---
 - name:             Dungeon Master's Guide
-  game_system:      dnd-5
+  game_system:      dnd5e
   publisher:        wizards-of-the-coast
   category:         sourcebook
   official:         true
   playtest:         false
   publication_date: '2014-12-09'
 - name:             Monster Manual
-  game_system:      dnd-5
+  game_system:      dnd5e
   publisher:        wizards-of-the-coast
   category:         sourcebook
   official:         true
   playtest:         false
   publication_date: '2014-08-19'
 - name:             Player's Handbook
-  game_system:      dnd-5
+  game_system:      dnd5e
   publisher:        wizards-of-the-coast
   category:         sourcebook
   official:         true
