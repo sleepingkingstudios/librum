@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_213128) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_02_12_020815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -20,20 +19,34 @@ ActiveRecord::Schema.define(version: 2022_01_22_213128) do
     t.string "name", default: "", null: false
     t.string "slug", default: "", null: false
     t.string "edition", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "publisher_id"
     t.index ["name", "edition"], name: "index_game_systems_on_name_and_edition", unique: true
     t.index ["publisher_id"], name: "index_game_systems_on_publisher_id"
     t.index ["slug"], name: "index_game_systems_on_slug", unique: true
   end
 
+  create_table "generic_references", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.boolean "stub", default: false, null: false
+    t.jsonb "source_metadata", default: {}, null: false
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "source_id"
+    t.index ["slug"], name: "index_generic_references_on_slug"
+    t.index ["source_id", "slug"], name: "index_generic_references_on_source_id_and_slug", unique: true
+    t.index ["source_id"], name: "index_generic_references_on_source_id"
+  end
+
   create_table "publishers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "slug", default: "", null: false
     t.string "website", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_publishers_on_name", unique: true
     t.index ["slug"], name: "index_publishers_on_slug", unique: true
   end
@@ -43,8 +56,8 @@ ActiveRecord::Schema.define(version: 2022_01_22_213128) do
     t.jsonb "data", default: {}, null: false
     t.string "name", default: "", null: false
     t.string "slug", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "game_system_id"
     t.uuid "publisher_id"
     t.index ["game_system_id"], name: "index_sources_on_game_system_id"
