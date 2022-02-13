@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Application() {
   return (
-    <div>
+    <div className="text-violet-900">
       <p>
         At twilight's end, the shadows cross'd<br />
         A new world birthed, the elder, lost-<br />
