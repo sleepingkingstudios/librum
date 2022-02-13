@@ -7,6 +7,11 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore Node modules and generated JavaScript files.
+/node_modules
+/public/javascript/*.bundle.js
+/public/javascript/*.bundle.js.LICENSE.txt
+
 # Ignore all logfiles and tempfiles.
 .byebug_history
 /log/*
