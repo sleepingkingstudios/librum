@@ -1,0 +1,35 @@
+{
+  "name": "@sleepingkingstudios/librum",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "serve": "webpack serve --config webpack.dev.js"
+  },
+  "repository": "git@github.com:sleepingkingstudios/librum.git",
+  "author": "Rob Smith <merlin@sleepingkingstudios.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.17",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "autoprefixer": "^10.4.2",
+    "css-loader": "^6.6.0",
+    "postcss": "^8.4.6",
+    "postcss-loader": "^6.2.1",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.0.22",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
