@@ -36,4 +36,8 @@ Rails.application.routes.draw do
       api_resources :websites
     end
   end
+
+  get '*path', to: 'client#index'
+
+  root 'client#index'
 end
