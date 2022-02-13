@@ -10,6 +10,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    'jest',
     'react',
     'react-hooks',
   ],
@@ -17,6 +18,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
     'plugin:react/jsx-runtime',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
@@ -31,5 +34,8 @@ module.exports = {
     linkComponents: [
       // { name: 'Link', linkAttribute: 'to' },
     ],
+  },
+  env: {
+    'jest/globals': true,
   },
 };
