@@ -59,7 +59,7 @@ module Spec::Support::Contracts::Models
     module ShouldValidateTheInclusionOfContract
       extend RSpec::SleepingKingStudios::Contract
 
-      contract do |attr_name, attributes:, **options|
+      contract do |attr_name, attributes: nil, **options|
         message = options.fetch(:message, 'is not included in the list')
         values  = options.fetch(:in)
 

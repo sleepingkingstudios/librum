@@ -11,8 +11,8 @@ class CreateSources < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :sources, :name,      unique: true
-    add_index :sources, :slug,      unique: true
+    add_index :sources, :name, unique: true
+    add_index :sources, :slug, unique: true
 
     add_reference :sources,
       :game_system,

@@ -82,6 +82,24 @@ module Spec::Support::Contracts
       end
     end
 
+    module ShouldSerializeReferenceAttributesContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |object, *attr_names, **attr_pairs|
+        include Spec::Support::Contracts::SerializerContracts
+
+        include_contract 'should serialize record attributes',
+          object,
+          :source_id,
+          :source_metadata,
+          :name,
+          :slug,
+          :stub,
+          *attr_names,
+          **attr_pairs
+      end
+    end
+
     module ShouldSerializeSourceAttributesContract
       extend RSpec::SleepingKingStudios::Contract
 

@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    namespace :dnd5e do
+      api_resources :conditions
+    end
+
     api_resources :game_systems
 
     api_resources :publishers
