@@ -3,7 +3,7 @@
 exports[`<FancyHr> should match the snapshot 1`] = `
 <DocumentFragment>
   <hr
-    class="fancy_hr"
+    class="fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
   />
 </DocumentFragment>
 `;

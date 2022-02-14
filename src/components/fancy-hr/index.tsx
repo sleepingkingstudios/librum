@@ -8,6 +8,10 @@ interface FancyHrProps {
   className?: string;
 }
 
+const defaultClassName =
+  'fancy_hr border-text-strong after:border-text-strong' +
+  ' dark:border-text-strong-dark dark:after:border-text-strong-dark';
+
 export const FancyHr = ({ className }: FancyHrProps): JSX.Element => (
-  <hr className={joinClassNames(className, 'fancy_hr')} />
+  <hr className={joinClassNames(className, defaultClassName)} />
 )

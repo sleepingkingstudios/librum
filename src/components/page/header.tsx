@@ -24,7 +24,7 @@ export const PageHeader = ({
   subtitle = 'Campaign Companion'
 }: PageHeaderProps): JSX.Element => {
   return (
-    <header className="font-serif leading-9 mb-2 text-5xl text-center sm:text-left">
+    <header className="font-serif leading-9 mb-3 text-5xl text-center sm:text-left text-text-strong dark:text-text-strong-dark">
       { title }
 
       { renderSubtitle({ subtitle }) }
