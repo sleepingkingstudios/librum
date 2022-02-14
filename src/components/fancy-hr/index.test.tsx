@@ -11,6 +11,4 @@ describe('<FancyHr>', () => {
 
     expect(asFragment()).toMatchSnapshot();
   });
-
-  test.todo('@todo');
 });
