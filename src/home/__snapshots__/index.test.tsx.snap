@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomePage> should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="bg-background dark:bg-background-dark flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 text-text-primary"
+  >
+    <header
+      class="font-serif leading-9 mb-3 text-5xl text-center sm:text-left text-text-strong dark:text-text-strong-dark"
+    >
+      Librum
+      <br
+        class="block sm:hidden"
+      />
+      <small
+        class="m-0 sm:ml-2 text-2xl"
+      >
+        Campaign Companion
+      </small>
+      <hr
+        class="mt-1 fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
+      />
+    </header>
+    <main
+      class="grow"
+    >
+      <div
+        class="text-violet-500"
+      >
+        <p>
+          At twilight's end, the shadows cross'd
+          <br />
+          A new world birthed, the elder, lost-
+          <br />
+        </p>
+        <p>
+          Yet on the morn we wake to find
+          <br />
+          That mem'ry left so far behind
+        </p>
+        <p>
+          To deafened ears we ask, unseen-
+          <br />
+          Which is life, and which the dream?
+        </p>
+      </div>
+    </main>
+    <footer
+      class="mt-3 shrink-0 text-center sm:text-left text-muted"
+    >
+      <hr
+        class="mb-2 fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
+      />
+      What lies beyond the furthest reaches of the sky?
+    </footer>
+  </div>
+</DocumentFragment>
+`;

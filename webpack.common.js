@@ -1,5 +1,7 @@
 const path = require('path');
 
+const srcPath = (subdir) => path.join(__dirname, "src", subdir);
+
 module.exports = {
   entry: {
     client: './src/index.tsx',
@@ -10,11 +12,15 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@components': srcPath('components'),
+      '@utils': srcPath('utils'),
+    },
   },
   module: {
     rules: [
       {
-        test: /\.tsx$/i,
+        test: /\.tsx?$/i,
         use: 'ts-loader',
         exclude: /node_modules/,
       },

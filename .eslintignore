@@ -1,2 +1,5 @@
 node_modules
 public
+jest.config.js
+webpack.*.js
+tailwind.config.js

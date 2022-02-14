@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageHeader> should match the snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="font-serif leading-9 mb-3 text-5xl text-center sm:text-left text-text-strong dark:text-text-strong-dark"
+  >
+    Librum
+    <br
+      class="block sm:hidden"
+    />
+    <small
+      class="m-0 sm:ml-2 text-2xl"
+    >
+      Campaign Companion
+    </small>
+    <hr
+      class="mt-1 fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
+    />
+  </header>
+</DocumentFragment>
+`;
+
+exports[`<PageHeader> with subtitle: null should match the snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="font-serif leading-9 mb-3 text-5xl text-center sm:text-left text-text-strong dark:text-text-strong-dark"
+  >
+    Librum
+    <br
+      class="block sm:hidden"
+    />
+    <small
+      class="m-0 sm:ml-2 text-2xl"
+    >
+      Campaign Companion
+    </small>
+    <hr
+      class="mt-1 fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
+    />
+  </header>
+</DocumentFragment>
+`;
