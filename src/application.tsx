@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Application() {
+export const Application = (): JSX.Element => {
   return (
     <div className="text-violet-900">
       <p>

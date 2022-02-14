@@ -1,2 +1,4 @@
 node_modules
 public
+jest.config.js
+webpack.*.js
