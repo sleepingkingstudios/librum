@@ -14,12 +14,13 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@components': srcPath('components'),
+      '@utils': srcPath('utils'),
     },
   },
   module: {
     rules: [
       {
-        test: /\.tsx$/i,
+        test: /\.tsx?$/i,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
