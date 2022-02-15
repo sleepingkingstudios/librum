@@ -7,3 +7,27 @@ exports[`<FancyHr> should match the snapshot 1`] = `
   />
 </DocumentFragment>
 `;
+
+exports[`<FancyHr> with className: value should append the className 1`] = `
+<DocumentFragment>
+  <hr
+    class="fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark some-class-name"
+  />
+</DocumentFragment>
+`;
+
+exports[`<FancyHr> with color: value should append the className 1`] = `
+<DocumentFragment>
+  <hr
+    class="fancy_hr border-[#ff3366] after:border-[#ff3366] dark:border-text-strong-dark dark:after:border-text-strong-dark"
+  />
+</DocumentFragment>
+`;
+
+exports[`<FancyHr> with darkColor: value should append the className 1`] = `
+<DocumentFragment>
+  <hr
+    class="fancy_hr border-text-strong after:border-text-strong dark:border-[#ff3366] dark:after:border-[#ff3366]"
+  />
+</DocumentFragment>
+`;

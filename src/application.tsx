@@ -1,9 +1,12 @@
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
 
-import { HomePage } from './home';
+import { ApplicationRoutes } from './routes';
 
 export const Application = (): JSX.Element => {
   return (
-    <HomePage />
+    <BrowserRouter>
+      <ApplicationRoutes />
+    </BrowserRouter>
   );
 }
