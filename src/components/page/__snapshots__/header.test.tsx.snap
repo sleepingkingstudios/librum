@@ -15,7 +15,7 @@ exports[`<PageHeader> should match the snapshot 1`] = `
       Campaign Companion
     </small>
     <hr
-      class="mt-1 fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
+      class="fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark mt-1"
     />
   </header>
 </DocumentFragment>
@@ -36,7 +36,7 @@ exports[`<PageHeader> with subtitle: null should match the snapshot 1`] = `
       Campaign Companion
     </small>
     <hr
-      class="mt-1 fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark"
+      class="fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark mt-1"
     />
   </header>
 </DocumentFragment>

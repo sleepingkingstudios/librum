@@ -33,7 +33,7 @@ module.exports = {
       // 'Form',
     ],
     linkComponents: [
-      // { name: 'Link', linkAttribute: 'to' },
+      { name: 'Link', linkAttribute: 'to' },
     ],
   },
   env: {
