@@ -1,30 +1,23 @@
 import * as React from 'react';
 
 import { joinClassNames } from '@utils/react-utils';
+import { useThemeStyles } from '@themes';
 
 import './fancy-hr.css';
 
 interface FancyHrProps {
   className?: string;
-  color?: string;
-  darkColor?: string;
+  style?: string;
 }
 
-const defaultClassName =
-  ({ color, darkColor }: { color: string, darkColor: string}): string => {
-    return `fancy_hr border-${color} after:border-${color}` +
-    ` dark:border-${darkColor} dark:after:border-${darkColor}`
-  }
-
-
-export const FancyHr = ({
-  className,
-  color = 'text-strong',
-  darkColor = 'text-strong-dark'
-}: FancyHrProps): JSX.Element => {
-  const defaults = defaultClassName({ color, darkColor });
+export const FancyHr = ({ className, style }: FancyHrProps): JSX.Element => {
+  const joinedClassNames = joinClassNames(
+    'fancy-hr',
+    useThemeStyles(style ? style : 'hr'),
+    className,
+  );
 
   return (
-    <hr className={joinClassNames(defaults, className)} />
+    <hr className={joinedClassNames} />
   );
 }

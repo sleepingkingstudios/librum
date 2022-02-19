@@ -29,7 +29,7 @@ describe('<ApplicationRoutes>', () => {
     it('should render the not found page', () => {
       renderAt(<ApplicationRoutes />, '/invalid');
 
-      const text = screen.getByText(/No more tales worth telling/);
+      const text = screen.getByText(/This place is not a place of honor/);
 
       expect(text).toBeVisible();
     });
@@ -39,7 +39,7 @@ describe('<ApplicationRoutes>', () => {
     it('should render the not found page', () => {
       renderAt(<ApplicationRoutes />, '/invalid/path/to/page');
 
-      const text = screen.getByText(/No more tales worth telling/);
+      const text = screen.getByText(/This place is not a place of honor/);
 
       expect(text).toBeVisible();
     });

@@ -1,11 +1,17 @@
 import * as React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { PageHeader } from './header';
+import { render } from '@test-helpers/rendering';
 
 describe('<PageHeader>', () => {
+  const theme = {
+    subtitle: 'text-blue-500',
+    title: 'text-xs',
+  };
+
   it('should display the default title', () => {
     const defaultTitle = 'Librum';
 
@@ -27,7 +33,7 @@ describe('<PageHeader>', () => {
   });
 
   it('should match the snapshot', () => {
-    const { asFragment } = render(<PageHeader />);
+    const { asFragment } = render(<PageHeader />, { theme });
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -45,7 +51,7 @@ describe('<PageHeader>', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(<PageHeader />);
+      const { asFragment } = render(<PageHeader />, { theme });
 
       expect(asFragment()).toMatchSnapshot();
     });

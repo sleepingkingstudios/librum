@@ -13,7 +13,10 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"]
+      "@test-helpers/*": ["test-helpers/*"],
+      "@themes": ["themes"],
+      "@themes/*": ["themes/*"],
+      "@utils/*": ["utils/*"],
     }
   },
   "exclude": [

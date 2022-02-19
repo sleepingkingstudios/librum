@@ -26,11 +26,27 @@ describe('ReactUtils', () => {
       });
     });
 
+    describe('with an empty string', () => {
+      const input = '';
+
+      it('should return an empty string', () => {
+        expect(joinClassNames(input)).toBe('');
+      });
+    });
+
     describe('with a string', () => {
       const input = 'some-class-name';
 
       it('should return the string', () => {
         expect(joinClassNames(input)).toBe(input);
+      });
+    });
+
+    describe('with an array of empty strings', () => {
+      const inputs = ['', '', ''];
+
+      it('should return an empty string', () => {
+        expect(joinClassNames(...inputs)).toBe('');
       });
     });
 
@@ -44,8 +60,14 @@ describe('ReactUtils', () => {
     });
 
     describe('with a mixed array', () => {
-      const inputs = [null, 'some-class-name other-class-name', undefined];
-      const expected = 'some-class-name other-class-name';
+      const inputs = [
+        null,
+        'some-class-name other-class-name',
+        undefined,
+        '',
+        'third-class-name'
+      ];
+      const expected = 'some-class-name other-class-name third-class-name';
 
       it('should return the string', () => {
         expect(joinClassNames(...inputs)).toBe(expected);

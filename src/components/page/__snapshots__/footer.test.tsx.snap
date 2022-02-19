@@ -3,10 +3,10 @@
 exports[`<PageFooter> should match the snapshot 1`] = `
 <DocumentFragment>
   <footer
-    class="mt-3 shrink-0 text-center sm:text-left text-muted"
+    class="mt-3 shrink-0 text-center sm:text-left text-[#ff3366]"
   >
     <hr
-      class="fancy_hr border-text-strong after:border-text-strong dark:border-text-strong-dark dark:after:border-text-strong-dark mb-2"
+      class="fancy-hr mb-2"
     />
     What lies beyond the furthest reaches of the sky?
   </footer>
