@@ -1,10 +1,10 @@
-hr.fancy_hr {
+hr.fancy-hr {
   border-top-style: solid;
   border-top-width: 2px;
   opacity: 1;
 }
 
-hr.fancy_hr:after {
+hr.fancy-hr:after {
   content: ' ';
 
   /* Display */

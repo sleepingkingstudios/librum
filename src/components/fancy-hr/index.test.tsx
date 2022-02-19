@@ -1,13 +1,19 @@
 import * as React from 'react';
 
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { FancyHr } from './index';
+import { render } from '@test-helpers/rendering';
 
 describe('<FancyHr>', () => {
+  const theme = {
+    hr: '@hrBase border-red-500',
+    hrDanger: '@hrBase border-green-500',
+  };
+
   it('should match the snapshot', () => {
-    const { asFragment } = render(<FancyHr />);
+    const { asFragment } = render(<FancyHr />, { theme });
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -15,25 +21,16 @@ describe('<FancyHr>', () => {
   describe('with className: value', () => {
     it('should append the className', () => {
       const className = 'some-class-name';
-      const { asFragment } = render(<FancyHr className={className} />);
+      const { asFragment } =
+        render(<FancyHr className={className} />, { theme });
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
-  describe('with color: value', () => {
-    it('should append the className', () => {
-      const color = '[#ff3366]';
-      const { asFragment } = render(<FancyHr color={color} />);
-
-      expect(asFragment()).toMatchSnapshot();
-    });
-  });
-
-  describe('with darkColor: value', () => {
-    it('should append the className', () => {
-      const darkColor = '[#ff3366]';
-      const { asFragment } = render(<FancyHr darkColor={darkColor} />);
+  describe('with style: value', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(<FancyHr style="hr-danger" />, { theme });
 
       expect(asFragment()).toMatchSnapshot();
     });

@@ -3,40 +3,58 @@ import { Link } from 'react-router-dom';
 
 import { FancyHr } from '@components/fancy-hr';
 import { Page } from '@components/page';
+import { useThemeStyles } from '@themes';
+import { joinClassNames } from '@utils/react-utils';
 
 const headingClassName =
-  'font-serif text-text-strong dark:text-text-strong-dark mb-2 text-3xl' +
-  ' text-center sm:text-left';
-const linkClassName =
-  'font-serif text-red-600 hover:text-red-700 dark:text-red-900 dark:hover:text-red-800';
+  'mb-2 text-3xl text-center sm:text-left';
+const linkClassName = 'font-serif';
 const paragraphClassName =
-  'mb-2 text-red-600 dark:text-red-900 text-center sm:text-left';
+  'mb-2 text-center sm:text-left';
 
 export const NotFoundPage = (): JSX.Element => {
+  const joinedHeaderNames = joinClassNames(
+    headingClassName,
+    useThemeStyles('header-danger'),
+  );
+  const joinedLinkNames = joinClassNames(
+    linkClassName,
+    useThemeStyles('link-danger'),
+  );
+  const joinedParagraphNames = joinClassNames(
+    paragraphClassName,
+    useThemeStyles('text-danger'),
+  );
+
   return (
     <Page>
       <article>
-        <h1 className={headingClassName}>
+        <h1 className={joinedHeaderNames}>
           Not Found
         </h1>
 
-        <p className={paragraphClassName}>
-          No more tales worth telling, no more lives worth living.
-          The fire fades.
+        <p className={joinedParagraphNames}>
+          This place is not a place of honor.
+          <br />
+          No highly esteemed deed is commemorated here.
+          <br />
+          Nothing valued is here.
         </p>
 
-        <p className={paragraphClassName}>
-          Now there is only enough light to look upon yesterday and despair-
+        <p className={joinedParagraphNames}>
+          What is here was dangerous and repulsive to us.
+          <br />
+          This message is a warning about danger.
         </p>
 
-        <p className={paragraphClassName}>
-          For all that I make is unworthy of completion.
+        <p className={joinedParagraphNames}>
+          The danger is still present, in your time, as it was in ours.
         </p>
 
-        <FancyHr className="m-5" color="muted" darkColor="muted" />
+        <FancyHr className="m-5" style="hr-muted" />
 
         <p className="text-center sm:text-left text-xl">
-          <Link className={linkClassName} to="/">Turn Back</Link>
+          <Link className={joinedLinkNames} to="/">Turn Back</Link>
         </p>
       </article>
     </Page>
