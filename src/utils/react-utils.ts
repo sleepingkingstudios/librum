@@ -6,5 +6,13 @@ import {
 
 export const joinClassNames =
   (...classNames: Array<string | null | undefined>): string => {
-    return join(filter(classNames, isString), ' ');
+    return join(
+      filter(
+        classNames,
+        (item: string | null | undefined) => (
+          isString(item) && item.length !== 0
+        )
+      ),
+      ' '
+    );
   };
