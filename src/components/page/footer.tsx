@@ -1,11 +1,22 @@
 import * as React from 'react';
 
 import { FancyHr } from '@components/fancy-hr';
+import { useThemeStyles } from '@themes';
+import { joinClassNames } from '@utils/react-utils';
 
-export const PageFooter = (): JSX.Element => (
-  <footer className="mt-3 shrink-0 text-center sm:text-left text-muted">
-    <FancyHr className="mb-2" />
+const defaultClassName = 'mt-3 shrink-0 text-center sm:text-left';
 
-    What lies beyond the furthest reaches of the sky?
-  </footer>
-);
+export const PageFooter = (): JSX.Element => {
+  const joinedClassNames = joinClassNames(
+    defaultClassName,
+    useThemeStyles('text-muted'),
+  );
+
+  return (
+    <footer className={joinedClassNames}>
+      <FancyHr className="mb-2" />
+
+      What lies beyond the furthest reaches of the sky?
+    </footer>
+  );
+};

@@ -3,14 +3,18 @@
 exports[`<PageHeader> should match the snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="font-serif leading-9 mb-3 text-5xl text-center sm:text-left text-text-strong dark:text-text-strong-dark"
+    class="leading-9 mb-3 text-center sm:text-left"
   >
-    Librum
+    <span
+      class="text-xs"
+    >
+      Librum
+    </span>
     <br
       class="block sm:hidden"
     />
     <small
-      class="m-0 sm:ml-2 text-2xl"
+      class="m-0 sm:ml-2 text-blue-500"
     >
       Campaign Companion
     </small>
@@ -24,14 +28,18 @@ exports[`<PageHeader> should match the snapshot 1`] = `
 exports[`<PageHeader> with subtitle: null should match the snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="font-serif leading-9 mb-3 text-5xl text-center sm:text-left text-text-strong dark:text-text-strong-dark"
+    class="leading-9 mb-3 text-center sm:text-left"
   >
-    Librum
+    <span
+      class="text-xs"
+    >
+      Librum
+    </span>
     <br
       class="block sm:hidden"
     />
     <small
-      class="m-0 sm:ml-2 text-2xl"
+      class="m-0 sm:ml-2 text-blue-500"
     >
       Campaign Companion
     </small>

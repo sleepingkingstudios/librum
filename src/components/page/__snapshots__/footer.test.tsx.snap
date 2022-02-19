@@ -3,7 +3,7 @@
 exports[`<PageFooter> should match the snapshot 1`] = `
 <DocumentFragment>
   <footer
-    class="mt-3 shrink-0 text-center sm:text-left text-muted"
+    class="mt-3 shrink-0 text-center sm:text-left text-[#ff3366]"
   >
     <hr
       class="fancy-hr mb-2"

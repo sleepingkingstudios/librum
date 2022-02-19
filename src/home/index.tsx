@@ -5,7 +5,7 @@ import { Page } from '@components/page';
 export const HomePage = (): JSX.Element => {
   return (
     <Page>
-      <div className="text-violet-500">
+      <div>
         <p>
           At twilight&apos;s end, the shadows cross&apos;d<br />
           A new world birthed, the elder, lost-<br />

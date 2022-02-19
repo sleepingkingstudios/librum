@@ -33,20 +33,20 @@ export const resolveClasses =
           get(theme, item) as string | undefined
         );
 
-        if(!(typeof rawValue === 'string')) { return; }
+        if (!(typeof rawValue === 'string')) { return; }
 
         const values: Array<string> = rawValue.split(' ');
 
         forEach(
           values,
           (value: string): void => {
-            if(!startsWith(value, '@')) {
+            if (!startsWith(value, '@')) {
               classNames.push(value);
 
               return;
             }
 
-            if(includes(previousTags, value)) {
+            if (includes(previousTags, value)) {
               throw `Recursive theme tag ${value} (${previousTags.join(' ')})`;
             }
 
