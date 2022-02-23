@@ -7,7 +7,7 @@ import { PageNavigation } from './index';
 import { render } from '@test-helpers/rendering';
 
 describe('<PageNavigation>', () => {
-  const navigationItems = [
+  const navigation = [
     {
       label: 'Home',
       url: '/',
@@ -16,8 +16,6 @@ describe('<PageNavigation>', () => {
       label: 'Launch Sites',
       url: '/launch-sites',
     },
-  ];
-  const navigationDropdowns = [
     {
       label: 'Rockets',
       items: [
@@ -40,10 +38,6 @@ describe('<PageNavigation>', () => {
         },
       ],
     },
-  ];
-  const navigation = [
-    ...navigationItems,
-    ...navigationDropdowns,
   ];
   const theme = {
     navigation: 'bg-[#ff3366]',
