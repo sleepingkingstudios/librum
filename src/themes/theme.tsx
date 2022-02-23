@@ -10,6 +10,17 @@ export interface Theme {
   linkBase?: string;
   linkDanger: string;
   name: string;
+  navigation?: string;
+  navigationDropdown?: string;
+  navigationDropdownContainer?: string;
+  navigationDropdownLabel?: string;
+  navigationDropdownItem: string;
+  navigationDropdownLink: string;
+  navigationDropdownLinkDisabled: string;
+  navigationItem: string;
+  navigationLink: string;
+  navigationLinkDisabled: string;
+  navigationList?: string;
   subtitle: string;
   text: string;
   textAccent: string;
@@ -29,6 +40,12 @@ export const defaultTheme = {
   link: '@linkBase',
   linkDanger: '@linkBase',
   name: 'Default Theme',
+  navigationDropdownItem: '@headerBase',
+  navigationDropdownLink: '@linkBase',
+  navigationDropdownLinkDisabled: '@navigationDropdownLink',
+  navigationItem: '@headerBase',
+  navigationLink: '@linkBase',
+  navigationLinkDisabled: '@navigationLink',
   subtitle: '@headerBase',
   text: '@textBase',
   textAccent: '@textBase',

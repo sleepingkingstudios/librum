@@ -38,6 +38,50 @@ describe('<PageHeader>', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  describe('with navigation: value', () => {
+    const navigation = [
+      {
+        label: 'Home',
+        url: '/',
+      },
+      {
+        label: 'Launch Sites',
+        url: '/launch-sites',
+      },
+      {
+        label: 'Rockets',
+        items: [
+          {
+            label: 'Engines',
+            url: '/rockets/engines',
+          },
+          {
+            label: 'Fuel Tanks',
+            url: '/rockets/fuel-tanks',
+          },
+        ],
+      },
+      {
+        label: 'Administration',
+        items: [
+          {
+            label: 'Strategies',
+            url: '/administration/strategies',
+          },
+        ],
+      },
+    ];
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <PageHeader navigation={navigation} />,
+        { router: true, theme },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
   describe('with subtitle: null', () => {
     it('should not display the subtitle', () => {
       const defaultTitle = 'Librum';
