@@ -15,6 +15,7 @@ module Spec::Support::Contracts::Models
         include Spec::Support::Contracts::Models
 
         association_name = association_name.intern
+        factory_name     = options.fetch(:factory_name, association_name)
         foreign_key_name = options.fetch(:foreign_key) do
           :"#{association_name}_id"
         end
@@ -40,7 +41,7 @@ module Spec::Support::Contracts::Models
               when Proc
                 instance_exec(&options[:association])
               when nil
-                FactoryBot.build(association_name)
+                FactoryBot.build(factory_name)
               else
                 options[:association]
               end

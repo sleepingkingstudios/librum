@@ -26,6 +26,11 @@ RSpec.describe Authentication::User, type: :model do
     :username,
     default: ''
 
+  ## Associations
+  include_contract 'should have many',
+    :credentials,
+    factory_name: :generic_credential
+
   describe '#valid?' do
     it { expect(user.valid?).to be true }
 

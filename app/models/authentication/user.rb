@@ -4,6 +4,11 @@
 class Authentication::User < ApplicationRecord
   self.table_name = 'authentication_users'
 
+  ## Associations
+  has_many :credentials,
+    class_name: 'Authentication::Credential',
+    dependent:  :destroy
+
   ### Validations
   validates :email,
     presence:   true,
