@@ -20,39 +20,6 @@ RSpec.describe Source, type: :model do
     }
   end
 
-  describe '.data_property' do
-    let(:described_class) { Spec::ExampleSource }
-
-    example_class 'Spec::ExampleSource', described_class
-
-    it 'should define the class method' do
-      expect(described_class)
-        .to respond_to(:data_property)
-        .with(1).argument
-        .and_keywords(:predicate)
-    end
-
-    describe 'with a property name' do
-      let(:property_name) { :prop_name }
-
-      before(:example) { described_class.data_property(property_name) }
-
-      include_contract 'should define data property', :prop_name
-    end
-
-    describe 'with a property name and predicate: true' do
-      let(:property_name) { :prop_name }
-
-      before(:example) do
-        described_class.data_property(property_name, predicate: true)
-      end
-
-      include_contract 'should define data property',
-        :prop_name,
-        predicate: true
-    end
-  end
-
   include_contract 'should be a source', type: nil
 
   describe '#homebrew?' do

@@ -5,11 +5,13 @@ require 'rspec/sleeping_king_studios/contract'
 require 'support/contracts/model_contracts'
 require 'support/contracts/models'
 require 'support/contracts/models/attributes_contracts'
+require 'support/contracts/models/data_properties_contracts'
 require 'support/contracts/models/validation_contracts'
 
 module Spec::Support::Contracts::Models
   module SourceContracts
     include Spec::Support::Contracts::ModelContracts
+    include Spec::Support::Contracts::Models::DataPropertiesContracts
 
     module ShouldBeASourceContract
       extend RSpec::SleepingKingStudios::Contract
@@ -31,6 +33,8 @@ module Spec::Support::Contracts::Models
         include_contract 'should define attribute',
           :data,
           default: {}
+
+        include_contract 'should define data properties'
 
         include_contract 'should define data property',
           :official,
@@ -117,125 +121,6 @@ module Spec::Support::Contracts::Models
                   publisher: FactoryBot.create(:publisher)
                 )
               }
-          end
-        end
-      end
-    end
-
-    module ShouldDefineDataProperty
-      extend RSpec::SleepingKingStudios::Contract
-
-      contract do |property_name, predicate: false|
-        describe "##{property_name}" do
-          it 'should define the reader' do
-            expect(subject)
-              .to define_reader(property_name)
-              .with_value(attributes[:data][property_name.to_s])
-          end
-        end
-
-        describe "##{property_name}=" do
-          let(:writer_name) { :"#{property_name}=" }
-
-          it { expect(subject).to define_writer(property_name) }
-
-          it 'should set the property' do
-            expect { subject.send(writer_name, 'new value') }
-              .to change(subject, property_name)
-              .to be == 'new value'
-          end
-
-          it 'should update the data' do
-            expect { subject.send(writer_name, 'new value') }
-              .to change { subject.data[property_name.to_s] }
-              .to be == 'new value'
-          end
-
-          context 'when the data includes the value' do
-            let(:attributes) do
-              data = super()[:data].merge({ property_name.to_s => 'old value' })
-
-              super().merge(data: data)
-            end
-
-            it 'should set the property' do
-              expect { subject.send(writer_name, 'new value') }
-                .to change(subject, property_name)
-                .to be == 'new value'
-            end
-
-            it 'should update the data' do
-              expect { subject.send(writer_name, 'new value') }
-                .to change { subject.data[property_name.to_s] }
-                .to be == 'new value'
-            end
-          end
-        end
-
-        describe "##{property_name}?" do
-          let(:predicate_name) { :"#{property_name}?" }
-
-          if predicate
-            it 'should define the predicate' do
-              expect(subject).to define_predicate(predicate_name)
-            end
-
-            context 'when the value is nil' do
-              let(:attributes) do
-                data =
-                  super()[:data].merge({ property_name.to_s => nil })
-
-                super().merge(data: data)
-              end
-
-              it { expect(subject.send(predicate_name)).to be false }
-            end
-
-            context 'when the value is false' do
-              let(:attributes) do
-                data =
-                  super()[:data].merge({ property_name.to_s => false })
-
-                super().merge(data: data)
-              end
-
-              it { expect(subject.send(predicate_name)).to be false }
-            end
-
-            context 'when the value is true' do
-              let(:attributes) do
-                data =
-                  super()[:data].merge({ property_name.to_s => true })
-
-                super().merge(data: data)
-              end
-
-              it { expect(subject.send(predicate_name)).to be true }
-            end
-
-            context 'when the value is an empty String' do
-              let(:attributes) do
-                data =
-                  super()[:data].merge({ property_name.to_s => '' })
-
-                super().merge(data: data)
-              end
-
-              it { expect(subject.send(predicate_name)).to be false }
-            end
-
-            context 'when the value is a non-empty String' do
-              let(:attributes) do
-                data =
-                  super()[:data].merge({ property_name.to_s => 'value' })
-
-                super().merge(data: data)
-              end
-
-              it { expect(subject.send(predicate_name)).to be true }
-            end
-          else
-            it { expect(subject).not_to define_predicate(predicate_name) }
           end
         end
       end
