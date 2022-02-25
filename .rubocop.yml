@@ -53,6 +53,7 @@ Layout/ParameterAlignment:
 Metrics/BlockLength:
   Exclude:
     - config/routes.rb
+    - spec/support/factories/**/*
     - spec/**/*_contract*.rb
     - spec/**/*_spec.rb
 
