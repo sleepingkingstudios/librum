@@ -20,6 +20,8 @@ class Authentication::Credential < ApplicationRecord
     presence: true
   validates :type, presence: true
 
+  # @return [true, false] true if the expires_at date is in the past, otherwise
+  #   false.
   def expired?
     expires_at < Time.current
   end

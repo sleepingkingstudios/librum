@@ -2,6 +2,7 @@
 
 require 'actions'
 require 'authentication'
+require 'authorization'
 require 'data'
 require 'models'
 require 'serializers'
@@ -12,6 +13,10 @@ loader.push_dir(Rails.root.join('lib/actions'), namespace: Actions)
 loader.push_dir(
   Rails.root.join('lib/authentication'),
   namespace: Authentication
+)
+loader.push_dir(
+  Rails.root.join('lib/authorization'),
+  namespace: Authorization
 )
 loader.push_dir(Rails.root.join('lib/data'), namespace: Data)
 loader.push_dir(Rails.root.join('lib/models'), namespace: Models)
