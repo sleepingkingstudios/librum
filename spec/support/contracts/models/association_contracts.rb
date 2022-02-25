@@ -65,6 +65,7 @@ module Spec::Support::Contracts::Models
       contract do |association_name, **options|
         association_name = association_name.intern
         singular_name    = association_name.to_s.singularize.intern
+        factory_name     = options.fetch(:factory_name, singular_name)
         model_name       =
           described_class.name.split('::').last.underscore.tr('_', ' ')
         display_name     = association_name.to_s.tr('_', ' ')
@@ -76,7 +77,7 @@ module Spec::Support::Contracts::Models
           context "when the #{model_name} has many #{display_name}" do
             let(:associations) do
               Array.new(3) do
-                FactoryBot.build(singular_name, inverse_name => subject)
+                FactoryBot.build(factory_name, inverse_name => subject)
               end
             end
             let(:association_value) { subject.send(association_name) }
