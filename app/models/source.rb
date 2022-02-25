@@ -2,36 +2,7 @@
 
 # An abstract source for game materials.
 class Source < ApplicationRecord
-  class << self
-    # Defines reader and writer methods wrapping a data value.
-    def data_property(property_name, predicate: false)
-      property_name = property_name.to_s
-
-      define_reader(property_name)
-      define_writer(property_name)
-      define_predicate(property_name) if predicate
-    end
-
-    private
-
-    def define_reader(property_name)
-      reader_name = property_name.intern
-
-      define_method(reader_name) { data[property_name] }
-    end
-
-    def define_predicate(property_name)
-      predicate_name = :"#{property_name}?"
-
-      define_method(predicate_name) { data[property_name].present? }
-    end
-
-    def define_writer(property_name)
-      writer_name = :"#{property_name}="
-
-      define_method(writer_name) { |value| data[property_name] = value }
-    end
-  end
+  extend Models::DataProperties
 
   ### Attributes
   data_property :official, predicate: true
