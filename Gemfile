@@ -18,6 +18,7 @@ gem 'annotate',
   group: :development,
   git:   'https://github.com/sleepingkingstudios/annotate_models'
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt',    '~> 2.3'
 
 ### Commands
 gem 'cuprum',

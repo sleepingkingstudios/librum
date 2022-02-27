@@ -3,9 +3,9 @@
 require 'cuprum'
 require 'cuprum/collections/commands/find_one_matching'
 
-module Authentication::Strategies
+module Authentication::Passwords
   # Finds the password credential for the requested user and matches passwords.
-  class Password < Cuprum::Command
+  class Find < Cuprum::Command
     # @param repository [Cuprum::Collections::Repository] The repository used to
     #   query the user and credential.
     def initialize(repository:)
@@ -17,8 +17,6 @@ module Authentication::Strategies
     attr_reader :repository
 
     private
-
-    attr_reader :request
 
     def credentials_collection
       repository['authentication/credentials']
@@ -36,63 +34,41 @@ module Authentication::Strategies
         )
     end
 
-    def find_user
+    def find_user(username)
       Cuprum::Collections::Commands::FindOneMatching
         .new(collection: users_collection)
         .call(attributes: { username: username })
     end
 
-    def password
-      request.params['password']
-    end
-
-    def process(request)
-      @request = request
-
+    def process(password:, username:)
       steps do
-        step { require_parameters }
-
-        user       = step { find_user }
+        user       = step { find_user(username) }
         credential = step { find_credential(user) }
 
-        step { validate_credential(credential) }
+        step { validate_credential(credential: credential, password: password) }
 
-        return Authorization::Session.new(credential: credential)
+        return credential
       end
 
       failure(Authentication::Errors::InvalidPassword.new)
-    end
-
-    def require_parameters
-      return if username.present? && password.present?
-
-      failure(Cuprum::Error.new(message: 'missing username or password'))
     end
 
     def users_collection
       repository['authentication/users']
     end
 
-    def username
-      request.params['username']
-    end
-
-    def validate_credential(credential)
+    def validate_credential(credential:, password:)
       step { validate_expiration(credential) }
 
-      step { validate_password(credential) }
+      Authentication::Passwords::Match
+        .new(credential.encrypted_password)
+        .call(password)
     end
 
     def validate_expiration(credential)
       return unless credential.expired?
 
       failure(Cuprum::Error.new(message: 'expired credential'))
-    end
-
-    def validate_password(credential)
-      Authentication::Passwords::Match
-        .new(credential.encrypted_password)
-        .call(password)
     end
   end
 end
