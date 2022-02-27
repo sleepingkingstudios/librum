@@ -1,0 +1,5 @@
+---
+middleware:
+  Data::Middleware::GenerateSlug:
+    attribute_name: username
+  Data::Middleware::GeneratePassword: {}

@@ -10,5 +10,6 @@ FactoryBot.define do
 
     email    { "user.#{user_index}@example.com" }
     username { "User #{user_index}" }
+    slug     { "user-#{user_index}" }
   end
 end

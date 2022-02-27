@@ -37,6 +37,30 @@ RSpec.describe Data::Tasks do
       expect(load_mock).to have_received(:call).with(no_args)
     end
 
+    describe 'with authentication: true' do
+      let(:options) { super().merge('authentication' => true) }
+
+      it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
+        invoke_task
+
+        expect(Data::Load)
+          .to have_received(:new)
+          .with(
+            data_path:      nil,
+            record_classes: [
+              *Data::Configuration::CORE_CLASSES,
+              *Data::Configuration::AUTHENTICATION_CLASSES
+            ]
+          )
+      end
+
+      it 'should call the loader' do
+        invoke_task
+
+        expect(load_mock).to have_received(:call).with(no_args)
+      end
+    end
+
     describe 'with data-path: a value' do
       let(:data_path) { 'path/to/data' }
       let(:options)   { super().merge('data-path' => data_path) }

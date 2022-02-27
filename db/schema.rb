@@ -29,9 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_23_200146) do
   create_table "authentication_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "slug", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_authentication_users_on_email", unique: true
+    t.index ["slug"], name: "index_authentication_users_on_slug", unique: true
     t.index ["username"], name: "index_authentication_users_on_username", unique: true
   end
 

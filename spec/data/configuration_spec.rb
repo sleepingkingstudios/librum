@@ -3,6 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe Data::Configuration do
+  describe '::AUTHENTICATION_CLASSES' do
+    let(:expected) do
+      [
+        Authentication::User
+      ]
+    end
+
+    include_examples 'should define constant',
+      :AUTHENTICATION_CLASSES,
+      -> { be == expected }
+  end
+
   describe '::CORE_CLASSES' do
     let(:expected) do
       [

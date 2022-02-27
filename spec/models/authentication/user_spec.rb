@@ -12,11 +12,12 @@ RSpec.describe Authentication::User, type: :model do
   let(:attributes) do
     {
       email:    'alan.bradley@example.com',
-      username: 'Alan Bradley'
+      username: 'Alan Bradley',
+      slug:     'alan-bradley'
     }
   end
 
-  include_contract 'should be a model', slug: false
+  include_contract 'should be a model'
 
   ### Attributes
   include_contract 'should define attribute',
@@ -52,6 +53,27 @@ RSpec.describe Authentication::User, type: :model do
       type: String
     include_contract 'should validate the uniqueness of',
       :email,
+      factory_name: :authentication_user
+
+    include_contract 'should validate the format of',
+      :slug,
+      message:     'must be in kebab-case',
+      matching:    {
+        'example'               => 'a lowercase string',
+        'example-slug'          => 'a kebab-case string',
+        'example-compound-slug' => 'a kebab-case string with multiple words',
+        '1st-example'           => 'a kebab-case string with digits'
+      },
+      nonmatching: {
+        'InvalidSlug'   => 'a string with capital letters',
+        'invalid slug'  => 'a string with whitespace',
+        'invalid_slug'  => 'a string with underscores',
+        '-invalid-slug' => 'a string with leading dash',
+        'invalid-slug-' => 'a string with trailing dash'
+      }
+    include_contract 'should validate the presence of', :slug, type: String
+    include_contract 'should validate the uniqueness of',
+      :slug,
       factory_name: :authentication_user
 
     include_contract 'should validate the presence of',
