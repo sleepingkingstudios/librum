@@ -9,7 +9,8 @@ RSpec.describe "#{ClientController} routes", type: :routing do
     it 'should route to ClientController#index' do
       expect(get: '/').to route_to(
         controller: controller,
-        action:     'index'
+        action:     'index',
+        path:       ''
       )
     end
   end
@@ -24,5 +25,9 @@ RSpec.describe "#{ClientController} routes", type: :routing do
         path:       'path/to/resource'
       )
     end
+  end
+
+  describe 'GET /api/path/to/resource' do
+    it { expect(get: '/api/path/to/resource').not_to be_routable }
   end
 end

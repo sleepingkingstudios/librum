@@ -9,6 +9,22 @@ module Spec::Support::Contracts
     module ShouldRouteToApiResourceContract
       extend RSpec::SleepingKingStudios::Contract
 
+      contract do |resource_name, only: nil, singular: false|
+        if singular
+          include_contract 'should route to singular api resource',
+            resource_name,
+            only: only
+        else
+          include_contract 'should route to plural api resource',
+            resource_name,
+            only: only
+        end
+      end
+    end
+
+    module ShouldRouteToPluralApiResourceContract
+      extend RSpec::SleepingKingStudios::Contract
+
       contract do |resource_name, only: nil|
         root_route      = "api/#{resource_name}"
         controller_name =
@@ -141,6 +157,122 @@ module Spec::Support::Contracts
             # :nocov:
             it 'should not be routeable' do
               expect(delete: "/#{root_route}/#{resource_id}.json")
+                .not_to be_routable
+            end
+            # :nocov:
+          end
+        end
+      end
+    end
+
+    module ShouldRouteToSingularApiResourceContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |resource_name, only: nil|
+        root_route      = "api/#{resource_name}"
+        controller_name =
+          resource_name
+          .to_s
+          .split('/')
+          .map(&:classify)
+          .map(&:pluralize)
+          .join('::')
+        controller_name =
+          "Api::#{controller_name}Controller"
+        expected_routes = %i[
+          create
+          show
+          update
+          destroy
+        ]
+        expected_routes &= Array(only).map(&:intern) unless Array(only).empty?
+
+        describe "GET /#{root_route}" do
+          let(:configured_controller) { root_route.pluralize }
+
+          if expected_routes.include?(:show)
+            # :nocov:
+            it "should route to #{controller_name}#show" do
+              expect(get: "/#{root_route}.json").to route_to(
+                controller: configured_controller,
+                action:     'show',
+                format:     'json'
+              )
+            end
+            # :nocov:
+          else
+            # :nocov:
+            it 'should not be routeable' do
+              expect(get: "/#{root_route}.json").not_to be_routable
+            end
+            # :nocov:
+          end
+        end
+
+        describe "POST /#{root_route}" do
+          let(:configured_controller) { root_route.pluralize }
+
+          if expected_routes.include?(:create)
+            # :nocov:
+            it "should route to #{controller_name}#create" do
+              expect(post: "/#{root_route}.json").to route_to(
+                controller: configured_controller,
+                action:     'create',
+                format:     'json'
+              )
+            end
+            # :nocov:
+          else
+            # :nocov:
+            it 'should not be routeable' do
+              expect(post: "/#{root_route}.json").not_to be_routable
+            end
+            # :nocov:
+          end
+        end
+
+        describe "PATCH /#{root_route}" do
+          let(:configured_controller) { root_route.pluralize }
+
+          if expected_routes.include?(:update)
+            # :nocov:
+            it "should route to #{controller_name}#update" do # rubocop:disable RSpec/ExampleLength
+              expect(patch: "/#{root_route}.json")
+                .to route_to(
+                  controller: configured_controller,
+                  action:     'update',
+                  format:     'json'
+                )
+            end
+            # :nocov:
+          else
+            # :nocov:
+            it 'should not be routeable' do
+              expect(patch: "/#{root_route}.json")
+                .not_to be_routable
+            end
+            # :nocov:
+          end
+        end
+
+        describe "DELETE /#{root_route}" do
+          let(:configured_controller) { root_route.pluralize }
+
+          if expected_routes.include?(:destroy)
+            # :nocov:
+            it "should route to #{controller_name}#destroy" do # rubocop:disable RSpec/ExampleLength
+              expect(delete: "/#{root_route}.json")
+                .to route_to(
+                  controller: configured_controller,
+                  action:     'destroy',
+                  format:     'json'
+                )
+            end
+            # :nocov:
+          else
+            # :nocov:
+            it 'should not be routeable' do
+              expect(delete: "/#{root_route}.json")
                 .not_to be_routable
             end
             # :nocov:

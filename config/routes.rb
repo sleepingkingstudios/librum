@@ -9,6 +9,17 @@ Rails.application.routes.draw do
   class << self
     API_ROUTES = %i[index create show update destroy].freeze
 
+    def api_resource(resource_name, **options, &block)
+      resource(
+        resource_name,
+        options.reverse_merge(
+          format: :json,
+          only:   API_ROUTES[1..]
+        ),
+        *block
+      )
+    end
+
     def api_resources(resource_name, **options, &block)
       resources(
         resource_name,
@@ -30,6 +41,8 @@ Rails.application.routes.draw do
 
     api_resources :publishers
 
+    api_resource :session, only: :create
+
     namespace :sources do
       api_resources :books
 
@@ -37,7 +50,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path', to: 'client#index'
+  get '*path',
+    to:          'client#index',
+    constraints: { path: /(?!api).*/ }
 
   root 'client#index'
 end
