@@ -13,6 +13,11 @@ class Authentication::User < ApplicationRecord
     SUPERADMIN: 'superadmin'
   ).freeze
 
+  ## Associations
+  has_many :credentials,
+    class_name: 'Authentication::Credential',
+    dependent:  :destroy
+
   ### Validations
   validates :email,
     presence:   true,

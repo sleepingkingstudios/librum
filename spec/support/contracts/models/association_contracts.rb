@@ -15,6 +15,7 @@ module Spec::Support::Contracts::Models
         include Spec::Support::Contracts::Models
 
         association_name = association_name.intern
+        factory_name     = options.fetch(:factory_name, association_name)
         foreign_key_name = options.fetch(:foreign_key) do
           :"#{association_name}_id"
         end
@@ -40,7 +41,7 @@ module Spec::Support::Contracts::Models
               when Proc
                 instance_exec(&options[:association])
               when nil
-                FactoryBot.build(association_name)
+                FactoryBot.build(factory_name)
               else
                 options[:association]
               end
@@ -65,6 +66,7 @@ module Spec::Support::Contracts::Models
       contract do |association_name, **options|
         association_name = association_name.intern
         singular_name    = association_name.to_s.singularize.intern
+        factory_name     = options.fetch(:factory_name, singular_name)
         model_name       =
           described_class.name.split('::').last.underscore.tr('_', ' ')
         display_name     = association_name.to_s.tr('_', ' ')
@@ -76,7 +78,7 @@ module Spec::Support::Contracts::Models
           context "when the #{model_name} has many #{display_name}" do
             let(:associations) do
               Array.new(3) do
-                FactoryBot.build(singular_name, inverse_name => subject)
+                FactoryBot.build(factory_name, inverse_name => subject)
               end
             end
             let(:association_value) { subject.send(association_name) }
