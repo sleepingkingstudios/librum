@@ -5,7 +5,8 @@ class CreateAuthenticationUsers < ActiveRecord::Migration[7.0]
     create_table :authentication_users, id: :uuid do |t|
       t.string :username, null: false, default: ''
       t.string :email,    null: false, default: ''
-      t.string :slug, null:     false, default: ''
+      t.string :slug,     null: false, default: ''
+      t.string :role,     null: false, default: ''
 
       t.timestamps
     end

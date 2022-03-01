@@ -26,7 +26,8 @@ RSpec.describe Data::Middleware::GeneratePassword do
       {
         email:    'user@example.com',
         slug:     'user',
-        username: 'User'
+        username: 'User',
+        role:     Authentication::User::Roles::USER
       }
     end
     let(:expected_attributes) { attributes }

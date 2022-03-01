@@ -11,5 +11,18 @@ FactoryBot.define do
     email    { "user.#{user_index}@example.com" }
     username { "User #{user_index}" }
     slug     { "user-#{user_index}" }
+    role     { Authentication::User::Roles::USER }
+
+    trait :admin do
+      role { Authentication::User::Roles::ADMIN }
+    end
+
+    trait :guest do
+      role { Authentication::User::Roles::GUEST }
+    end
+
+    trait :superadmin do
+      role { Authentication::User::Roles::SUPERADMIN }
+    end
   end
 end
