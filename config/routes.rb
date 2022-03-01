@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    namespace :authentication do
+      api_resources :users
+    end
+
     namespace :dnd5e do
       api_resources :conditions
     end
@@ -37,7 +41,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path', to: 'client#index'
+  get '*path',
+    to:          'client#index',
+    constraints: { path: /(?!api).*/ }
 
   root 'client#index'
 end
