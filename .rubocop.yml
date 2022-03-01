@@ -54,6 +54,7 @@ Metrics/BlockLength:
   Exclude:
     - config/routes.rb
     - spec/**/*_contract*.rb
+    - spec/**/*_factories.rb
     - spec/**/*_spec.rb
 
 Metrics/MethodLength:

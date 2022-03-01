@@ -6,6 +6,10 @@ module Data
     namespace :data
 
     desc 'load', 'Loads serialized data from the directory'
+    option :authentication,
+      type:     :boolean,
+      required: false,
+      desc:     'Load authentication data'
     option :'data-path',
       type:     :string,
       required: false,
@@ -13,8 +17,15 @@ module Data
     def load
       lazy_require_rails!
 
+      record_classes = scoped_classes(
+        authentication: options['authentication']
+      )
+
       Data::Load
-        .new(data_path: options['data-path'], record_classes: scoped_classes)
+        .new(
+          data_path:      options['data-path'],
+          record_classes: record_classes
+        )
         .call
     end
 
@@ -24,8 +35,16 @@ module Data
       require_relative '../../config/environment'
     end
 
-    def scoped_classes
-      Data::Configuration::CORE_CLASSES
+    def scoped_classes(authentication:)
+      record_classes = Data::Configuration::CORE_CLASSES
+
+      if authentication
+        raise if Rails.env.production?
+
+        record_classes += Data::Configuration::AUTHENTICATION_CLASSES
+      end
+
+      record_classes
     end
   end
 end
