@@ -14,7 +14,7 @@ RSpec.describe ApiController, type: :controller do
   describe '.responders' do
     include_contract 'should respond to',
       :json,
-      using: Cuprum::Rails::Responders::Json::Resource
+      using: ApplicationResponder
 
     include_contract 'should not respond to', :html
   end
