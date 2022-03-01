@@ -238,11 +238,13 @@ module Spec::Support::Contracts::Models
     module ShouldValidateTheUniquenessOfContract
       extend RSpec::SleepingKingStudios::Contract
 
-      contract do |attr_name, attributes: {}|
+      contract do |attr_name, attributes: {}, **options|
         context "when a #{described_class} exists with the same #{attr_name}" do
           let(:value)        { subject.send(attr_name) }
           let(:message)      { 'has already been taken' }
           let(:factory_name) do
+            return options[:factory_name] if options.key?(:factory_name)
+
             return super() if defined?(super())
 
             described_class.name.split('::').last.underscore.intern
