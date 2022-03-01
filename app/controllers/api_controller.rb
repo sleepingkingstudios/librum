@@ -11,7 +11,7 @@ class ApiController < ApplicationController
 
   protect_from_forgery with: :null_session
 
-  responder :json, Cuprum::Rails::Responders::Json::Resource
+  responder :json, ApplicationResponder
 
   def self.serializers
     Serializers::Json.default_serializers
