@@ -5,6 +5,11 @@ require 'data'
 module Data
   # Static configuration for loading record data.
   module Configuration
+    # The authentication record classes, for loading user fixtures.
+    AUTHENTICATION_CLASSES = [
+      ::Authentication::User
+    ].freeze
+
     # The core Librum record classes, required to load any system data.
     CORE_CLASSES = [
       ::Publisher,

@@ -1,0 +1,13 @@
+---
+- email:    ed.dillinger@example.com
+  username: Ed Dillinger
+  password: endofline
+  role:     superadmin
+- email:    alan.bradley@example.com
+  username: Alan Bradley
+  password: tronlives
+  role:     admin
+- email:    kevin.flynn@example.com
+  username: Kevin Flynn
+  password: clu
+  role:     user

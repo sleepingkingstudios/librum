@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/cuprum-collections
-  revision: 9858a83fda1fd53e939764f590a75d6c9302250a
+  revision: 67b23dd7648f8175cd96936c472c1d4bf216f028
   branch: main
   specs:
     cuprum-collections (0.2.0)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/cuprum-collections-loader
-  revision: db0077295b1c8aacf342660b4bba397d348feb13
+  revision: fa3dc75cdf1ec98bea65564d84ed327820a55b37
   branch: main
   specs:
     cuprum-collections-loader (0.0.1)
