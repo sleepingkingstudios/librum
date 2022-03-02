@@ -3,11 +3,19 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-
   class << self
     API_ROUTES = %i[index create show update destroy].freeze
+
+    def api_resource(resource_name, **options, &block)
+      resource(
+        resource_name,
+        options.reverse_merge(
+          format: :json,
+          only:   API_ROUTES[1..]
+        ),
+        *block
+      )
+    end
 
     def api_resources(resource_name, **options, &block)
       resources(
@@ -33,6 +41,8 @@ Rails.application.routes.draw do
     api_resources :game_systems
 
     api_resources :publishers
+
+    api_resource :session, only: :create
 
     namespace :sources do
       api_resources :books
