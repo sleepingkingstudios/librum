@@ -61,7 +61,7 @@ RSpec.describe Authentication::Jwt::Parse do
     end
 
     describe 'with an unsigned token' do
-      let(:credential) { FactoryBot.create(:generic_credential, :with_user) }
+      let(:credential) { FactoryBot.build(:generic_credential, :with_user) }
       let(:expires_at) { 1.day.from_now }
       let(:token) do
         JWT.encode({ exp: expires_at.to_i, sub: credential.id }, nil, 'none')
@@ -78,7 +78,7 @@ RSpec.describe Authentication::Jwt::Parse do
     end
 
     describe 'with an expired token' do
-      let(:credential) { FactoryBot.create(:generic_credential, :with_user) }
+      let(:credential) { FactoryBot.build(:generic_credential, :with_user) }
       let(:expires_at) { 1.day.ago }
       let(:session) do
         Authentication::Session.new(
@@ -101,7 +101,7 @@ RSpec.describe Authentication::Jwt::Parse do
     end
 
     describe 'with a valid token' do
-      let(:credential) { FactoryBot.create(:generic_credential, :with_user) }
+      let(:credential) { FactoryBot.build(:generic_credential, :with_user) }
       let(:expires_at) { 1.day.from_now }
       let(:session) do
         Authentication::Session.new(
