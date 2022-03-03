@@ -6,7 +6,7 @@ module Api::Sources
   # API controller for managing Sources::Website entities.
   class WebsitesController < ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
-      Cuprum::Rails::Resource.new(
+      ::Authentication::Resource.new(
         default_order:        :name,
         permitted_attributes: %w[
           game_system_id

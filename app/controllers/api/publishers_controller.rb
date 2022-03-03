@@ -6,7 +6,7 @@ module Api
   # API controller for managing Publisher entities.
   class PublishersController < ApiController
     def self.resource
-      Cuprum::Rails::Resource.new(
+      ::Authentication::Resource.new(
         default_order:        :name,
         permitted_attributes: %w[
           name

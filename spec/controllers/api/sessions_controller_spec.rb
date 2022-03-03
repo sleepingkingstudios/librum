@@ -15,7 +15,7 @@ RSpec.describe Api::SessionsController, type: :controller do
       described_class::Responder.new(**constructor_options)
     end
 
-    let(:resource) { Cuprum::Rails::Resource.new(resource_name: 'sessions') }
+    let(:resource) { described_class.resource }
     let(:constructor_options) do
       {
         action_name:   'create',
@@ -39,22 +39,14 @@ RSpec.describe Api::SessionsController, type: :controller do
     end
   end
 
-  describe '.repository' do
-    subject(:repository) { described_class.repository }
-
-    it { expect(repository).to be_a Cuprum::Rails::Repository }
-
-    it { expect(repository.key?('authentication/credentials')).to be true }
-
-    it { expect(repository.key?('authentication/users')).to be true }
-  end
-
   describe '.resource' do
     subject(:resource) { described_class.resource }
 
-    it { expect(resource).to be_a Cuprum::Rails::Resource }
+    it { expect(resource).to be_a Authentication::Resource }
 
     it { expect(resource.resource_name).to be == 'sessions' }
+
+    it { expect(resource.skip_authentication.to_a).to be == %w[create] }
   end
 
   describe '.responders' do

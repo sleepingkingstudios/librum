@@ -22,6 +22,31 @@ module Spec::Support::Contracts
       end
     end
 
+    module ShouldDefineMiddleware
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |middleware_class, except: [], only: []|
+        describe '.middleware' do
+          let(:middleware) do
+            described_class.middleware.find do |config|
+              config.command == middleware_class
+            end
+          end
+
+          it 'should define the middleware' do
+            expect(described_class.middleware)
+              .to include(
+                have_attributes(command: middleware_class)
+              )
+          end
+
+          it { expect(middleware.except.to_a).to be == except }
+
+          it { expect(middleware.only.to_a).to be == only }
+        end
+      end
+    end
+
     module ShouldNotRespondToContract
       extend RSpec::SleepingKingStudios::Contract
 

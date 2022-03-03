@@ -6,7 +6,7 @@ module Api::Authentication
   # API controller for managing Authentication::User entities.
   class UsersController < ApiController
     def self.resource
-      Cuprum::Rails::Resource.new(
+      ::Authentication::Resource.new(
         default_order:        :username,
         permitted_attributes: %w[
           email

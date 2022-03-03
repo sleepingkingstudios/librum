@@ -6,7 +6,7 @@ module Api
   # API controller for managing GameSystem entities.
   class GameSystemsController < ApiController
     def self.resource
-      Cuprum::Rails::Resource.new(
+      ::Authentication::Resource.new(
         default_order:        %w[name edition],
         permitted_attributes: %w[
           publisher_id
