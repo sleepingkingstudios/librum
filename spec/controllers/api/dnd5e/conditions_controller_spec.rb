@@ -22,13 +22,15 @@ RSpec.describe Api::Dnd5e::ConditionsController, type: :controller do
       ]
     end
 
-    it { expect(resource).to be_a Cuprum::Rails::Resource }
+    it { expect(resource).to be_a Authentication::Resource }
 
     it { expect(resource.default_order).to be :name }
 
     it { expect(resource.permitted_attributes).to be == permitted_attributes }
 
     it { expect(resource.resource_class).to be == Dnd5e::Condition }
+
+    it { expect(resource.skip_authentication).to be false }
   end
 
   describe '.serializers' do

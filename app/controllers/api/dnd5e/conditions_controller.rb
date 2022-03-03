@@ -6,7 +6,7 @@ module Api::Dnd5e
   # API controller for managing Dnd5e::Condition entities.
   class ConditionsController < ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
-      Cuprum::Rails::Resource.new(
+      ::Authentication::Resource.new(
         default_order:        :name,
         permitted_attributes: %w[
           source_id

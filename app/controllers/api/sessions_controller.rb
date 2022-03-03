@@ -23,7 +23,10 @@ module Api
     end
 
     def self.resource
-      Cuprum::Rails::Resource.new(resource_name: 'sessions')
+      ::Authentication::Resource.new(
+        resource_name:       'sessions',
+        skip_authentication: :create
+      )
     end
 
     def self.serializers
