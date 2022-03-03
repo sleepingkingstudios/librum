@@ -91,5 +91,53 @@ RSpec.describe ApplicationResponder do
         { 'ok' => false, 'error' => result.error.as_json }
       end
     end
+
+    describe 'with a failing result with an InvalidToken error' do
+      let(:error) do
+        Authentication::Errors::InvalidToken.new
+      end
+      let(:result) { Cuprum::Result.new(error: error) }
+      let(:expected_error) do
+        Errors::AuthenticationFailed.new
+      end
+
+      include_contract 'should respond with', 401 do
+        { 'ok' => false, 'error' => expected_error.as_json }
+      end
+
+      context 'when the Rails environment is development' do
+        before(:example) do
+          allow(Rails.env).to receive(:development?).and_return(true)
+        end
+
+        include_contract 'should respond with', 401 do
+          { 'ok' => false, 'error' => result.error.as_json }
+        end
+      end
+    end
+
+    describe 'with a failing result with a MissingToken error' do
+      let(:error) do
+        Authentication::Errors::MissingToken.new
+      end
+      let(:result) { Cuprum::Result.new(error: error) }
+      let(:expected_error) do
+        Errors::AuthenticationFailed.new
+      end
+
+      include_contract 'should respond with', 401 do
+        { 'ok' => false, 'error' => expected_error.as_json }
+      end
+
+      context 'when the Rails environment is development' do
+        before(:example) do
+          allow(Rails.env).to receive(:development?).and_return(true)
+        end
+
+        include_contract 'should respond with', 401 do
+          { 'ok' => false, 'error' => result.error.as_json }
+        end
+      end
+    end
   end
 end

@@ -39,16 +39,6 @@ RSpec.describe Api::SessionsController, type: :controller do
     end
   end
 
-  describe '.repository' do
-    subject(:repository) { described_class.repository }
-
-    it { expect(repository).to be_a Cuprum::Rails::Repository }
-
-    it { expect(repository.key?('authentication/credentials')).to be true }
-
-    it { expect(repository.key?('authentication/users')).to be true }
-  end
-
   describe '.resource' do
     subject(:resource) { described_class.resource }
 
