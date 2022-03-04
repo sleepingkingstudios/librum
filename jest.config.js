@@ -84,6 +84,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.css': '<rootDir>/src/jest/mocks/style-mock.ts',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@store$': '<rootDir>/src/store',
     '^@test-helpers/(.*)$': '<rootDir>/src/test-helpers/$1',
     '^@themes$': '<rootDir>/src/themes',
     '^@themes/(.*)$': '<rootDir>/src/themes/$1',
