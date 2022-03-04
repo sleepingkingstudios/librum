@@ -1,6 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IStoreState {}
+import {
+  ISession,
+  reducer as sessionReducer,
+} from '@session';
 
-export const store = configureStore({ reducer: {} });
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IStoreState {
+  session: ISession;
+}
+
+export const store = configureStore({
+  reducer: {
+    session: sessionReducer,
+  },
+});
