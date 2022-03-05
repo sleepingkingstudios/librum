@@ -3,7 +3,7 @@ import * as React from 'react';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import { PageHeader } from './header';
+import { PageHeader } from './index';
 import { render } from '@test-helpers/rendering';
 
 describe('<PageHeader>', () => {

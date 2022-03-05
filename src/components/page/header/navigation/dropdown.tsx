@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { map } from 'lodash';
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import {
   faCaretDown,
   faCaretUp,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
 import { DropdownItem } from './dropdown-item';
 import { NavigationItemProps } from './item';
