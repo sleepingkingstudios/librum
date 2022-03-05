@@ -2,6 +2,7 @@ import {
   actions,
   initialState,
   reducer,
+  selector,
 } from './reducer';
 import { ISession } from './session';
 import { IUser } from './user';
@@ -101,6 +102,14 @@ describe('sessionSlice', () => {
           expect(reducer(state, action)).toEqual(expected);
         });
       });
+    });
+  });
+
+  describe('selector', () => {
+    const state = { session: initialState };
+
+    it('should select the state', () => {
+      expect(selector(state)).toEqual(initialState);
     });
   });
 });

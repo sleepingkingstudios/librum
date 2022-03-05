@@ -1,16 +1,18 @@
 import * as React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 
 import { ApplicationRoutes } from './index';
+import { render } from '@test-helpers/rendering';
 
 const renderAt = (element: React.ReactNode, path: string) => (
   render(
     <MemoryRouter initialEntries={[path]}>
       { element }
-    </MemoryRouter>
+    </MemoryRouter>,
+    { store: true }
   )
 );
 

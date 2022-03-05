@@ -12,7 +12,7 @@ export const chiaroscuro: Theme = {
   hr: 'border-chiaroscuro-text-strong dark:border-chiaroscuro-text-strong-dark after:border-chiaroscuro-text-strong after:dark:border-chiaroscuro-text-strong-dark',
   hrMuted: 'border-chiaroscuro-text-muted after:border-chiaroscuro-text-muted',
   link: '@linkBase text-chiaroscuro-link hover:text-chiaroscuro-link-hover dark:hover:text-chiaroscuro-link-hover-dark',
-  linkBase: 'hover:underline',
+  linkBase: 'cursor-pointer hover:underline',
   linkDanger: '@linkBase text-chiaroscuro-text-danger hover:text-chiaroscuro-text-danger-hover dark:text-chiaroscuro-text-danger-dark dark:hover:text-chiaroscuro-text-danger-hover-dark',
   name: 'Chiaroscuro',
   navigationDropdown: 'bg-chiaroscuro-background/75 dark:bg-chiaroscuro-background-dark/75 px-2 text-lg',

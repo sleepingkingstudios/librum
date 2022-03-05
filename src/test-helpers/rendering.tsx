@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { Provider as ReduxProvider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import {
   RenderOptions,
@@ -7,6 +7,10 @@ import {
   render,
 } from '@testing-library/react';
 
+import {
+  createStore,
+  storeType,
+} from './store';
 import { ThemeContext } from '@themes/context';
 import { defaultTheme } from '@themes/theme';
 
@@ -17,6 +21,7 @@ interface themeProperties {
 interface customRenderOptions extends RenderOptions {
   initialEntries?: Array<string>;
   router?: true;
+  store?: (storeType | true);
   theme?: themeProperties;
 }
 
@@ -37,6 +42,25 @@ export const withRouter = (
   </MemoryRouter>
 );
 
+export const withStore = (
+  component: React.ReactElement,
+  { store }: { store: (storeType | true) }
+): React.ReactElement => {
+  let configuredStore: storeType;
+
+  if (store === true) {
+    configuredStore = createStore().store;
+  } else {
+    configuredStore = store;
+  }
+
+  return (
+    <ReduxProvider store={configuredStore}>
+      { component }
+    </ReduxProvider>
+  );
+};
+
 export const withTheme = (
   component: React.ReactElement,
   { theme }: withThemeOptions
@@ -56,6 +80,10 @@ const customRender = (
 
   if ('router' in options && options.router) {
     wrapped = withRouter(wrapped, { initialEntries: options.initialEntries });
+  }
+
+  if ('store' in options) {
+    wrapped = withStore(wrapped, { store: options.store });
   }
 
   if ('theme' in options) {

@@ -22,10 +22,12 @@ const sessionSlice = createSlice({
         },
       }),
     },
-    destroy: () => initialState,
+    destroy: () => ({ authenticated: false }),
   },
 });
 export const {
   actions,
   reducer,
 } = sessionSlice;
+export const selector =
+  (state: { session: ISession }): ISession => state.session;
