@@ -7,11 +7,7 @@ require 'cuprum/rails/responders/json/resource'
 class ApiController < ApplicationController
   include Cuprum::Rails::Controller
 
-  default_format :json
-
   protect_from_forgery with: :null_session
-
-  responder :json, ApplicationResponder
 
   def self.repository
     return @repository if @repository
@@ -28,5 +24,9 @@ class ApiController < ApplicationController
     Serializers::Json.default_serializers
   end
 
+  default_format :json
+
   middleware Actions::Api::Middleware::Authenticate
+
+  responder :json, ApplicationResponder
 end

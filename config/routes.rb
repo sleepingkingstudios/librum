@@ -49,6 +49,10 @@ Rails.application.routes.draw do
 
       api_resources :websites
     end
+
+    api_resource :status,
+      controller: 'status',
+      only:       :show
   end
 
   get '*path',
