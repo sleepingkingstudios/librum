@@ -1,8 +1,4 @@
 import * as React from 'react';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,6 +7,10 @@ import {
   actions,
   selector,
 } from '@session';
+import {
+  useDispatch,
+  useSelector,
+} from '@store';
 import { useThemeStyles } from '@themes';
 import { joinClassNames } from '@utils/react-utils';
 
