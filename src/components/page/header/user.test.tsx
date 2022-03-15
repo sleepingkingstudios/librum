@@ -9,6 +9,7 @@ import {
   actions,
   selector,
 } from '@session';
+import { ISession } from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
@@ -114,7 +115,7 @@ describe('<PageHeaderUser>', () => {
 
         userEvent.click(button);
 
-        const state = getState();
+        const state = getState() as { session: ISession };
 
         expect(selector(state)).toEqual(expected);
       });
