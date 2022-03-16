@@ -10,6 +10,14 @@ export {
   useStoreDispatch as useDispatch,
   useStoreSelector as useSelector,
 } from './hooks';
+export {
+  ApiData,
+  ApiError,
+  ApiFailure,
+  ApiParam,
+  ApiResponse,
+  ApiSuccess,
+} from './types';
 
 type getDefaultMiddlewareType = () => Middleware[];
 

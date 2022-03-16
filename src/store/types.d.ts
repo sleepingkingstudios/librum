@@ -1,10 +1,12 @@
 type Literal = string | number | true | false | null;
 
-type DataItem = Literal | DataItem[] | { [name: string]: DataItem };
+type DataItem = Literal | DataItem[] | Record<string, DataItem>;
 
-export type ApiData = { [name: string]: DataItem };
+export type ApiData = Record<string, DataItem>;
 
 export type ApiError = { type: string, message: string, data: ApiData };
+
+export type ApiParam = Literal | ApiData;
 
 export type ApiFailure<Data extends ApiData = ApiData> = { ok: false, error: ApiError, data?: Data };
 

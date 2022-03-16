@@ -14,6 +14,7 @@ export {
   ApiData,
   ApiError,
   ApiFailure,
+  ApiParam,
   ApiResponse,
   ApiSuccess,
 } from './types';

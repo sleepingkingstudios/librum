@@ -17,11 +17,11 @@ beforeEach((): void => { fetchMock.resetMocks(); });
 describe('Status API', () => {
   describe('GET /api/status', () => {
     const endpoint = 'getStatus';
-    const status: ApiResponse = { ok: true, data: {} };
+    const data: ApiResponse = { ok: true, data: {} };
 
     shouldPerformTheQuery({
       api,
-      data: status,
+      data,
       endpoint,
       request: {
         url: '/api/status',
@@ -30,12 +30,11 @@ describe('Status API', () => {
   });
 
   describe('useGetStatusQuery', () => {
+    const data: ApiResponse = { ok: true, data: {} };
+
     shouldDefineTheQueryHook({
       api,
-      data: status,
-      request: {
-        url: '/api/status',
-      },
+      data,
       useQuery: useGetStatusQuery,
     });
   });
