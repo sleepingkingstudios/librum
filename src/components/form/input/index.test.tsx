@@ -7,16 +7,16 @@ import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
 
 import { FormInput } from './index';
-import {
-  formWrapper,
-  onSubmitType,
-  submitHandlerType,
-} from '@components/form/test-helpers';
+import type {
+  OnSubmit,
+  SubmitHandler,
+} from '../types';
+import { formWrapper } from '@components/form/test-helpers';
 
 describe('<FormInput />', () => {
   it('should pass the value to the form', async () => {
-    const submitHandler: submitHandlerType = jest.fn();
-    const onSubmit: onSubmitType =
+    const submitHandler: SubmitHandler = jest.fn();
+    const onSubmit: OnSubmit =
       (values: FormikValues) => submitHandler(values);
     const initialValues = { email: '' };
 
@@ -71,8 +71,8 @@ describe('<FormInput />', () => {
     });
 
     it('should pass the value to the form', async () => {
-      const submitHandler: submitHandlerType = jest.fn();
-      const onSubmit: onSubmitType =
+      const submitHandler: SubmitHandler = jest.fn();
+      const onSubmit: OnSubmit =
         (values: FormikValues) => submitHandler(values);
       const initialValues = { email: '' };
 
@@ -118,8 +118,8 @@ describe('<FormInput />', () => {
     });
 
     it('should pass the value to the form', async () => {
-      const submitHandler: submitHandlerType = jest.fn();
-      const onSubmit: onSubmitType =
+      const submitHandler: SubmitHandler = jest.fn();
+      const onSubmit: OnSubmit =
         (values: FormikValues) => submitHandler(values);
       const initialValues = { email: 'alan.bradley@example.com' };
 

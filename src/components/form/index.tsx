@@ -2,27 +2,36 @@ import * as React from 'react';
 import {
   Form as FormWrapper,
   Formik,
-  FormikHelpers,
   FormikValues,
 } from 'formik';
+import type {
+  OnSubmit,
+  QueryParams,
+  UseMutation,
+} from './types';
+import { wrapMutation } from './utils';
 
 export { FormInput } from './input';
-
-type submitHandler = (
-  values: FormikValues,
-  formikHelpers: FormikHelpers<FormikValues>
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-) => void | Promise<any>;
 
 interface IFormProps {
   children: React.ReactNode;
   initialValues?: FormikValues;
-  onSubmit: submitHandler;
+  params?: QueryParams;
+  useMutation: UseMutation;
 }
 
 export const Form = (
-  { children, initialValues, onSubmit }: IFormProps
+  {
+    children,
+    initialValues,
+    params,
+    useMutation,
+  }: IFormProps
 ): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [mutation, status] = useMutation();
+  const onSubmit: OnSubmit = wrapMutation({ mutation, params });
+
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       <FormWrapper>

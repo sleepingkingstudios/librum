@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  Field,
-  FormikValues,
-} from 'formik';
+import { Field } from 'formik';
 
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,18 +8,18 @@ import { render } from '@test-helpers/rendering';
 
 import { Form } from './index';
 import {
-  onSubmitType,
-  submitHandlerType,
-} from '@components/form/test-helpers';
+  Mutation,
+  QueryParams,
+  UseMutation,
+} from './types';
 
 describe('<Form />', () => {
   it('should submit the form', async () => {
-    const submitHandler: submitHandlerType = jest.fn();
-    const onSubmit: onSubmitType =
-      (values: FormikValues) => submitHandler(values);
+    const mutation: Mutation = jest.fn();
+    const useMutation: UseMutation = () => [mutation, {}];
 
     const { getByRole } = render(
-      <Form initialValues={{}} onSubmit={onSubmit}>
+      <Form initialValues={{}} useMutation={useMutation}>
         <button type="submit">Submit</button>
       </Form>
     );
@@ -30,18 +27,42 @@ describe('<Form />', () => {
     userEvent.click(getByRole('button', { name: 'Submit'}));
 
     await waitFor(() => {
-      expect(submitHandler).toHaveBeenCalledWith({});
+      expect(mutation).toHaveBeenCalledWith({});
     });
   });
 
   it('should match the snapshot', () => {
+    const mutation: Mutation = jest.fn();
+    const useMutation: UseMutation = () => [mutation, {}];
+
     const { asFragment } = render(
-      <Form initialValues={{}} onSubmit={jest.fn()}>
+      <Form initialValues={{}} useMutation={useMutation}>
         <button type="submit">Submit</button>
       </Form>
     );
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  describe('with params', () => {
+    const params: QueryParams = { id: 0 };
+
+    it('should submit the form', async () => {
+      const mutation: Mutation = jest.fn();
+      const useMutation: UseMutation = () => [mutation, {}];
+
+      const { getByRole } = render(
+        <Form params={params} initialValues={{}} useMutation={useMutation}>
+          <button type="submit">Submit</button>
+        </Form>
+      );
+
+      userEvent.click(getByRole('button', { name: 'Submit'}));
+
+      await waitFor(() => {
+        expect(mutation).toHaveBeenCalledWith(params);
+      });
+    });
   });
 
   describe('with form inputs', () => {
@@ -66,12 +87,11 @@ describe('<Form />', () => {
     };
 
     it('should submit the form', async () => {
-      const submitHandler: submitHandlerType = jest.fn();
-      const onSubmit: onSubmitType =
-        (values: FormikValues) => submitHandler(values);
+      const mutation: Mutation = jest.fn();
+      const useMutation: UseMutation = () => [mutation, {}];
 
       const { getByRole } = render(
-        <Form initialValues={defaultValues} onSubmit={onSubmit}>
+        <Form initialValues={defaultValues} useMutation={useMutation}>
           <Fields />
 
           <button type="submit">Submit</button>
@@ -81,15 +101,14 @@ describe('<Form />', () => {
       userEvent.click(getByRole('button', { name: 'Submit'}));
 
       await waitFor(() => {
-        expect(submitHandler).toHaveBeenCalledWith(defaultValues);
+        expect(mutation).toHaveBeenCalledWith(defaultValues);
       });
     });
 
     describe('when the user inputs values', () => {
       it('should submit the form', async () => {
-        const submitHandler: submitHandlerType = jest.fn();
-        const onSubmit: onSubmitType =
-          (values: FormikValues) => submitHandler(values);
+        const mutation: Mutation = jest.fn();
+        const useMutation: UseMutation = () => [mutation, {}];
         const expectedValues = {
           launchSite: 'KSC',
           mission: {
@@ -98,7 +117,7 @@ describe('<Form />', () => {
         };
 
         const { getByRole, getByLabelText } = render(
-          <Form initialValues={defaultValues} onSubmit={onSubmit}>
+          <Form initialValues={defaultValues} useMutation={useMutation}>
             <Fields />
 
             <button type="submit">Submit</button>
@@ -112,7 +131,41 @@ describe('<Form />', () => {
         userEvent.click(getByRole('button', { name: 'Submit'}));
 
         await waitFor(() => {
-          expect(submitHandler).toHaveBeenCalledWith(expectedValues);
+          expect(mutation).toHaveBeenCalledWith(expectedValues);
+        });
+      });
+
+      describe('with params', () => {
+        const params: QueryParams = { id: 0 };
+
+        it('should submit the form', async () => {
+          const mutation: Mutation = jest.fn();
+          const useMutation: UseMutation = () => [mutation, {}];
+          const expectedValues = {
+            launchSite: 'KSC',
+            mission: {
+              name: 'Warlock IV',
+            },
+            ...params,
+          };
+
+          const { getByRole, getByLabelText } = render(
+            <Form params={params} initialValues={defaultValues} useMutation={useMutation}>
+              <Fields />
+
+              <button type="submit">Submit</button>
+            </Form>
+          );
+
+          userEvent.type(getByLabelText('Launch Site'), 'KSC');
+
+          userEvent.type(getByLabelText('Mission Name'), 'Warlock IV');
+
+          userEvent.click(getByRole('button', { name: 'Submit'}));
+
+          await waitFor(() => {
+            expect(mutation).toHaveBeenCalledWith(expectedValues);
+          });
         });
       });
     });
@@ -126,12 +179,11 @@ describe('<Form />', () => {
       };
 
       it('should submit the form', async () => {
-        const submitHandler: submitHandlerType = jest.fn();
-        const onSubmit: onSubmitType =
-          (values: FormikValues) => submitHandler(values);
+        const mutation: Mutation = jest.fn();
+        const useMutation: UseMutation = () => [mutation, {}];
 
         const { getByRole } = render(
-          <Form initialValues={initialValues} onSubmit={onSubmit}>
+          <Form initialValues={initialValues} useMutation={useMutation}>
             <Fields />
 
             <button type="submit">Submit</button>
@@ -141,7 +193,53 @@ describe('<Form />', () => {
         userEvent.click(getByRole('button', { name: 'Submit'}));
 
         await waitFor(() => {
-          expect(submitHandler).toHaveBeenCalledWith(initialValues);
+          expect(mutation).toHaveBeenCalledWith(initialValues);
+        });
+      });
+
+      describe('with params', () => {
+        const params: QueryParams = { id: 0 };
+
+        it('should submit the form', async () => {
+          const mutation: Mutation = jest.fn();
+          const useMutation: UseMutation = () => [mutation, {}];
+
+          const { getByRole } = render(
+            <Form params={params} initialValues={initialValues} useMutation={useMutation}>
+              <Fields />
+
+              <button type="submit">Submit</button>
+            </Form>
+          );
+
+          userEvent.click(getByRole('button', { name: 'Submit'}));
+
+          await waitFor(() => {
+            expect(mutation).toHaveBeenCalledWith({ ...initialValues, ...params });
+          });
+        });
+      });
+    });
+
+    describe('with params', () => {
+      const params: QueryParams = { id: 0 };
+
+      it('should submit the form', async () => {
+        const mutation: Mutation = jest.fn();
+        const useMutation: UseMutation = () => [mutation, {}];
+
+        const { getByRole } = render(
+          <Form initialValues={defaultValues} params={params} useMutation={useMutation}>
+            <Fields />
+
+            <button type="submit">Submit</button>
+          </Form>
+        );
+
+        userEvent.click(getByRole('button', { name: 'Submit'}));
+
+        await waitFor(() => {
+          expect(mutation).toHaveBeenCalledWith({ ...defaultValues, ...params });
         });
       });
     });

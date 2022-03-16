@@ -2,21 +2,14 @@ import * as React from 'react';
 import {
   Form,
   Formik,
-  FormikHelpers,
   FormikValues,
 } from 'formik';
 
-export type onSubmitType = (
-  values: FormikValues,
-  formikHelpers: FormikHelpers<FormikValues>
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-) => void | Promise<any>;
-
-export type submitHandlerType = (values: FormikValues) => void;
+import type { OnSubmit } from './types';
 
 interface IFormWrapperProps {
   initialValues?: FormikValues;
-  onSubmit?: onSubmitType;
+  onSubmit?: OnSubmit;
   submitButton?: true | false;
 }
 
