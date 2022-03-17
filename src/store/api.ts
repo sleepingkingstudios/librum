@@ -5,10 +5,8 @@ import {
 
 import { ApiResponse } from './types';
 import type { RootState } from './index';
-import {
-  ISession,
-  selector as selectSession,
-} from '@session';
+import { selector as selectSession } from '@session';
+import type { Session } from '@session';
 
 export {
   ApiData,
@@ -17,6 +15,9 @@ export {
   ApiParam,
   ApiResponse,
   ApiSuccess,
+  FetchFailure,
+  FetchResponse,
+  FetchSuccess,
 } from './types';
 
 export const api = createApi({
@@ -24,7 +25,7 @@ export const api = createApi({
     baseUrl: '/api',
     prepareHeaders: (headers, { getState }) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      const session: ISession = selectSession(getState() as RootState);
+      const session: Session = selectSession(getState() as RootState);
 
       const {
         authenticated,

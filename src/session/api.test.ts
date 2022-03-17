@@ -7,7 +7,7 @@ import {
   useCreateSessionMutation,
 } from './api';
 import type { Login } from './api';
-import type { IUser } from './user';
+import type { User } from './types';
 import type { ApiResponse } from '@store/api';
 import {
   shouldDefineTheMutationHook,
@@ -21,14 +21,14 @@ describe('Session API', () => {
     username: 'alan.bradley@example.com',
     password: 'tronlives',
   };
-  const user: IUser = {
+  const user: User = {
     email: 'alan.bradley@example.com',
     id: '00000000-0000-0000-0000-000000000000',
     role: 'user',
     slug: 'alan-bradley',
     username: 'Alan Bradley',
   };
-  const data: ApiResponse<{ token: string, user: IUser }> = {
+  const data: ApiResponse<{ token: string, user: User }> = {
     ok: true,
     data: {
       token: '12345',

@@ -1,8 +1,6 @@
-import { IUser } from './user';
-import {
-  ApiResponse,
-  api,
-} from '@store';
+import type { User } from './types';
+import { api } from '@store';
+import type { ApiSuccess } from '@store/api';
 
 export type Login = {
   password: string;
@@ -11,7 +9,7 @@ export type Login = {
 
 export const sessionApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    createSession: builder.mutation<ApiResponse<{ token: string, user: IUser }>, Login>({
+    createSession: builder.mutation<ApiSuccess<{ token: string, user: User }>, Login>({
       query: (body: Login) => ({
         method: 'POST',
         url: 'session',

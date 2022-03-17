@@ -4,10 +4,8 @@ import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { PageHeader } from './index';
-import {
-  IUser,
-  actions,
-} from '@session';
+import { actions } from '@session';
+import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
@@ -147,7 +145,7 @@ describe('<PageHeader>', () => {
   });
 
   describe('when the session is authenticated', () => {
-    const user: IUser = {
+    const user: User = {
       email: 'alan.bradley@example.com',
       id: '00000000-0000-0000-0000-000000000000',
       role: 'user',

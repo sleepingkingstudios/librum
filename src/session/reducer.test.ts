@@ -4,10 +4,12 @@ import {
   reducer,
   selector,
 } from './reducer';
-import { ISession } from './session';
-import { IUser } from './user';
+import type {
+  Session,
+  User,
+} from './types';
 
-const user: IUser = {
+const user: User = {
   email: 'alan.bradley@example.com',
   id: '00000000-0000-0000-0000-000000000000',
   role: 'user',
@@ -52,7 +54,7 @@ describe('sessionSlice', () => {
 
   describe('initialState', () => {
     it('should set the initial state', () => {
-      const expected: ISession = {
+      const expected: Session = {
         authenticated: false,
       };
 
@@ -70,7 +72,7 @@ describe('sessionSlice', () => {
       const action = create({ token, user });
 
       it('should update the state', () => {
-        const expected: ISession = {
+        const expected: Session = {
           authenticated: true,
           token,
           user,
@@ -84,20 +86,20 @@ describe('sessionSlice', () => {
       const action = destroy();
 
       it('should update the state', () => {
-        const expected: ISession = { authenticated: false };
+        const expected: Session = { authenticated: false };
 
         expect(reducer(initialState, action)).toEqual(expected);
       });
 
       describe('when the state has an existing session', () => {
-        const state: ISession = {
+        const state: Session = {
           authenticated: true,
           token,
           user,
         };
 
         it('should update the state', () => {
-          const expected: ISession = { authenticated: false };
+          const expected: Session = { authenticated: false };
 
           expect(reducer(state, action)).toEqual(expected);
         });

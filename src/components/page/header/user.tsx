@@ -3,10 +3,10 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  ISession,
   actions,
   selector,
 } from '@session';
+import type { Session } from '@session';
 import {
   useDispatch,
   useSelector,
@@ -17,7 +17,7 @@ import { joinClassNames } from '@utils/react-utils';
 export const PageHeaderUser = (): JSX.Element => {
   const dispatch = useDispatch();
   const logout = () => { dispatch(actions.destroy()); };
-  const session: ISession = useSelector(selector);
+  const session: Session = useSelector(selector);
   const {
     authenticated,
     user,

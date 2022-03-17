@@ -14,10 +14,10 @@ import {
 } from "@testing-library/react-hooks";
 
 import {
-  IUser,
   actions,
   reducer as session,
 } from '@session';
+import type { User } from '@session';
 import type {
   ApiParam,
   ApiResponse,
@@ -235,7 +235,7 @@ export const shouldPerformTheMutation = (
 
     describe('when the user is authenticated', () => {
       const { create } = actions;
-      const user: IUser = {
+      const user: User = {
         email: 'alan.bradley@example.com',
         id: '00000000-0000-0000-0000-000000000000',
         role: 'user',
@@ -309,7 +309,7 @@ export const shouldPerformTheQuery = (
 
     describe('when the user is authenticated', () => {
       const { create } = actions;
-      const user: IUser = {
+      const user: User = {
         email: 'alan.bradley@example.com',
         id: '00000000-0000-0000-0000-000000000000',
         role: 'user',

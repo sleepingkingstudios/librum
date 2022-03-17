@@ -11,12 +11,8 @@ export {
   useStoreSelector as useSelector,
 } from './hooks';
 export {
-  ApiData,
-  ApiError,
-  ApiFailure,
-  ApiParam,
-  ApiResponse,
-  ApiSuccess,
+  Action,
+  ActionCreator,
 } from './types';
 
 type getDefaultMiddlewareType = () => Middleware[];

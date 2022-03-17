@@ -3,18 +3,20 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 
-import { ISession } from './session';
-import { IUser } from './user';
+import type {
+  Session,
+  User,
+} from './types';
 
-export const initialState: ISession = { authenticated: false };
+export const initialState: Session = { authenticated: false };
 
 const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {
     create: {
-      reducer: (state, action: PayloadAction<ISession>) => action.payload,
-      prepare: ({ token, user }: { token: string, user: IUser }) => ({
+      reducer: (state, action: PayloadAction<Session>) => action.payload,
+      prepare: ({ token, user }: { token: string, user: User }) => ({
         payload: {
           authenticated: true,
           token,
@@ -30,4 +32,4 @@ export const {
   reducer,
 } = sessionSlice;
 export const selector =
-  (state: { session: ISession }): ISession => state.session;
+  (state: { session: Session }): Session => state.session;

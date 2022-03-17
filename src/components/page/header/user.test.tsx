@@ -5,11 +5,13 @@ import '@testing-library/jest-dom';
 
 import { PageHeaderUser } from './user';
 import {
-  IUser,
   actions,
   selector,
 } from '@session';
-import { ISession } from '@session';
+import type {
+  Session,
+  User,
+} from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
@@ -43,7 +45,7 @@ describe('<PageHeaderUser>', () => {
   });
 
   describe('when the session is authenticated', () => {
-    const user: IUser = {
+    const user: User = {
       email: 'alan.bradley@example.com',
       id: '00000000-0000-0000-0000-000000000000',
       role: 'user',
@@ -115,7 +117,7 @@ describe('<PageHeaderUser>', () => {
 
         userEvent.click(button);
 
-        const state = getState() as { session: ISession };
+        const state = getState() as { session: Session };
 
         expect(selector(state)).toEqual(expected);
       });

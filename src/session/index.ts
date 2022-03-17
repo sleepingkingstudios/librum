@@ -4,5 +4,7 @@ export {
   reducer,
   selector,
 } from './reducer';
-export { ISession } from './session';
-export { IUser } from './user';
+export {
+  Session,
+  User,
+} from './types';
