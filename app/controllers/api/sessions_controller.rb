@@ -5,6 +5,12 @@ module Api
   class SessionsController < ApiController
     # Responder class for authentication responses.
     class Responder < ApplicationResponder
+      action :create do
+        match :success do |result|
+          render_success(result.value, status: 201)
+        end
+      end
+
       match :failure, error: ::Authentication::Errors::InvalidPassword \
       do |result|
         render_failure(result.error, status: 422)
