@@ -7,11 +7,12 @@ import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
 
 import { Form } from './index';
-import {
+import type {
   Mutation,
   QueryParams,
   UseMutation,
 } from './types';
+import type { Middleware } from '@utils/middleware';
 
 describe('<Form />', () => {
   it('should submit the form', async () => {
@@ -42,6 +43,30 @@ describe('<Form />', () => {
     );
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  describe('with middleware', () => {
+    const middleware: Middleware<
+      Record<string, unknown>,
+      Record<string, unknown>
+    > = (nextFn, data) => nextFn({ ...data, secret: '12345' });
+
+    it('should submit the form', async () => {
+      const mutation: Mutation = jest.fn();
+      const useMutation: UseMutation = () => [mutation, {}];
+
+      const { getByRole } = render(
+        <Form initialValues={{}} middleware={middleware} useMutation={useMutation}>
+          <button type="submit">Submit</button>
+        </Form>
+      );
+
+      userEvent.click(getByRole('button', { name: 'Submit'}));
+
+      await waitFor(() => {
+        expect(mutation).toHaveBeenCalledWith({ secret: '12345' });
+      });
+    });
   });
 
   describe('with params', () => {
@@ -102,6 +127,30 @@ describe('<Form />', () => {
 
       await waitFor(() => {
         expect(mutation).toHaveBeenCalledWith(defaultValues);
+      });
+    });
+
+    describe('with middleware', () => {
+      const middleware: Middleware<
+        Record<string, unknown>,
+        Record<string, unknown>
+      > = (nextFn, data) => nextFn({ ...data, secret: '12345' });
+
+      it('should submit the form', async () => {
+        const mutation: Mutation = jest.fn();
+        const useMutation: UseMutation = () => [mutation, {}];
+
+        const { getByRole } = render(
+          <Form initialValues={defaultValues} middleware={middleware} useMutation={useMutation}>
+            <button type="submit">Submit</button>
+          </Form>
+        );
+
+        userEvent.click(getByRole('button', { name: 'Submit'}));
+
+        await waitFor(() => {
+          expect(mutation).toHaveBeenCalledWith({ ...defaultValues, secret: '12345' });
+        });
       });
     });
 

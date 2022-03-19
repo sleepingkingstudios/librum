@@ -2,19 +2,27 @@ import type {
   FormikHelpers,
   FormikValues,
 } from 'formik';
+
 import type {
   Mutation,
   OnSubmit,
   QueryParams,
 } from './types';
+import { applyMiddleware } from '@utils/middleware';
+import type { Middleware } from '@utils/middleware';
 
 type WrapMutation = {
+  middleware?: Middleware | Middleware[];
   mutation: Mutation;
   params?: QueryParams;
 }
 
 export const wrapMutation = (
-  { mutation, params = {} }: WrapMutation
+  {
+    middleware,
+    mutation,
+    params = {}
+  }: WrapMutation
 ): OnSubmit => (
   async (
     values: FormikValues,
@@ -26,6 +34,6 @@ export const wrapMutation = (
       ...params,
     };
 
-    return await mutation(param);
+    return await applyMiddleware(mutation, middleware)(param);
   }
 );

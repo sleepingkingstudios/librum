@@ -33,6 +33,6 @@ export type Action<Payload extends ApiData = ApiData> =
   { payload: Payload, type: string };
 
 export type ActionCreator<
-  Params extends unknown[] = unknown[],
+  Param = unknown,
   Payload extends ApiData = ApiData
-> = (...params: Params) => Action<Payload>;
+> = (param: Param) => Action<Payload>;

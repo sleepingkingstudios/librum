@@ -2,7 +2,7 @@ import {
   joinClassNames
 } from './react-utils';
 
-describe('ReactUtils', () => {
+describe('React utils', () => {
   describe('joinClassNames()', () => {
     it('should be a function', () => {
       expect(typeof joinClassNames).toBe('function');
