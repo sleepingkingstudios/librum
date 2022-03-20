@@ -1,47 +1,41 @@
 import * as React from 'react';
 
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
 
 import { ApplicationRoutes } from './index';
+import { HomePage } from '../home';
+import { LoginPage } from '../pages';
+import { NotFoundPage } from '../not-found';
+import { shouldRenderContent } from '@test-helpers/routing';
 
-const renderAt = (element: React.ReactNode, path: string) => (
-  render(
-    <MemoryRouter initialEntries={[path]}>
-      { element }
-    </MemoryRouter>
-  )
-);
+jest.mock('../home');
+jest.mock('../pages');
+jest.mock('../not-found');
+
+const mockHomePage = HomePage as jest.MockedFunction<typeof HomePage>;
+const mockLoginPage = LoginPage as jest.MockedFunction<typeof LoginPage>;
+const mockNotFoundPage = NotFoundPage as jest.MockedFunction<typeof NotFoundPage>;
+
+mockHomePage.mockImplementation(() => (<div id="page">Home Page</div>));
+mockLoginPage.mockImplementation(() => (<div id="page">Login Page</div>));
+mockNotFoundPage.mockImplementation(() => (<div id="page">Not Found Page</div>));
 
 describe('<ApplicationRoutes>', () => {
-  describe('with path "/"', () => {
-    it('should render the home page', () => {
-      renderAt(<ApplicationRoutes />, '/');
+  shouldRenderContent(
+    ApplicationRoutes,
+    { content: 'Home Page', at: '/' },
+  );
 
-      const text = screen.getByText(/At twilight's end, the shadows cross'd/);
+  shouldRenderContent(
+    ApplicationRoutes,
+    { content: 'Not Found Page', at: '/invalid' },
+  );
 
-      expect(text).toBeVisible();
-    });
-  });
-
-  describe('with path "/invalid"', () => {
-    it('should render the not found page', () => {
-      renderAt(<ApplicationRoutes />, '/invalid');
-
-      const text = screen.getByText(/This place is not a place of honor/);
-
-      expect(text).toBeVisible();
-    });
-  });
-
-  describe('with path "/invalid/path/to/page"', () => {
-    it('should render the not found page', () => {
-      renderAt(<ApplicationRoutes />, '/invalid/path/to/page');
-
-      const text = screen.getByText(/This place is not a place of honor/);
-
-      expect(text).toBeVisible();
-    });
-  });
+  shouldRenderContent(
+    ApplicationRoutes,
+    {
+      content: 'Not Found Page',
+      at: '/invalid/path/to/page',
+    },
+  );
 });

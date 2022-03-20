@@ -14,6 +14,8 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@components': srcPath('components'),
+      '@session': srcPath('session'),
+      '@store': srcPath('store'),
       '@test-helpers': srcPath('test-helpers'),
       '@themes': srcPath('themes'),
       '@utils': srcPath('utils'),

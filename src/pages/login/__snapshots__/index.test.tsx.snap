@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginPage> should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="page"
+  >
+    <h1
+      class="mb-2 text-4xl"
+    >
+      Log In
+    </h1>
+    <form
+      action="#"
+    >
+      <label
+        for="username"
+      >
+        Username
+      </label>
+      <input
+        class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
+        id="username"
+        name="username"
+        type="text"
+        value=""
+      />
+      <br />
+      <label
+        for="password"
+      >
+        Password
+      </label>
+      <input
+        class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <br />
+      <button
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

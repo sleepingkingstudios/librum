@@ -13,6 +13,10 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
+      "@session": ["session"],
+      "@session/*": ["session/*"],
+      "@store": ["store"],
+      "@store/*": ["store/*"],
       "@test-helpers/*": ["test-helpers/*"],
       "@themes": ["themes"],
       "@themes/*": ["themes/*"],

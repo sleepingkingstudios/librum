@@ -3,8 +3,11 @@ import * as React from 'react';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import { PageHeader } from './header';
+import { PageHeader } from './index';
+import { actions } from '@session';
+import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
+import { createStore } from '@test-helpers/store';
 
 describe('<PageHeader>', () => {
   const theme = {
@@ -15,7 +18,7 @@ describe('<PageHeader>', () => {
   it('should display the default title', () => {
     const defaultTitle = 'Librum';
 
-    render(<PageHeader />);
+    render(<PageHeader />, { store: true });
 
     const text = screen.getByText(defaultTitle);
 
@@ -25,7 +28,7 @@ describe('<PageHeader>', () => {
   it('should display the default subtitle', () => {
     const defaultSubtitle = 'Campaign Companion';
 
-    render(<PageHeader />);
+    render(<PageHeader />, { store: true });
 
     const text = screen.getByText(defaultSubtitle);
 
@@ -33,7 +36,13 @@ describe('<PageHeader>', () => {
   });
 
   it('should match the snapshot', () => {
-    const { asFragment } = render(<PageHeader />, { theme });
+    const { asFragment } = render(
+      <PageHeader />,
+      {
+        store: true,
+        theme
+      },
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -75,7 +84,11 @@ describe('<PageHeader>', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <PageHeader navigation={navigation} />,
-        { router: true, theme },
+        {
+          router: true,
+          store: true,
+          theme,
+        },
       );
 
       expect(asFragment()).toMatchSnapshot();
@@ -86,7 +99,7 @@ describe('<PageHeader>', () => {
     it('should not display the subtitle', () => {
       const defaultTitle = 'Librum';
 
-      render(<PageHeader subtitle={null} />);
+      render(<PageHeader subtitle={null} />, { store: true });
 
       const text = screen.getByText(defaultTitle);
 
@@ -95,7 +108,13 @@ describe('<PageHeader>', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(<PageHeader />, { theme });
+      const { asFragment } = render(
+        <PageHeader />,
+        {
+          store: true,
+          theme,
+        },
+      );
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -105,7 +124,7 @@ describe('<PageHeader>', () => {
     const subtitle = 'Example Subtitle';
 
     it('should display the configured title', () => {
-      render(<PageHeader subtitle={subtitle} />);
+      render(<PageHeader subtitle={subtitle} />, { store: true });
 
       const text = screen.getByText(subtitle);
 
@@ -117,11 +136,38 @@ describe('<PageHeader>', () => {
     const title = 'Example Title';
 
     it('should display the configured title', () => {
-      render(<PageHeader title={title} />);
+      render(<PageHeader title={title} />, { store: true });
 
       const text = screen.getByText(title);
 
       expect(text).toBeVisible();
+    });
+  });
+
+  describe('when the session is authenticated', () => {
+    const user: User = {
+      email: 'alan.bradley@example.com',
+      id: '00000000-0000-0000-0000-000000000000',
+      role: 'user',
+      slug: 'alan-bradley',
+      username: 'Alan Bradley',
+    };
+    const token = '12345';
+    const { create } = actions;
+
+    it('should match the snapshot', () => {
+      const { dispatch, store } = createStore();
+      dispatch(create({ token, user }));
+
+      const { asFragment } = render(
+        <PageHeader />,
+        {
+          store,
+          theme,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 });

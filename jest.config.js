@@ -84,6 +84,10 @@ module.exports = {
   moduleNameMapper: {
     '\\.css': '<rootDir>/src/jest/mocks/style-mock.ts',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@session$': '<rootDir>/src/session',
+    '^@session/(.*)$': '<rootDir>/src/session/$1',
+    '^@store$': '<rootDir>/src/store',
+    '^@store/(.*)$': '<rootDir>/src/store/$1',
     '^@test-helpers/(.*)$': '<rootDir>/src/test-helpers/$1',
     '^@themes$': '<rootDir>/src/themes',
     '^@themes/(.*)$': '<rootDir>/src/themes/$1',
@@ -132,7 +136,9 @@ module.exports = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
+  setupFiles: [
+    './jest.setup.ts',
+  ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],

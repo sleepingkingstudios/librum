@@ -15,10 +15,11 @@ RSpec.describe Api::SessionsController, type: :controller do
       described_class::Responder.new(**constructor_options)
     end
 
-    let(:resource) { described_class.resource }
+    let(:action_name) { 'process' }
+    let(:resource)    { described_class.resource }
     let(:constructor_options) do
       {
-        action_name:   'create',
+        action_name:   action_name,
         member_action: false,
         resource:      resource,
         serializers:   Serializers::Json.default_serializers
@@ -28,12 +29,34 @@ RSpec.describe Api::SessionsController, type: :controller do
     describe '#call' do
       it { expect(responder).to respond_to(:call).with(1).argument }
 
+      describe 'with a passing result' do
+        let(:value)  { { 'secret' => '12345' } }
+        let(:result) { Cuprum::Result.new(value: value) }
+
+        include_contract 'should respond with', 200 do
+          { 'ok' => true, 'data' => value }
+        end
+      end
+
       describe 'with a failing result with an InvalidPassword error' do
         let(:error)  { ::Authentication::Errors::InvalidPassword.new }
         let(:result) { Cuprum::Result.new(error: error) }
 
         include_contract 'should respond with', 422 do
           { 'ok' => false, 'error' => error.as_json }
+        end
+      end
+
+      describe 'with action: create' do
+        let(:action_name) { 'create' }
+
+        describe 'with a passing result' do
+          let(:value)  { { 'secret' => '12345' } }
+          let(:result) { Cuprum::Result.new(value: value) }
+
+          include_contract 'should respond with', 201 do
+            { 'ok' => true, 'data' => value }
+          end
         end
       end
     end

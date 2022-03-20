@@ -8,6 +8,7 @@ import {
   NavigationProps,
   PageNavigation,
 } from './navigation';
+import { PageHeaderUser } from './user';
 
 interface PageHeaderProps {
   title?: string;
@@ -50,6 +51,8 @@ export const PageHeader = ({
       <PageNavigation navigation={navigation} />
 
       <FancyHr className="mt-1" />
+
+      <PageHeaderUser />
     </header>
   )
 }

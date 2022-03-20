@@ -4,7 +4,10 @@ import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { Page } from './index';
+import { actions } from '@session';
+import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
+import { createStore } from '@test-helpers/store';
 
 describe('<Page>', () => {
   const theme = {
@@ -16,7 +19,13 @@ describe('<Page>', () => {
     const defaultTitle = 'Librum';
     const defaultSubtitle = 'Campaign Companion';
 
-    render(<Page>Page Content Here...</Page>, { router: true });
+    render(
+      <Page>Page Content Here...</Page>,
+      {
+        router: true,
+        store: true,
+      }
+    );
 
     expect(screen.getByText(defaultTitle)).toBeVisible();
     expect(screen.getByText(defaultSubtitle)).toBeVisible();
@@ -25,7 +34,13 @@ describe('<Page>', () => {
   it('should render the footer', () => {
     const footerText = 'What lies beyond the furthest reaches of the sky?';
 
-    render(<Page>Page Content Here...</Page>, { router: true });
+    render(
+      <Page>Page Content Here...</Page>,
+      {
+        router: true,
+        store: true,
+      }
+    );
 
     const footer = screen.getByText(footerText);
 
@@ -35,7 +50,13 @@ describe('<Page>', () => {
   it('should render the contents', () => {
     const content = 'Page Content Here...';
 
-    render(<Page>{ content }</Page>, { router: true });
+    render(
+      <Page>Page Content Here...</Page>,
+      {
+        router: true,
+        store: true,
+      }
+    );
 
     const footer = screen.getByText(content);
 
@@ -45,7 +66,11 @@ describe('<Page>', () => {
   it('should match the snapshot', () => {
     const { asFragment } = render(
       <Page>Page Content Here...</Page>,
-      { router: true, theme },
+      {
+        router: true,
+        store: true,
+        theme,
+      },
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -88,7 +113,11 @@ describe('<Page>', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <Page navigation={navigation}>Page Content Here...</Page>,
-        { router: true, theme },
+        {
+          router: true,
+          store: true,
+          theme,
+        },
       );
 
       expect(asFragment()).toMatchSnapshot();
@@ -102,7 +131,10 @@ describe('<Page>', () => {
 
       render(
         <Page subtitle={subtitle}>Page Content Here...</Page>,
-        { router: true },
+        {
+          router: true,
+          store: true,
+        },
       );
 
       expect(screen.getByText(defaultTitle)).toBeVisible();
@@ -117,11 +149,42 @@ describe('<Page>', () => {
 
       render(
         <Page title={title}>Page Content Here...</Page>,
-        { router: true },
+        {
+          router: true,
+          store: true,
+        },
       );
 
       expect(screen.getByText(title)).toBeVisible();
       expect(screen.getByText(defaultSubtitle)).toBeVisible();
+    });
+  });
+
+  describe('when the session is authenticated', () => {
+    const user: User = {
+      email: 'alan.bradley@example.com',
+      id: '00000000-0000-0000-0000-000000000000',
+      role: 'user',
+      slug: 'alan-bradley',
+      username: 'Alan Bradley',
+    };
+    const token = '12345';
+    const { create } = actions;
+
+    it('should match the snapshot', () => {
+      const { dispatch, store } = createStore();
+      dispatch(create({ token, user }));
+
+      const { asFragment } = render(
+        <Page>Page Content Here...</Page>,
+        {
+          router: true,
+          store,
+          theme,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 });

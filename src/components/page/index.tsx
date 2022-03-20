@@ -4,7 +4,7 @@ import { PageFooter } from './footer';
 import { PageHeader } from './header';
 import { useThemeStyles } from '@themes';
 import { joinClassNames } from '@utils/react-utils';
-import { NavigationProps } from './navigation';
+import { NavigationProps } from './header/navigation';
 
 interface PageProps {
   title?: string;
