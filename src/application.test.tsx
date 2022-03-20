@@ -1,16 +1,14 @@
 import * as React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { Application } from './application';
 
 describe('<Application>', () => {
-  it('should be poetry', () => {
-    render(<Application />);
+  it('should render the login page', () => {
+    const { getByText } = render(<Application />);
 
-    const poetry = screen.getByText(/Which is life, and which the dream\?/);
-
-    expect(poetry).toBeVisible();
+    expect(getByText(/Log In/)).toBeVisible();
   });
 });

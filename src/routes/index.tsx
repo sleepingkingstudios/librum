@@ -1,17 +1,36 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Routes,
   Route
 } from "react-router-dom";
 
 import { HomePage } from '../home';
+import { LoginPage } from '../pages';
 import { NotFoundPage } from '../not-found';
+import { selector } from '@session';
+import type { Session } from '@session';
 
-export const ApplicationRoutes = (): JSX.Element => (
-  <Routes>
-    <Route path="/">
-      <Route index element={<HomePage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Route>
-  </Routes>
-)
+export const ApplicationRoutes = (): JSX.Element => {
+  const session: Session = useSelector(selector);
+  const { authenticated } = session;
+
+  console.log('session:', session);
+
+  if (!authenticated) {
+    return (
+      <Routes>
+        <Route path="*" element={<LoginPage />} />
+      </Routes>
+    );
+  }
+
+  return (
+    <Routes>
+      <Route path="/">
+        <Route index element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  );
+};

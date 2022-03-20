@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Field } from 'formik';
 
+import '@testing-library/jest-dom';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
-import { render } from '@test-helpers/rendering';
 
 import { Form } from './index';
 import type {
@@ -12,6 +11,7 @@ import type {
   QueryParams,
   UseMutation,
 } from './types';
+import { render } from '@test-helpers/rendering';
 import type { Middleware } from '@utils/middleware';
 
 describe('<Form />', () => {
