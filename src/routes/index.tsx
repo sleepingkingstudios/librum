@@ -5,9 +5,11 @@ import {
   Route
 } from "react-router-dom";
 
-import { HomePage } from '../home';
-import { LoginPage } from '../pages';
-import { NotFoundPage } from '../not-found';
+import {
+  HomePage,
+  LoginPage,
+  NotFoundPage,
+} from '../pages';
 import { selector } from '@session';
 import type { Session } from '@session';
 
