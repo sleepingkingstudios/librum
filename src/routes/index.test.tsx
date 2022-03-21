@@ -3,14 +3,14 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { ApplicationRoutes } from './index';
-import { HomePage } from '../home';
-import { LoginPage } from '../pages';
-import { NotFoundPage } from '../not-found';
+import {
+  HomePage,
+  LoginPage,
+  NotFoundPage,
+} from '../pages';
 import { shouldRenderContent } from '@test-helpers/routing';
 
-jest.mock('../home');
 jest.mock('../pages');
-jest.mock('../not-found');
 
 const mockHomePage = HomePage as jest.MockedFunction<typeof HomePage>;
 const mockLoginPage = LoginPage as jest.MockedFunction<typeof LoginPage>;
