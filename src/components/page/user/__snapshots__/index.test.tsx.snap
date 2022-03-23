@@ -5,7 +5,7 @@ exports[`<PageUser> should match the snapshot 1`] = `<DocumentFragment />`;
 exports[`<PageUser> when the session is authenticated should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="text-left"
+    class="text-left mt-2"
   >
     <svg
       aria-hidden="true"

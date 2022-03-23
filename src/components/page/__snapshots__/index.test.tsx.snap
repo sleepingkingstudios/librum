@@ -3,7 +3,7 @@
 exports[`<Page> should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-Default Theme"
+    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-default"
   >
     <header
       class="mb-3 text-center sm:text-left"
@@ -118,7 +118,7 @@ exports[`<Page> should match the snapshot 1`] = `
         </ul>
       </nav>
       <hr
-        class="hr-fancy mt-1"
+        class="hr-fancy m-1"
       />
     </header>
     <main
@@ -141,7 +141,7 @@ exports[`<Page> should match the snapshot 1`] = `
 exports[`<Page> when the session is authenticated should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-Default Theme"
+    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-default"
   >
     <header
       class="mb-3 text-center sm:text-left"
@@ -256,10 +256,10 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
         </ul>
       </nav>
       <hr
-        class="hr-fancy mt-1"
+        class="hr-fancy m-1"
       />
       <div
-        class="text-left"
+        class="text-left mt-2"
       >
         <svg
           aria-hidden="true"
@@ -311,7 +311,7 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
 exports[`<Page> with navigation: value should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-Default Theme"
+    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-default"
   >
     <header
       class="mb-3 text-center sm:text-left"
@@ -416,7 +416,7 @@ exports[`<Page> with navigation: value should match the snapshot 1`] = `
         </ul>
       </nav>
       <hr
-        class="hr-fancy mt-1"
+        class="hr-fancy m-1"
       />
     </header>
     <main

@@ -3,9 +3,12 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import { ThemeContext } from './context';
+import {
+  ThemeContext,
+  defaultTheme,
+} from './context';
 import { useTheme } from './index';
-import { defaultTheme } from './theme';
+import type { Theme } from './types';
 
 const ThemeDisplay = (): JSX.Element => {
   const theme = useTheme();
@@ -27,7 +30,7 @@ describe('useTheme()', () => {
   });
 
   describe('with a provider', () => {
-    const theme = { ...defaultTheme, name: 'Custom Theme' };
+    const theme: Theme = { name: 'custom-theme' };
 
     it('should display the provided theme', () => {
       const expected = JSON.stringify(theme);

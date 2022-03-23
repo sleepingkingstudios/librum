@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import {
+  DemoPage,
   HomePage,
   LoginPage,
   NotFoundPage,
@@ -16,8 +17,6 @@ import type { Session } from '@session';
 export const ApplicationRoutes = (): JSX.Element => {
   const session: Session = useSelector(selector);
   const { authenticated } = session;
-
-  console.log('session:', session);
 
   if (!authenticated) {
     return (
@@ -31,6 +30,7 @@ export const ApplicationRoutes = (): JSX.Element => {
     <Routes>
       <Route path="/">
         <Route index element={<HomePage />} />
+        <Route path="demo" element={<DemoPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

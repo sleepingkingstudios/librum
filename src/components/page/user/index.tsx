@@ -26,7 +26,7 @@ export const PageUser = (): JSX.Element => {
   const { username } = user;
 
   return (
-    <div className="text-left">
+    <div className="text-left mt-2">
       <Icon icon={faUser} className='mr-1' />
 
       <span className="hidden sm:inline">You are currently logged in as </span>

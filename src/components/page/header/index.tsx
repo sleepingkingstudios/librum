@@ -39,7 +39,7 @@ export const PageHeader = ({
 
       <PageNavigation navigation={navigation} />
 
-      <hr className="hr-fancy mt-1" />
+      <hr className="hr-fancy m-1" />
 
       <PageUser />
     </header>

@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply mt-1;
+  }
+
+  h1 {
+    @apply mb-1;
+
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  h2 {
+    @apply text-4xl;
+    @apply mb-1;
+  }
+
+  h3 {
+    @apply text-3xl;
+    @apply mb-1;
+  }
+
+  h4 { @apply text-2xl; }
+
+  h5 { @apply text-xl; }
+
+  a { @apply cursor-pointer; }
+
+  p {
+    @apply mb-1;
+  }
+}
+
+@layer components {
+  .page-navigation {
+    .dropdown-container {
+      @apply block leading-6 mb-1 mx-2 text-xl sm:mb-0 sm:max-h-6 sm:leading-9;
+    }
+
+    .dropdown-label {
+      @apply leading-6;
+    }
+
+    .dropdown-item {
+      @apply leading-6 mt-1 text-lg last:mb-1 sm:first:mt-3;
+    }
+
+    .dropdown-item-link {
+      @apply hover:no-underline;
+    }
+
+    .dropdown-item-link-disabled {
+      @apply cursor-default select-none hover:no-underline;
+    }
+
+    .navigation-item {
+      @apply block leading-6 mb-1 mx-2 text-xl sm:leading-9 sm:mb-0 sm:first:ml-0;
+    }
+
+    .navigation-item-link {
+      @apply hover:no-underline;
+    }
+
+    .navigation-item-link-disabled {
+      @apply cursor-default mb-0 select-none hover:no-underline;
+    }
+  }
+
+  .page-subtitle {
+    @apply text-3xl;
+  }
+
+  .page-title {
+    @apply text-5xl;
+  }
+}
+
+@layer utilities {}

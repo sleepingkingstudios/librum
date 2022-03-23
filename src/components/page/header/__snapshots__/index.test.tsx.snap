@@ -29,7 +29,7 @@ exports[`<PageHeader> should match the snapshot 1`] = `
       />
     </nav>
     <hr
-      class="hr-fancy mt-1"
+      class="hr-fancy m-1"
     />
   </header>
 </DocumentFragment>
@@ -64,10 +64,10 @@ exports[`<PageHeader> when the session is authenticated should match the snapsho
       />
     </nav>
     <hr
-      class="hr-fancy mt-1"
+      class="hr-fancy m-1"
     />
     <div
-      class="text-left"
+      class="text-left mt-2"
     >
       <svg
         aria-hidden="true"
@@ -207,7 +207,7 @@ exports[`<PageHeader> with navigation: value should match the snapshot 1`] = `
       </ul>
     </nav>
     <hr
-      class="hr-fancy mt-1"
+      class="hr-fancy m-1"
     />
   </header>
 </DocumentFragment>
@@ -242,7 +242,7 @@ exports[`<PageHeader> with subtitle: null should match the snapshot 1`] = `
       />
     </nav>
     <hr
-      class="hr-fancy mt-1"
+      class="hr-fancy m-1"
     />
   </header>
 </DocumentFragment>
