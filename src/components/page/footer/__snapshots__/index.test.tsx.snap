@@ -6,7 +6,7 @@ exports[`<PageFooter> should match the snapshot 1`] = `
     class="mt-3 shrink-0 text-center text-muted sm:text-left"
   >
     <hr
-      class="fancy mb-2"
+      class="hr-fancy mb-2"
     />
     What lies beyond the furthest reaches of the sky?
   </footer>

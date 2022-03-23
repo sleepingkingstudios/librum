@@ -33,7 +33,7 @@ exports[`<NotFoundPage> should match the snapshot 1`] = `
         The danger is still present, in your time, as it was in ours.
       </p>
       <hr
-        class="fancy-hr border-green-500 m-5"
+        class="hr-fancy hr-muted m-5"
       />
       <p
         class="text-center sm:text-left text-xl"

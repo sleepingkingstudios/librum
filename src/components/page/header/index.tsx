@@ -35,11 +35,11 @@ export const PageHeader = ({
 
       <PageHeaderSubtitle subtitle={subtitle} />
 
-      <hr className="fancy my-1 block sm:hidden" />
+      <hr className="hr-fancy my-1 block sm:hidden" />
 
       <PageNavigation navigation={navigation} />
 
-      <hr className="fancy mt-1" />
+      <hr className="hr-fancy mt-1" />
 
       <PageUser />
     </header>

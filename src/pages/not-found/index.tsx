@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { FancyHr } from '@components/fancy-hr';
 import { Page } from '@components/page';
 import { useThemeStyles } from '@themes';
 import { joinClassNames } from '@utils/react-utils';
@@ -51,7 +50,7 @@ export const NotFoundPage = (): JSX.Element => {
           The danger is still present, in your time, as it was in ours.
         </p>
 
-        <FancyHr className="m-5" style="hr-muted" />
+        <hr className="hr-fancy hr-muted m-5" />
 
         <p className="text-center sm:text-left text-xl">
           <Link className={joinedLinkNames} to="/">Turn Back</Link>
