@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { chiaroscuro } from './chiaroscuro';
 import { ThemeContext } from './context';
-import { Theme } from './theme';
+import type { Theme } from './types';
 
 interface ThemeProviderProps {
   children: React.ReactNode;

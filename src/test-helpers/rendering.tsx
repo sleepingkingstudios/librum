@@ -11,8 +11,10 @@ import {
   createStore,
   storeType,
 } from './store';
-import { ThemeContext } from '@themes/context';
-import { defaultTheme } from '@themes/theme';
+import {
+  ThemeContext,
+  defaultTheme,
+} from '@themes/context';
 
 interface themeProperties {
   [index: string]: string;

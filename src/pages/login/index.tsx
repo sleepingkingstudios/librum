@@ -9,15 +9,9 @@ import { Page } from '@components/page';
 import { useCreateSessionMutation } from '@session/api';
 import { createSession } from '@session/middleware';
 import { actions } from '@session/reducer';
-import { useThemeStyles } from '@themes';
 import { applyMiddleware } from '@utils/middleware';
-import { joinClassNames } from '@utils/react-utils';
 
 export const LoginPage = (): JSX.Element => {
-  const headingClassName = joinClassNames(
-    useThemeStyles('header'),
-    'mb-2 text-4xl',
-  );
   const { create } = actions;
   const dispatch = useDispatch();
   const [mutation, status] = useCreateSessionMutation();
@@ -34,7 +28,7 @@ export const LoginPage = (): JSX.Element => {
 
   return (
     <Page navigation={[]}>
-      <h1 className={headingClassName}>Log In</h1>
+      <h1>Log In</h1>
 
       <Form
         initialValues={{ username: '', password: '' }}

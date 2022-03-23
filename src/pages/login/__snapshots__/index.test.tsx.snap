@@ -5,9 +5,7 @@ exports[`<LoginPage> should match the snapshot 1`] = `
   <div
     id="page"
   >
-    <h1
-      class="mb-2 text-4xl"
-    >
+    <h1>
       Log In
     </h1>
     <form

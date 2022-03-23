@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationItem> when the pathname does not match the url should match the snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="navigation-item"
+  >
+    <a
+      class="navigation-item-link"
+      href="/back"
+    >
+      Go Back
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`<NavigationItem> when the pathname matches the url should match the snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="navigation-item"
+  >
+    <p
+      class="navigation-item-link-disabled text-muted"
+    >
+      Go Back
+    </p>
+  </li>
+</DocumentFragment>
+`;

@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { PageFooter } from './footer';
 import { PageHeader } from './header';
-import { useThemeStyles } from '@themes';
+import type { NavigationProps } from './navigation';
+import { useTheme } from '@themes';
 import { joinClassNames } from '@utils/react-utils';
-import { NavigationProps } from './header/navigation';
 
 interface PageProps {
   title?: string;
@@ -59,10 +59,10 @@ export const Page = ({
   children,
   navigation,
 }: PageProps): JSX.Element => {
+  const themeName = useTheme().name;
   const joinedClassNames = joinClassNames(
     defaultClassName,
-    useThemeStyles('background'),
-    useThemeStyles('text'),
+    `theme-${themeName}`,
   );
 
   return (
