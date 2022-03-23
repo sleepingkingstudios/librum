@@ -11,10 +11,8 @@ import {
   useDispatch,
   useSelector,
 } from '@store';
-import { useThemeStyles } from '@themes';
-import { joinClassNames } from '@utils/react-utils';
 
-export const PageHeaderUser = (): JSX.Element => {
+export const PageUser = (): JSX.Element => {
   const dispatch = useDispatch();
   const logout = () => { dispatch(actions.destroy()); };
   const session: Session = useSelector(selector);
@@ -22,11 +20,6 @@ export const PageHeaderUser = (): JSX.Element => {
     authenticated,
     user,
   } = session;
-
-  const joinedClassNames = joinClassNames(
-    'float-right',
-    useThemeStyles('linkDanger'),
-  );
 
   if (!authenticated) { return null; }
 
@@ -40,7 +33,7 @@ export const PageHeaderUser = (): JSX.Element => {
 
       { username }
 
-      <span className={joinedClassNames}>
+      <span className='float-right link-danger'>
         <button onClick={logout}>Log Out</button>
       </span>
     </div>

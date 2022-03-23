@@ -1,14 +1,8 @@
 import * as React from 'react';
 
-import { FancyHr } from '@components/fancy-hr';
-import { useThemeStyles } from '@themes';
-import { joinClassNames } from '@utils/react-utils';
-
-import {
-  NavigationProps,
-  PageNavigation,
-} from '../navigation';
-import { PageHeaderUser } from './user';
+import { PageNavigation } from '../navigation';
+import type { NavigationProps } from '../navigation';
+import { PageUser } from '../user';
 
 interface PageHeaderProps {
   title?: string;
@@ -16,21 +10,16 @@ interface PageHeaderProps {
   navigation?: NavigationProps;
 }
 
-const defaultClassName = "leading-9 mb-3 text-center sm:text-left";
+const defaultClassName = "mb-3 text-center sm:text-left";
 
 const PageHeaderSubtitle = ({ subtitle }: { subtitle?: string; }): JSX.Element | null => {
-  const joinedClassNames = joinClassNames(
-    'm-0 sm:ml-2',
-    useThemeStyles('subtitle'),
-  );
-
   if (!(typeof subtitle === 'string')) { return null; }
 
   return (
     <React.Fragment>
       <br className="block sm:hidden" />
 
-      <small className={joinedClassNames}>{ subtitle }</small>
+      <small className="page-subtitle m-0 sm:ml-2">{ subtitle }</small>
     </React.Fragment>
   )
 }
@@ -42,17 +31,17 @@ export const PageHeader = ({
 }: PageHeaderProps): JSX.Element => {
   return (
     <header className={defaultClassName}>
-      <span className={useThemeStyles('title')}>{ title }</span>
+      <span className="page-title">{ title }</span>
 
       <PageHeaderSubtitle subtitle={subtitle} />
 
-      <FancyHr className="my-1 block sm:hidden" />
+      <hr className="fancy my-1 block sm:hidden" />
 
       <PageNavigation navigation={navigation} />
 
-      <FancyHr className="mt-1" />
+      <hr className="fancy mt-1" />
 
-      <PageHeaderUser />
+      <PageUser />
     </header>
   )
 }

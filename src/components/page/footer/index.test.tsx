@@ -2,16 +2,12 @@ import * as React from 'react';
 
 import '@testing-library/jest-dom';
 
-import { PageFooter } from './footer';
+import { PageFooter } from './index';
 import { render } from '@test-helpers/rendering';
 
 describe('<PageFooter>', () => {
-  const theme = {
-    textMuted: 'text-[#ff3366]',
-  };
-
   it('should match the snapshot', () => {
-    const { asFragment } = render(<PageFooter />, { theme });
+    const { asFragment } = render(<PageFooter />);
 
     expect(asFragment()).toMatchSnapshot();
   });

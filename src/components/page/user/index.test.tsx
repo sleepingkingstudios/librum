@@ -3,7 +3,7 @@ import * as React from 'react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-import { PageHeaderUser } from './user';
+import { PageUser } from './index';
 import {
   actions,
   selector,
@@ -15,31 +15,21 @@ import type {
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
-describe('<PageHeaderUser>', () => {
-  const theme = {
-    linkDanger: 'text-[#ff3366]',
-  };
-
+describe('<PageUser>', () => {
   it('should not show a user name', () => {
-    const { queryByText } = render(<PageHeaderUser />, { store: true });
+    const { queryByText } = render(<PageUser />, { store: true });
 
     expect(queryByText(/currently logged in/)).toBeNull();
   });
 
   it('should not show the logout button', () => {
-    const { queryByRole } = render(<PageHeaderUser />, { store: true });
+    const { queryByRole } = render(<PageUser />, { store: true });
 
     expect(queryByRole('button', { name: 'Log Out' })).toBeNull();
   });
 
   it('should match the snapshot', () => {
-    const { asFragment } = render(
-      <PageHeaderUser />,
-      {
-        store: true,
-        theme,
-      },
-    );
+    const { asFragment } = render(<PageUser />, { store: true });
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -59,7 +49,7 @@ describe('<PageHeaderUser>', () => {
       const { dispatch, store } = createStore();
       dispatch(create({ token, user }));
 
-      const { getByText } = render(<PageHeaderUser />, { store });
+      const { getByText } = render(<PageUser />, { store });
 
       const notice = getByText(/currently logged in/);
 
@@ -73,7 +63,7 @@ describe('<PageHeaderUser>', () => {
       const { dispatch, store } = createStore();
       dispatch(create({ token, user }));
 
-      const { getByRole } = render(<PageHeaderUser />, { store });
+      const { getByRole } = render(<PageUser />, { store });
 
       expect(getByRole('button', { name: 'Log Out' })).toBeVisible();
     });
@@ -82,13 +72,7 @@ describe('<PageHeaderUser>', () => {
       const { dispatch, store } = createStore();
       dispatch(create({ token, user }));
 
-      const { asFragment } = render(
-        <PageHeaderUser />,
-        {
-          store,
-          theme,
-        },
-      );
+      const { asFragment } = render(<PageUser />, { store });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -98,7 +82,7 @@ describe('<PageHeaderUser>', () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
 
-        const { getByRole, queryByText } = render(<PageHeaderUser />, { store });
+        const { getByRole, queryByText } = render(<PageUser />, { store });
         const button = getByRole('button', { name: 'Log Out' });
 
         userEvent.click(button);
@@ -112,7 +96,7 @@ describe('<PageHeaderUser>', () => {
         const { dispatch, getState, store } = createStore();
         dispatch(create({ token, user }));
 
-        const { getByRole } = render(<PageHeaderUser />, { store });
+        const { getByRole } = render(<PageUser />, { store });
         const button = getByRole('button', { name: 'Log Out' });
 
         userEvent.click(button);

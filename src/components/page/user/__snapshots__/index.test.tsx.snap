@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PageHeaderUser> should match the snapshot 1`] = `<DocumentFragment />`;
+exports[`<PageUser> should match the snapshot 1`] = `<DocumentFragment />`;
 
-exports[`<PageHeaderUser> when the session is authenticated should match the snapshot 1`] = `
+exports[`<PageUser> when the session is authenticated should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="text-left"
@@ -29,7 +29,7 @@ exports[`<PageHeaderUser> when the session is authenticated should match the sna
     </span>
     Alan Bradley
     <span
-      class="float-right text-[#ff3366]"
+      class="float-right link-danger"
     >
       <button>
         Log Out
