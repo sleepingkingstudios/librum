@@ -13,11 +13,6 @@ describe('<NavigationItem>', () => {
   };
 
   describe('when the pathname does not match the url', () => {
-    const theme = {
-      navigationItem: 'font-mono',
-      navigationLink: 'text-[#ff3366]',
-    };
-
     it('should render the link', () => {
       const { getByRole } =
         render(<NavigationItem {...defaultProps} />, { router: true });
@@ -33,18 +28,13 @@ describe('<NavigationItem>', () => {
 
     it('should match the snapshot', () => {
       const { asFragment } =
-        render(<NavigationItem {...defaultProps} />, { router: true, theme });
+        render(<NavigationItem {...defaultProps} />, { router: true });
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
   describe('when the pathname matches the url', () => {
-    const theme = {
-      navigationItem: 'font-mono',
-      navigationLinkDisabled: 'text-muted',
-    };
-
     it('should not render a link', () => {
       const {
         getByText,
@@ -69,7 +59,6 @@ describe('<NavigationItem>', () => {
           {
             initialEntries: [defaultProps.url],
             router: true,
-            theme,
           },
         );
 

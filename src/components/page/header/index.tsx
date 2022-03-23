@@ -7,7 +7,7 @@ import { joinClassNames } from '@utils/react-utils';
 import {
   NavigationProps,
   PageNavigation,
-} from './navigation';
+} from '../navigation';
 import { PageHeaderUser } from './user';
 
 interface PageHeaderProps {

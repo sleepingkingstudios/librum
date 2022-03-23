@@ -3,10 +3,10 @@
 exports[`<NavigationItem> when the pathname does not match the url should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="font-mono"
+    class="navigation-item"
   >
     <a
-      class="text-[#ff3366]"
+      class="navigation-item-link"
       href="/back"
     >
       Go Back
@@ -18,10 +18,10 @@ exports[`<NavigationItem> when the pathname does not match the url should match 
 exports[`<NavigationItem> when the pathname matches the url should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="font-mono"
+    class="navigation-item"
   >
     <p
-      class="text-muted"
+      class="navigation-item-link-disabled text-muted"
     >
       Go Back
     </p>

@@ -3,10 +3,10 @@
 exports[`<DropdownItem> when the pathname does not match the url should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="font-mono"
+    class="dropdown-item"
   >
     <a
-      class="text-[#ff3366]"
+      class="dropdown-item-link"
       href="/back"
     >
       Go Back
@@ -18,10 +18,10 @@ exports[`<DropdownItem> when the pathname does not match the url should match th
 exports[`<DropdownItem> when the pathname matches the url should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="font-mono"
+    class="dropdown-item"
   >
     <p
-      class="text-muted"
+      class="dropdown-item-link-disabled text-muted"
     >
       Go Back
     </p>

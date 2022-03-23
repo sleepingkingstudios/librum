@@ -13,11 +13,6 @@ describe('<DropdownItem>', () => {
   };
 
   describe('when the pathname does not match the url', () => {
-    const theme = {
-      navigationDropdownItem: 'font-mono',
-      navigationDropdownLink: 'text-[#ff3366]',
-    };
-
     it('should render the link', () => {
       const { getByRole } =
         render(<DropdownItem {...defaultProps} />, { router: true });
@@ -33,18 +28,13 @@ describe('<DropdownItem>', () => {
 
     it('should match the snapshot', () => {
       const { asFragment } =
-        render(<DropdownItem {...defaultProps} />, { router: true, theme });
+        render(<DropdownItem {...defaultProps} />, { router: true });
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
   describe('when the pathname matches the url', () => {
-    const theme = {
-      navigationDropdownItem: 'font-mono',
-      navigationDropdownLinkDisabled: 'text-muted',
-    };
-
     it('should not render a link', () => {
       const {
         getByText,
@@ -69,7 +59,6 @@ describe('<DropdownItem>', () => {
           {
             initialEntries: [defaultProps.url],
             router: true,
-            theme,
           },
         );
 

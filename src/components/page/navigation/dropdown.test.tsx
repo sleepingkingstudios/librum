@@ -10,11 +10,6 @@ import {
 import { render } from '@test-helpers/rendering';
 
 describe('<Dropdown>', () => {
-  const theme = {
-    navigationDropdown: 'bg-[#ff3366]',
-    navigationDropdownContainer: 'border-solid border-red-500',
-    navigationDropdownLabel: 'font-mono',
-  };
   const defaultProps: DropdownElementProps = {
     label: 'Rockets',
     items: [
@@ -66,7 +61,7 @@ describe('<Dropdown>', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(<Dropdown {...closedProps} />, { theme });
+      const { asFragment } = render(<Dropdown {...closedProps} />);
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -107,7 +102,7 @@ describe('<Dropdown>', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(<Dropdown {...closedProps} />, { theme });
+      const { asFragment } = render(<Dropdown {...closedProps} />);
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -155,7 +150,7 @@ describe('<Dropdown>', () => {
 
     it('should match the snapshot', () => {
       const { asFragment } =
-        render(<Dropdown {...openProps} />, { router: true, theme });
+        render(<Dropdown {...openProps} />, { router: true });
 
       expect(asFragment()).toMatchSnapshot();
     });

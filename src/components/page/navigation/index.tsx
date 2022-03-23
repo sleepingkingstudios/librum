@@ -10,7 +10,6 @@ import {
   NavigationItem,
   NavigationItemProps,
 } from './item';
-import { useThemeStyles } from '@themes';
 
 export type NavigationProps = Array<NavigationItemProps | DropdownProps>;
 
@@ -19,25 +18,18 @@ interface PageNavigationProps {
   navigation: NavigationProps;
 }
 
-const defaultListClassName = 'flex flex-col sm:flex-row';
-
 export const PageNavigation = (
   { className, navigation }: PageNavigationProps
 ): JSX.Element => {
   const joinedClassNames = joinClassNames(
-    'relative z-10',
-    useThemeStyles('navigation'),
+    'page-navigation relative z-10',
     className,
-  );
-  const joinedListNames = joinClassNames(
-    defaultListClassName,
-    useThemeStyles('navigation-list'),
   );
   const [open, setOpen] = React.useState<string | null>(null);
 
   return (
     <nav className={joinedClassNames}>
-      <ul className={joinedListNames}>
+      <ul className="flex flex-col sm:flex-row">
         {
           map(
             navigation,

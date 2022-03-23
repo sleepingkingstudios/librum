@@ -39,10 +39,6 @@ describe('<PageNavigation>', () => {
       ],
     },
   ];
-  const theme = {
-    navigation: 'bg-[#ff3366]',
-    navigationList: 'font-mono',
-  };
 
   it('should render the navigation items', () => {
     const {
@@ -81,7 +77,7 @@ describe('<PageNavigation>', () => {
   it('should match the snapshot', () => {
     const { asFragment } = render(
       <PageNavigation navigation={navigation} />,
-      { router: true, theme }
+      { router: true }
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -127,7 +123,7 @@ describe('<PageNavigation>', () => {
         getByRole,
       } = render(
         <PageNavigation navigation={navigation} />,
-        { router: true, theme }
+        { router: true }
       );
 
       userEvent.click(getByRole('button', { name: 'Rockets' }));
@@ -142,7 +138,7 @@ describe('<PageNavigation>', () => {
           queryByRole,
         } = render(
           <PageNavigation navigation={navigation} />,
-          { router: true, theme }
+          { router: true }
         );
 
         userEvent.click(getByRole('button', { name: 'Rockets' }));
@@ -178,7 +174,7 @@ describe('<PageNavigation>', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <PageNavigation className="text-red-500" navigation={navigation} />,
-        { router: true, theme }
+        { router: true }
       );
 
       expect(asFragment()).toMatchSnapshot();

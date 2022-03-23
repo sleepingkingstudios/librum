@@ -8,7 +8,6 @@ import {
 
 import { DropdownItem } from './dropdown-item';
 import { NavigationItemProps } from './item';
-import { useThemeStyles } from '@themes';
 
 export interface DropdownProps {
   label: string;
@@ -56,11 +55,11 @@ export const Dropdown = (
   const closeDropdown = () => setOpen(null);
 
   return (
-    <li className={useThemeStyles('navigation-dropdown-container')}>
-      <div className={useThemeStyles('navigation-dropdown')}>
+    <li className="dropdown-container">
+      <div className="dropdown">
         <button
           onClick={isOpen ? closeDropdown : openDropdown}
-          className={useThemeStyles('navigation-dropdown-label')}
+          className="dropdown-label"
         >
           { label }
           <Icon

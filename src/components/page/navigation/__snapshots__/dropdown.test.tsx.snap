@@ -3,13 +3,13 @@
 exports[`<Dropdown> when all dropdowns are closed should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="border-solid border-red-500"
+    class="dropdown-container"
   >
     <div
-      class="bg-[#ff3366]"
+      class="dropdown"
     >
       <button
-        class="font-mono"
+        class="dropdown-label"
       >
         Rockets
         <svg
@@ -36,13 +36,13 @@ exports[`<Dropdown> when all dropdowns are closed should match the snapshot 1`] 
 exports[`<Dropdown> when another dropdown is open should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="border-solid border-red-500"
+    class="dropdown-container"
   >
     <div
-      class="bg-[#ff3366]"
+      class="dropdown"
     >
       <button
-        class="font-mono"
+        class="dropdown-label"
       >
         Rockets
         <svg
@@ -69,13 +69,13 @@ exports[`<Dropdown> when another dropdown is open should match the snapshot 1`] 
 exports[`<Dropdown> when the dropdown is open should match the snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="border-solid border-red-500"
+    class="dropdown-container"
   >
     <div
-      class="bg-[#ff3366]"
+      class="dropdown"
     >
       <button
-        class="font-mono"
+        class="dropdown-label"
       >
         Rockets
         <svg
@@ -96,20 +96,20 @@ exports[`<Dropdown> when the dropdown is open should match the snapshot 1`] = `
       </button>
       <ul>
         <li
-          class=""
+          class="dropdown-item"
         >
           <a
-            class=""
+            class="dropdown-item-link"
             href="/rockets/engines"
           >
             Engines
           </a>
         </li>
         <li
-          class=""
+          class="dropdown-item"
         >
           <a
-            class=""
+            class="dropdown-item-link"
             href="/rockets/fuel-tanks"
           >
             Fuel Tanks

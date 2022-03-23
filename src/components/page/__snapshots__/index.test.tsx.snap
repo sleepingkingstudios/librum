@@ -25,48 +25,48 @@ exports[`<Page> should match the snapshot 1`] = `
         class="fancy-hr my-1 block sm:hidden"
       />
       <nav
-        class="relative z-10"
+        class="page-navigation relative z-10"
       >
         <ul
           class="flex flex-col sm:flex-row"
         >
           <li
-            class=""
+            class="navigation-item"
           >
             <p
-              class=""
+              class="navigation-item-link-disabled text-muted"
             >
               Home
             </p>
           </li>
           <li
-            class=""
+            class="navigation-item"
           >
             <a
-              class=""
+              class="navigation-item-link"
               href="/publishers"
             >
               Publishers
             </a>
           </li>
           <li
-            class=""
+            class="navigation-item"
           >
             <a
-              class=""
+              class="navigation-item-link"
               href="/game_systems"
             >
               Game Systems
             </a>
           </li>
           <li
-            class=""
+            class="dropdown-container"
           >
             <div
-              class=""
+              class="dropdown"
             >
               <button
-                class=""
+                class="dropdown-label"
               >
                 Sources
                 <svg
@@ -88,13 +88,13 @@ exports[`<Page> should match the snapshot 1`] = `
             </div>
           </li>
           <li
-            class=""
+            class="dropdown-container"
           >
             <div
-              class=""
+              class="dropdown"
             >
               <button
-                class=""
+                class="dropdown-label"
               >
                 Admin
                 <svg
@@ -163,48 +163,48 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
         class="fancy-hr my-1 block sm:hidden"
       />
       <nav
-        class="relative z-10"
+        class="page-navigation relative z-10"
       >
         <ul
           class="flex flex-col sm:flex-row"
         >
           <li
-            class=""
+            class="navigation-item"
           >
             <p
-              class=""
+              class="navigation-item-link-disabled text-muted"
             >
               Home
             </p>
           </li>
           <li
-            class=""
+            class="navigation-item"
           >
             <a
-              class=""
+              class="navigation-item-link"
               href="/publishers"
             >
               Publishers
             </a>
           </li>
           <li
-            class=""
+            class="navigation-item"
           >
             <a
-              class=""
+              class="navigation-item-link"
               href="/game_systems"
             >
               Game Systems
             </a>
           </li>
           <li
-            class=""
+            class="dropdown-container"
           >
             <div
-              class=""
+              class="dropdown"
             >
               <button
-                class=""
+                class="dropdown-label"
               >
                 Sources
                 <svg
@@ -226,13 +226,13 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
             </div>
           </li>
           <li
-            class=""
+            class="dropdown-container"
           >
             <div
-              class=""
+              class="dropdown"
             >
               <button
-                class=""
+                class="dropdown-label"
               >
                 Admin
                 <svg
@@ -333,38 +333,38 @@ exports[`<Page> with navigation: value should match the snapshot 1`] = `
         class="fancy-hr my-1 block sm:hidden"
       />
       <nav
-        class="relative z-10"
+        class="page-navigation relative z-10"
       >
         <ul
           class="flex flex-col sm:flex-row"
         >
           <li
-            class=""
+            class="navigation-item"
           >
             <p
-              class=""
+              class="navigation-item-link-disabled text-muted"
             >
               Home
             </p>
           </li>
           <li
-            class=""
+            class="navigation-item"
           >
             <a
-              class=""
+              class="navigation-item-link"
               href="/launch-sites"
             >
               Launch Sites
             </a>
           </li>
           <li
-            class=""
+            class="dropdown-container"
           >
             <div
-              class=""
+              class="dropdown"
             >
               <button
-                class=""
+                class="dropdown-label"
               >
                 Rockets
                 <svg
@@ -386,13 +386,13 @@ exports[`<Page> with navigation: value should match the snapshot 1`] = `
             </div>
           </li>
           <li
-            class=""
+            class="dropdown-container"
           >
             <div
-              class=""
+              class="dropdown"
             >
               <button
-                class=""
+                class="dropdown-label"
               >
                 Administration
                 <svg

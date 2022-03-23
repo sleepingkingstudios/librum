@@ -3,8 +3,8 @@ import * as React from 'react';
 import { PageFooter } from './footer';
 import { PageHeader } from './header';
 import { useThemeStyles } from '@themes';
+import type { NavigationProps } from './navigation';
 import { joinClassNames } from '@utils/react-utils';
-import { NavigationProps } from './header/navigation';
 
 interface PageProps {
   title?: string;
