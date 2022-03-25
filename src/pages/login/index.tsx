@@ -7,24 +7,25 @@ import {
 } from '@components/form';
 import { Page } from '@components/page';
 import { useCreateSessionMutation } from '@session/api';
-import { createSession } from '@session/middleware';
+import {
+  createSession,
+  storeSession,
+} from '@session/middleware';
 import { actions } from '@session/reducer';
-import { applyMiddleware } from '@utils/middleware';
 
 export const LoginPage = (): JSX.Element => {
   const { create } = actions;
   const dispatch = useDispatch();
-  const [mutation, status] = useCreateSessionMutation();
-
-  const appliedMiddleware = applyMiddleware(
-    mutation,
-    [
-      createSession({
-        actionCreator: create,
-        dispatch,
-      }),
-    ],
-  );
+  const setItem = (key: string, value: string) => {
+    localStorage.setItem(key, value);
+  };
+  const middleware = [
+    createSession({
+      actionCreator: create,
+      dispatch,
+    }),
+    storeSession({ setItem }),
+  ];
 
   return (
     <Page navigation={[]}>
@@ -32,9 +33,8 @@ export const LoginPage = (): JSX.Element => {
 
       <Form
         initialValues={{ username: '', password: '' }}
-        useMutation={
-          () => ([appliedMiddleware, status])
-        }
+        middleware={middleware}
+        useMutation={useCreateSessionMutation}
       >
         <label htmlFor="username">Username</label>
         <Input id="username" name="username" />

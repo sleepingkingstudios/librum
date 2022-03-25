@@ -55,6 +55,8 @@ useMutation.mockImplementation(() => [mutation, {}]);
 describe('<LoginPage>', () => {
   beforeEach(() => { mutation.mockClear(); });
 
+  afterEach(() => { localStorage.clear(); })
+
   it('should render the form', () => {
     const { getByRole } = render(
       <LoginPage />,
@@ -144,6 +146,27 @@ describe('<LoginPage>', () => {
 
           expect(queryByText(/Logged in/)).toBeNull();
         });
+
+        it('should not store the session', async () => {
+          localStorage.clear();
+
+          const { getByLabelText, getByRole } = render(
+            <LoginPage />,
+            { store: true }
+          );
+
+          userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+
+          userEvent.type(getByLabelText('Password'), 'tronlives');
+
+          userEvent.click(getByRole('button', { name: 'Submit'}));
+
+          await waitFor(() => {
+            expect(mutation).toHaveBeenCalled();
+          });
+
+          expect(localStorage.getItem('session')).toBeNull();
+        });
       });
 
       describe('when the api returns a successful response', () => {
@@ -186,6 +209,52 @@ describe('<LoginPage>', () => {
 
           expect(message).toBeVisible();
           expect(message).toHaveTextContent('Logged in as Alan Bradley');
+        });
+
+        it('should store the session', async () => {
+          localStorage.clear();
+
+          const { getByLabelText, getByRole } = render(
+            <LoginPage />,
+            { store: true }
+          );
+          const user: User = {
+            email: 'alan.bradley@example.com',
+            id: '00000000-0000-0000-0000-000000000000',
+            role: 'user',
+            slug: 'alan-bradley',
+            username: 'Alan Bradley',
+          };
+          const token = '12345';
+          const response: FetchResponse<{ token: string, user: User }> = {
+            data: {
+              ok: true,
+              data: {
+                token,
+                user,
+              },
+            },
+          };
+          const session = {
+            authenticated: true,
+            token,
+            user,
+          };
+          const value = JSON.stringify(session);
+
+          mutation.mockImplementationOnce(() => response);
+
+          userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+
+          userEvent.type(getByLabelText('Password'), 'tronlives');
+
+          userEvent.click(getByRole('button', { name: 'Submit'}));
+
+          await waitFor(() => {
+            expect(mutation).toHaveBeenCalled();
+          });
+
+          expect(localStorage.getItem('session')).toBe(value);
         });
       });
     });

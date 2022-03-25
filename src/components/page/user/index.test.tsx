@@ -78,6 +78,8 @@ describe('<PageUser>', () => {
     });
 
     describe('when the user clicks the logout button', () => {
+      afterEach(() => { localStorage.clear(); });
+
       it('should not show a user name', () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
@@ -104,6 +106,20 @@ describe('<PageUser>', () => {
         const state = getState() as { session: Session };
 
         expect(selector(state)).toEqual(expected);
+      });
+
+      it('should clear the stored session', () => {
+        localStorage.setItem('session', JSON.stringify({ authenticated: true }));
+
+        const { dispatch, store } = createStore();
+        dispatch(create({ token, user }));
+
+        const { getByRole } = render(<PageUser />, { store });
+        const button = getByRole('button', { name: 'Log Out' });
+
+        userEvent.click(button);
+
+        expect(localStorage.getItem('session')).toBeNull();
       });
     });
   });

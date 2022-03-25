@@ -7,8 +7,9 @@ import type {
   Session,
   User,
 } from './types';
+import { getStoredSession } from './utils';
 
-export const initialState: Session = { authenticated: false };
+export const initialState: Session = getStoredSession();
 
 const sessionSlice = createSlice({
   name: 'session',
