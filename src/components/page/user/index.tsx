@@ -14,7 +14,11 @@ import {
 
 export const PageUser = (): JSX.Element => {
   const dispatch = useDispatch();
-  const logout = () => { dispatch(actions.destroy()); };
+  const logout = () => {
+    dispatch(actions.destroy());
+
+    localStorage.removeItem('session');
+  };
   const session: Session = useSelector(selector);
   const {
     authenticated,
