@@ -61,5 +61,50 @@ RSpec.describe Data::Tasks do
         expect(load_mock).to have_received(:call).with(no_args)
       end
     end
+
+    describe 'with core: false' do
+      let(:options) { super().merge('core' => false) }
+
+      it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
+        invoke_task
+
+        expect(Data::Load)
+          .to have_received(:new)
+          .with(
+            data_path:      data_path,
+            record_classes: []
+          )
+      end
+
+      it 'should call the loader' do
+        invoke_task
+
+        expect(load_mock).to have_received(:call).with(no_args)
+      end
+    end
+
+    describe 'with dnd5e: true' do
+      let(:options) { super().merge('dnd5e' => true) }
+
+      it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
+        invoke_task
+
+        expect(Data::Load)
+          .to have_received(:new)
+          .with(
+            data_path:      data_path,
+            record_classes: [
+              *Data::Configuration::CORE_CLASSES,
+              *Data::Configuration::DND5E_CLASSES
+            ]
+          )
+      end
+
+      it 'should call the loader' do
+        invoke_task
+
+        expect(load_mock).to have_received(:call).with(no_args)
+      end
+    end
   end
 end

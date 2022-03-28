@@ -10,15 +10,26 @@ module Data
       type:     :boolean,
       required: false,
       desc:     'Load authentication data'
+    option :core,
+      type:     :boolean,
+      required: false,
+      default:  true,
+      desc:     'Load core data, such as game systems and publishers'
     option :'data-path',
       type:     :string,
       required: true,
       desc:     'The path to the serialized data'
-    def load
+    option :dnd5e,
+      type:     :boolean,
+      required: false,
+      desc:     'Load data for D&D Fifth Edition'
+    def load # rubocop:disable Metrics/MethodLength
       lazy_require_rails!
 
       record_classes = scoped_classes(
-        authentication: options['authentication']
+        authentication: options['authentication'],
+        core:           options['core'],
+        dnd5e:          options['dnd5e']
       )
 
       Data::Load
@@ -35,14 +46,16 @@ module Data
       require_relative '../../config/environment'
     end
 
-    def scoped_classes(authentication:)
-      record_classes = Data::Configuration::CORE_CLASSES
+    def scoped_classes(authentication:, core:, dnd5e:)
+      record_classes = core ? Data::Configuration::CORE_CLASSES : []
 
       if authentication
         raise if Rails.env.production?
 
         record_classes += Data::Configuration::AUTHENTICATION_CLASSES
       end
+
+      record_classes += Data::Configuration::DND5E_CLASSES if dnd5e
 
       record_classes
     end

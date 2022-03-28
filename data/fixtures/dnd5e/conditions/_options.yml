@@ -1,0 +1,10 @@
+---
+middleware:
+  Data::Middleware::GenerateSlug:
+    attribute_name: name
+require:
+  - cuprum/collections/loader/middleware/find_association
+source:
+  middleware:
+    Data::Middleware::FindSource:
+      game_system: nothing-to-lose-but-your-tentacles-2e

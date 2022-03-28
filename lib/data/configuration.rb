@@ -18,6 +18,11 @@ module Data
       ::Sources::Website
     ].freeze
 
+    # The reference classes defined for D&D Fifth Edition.
+    DND5E_CLASSES = [
+      ::Dnd5e::Condition
+    ].freeze
+
     # @return [String] the default path to load data.
     def self.data_path
       Rails.root.join('data', Rails.env)
@@ -29,6 +34,8 @@ module Data
     #   repository.
     def self.repository(*record_classes)
       repository = Cuprum::Rails::Repository.new
+
+      repository.find_or_create(record_class: Source)
 
       CORE_CLASSES.each do |record_class|
         repository.find_or_create(record_class: record_class)
