@@ -2,21 +2,28 @@ import * as React from 'react';
 
 import '@testing-library/jest-dom';
 
-import { PageFooter } from './index';
+import { PageBreadcrumbs } from './index';
 import type {
   Breadcrumb,
   Breadcrumbs,
-} from '../breadcrumbs';
+} from './types';
 import { render } from '@test-helpers/rendering';
 
-describe('<PageFooter>', () => {
-  it('should match the snapshot', () => {
-    const { asFragment } = render(<PageFooter />);
+describe('<PageBreadcrumbs />', () => {
+  describe('with breadcrumbs: an empty array', () => {
+    const breadcrumbs: Breadcrumbs = [];
 
-    expect(asFragment()).toMatchSnapshot();
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <PageBreadcrumbs breadcrumbs={breadcrumbs} />,
+        { router: true }
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 
-  describe('with breadcrumbs: value', () => {
+  describe('with breadcrumbs: an array of breadcrumbs', () => {
     const breadcrumbs: Breadcrumbs = [
       {
         label: 'Home',
@@ -33,7 +40,7 @@ describe('<PageFooter>', () => {
 
     it('should match the snapshot', () => {
       const { asFragment, getByText } = render(
-        <PageFooter breadcrumbs={breadcrumbs} />,
+        <PageBreadcrumbs breadcrumbs={breadcrumbs} />,
         { router: true }
       );
 

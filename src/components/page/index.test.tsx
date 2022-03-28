@@ -4,6 +4,10 @@ import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { Page } from './index';
+import type {
+  Breadcrumb,
+  Breadcrumbs,
+} from './breadcrumbs';
 import { actions } from '@session';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
@@ -74,6 +78,57 @@ describe('<Page>', () => {
     );
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  describe('with breadcrumbs: value', () => {
+    const breadcrumbs: Breadcrumbs = [
+      {
+        label: 'Breadcrumb One',
+        url: '/',
+      },
+      {
+        label: 'Breadcrumb Two'
+      },
+      {
+        label: 'Breadcrumb Three',
+        url: '/example',
+      },
+    ];
+
+    it('should render the footer', () => {
+      const footerText = 'What lies beyond the furthest reaches of the sky?';
+
+      const { getByText } = render(
+        <Page breadcrumbs={breadcrumbs}>Page Content Here...</Page>,
+        {
+          router: true,
+          store: true,
+        }
+      );
+
+      const footer = getByText(footerText);
+
+      expect(footer).toBeVisible();
+
+      breadcrumbs.forEach((breadcrumb: Breadcrumb) => {
+        const { label } = breadcrumb;
+
+        expect(getByText(label)).toBeVisible();
+      });
+    });
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <Page breadcrumbs={breadcrumbs}>Page Content Here...</Page>,
+        {
+          router: true,
+          store: true,
+          theme,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 
   describe('with navigation: value', () => {

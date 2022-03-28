@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageBreadcrumbs /> with breadcrumbs: an array of breadcrumbs should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    class="flex flex-col sm:flex-row page-breadcrumbs"
+  >
+    <li
+      class="page-breadcrumb"
+    >
+      <span
+        class="page-breadcrumb-empty"
+      >
+        Home
+      </span>
+    </li>
+    <li
+      class="page-breadcrumb"
+    >
+      <span
+        class="page-breadcrumb-empty"
+      >
+        Admin
+      </span>
+    </li>
+    <li
+      class="page-breadcrumb"
+    >
+      <a
+        class="page-breadcrumb-link"
+        href="/example"
+      >
+        Example
+      </a>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<PageBreadcrumbs /> with breadcrumbs: an empty array should match the snapshot 1`] = `<DocumentFragment />`;

@@ -1,14 +1,18 @@
 import * as React from 'react';
 
+import type { Breadcrumbs } from './breadcrumbs';
 import { PageFooter } from './footer';
 import { PageHeader } from './header';
 import type { NavigationProps } from './navigation';
 import { useTheme } from '@themes';
 import { joinClassNames } from '@utils/react-utils';
 
+export type { Breadcrumbs } from './breadcrumbs';
+
 interface PageProps {
   title?: string;
   subtitle?: string;
+  breadcrumbs?: Breadcrumbs;
   children: React.ReactNode,
   navigation?: NavigationProps;
 }
@@ -56,6 +60,7 @@ const defaultNavigation = [
 export const Page = ({
   title,
   subtitle,
+  breadcrumbs,
   children,
   navigation,
 }: PageProps): JSX.Element => {
@@ -77,7 +82,7 @@ export const Page = ({
         { children }
       </main>
 
-      <PageFooter />
+      <PageFooter breadcrumbs={breadcrumbs} />
     </div>
   );
 };

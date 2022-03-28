@@ -55,6 +55,17 @@
 
 @layer components {
   .theme-chiaroscuro {
+    .page-breadcrumbs {
+      .page-breadcrumb {
+        @apply p-1 first:pl-0;
+        @apply sm:before:content-['/'] sm:before:pr-2 sm:before:text-zinc-500 first:before:content-none;
+
+        .page-breadcrumb-empty {
+          @apply text-zinc-500;
+        }
+      }
+    }
+
     .page-navigation {
       .dropdown {
         @apply bg-zinc-100/75;
