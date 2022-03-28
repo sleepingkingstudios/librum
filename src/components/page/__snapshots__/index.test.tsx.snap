@@ -127,12 +127,16 @@ exports[`<Page> should match the snapshot 1`] = `
       Page Content Here...
     </main>
     <footer
-      class="mt-3 shrink-0 text-center text-muted sm:text-left"
+      class="mt-3 shrink-0 text-center sm:text-left"
     >
       <hr
         class="hr-fancy mb-2"
       />
-      What lies beyond the furthest reaches of the sky?
+      <span
+        class="text-muted"
+      >
+        What lies beyond the furthest reaches of the sky?
+      </span>
     </footer>
   </div>
 </DocumentFragment>
@@ -297,12 +301,190 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
       Page Content Here...
     </main>
     <footer
-      class="mt-3 shrink-0 text-center text-muted sm:text-left"
+      class="mt-3 shrink-0 text-center sm:text-left"
     >
       <hr
         class="hr-fancy mb-2"
       />
-      What lies beyond the furthest reaches of the sky?
+      <span
+        class="text-muted"
+      >
+        What lies beyond the furthest reaches of the sky?
+      </span>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<Page> with breadcrumbs: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-default"
+  >
+    <header
+      class="mb-3 text-center sm:text-left"
+    >
+      <span
+        class="page-title"
+      >
+        Librum
+      </span>
+      <br
+        class="block sm:hidden"
+      />
+      <small
+        class="page-subtitle m-0 sm:ml-2"
+      >
+        Campaign Companion
+      </small>
+      <hr
+        class="hr-fancy my-1 block sm:hidden"
+      />
+      <nav
+        class="page-navigation relative z-10"
+      >
+        <ul
+          class="flex flex-col sm:flex-row"
+        >
+          <li
+            class="navigation-item"
+          >
+            <p
+              class="navigation-item-link-disabled text-muted"
+            >
+              Home
+            </p>
+          </li>
+          <li
+            class="navigation-item"
+          >
+            <a
+              class="navigation-item-link"
+              href="/publishers"
+            >
+              Publishers
+            </a>
+          </li>
+          <li
+            class="navigation-item"
+          >
+            <a
+              class="navigation-item-link"
+              href="/game_systems"
+            >
+              Game Systems
+            </a>
+          </li>
+          <li
+            class="dropdown-container"
+          >
+            <div
+              class="dropdown"
+            >
+              <button
+                class="dropdown-label"
+              >
+                Sources
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-caret-up fa-xs ml-2"
+                  data-icon="caret-up"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.39 265.4l127.1-128C143.6 131.1 151.8 128 160 128s16.38 3.125 22.63 9.375l127.1 128c9.156 9.156 11.9 22.91 6.943 34.88S300.9 320 287.1 320H32.01c-12.94 0-24.62-7.781-29.58-19.75S.2333 274.5 9.39 265.4z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </div>
+          </li>
+          <li
+            class="dropdown-container"
+          >
+            <div
+              class="dropdown"
+            >
+              <button
+                class="dropdown-label"
+              >
+                Admin
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-caret-up fa-xs ml-2"
+                  data-icon="caret-up"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 320 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.39 265.4l127.1-128C143.6 131.1 151.8 128 160 128s16.38 3.125 22.63 9.375l127.1 128c9.156 9.156 11.9 22.91 6.943 34.88S300.9 320 287.1 320H32.01c-12.94 0-24.62-7.781-29.58-19.75S.2333 274.5 9.39 265.4z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <hr
+        class="hr-fancy m-1"
+      />
+    </header>
+    <main
+      class="grow"
+    >
+      Page Content Here...
+    </main>
+    <footer
+      class="mt-3 shrink-0 text-center sm:text-left"
+    >
+      <ul
+        class="flex flex-col sm:flex-row page-breadcrumbs"
+      >
+        <li
+          class="page-breadcrumb"
+        >
+          <span
+            class="page-breadcrumb-empty"
+          >
+            Breadcrumb One
+          </span>
+        </li>
+        <li
+          class="page-breadcrumb"
+        >
+          <span
+            class="page-breadcrumb-empty"
+          >
+            Breadcrumb Two
+          </span>
+        </li>
+        <li
+          class="page-breadcrumb"
+        >
+          <a
+            class="page-breadcrumb-link"
+            href="/example"
+          >
+            Breadcrumb Three
+          </a>
+        </li>
+      </ul>
+      <hr
+        class="hr-fancy mb-2"
+      />
+      <span
+        class="text-muted"
+      >
+        What lies beyond the furthest reaches of the sky?
+      </span>
     </footer>
   </div>
 </DocumentFragment>
@@ -425,12 +607,16 @@ exports[`<Page> with navigation: value should match the snapshot 1`] = `
       Page Content Here...
     </main>
     <footer
-      class="mt-3 shrink-0 text-center text-muted sm:text-left"
+      class="mt-3 shrink-0 text-center sm:text-left"
     >
       <hr
         class="hr-fancy mb-2"
       />
-      What lies beyond the furthest reaches of the sky?
+      <span
+        class="text-muted"
+      >
+        What lies beyond the furthest reaches of the sky?
+      </span>
     </footer>
   </div>
 </DocumentFragment>

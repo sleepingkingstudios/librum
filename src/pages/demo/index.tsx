@@ -1,9 +1,24 @@
 import * as React from 'react';
 
 import { Page } from '@components/page';
+import type { Breadcrumbs } from '@components/page';
+
+const breadcrumbs: Breadcrumbs = [
+  {
+    label: 'Home',
+    url: '/',
+  },
+  {
+    label: 'Admin',
+  },
+  {
+    label: 'Demo',
+    url: '/demo',
+  },
+];
 
 export const DemoPage = (): JSX.Element => (
-  <Page>
+  <Page breadcrumbs={breadcrumbs}>
     <h1>Demo</h1>
 
     <p>
