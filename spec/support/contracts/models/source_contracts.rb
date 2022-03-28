@@ -20,6 +20,7 @@ module Spec::Support::Contracts::Models
         include Spec::Support::Contracts::Models::SourceContracts
 
         options[:game_system_ids] ||= Array.new(2) { SecureRandom.uuid }
+        options[:publisher_ids]   ||= Array.new(2) { SecureRandom.uuid }
 
         include_contract 'should be a model'
 
@@ -55,25 +56,46 @@ module Spec::Support::Contracts::Models
           :publisher
 
         describe '#valid?' do
+          let(:attributes) do
+            super().merge(
+              game_system: game_system,
+              publisher:   publisher
+            )
+          end
           let(:factory_name) do
             described_class.name.split('::').last.underscore.intern
+          end
+          let(:publisher) do
+            FactoryBot.create(
+              :publisher,
+              id: options[:publisher_ids].first
+            )
+          end
+          let(:other_publisher) do
+            FactoryBot.create(
+              :publisher,
+              id: options[:publisher_ids].last
+            )
           end
           let(:game_system) do
             FactoryBot.create(
               :game_system,
-              :with_publisher,
-              id: options[:game_system_ids].first
+              id:        options[:game_system_ids].first,
+              publisher: publisher
             )
           end
           let(:other_game_system) do
             FactoryBot.create(
               :game_system,
-              :with_publisher,
-              id: options[:game_system_ids].last
+              id:        options[:game_system_ids].last,
+              publisher: other_publisher
             )
           end
 
           before(:example) do
+            publisher.save!
+            other_publisher.save!
+
             game_system.save!
             other_game_system.save!
           end
@@ -112,15 +134,27 @@ module Spec::Support::Contracts::Models
             type: String
 
           unless type.nil?
-            include_contract 'should validate the scoped uniqueness of',
-              :slug,
-              scope:      { game_system_id: options[:game_system_ids] },
-              attributes: lambda {
-                FactoryBot.attributes_for(
-                  factory_name,
-                  publisher: FactoryBot.create(:publisher)
-                )
-              }
+            context 'with a game system and publisher' do
+              include_contract 'should validate the scoped uniqueness of',
+                :name,
+                scope:      {
+                  game_system_id: options[:game_system_ids],
+                  publisher_id:   options[:publisher_ids]
+                },
+                attributes: lambda {
+                  FactoryBot.attributes_for(factory_name)
+                }
+
+              include_contract 'should validate the scoped uniqueness of',
+                :slug,
+                scope:      { game_system_id: options[:game_system_ids] },
+                attributes: lambda {
+                  FactoryBot.attributes_for(
+                    factory_name,
+                    :with_publisher
+                  )
+                }
+            end
           end
         end
       end
