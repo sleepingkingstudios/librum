@@ -12,7 +12,7 @@ module Data
       desc:     'Load authentication data'
     option :'data-path',
       type:     :string,
-      required: false,
+      required: true,
       desc:     'The path to the serialized data'
     def load
       lazy_require_rails!

@@ -1,4 +1,0 @@
----
-middleware:
-  Data::Middleware::GenerateSlug:
-    attribute_name: name
