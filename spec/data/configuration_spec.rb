@@ -30,6 +30,18 @@ RSpec.describe Data::Configuration do
       -> { be == expected }
   end
 
+  describe '::DND5E_CLASSES' do
+    let(:expected) do
+      [
+        Dnd5e::Condition
+      ]
+    end
+
+    include_examples 'should define constant',
+      :DND5E_CLASSES,
+      -> { be == expected }
+  end
+
   describe '.data_path' do
     let(:expected) { Rails.root.join('data', Rails.env) }
 
@@ -47,7 +59,12 @@ RSpec.describe Data::Configuration do
   end
 
   describe '.repository' do
-    let(:expected_classes) { described_class::CORE_CLASSES }
+    let(:expected_classes) do
+      [
+        Source,
+        *described_class::CORE_CLASSES
+      ]
+    end
     let(:expected_keys) do
       expected_classes.map do |record_class|
         record_class.name.split('::').map(&:underscore).join('/').pluralize
