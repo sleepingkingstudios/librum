@@ -90,7 +90,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.3
+        ruby-version: 3.0.4
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         cache-version: 1
 
@@ -117,7 +117,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.3
+        ruby-version: 3.0.4
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         cache-version: 1
 

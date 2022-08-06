@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.3'
+ruby '3.0.4'
 
 gem 'rails', '~> 7.0.1'
 
@@ -14,9 +14,6 @@ gem 'importmap-rails' # Use JavaScript with ESM import maps
 gem 'sprockets-rails' # The original asset pipeline for Rails
 
 ### Data
-gem 'annotate',
-  group: :development,
-  git:   'https://github.com/sleepingkingstudios/annotate_models'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt',    '~> 2.3'
 
@@ -36,6 +33,10 @@ gem 'cuprum-rails',
   git:    'https://github.com/sleepingkingstudios/cuprum-rails'
 
 group :development, :test do
+  gem 'annotate',
+    group: :development,
+    git:   'https://github.com/sleepingkingstudios/annotate_models'
+
   gem 'byebug'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
