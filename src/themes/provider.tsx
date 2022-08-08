@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { chiaroscuro } from './chiaroscuro';
 import { ThemeContext } from './context';
+import { chiaroscuro } from './chiaroscuro';
 import type { Theme } from './types';
 
 interface ThemeProviderProps {

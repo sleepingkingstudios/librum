@@ -8,42 +8,19 @@
     @apply dark:bg-zinc-900 dark:text-zinc-200;
 
     h1, h2, h3, h4, h5, h6 {
-      @apply font-serif text-zinc-900;
+      @apply text-zinc-900;
       @apply dark:text-zinc-100;
     }
 
     a {
       @apply text-blue-500;
-      @apply hover:text-blue-600 hover:underline;
+      @apply hover:text-blue-600;
       @apply dark:hover:text-blue-400;
     }
 
     hr {
       @apply border-zinc-900;
       @apply dark:border-zinc-100;
-    }
-
-    .hr-fancy {
-      @apply after:border-zinc-900;
-      @apply dark:after:border-zinc-100;
-
-      border-top-style: solid;
-      border-top-width: 2px;
-      opacity: 1;
-
-      &:after {
-        content: ' ';
-
-        /* Display */
-        display: block;
-        border-top-style: solid;
-        border-top-width: 1px;
-        margin: 0 10px;
-
-        /* Positioning */
-        position: relative;
-        top: 2px;
-      }
     }
 
     .hr-muted {
@@ -57,8 +34,7 @@
   .theme-chiaroscuro {
     .page-breadcrumbs {
       .page-breadcrumb {
-        @apply p-1 first:pl-0;
-        @apply sm:before:content-['/'] sm:before:pr-2 sm:before:text-zinc-500 first:before:content-none;
+        @apply sm:before:text-zinc-500;
 
         .page-breadcrumb-empty {
           @apply text-zinc-500;
@@ -72,22 +48,14 @@
         @apply dark:bg-zinc-900/75;
       }
 
-      .dropdown-item {
-        @apply font-serif;
-      }
-
       .dropdown-item-link {
         @apply text-zinc-900 hover:text-black;
         @apply dark:text-zinc-100 dark:hover:text-white;
       }
 
       .dropdown-label {
-        @apply font-serif text-zinc-900;
+        @apply text-zinc-900;
         @apply dark:text-zinc-100;
-      }
-
-      .navigation-item {
-        @apply font-serif;
       }
 
       .navigation-item-link {
@@ -97,12 +65,12 @@
     }
 
     .page-subtitle {
-      @apply font-serif text-zinc-900;
+      @apply text-zinc-900;
       @apply dark:text-zinc-100;
     }
 
     .page-title {
-      @apply font-serif text-zinc-900;
+      @apply text-zinc-900;
       @apply dark:text-zinc-100;
     }
   }
@@ -110,6 +78,11 @@
 
 @layer utilities {
   .theme-chiaroscuro {
+    .hr-fancy {
+      @apply after:border-zinc-900;
+      @apply dark:after:border-zinc-100;
+    }
+
     .link-danger {
       @apply text-red-600;
       @apply hover:text-red-700;

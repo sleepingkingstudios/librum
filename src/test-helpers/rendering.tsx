@@ -15,24 +15,17 @@ import {
   ThemeContext,
   defaultTheme,
 } from '@themes/context';
-
-interface themeProperties {
-  [index: string]: string;
-}
+import type { Theme } from '@themes';
 
 interface customRenderOptions extends RenderOptions {
   initialEntries?: Array<string>;
   router?: true;
   store?: (storeType | true);
-  theme?: themeProperties;
+  theme?: (Theme | true);
 }
 
 interface withRouterOptions {
   initialEntries?: Array<string>;
-}
-
-interface withThemeOptions {
-  theme: themeProperties;
 }
 
 export const withRouter = (
@@ -65,12 +58,22 @@ export const withStore = (
 
 export const withTheme = (
   component: React.ReactElement,
-  { theme }: withThemeOptions
-): React.ReactElement => (
-  <ThemeContext.Provider value={{ ...defaultTheme, ...theme }}>
-    { component }
-  </ThemeContext.Provider>
-);
+  { theme }: { theme: (Theme | true) }
+): React.ReactElement => {
+  let configuredTheme: Theme;
+
+  if (theme === true) {
+    configuredTheme = defaultTheme;
+  } else {
+    configuredTheme = theme;
+  }
+
+  return (
+    <ThemeContext.Provider value={configuredTheme}>
+      { component }
+    </ThemeContext.Provider>
+  );
+};
 
 const customRender = (
   component: React.ReactElement,

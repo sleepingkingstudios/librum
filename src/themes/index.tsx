@@ -5,6 +5,6 @@ import { ThemeContext } from './context';
 export { ThemeProvider } from './provider';
 export type { Theme } from './types';
 
-import './theme.css';
+import './styles/theme.css';
 
 export const useTheme = () => React.useContext(ThemeContext);
