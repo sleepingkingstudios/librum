@@ -14,7 +14,9 @@ export type QueryParams = Record<string, unknown>;
 
 export type SubmitHandler = (values: FormikValues) => void;
 
-export type UseMutation = () => readonly [
+export type UseMutationResponse = readonly [
   Mutation,
   unknown,
 ];
+
+export type UseMutation = () => UseMutationResponse;

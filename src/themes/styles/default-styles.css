@@ -16,6 +16,10 @@
 
 @layer components {
   .theme-default-styles {
+    .form-input {
+      @apply border border-solid m-2 p-1 rounded-lg;
+    }
+
     .page-breadcrumbs {
       .page-breadcrumb {
         @apply p-1 first:pl-0;

@@ -17,7 +17,7 @@ exports[`<LoginPage> should match the snapshot 1`] = `
         Username
       </label>
       <input
-        class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
+        class="form-input"
         id="username"
         name="username"
         type="text"
@@ -30,7 +30,7 @@ exports[`<LoginPage> should match the snapshot 1`] = `
         Password
       </label>
       <input
-        class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
+        class="form-input"
         id="password"
         name="password"
         type="password"

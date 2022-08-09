@@ -46,7 +46,7 @@ export const FormInput = (
   }: IFormInputProps
 ): JSX.Element => {
   const joinedClassName = joinClassNames(
-    'bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg',
+    'form-input',
     className,
   );
 
