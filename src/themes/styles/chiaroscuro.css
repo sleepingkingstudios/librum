@@ -32,6 +32,15 @@
 
 @layer components {
   .theme-chiaroscuro {
+    .form-label {
+      @apply text-zinc-900;
+      @apply dark:text-zinc-100;
+    }
+
+    .form-input {
+      @apply bg-zinc-100 dark:bg-zinc-900 border-zinc-500;
+    }
+
     .page-breadcrumbs {
       .page-breadcrumb {
         @apply sm:before:text-zinc-500;
@@ -78,10 +87,6 @@
 
 @layer utilities {
   .theme-chiaroscuro {
-    .form-input {
-      @apply bg-zinc-200 dark:bg-zinc-800 border-zinc-900 dark:border-zinc-100;
-    }
-
     .hr-fancy {
       @apply after:border-zinc-900;
       @apply dark:after:border-zinc-100;

@@ -11,32 +11,40 @@ exports[`<LoginPage> should match the snapshot 1`] = `
     <form
       action="#"
     >
-      <label
-        for="username"
+      <div
+        class="form-field"
       >
-        Username
-      </label>
-      <input
-        class="form-input"
-        id="username"
-        name="username"
-        type="text"
-        value=""
-      />
-      <br />
-      <label
-        for="password"
+        <label
+          class="form-label"
+          for="username"
+        >
+          Username
+        </label>
+        <input
+          class="form-input"
+          id="username"
+          name="username"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="form-field"
       >
-        Password
-      </label>
-      <input
-        class="form-input"
-        id="password"
-        name="password"
-        type="password"
-        value=""
-      />
-      <br />
+        <label
+          class="form-label"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          class="form-input"
+          id="password"
+          name="password"
+          type="text"
+          value=""
+        />
+      </div>
       <button
         type="submit"
       >

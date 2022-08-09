@@ -13,6 +13,7 @@ import type {
 import { wrapMutation } from './utils';
 import type { Middleware } from '@utils/middleware';
 
+export { FormField } from './field';
 export { FormInput } from './input';
 
 interface IFormProps {
