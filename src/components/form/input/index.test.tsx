@@ -30,6 +30,17 @@ describe('<FormInput />', () => {
     });
   });
 
+  describe('with className: value', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <Field name="email" className="input-important" component={FormInput} />,
+        { wrapper: formWrapper({ onSubmit: jest.fn() }) },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
   describe('with id: value', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(

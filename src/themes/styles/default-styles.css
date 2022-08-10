@@ -16,6 +16,10 @@
 
 @layer components {
   .theme-default-styles {
+    .form-button {
+      @apply border border-solid mt-1 mb-3 px-3 py-1 rounded-lg w-full;
+    }
+
     .form-input {
       @apply border border-solid mt-1 mb-3 p-1 rounded-lg w-full;
     }

@@ -4,6 +4,8 @@ import type {
   FormikProps,
 } from 'formik';
 
+import { joinClassNames } from '@utils/react-utils';
+
 interface IInputProps {
   className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,6 +23,13 @@ export const FormInput = ({
   form,
   id,
   type = 'text',
-}: IInputProps): JSX.Element => (
-  <input id={id} className={className} type={type} {...field} />
-);
+}: IInputProps): JSX.Element => {
+  const joinedClassName = joinClassNames(
+    'form-input',
+    className,
+  );
+
+  return (
+    <input id={id} className={joinedClassName} type={type} {...field} />
+  );
+};

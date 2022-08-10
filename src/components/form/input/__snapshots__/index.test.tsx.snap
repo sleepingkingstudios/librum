@@ -6,6 +6,7 @@ exports[`<FormInput /> should match the snapshot 1`] = `
     action="#"
   >
     <input
+      class="form-input"
       name="email"
       type="text"
       value=""
@@ -20,9 +21,25 @@ exports[`<FormInput /> when the form has data for the input should match the sna
     action="#"
   >
     <input
+      class="form-input"
       name="email"
       type="text"
       value="alan.bradley@example.com"
+    />
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with className: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <input
+      class="form-input input-important"
+      name="email"
+      type="text"
+      value=""
     />
   </form>
 </DocumentFragment>
@@ -34,6 +51,7 @@ exports[`<FormInput /> with id: value should match the snapshot 1`] = `
     action="#"
   >
     <input
+      class="form-input"
       id="user-email"
       name="email"
       type="text"
@@ -49,6 +67,7 @@ exports[`<FormInput /> with type: value should match the snapshot 1`] = `
     action="#"
   >
     <input
+      class="form-input"
       name="email"
       type="password"
       value=""

@@ -60,18 +60,17 @@ export const FormField = ({
   const configuredLabel =
     label === false ? label : (label || convertNameToLabel(name));
   const joinedClassName = joinClassNames(
-    'form-input',
+    'form-field',
     className,
   );
   const InputComponent: React.ElementType = inputType({ type });
 
   return (
-    <div className="form-field">
+    <div className={joinedClassName}>
       { renderLabel({ id: configuredId, label: configuredLabel }) }
 
       <Field
         id={configuredId}
-        className={joinedClassName}
         name={name}
         component={InputComponent}
         type={type}

@@ -32,6 +32,13 @@
 
 @layer components {
   .theme-chiaroscuro {
+    .form-button {
+      @apply border-zinc-800 text-zinc-800;
+      @apply active:bg-zinc-200 hover:border-zinc-900 hover:text-zinc-900;
+      @apply dark:border-zinc-200 dark:text-zinc-200;
+      @apply dark:active:bg-zinc-800 dark:hover:border-zinc-100 dark:hover:text-zinc-100;
+    }
+
     .form-label {
       @apply text-zinc-900;
       @apply dark:text-zinc-100;

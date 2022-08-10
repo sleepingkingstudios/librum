@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import {
   Form,
+  FormButton,
   FormField as Field,
 } from '@components/form';
 import { Page } from '@components/page';
@@ -38,9 +39,9 @@ export const LoginPage = (): JSX.Element => {
       >
         <Field name="username" />
 
-        <Field name="password" />
+        <Field name="password" type="password" />
 
-        <button type="submit">Submit</button>
+        <FormButton type="submit">Submit</FormButton>
       </Form>
     </Page>
   );

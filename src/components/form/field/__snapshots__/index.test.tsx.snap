@@ -58,7 +58,7 @@ exports[`<FormField /> with className: value should match the snapshot 1`] = `
     action="#"
   >
     <div
-      class="form-field"
+      class="form-field custom-form-field"
     >
       <label
         class="form-label"
@@ -67,7 +67,7 @@ exports[`<FormField /> with className: value should match the snapshot 1`] = `
         Email
       </label>
       <input
-        class="form-input custom-form-field"
+        class="form-input"
         id="email"
         name="email"
         type="text"
