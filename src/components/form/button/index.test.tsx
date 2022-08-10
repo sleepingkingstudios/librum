@@ -37,6 +37,16 @@ describe('<FormInput />', () => {
     });
   });
 
+  describe('with cols: value', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <FormButton cols={3}>Button</FormButton>,
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
   describe('with type: button', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(

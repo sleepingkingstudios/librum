@@ -11,7 +11,7 @@ import { FormInput } from '../input';
 
 interface IFormFieldProps {
   className?: string;
-  horizontal?: boolean;
+  cols?: (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12);
   id?: string;
   label?: string | false;
   name: string;
@@ -22,6 +22,12 @@ interface IFormLabelProps {
   id: string;
   label: string | false;
 }
+
+const columnSpanClassName = ({ cols }: { cols: number }): string | null => {
+  if (cols === null) { return null; }
+
+  return `col-span-${cols}`;
+};
 
 const convertNameToId = (name: string): string => (
   name.replace(/\]/g, '').split('[').join('_')
@@ -51,6 +57,7 @@ const renderLabel = ({ id, label }: IFormLabelProps): JSX.Element => {
 
 export const FormField = ({
   className = null,
+  cols = null,
   id = null,
   label = null,
   name,
@@ -61,6 +68,7 @@ export const FormField = ({
     label === false ? label : (label || convertNameToLabel(name));
   const joinedClassName = joinClassNames(
     'form-field',
+    columnSpanClassName({ cols }),
     className,
   );
   const InputComponent: React.ElementType = inputType({ type });

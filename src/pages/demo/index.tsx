@@ -1,7 +1,18 @@
 import * as React from 'react';
 
+import {
+  Form,
+  FormButton,
+  FormField,
+  FormRow,
+} from '@components/form';
 import { Page } from '@components/page';
 import type { Breadcrumbs } from '@components/page';
+import type {
+  Mutation,
+  UseMutation,
+  UseMutationResponse,
+} from '@components/form/types';
 
 const breadcrumbs: Breadcrumbs = [
   {
@@ -16,6 +27,10 @@ const breadcrumbs: Breadcrumbs = [
     url: '/demo',
   },
 ];
+
+const mockMutation: Mutation = () => null;
+const mockMutationResponse: UseMutationResponse = [mockMutation, 'ok'];
+const mockUseMutation: UseMutation = () => mockMutationResponse;
 
 export const DemoPage = (): JSX.Element => (
   <Page breadcrumbs={breadcrumbs}>
@@ -83,5 +98,51 @@ export const DemoPage = (): JSX.Element => (
     <p>This is a <a className="link-danger">danger link</a>.</p>
 
     <p>This is a <a className="link-muted">muted link</a>.</p>
+
+    <hr className="hr-muted m-5" />
+
+    <h2>Forms</h2>
+
+    <br />
+
+    <p>This is a full-width form.</p>
+
+    <Form
+      initialValues={{ generation: '1', version: 'red' }}
+      useMutation={mockUseMutation}
+    >
+      <FormField name="version" />
+
+      <FormField name="generation" />
+
+      <FormButton type="submit">Submit</FormButton>
+    </Form>
+
+    <br />
+
+    <p>This is a grid form.</p>
+
+    <Form
+      initialValues={{}}
+      useMutation={mockUseMutation}
+    >
+      <FormRow>
+        <FormField name="strength" />
+        <FormField name="dexterity" />
+        <FormField name="constitution" />
+        <FormField name="intelligence" />
+        <FormField name="wisdom" />
+        <FormField name="charisma" />
+
+        <FormField name="armor_class" cols={2} />
+        <FormField name="saving_throws" cols={2} />
+        <FormField name="skills" cols={2} />
+      </FormRow>
+
+      <FormRow cols={4} reverse>
+        <FormButton type="submit" cols={2}>Submit</FormButton>
+        <FormButton>Cancel</FormButton>
+      </FormRow>
+    </Form>
   </Page>
 );

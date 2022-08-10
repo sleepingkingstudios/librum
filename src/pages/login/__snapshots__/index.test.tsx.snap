@@ -12,45 +12,57 @@ exports[`<LoginPage> should match the snapshot 1`] = `
       action="#"
     >
       <div
-        class="form-field"
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
       >
-        <label
-          class="form-label"
-          for="username"
+        <div
+          class="form-field"
         >
-          Username
-        </label>
-        <input
-          class="form-input"
-          id="username"
-          name="username"
-          type="text"
-          value=""
-        />
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            type="text"
+            value=""
+          />
+        </div>
       </div>
       <div
-        class="form-field"
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
       >
-        <label
-          class="form-label"
-          for="password"
+        <div
+          class="form-field"
         >
-          Password
-        </label>
-        <input
-          class="form-input"
-          id="password"
-          name="password"
-          type="password"
-          value=""
-        />
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            type="password"
+            value=""
+          />
+        </div>
       </div>
-      <button
-        class="form-button"
-        type="submit"
+      <div
+        class="gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-4"
       >
-        Submit
-      </button>
+        <button
+          class="form-button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
     </form>
   </div>
 </DocumentFragment>

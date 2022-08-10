@@ -16,6 +16,7 @@ import type { Middleware } from '@utils/middleware';
 export { FormButton } from './button';
 export { FormField } from './field';
 export { FormInput } from './input';
+export { FormRow } from './row';
 
 interface IFormProps {
   children: React.ReactNode;

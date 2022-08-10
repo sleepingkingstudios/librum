@@ -166,6 +166,17 @@ describe('<FormField />', () => {
     });
   });
 
+  describe('with cols: value', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <FormField name="email" cols={3} />,
+        { wrapper: formWrapper({ onSubmit: jest.fn() }) },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
   describe('with id: value', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(

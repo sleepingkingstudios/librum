@@ -36,6 +36,17 @@ exports[`<FormInput /> with className: value should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<FormInput /> with cols: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button col-span-3"
+    type="button"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
 exports[`<FormInput /> with type: button should match the snapshot 1`] = `
 <DocumentFragment>
   <button

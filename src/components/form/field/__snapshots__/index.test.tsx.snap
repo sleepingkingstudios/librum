@@ -78,6 +78,32 @@ exports[`<FormField /> with className: value should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<FormField /> with cols: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field col-span-3"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
 exports[`<FormField /> with id: value should match the snapshot 1`] = `
 <DocumentFragment>
   <form

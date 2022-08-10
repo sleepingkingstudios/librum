@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import {
   Form,
   FormButton,
-  FormField as Field,
+  FormField,
+  FormRow,
 } from '@components/form';
 import { Page } from '@components/page';
 import { useCreateSessionMutation } from '@session/api';
@@ -37,11 +38,17 @@ export const LoginPage = (): JSX.Element => {
         middleware={middleware}
         useMutation={useCreateSessionMutation}
       >
-        <Field name="username" />
+        <FormRow cols={2}>
+          <FormField name="username" />
+        </FormRow>
 
-        <Field name="password" type="password" />
+        <FormRow cols={2}>
+          <FormField name="password" type="password" />
+        </FormRow>
 
-        <FormButton type="submit">Submit</FormButton>
+        <FormRow cols={4}>
+          <FormButton type="submit">Submit</FormButton>
+        </FormRow>
       </Form>
     </Page>
   );
