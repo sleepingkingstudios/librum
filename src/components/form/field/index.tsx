@@ -4,7 +4,11 @@ import {
   last,
   map,
 } from 'lodash';
-import { Field } from 'formik';
+import { useField } from 'formik';
+import type {
+  FieldHookConfig,
+  FieldInputProps,
+} from 'formik';
 
 import { joinClassNames } from '@utils/react-utils';
 import { FormInput } from '../input';
@@ -21,6 +25,13 @@ interface IFormFieldProps {
 interface IFormLabelProps {
   id: string;
   label: string | false;
+}
+
+interface IRenderComponentProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: FieldInputProps<any>;
+  id?: string;
+  type: string;
 }
 
 const columnSpanClassName = ({ cols }: { cols: number }): string | null => {
@@ -40,10 +51,13 @@ const convertNameToLabel = (name: string): string => {
   return map(trimmed.split('_'), capitalize).join(' ');
 };
 
-const inputType = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const renderComponent = ({
+  field,
+  id = null,
   type,
-}: { type: string }): React.ElementType => FormInput;
+}: IRenderComponentProps): JSX.Element => (
+  <FormInput field={field} id={id} type={type} />
+);
 
 const renderLabel = ({ id, label }: IFormLabelProps): JSX.Element => {
   if (label === false) {
@@ -71,18 +85,16 @@ export const FormField = ({
     columnSpanClassName({ cols }),
     className,
   );
-  const InputComponent: React.ElementType = inputType({ type });
+  const fieldConfig: FieldHookConfig<string> = {
+    name,
+  };
+  const [field] = useField(fieldConfig);
 
   return (
     <div className={joinedClassName}>
       { renderLabel({ id: configuredId, label: configuredLabel }) }
 
-      <Field
-        id={configuredId}
-        name={name}
-        component={InputComponent}
-        type={type}
-      />
+      { renderComponent({ id: configuredId, field, type }) }
     </div>
   );
 };
