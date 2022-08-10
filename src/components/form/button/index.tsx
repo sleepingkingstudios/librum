@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 import { joinClassNames } from '@utils/react-utils';
+import type { UpToTwelveColumns } from '@components/types';
 
 interface IFormButtonProps {
   className?: string;
   children: React.ReactNode;
   disabled?: boolean;
-  cols?: (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12);
+  cols?: UpToTwelveColumns;
   type?: "button" | "reset" | "submit";
 }
 

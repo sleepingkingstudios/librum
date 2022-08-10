@@ -12,10 +12,11 @@ import type {
 
 import { joinClassNames } from '@utils/react-utils';
 import { FormInput } from '../input';
+import type { UpToTwelveColumns } from '@components/types';
 
 interface IFormFieldProps {
   className?: string;
-  cols?: (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12);
+  cols?: UpToTwelveColumns;
   id?: string;
   label?: string | false;
   name: string;
