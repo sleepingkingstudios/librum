@@ -64,10 +64,9 @@ export const Page = ({
   children,
   navigation,
 }: PageProps): JSX.Element => {
-  const themeName = useTheme().name;
   const joinedClassNames = joinClassNames(
     defaultClassName,
-    `theme-${themeName}`,
+    useTheme().className,
   );
 
   return (

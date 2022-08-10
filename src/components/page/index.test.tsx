@@ -14,11 +14,6 @@ import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
 describe('<Page>', () => {
-  const theme = {
-    background: 'bg-[#ff3366]',
-    text: 'font-mono',
-  };
-
   it('should render the header', () => {
     const defaultTitle = 'Librum';
     const defaultSubtitle = 'Campaign Companion';
@@ -73,7 +68,7 @@ describe('<Page>', () => {
       {
         router: true,
         store: true,
-        theme,
+        theme: true,
       },
     );
 
@@ -123,7 +118,7 @@ describe('<Page>', () => {
         {
           router: true,
           store: true,
-          theme,
+          theme: true,
         },
       );
 
@@ -171,7 +166,7 @@ describe('<Page>', () => {
         {
           router: true,
           store: true,
-          theme,
+          theme: true,
         },
       );
 
@@ -235,7 +230,7 @@ describe('<Page>', () => {
         {
           router: true,
           store,
-          theme,
+          theme: true,
         },
       );
 

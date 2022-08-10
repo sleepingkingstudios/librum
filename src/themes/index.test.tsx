@@ -30,7 +30,10 @@ describe('useTheme()', () => {
   });
 
   describe('with a provider', () => {
-    const theme: Theme = { name: 'custom-theme' };
+    const theme: Theme = {
+      className: 'theme-custom',
+      name: 'custom-theme',
+    };
 
     it('should display the provided theme', () => {
       const expected = JSON.stringify(theme);

@@ -11,37 +11,58 @@ exports[`<LoginPage> should match the snapshot 1`] = `
     <form
       action="#"
     >
-      <label
-        for="username"
+      <div
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
       >
-        Username
-      </label>
-      <input
-        class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
-        id="username"
-        name="username"
-        type="text"
-        value=""
-      />
-      <br />
-      <label
-        for="password"
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
       >
-        Password
-      </label>
-      <input
-        class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
-        id="password"
-        name="password"
-        type="password"
-        value=""
-      />
-      <br />
-      <button
-        type="submit"
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-4"
       >
-        Submit
-      </button>
+        <button
+          class="form-button"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
     </form>
   </div>
 </DocumentFragment>

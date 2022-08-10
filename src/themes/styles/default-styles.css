@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .theme-default-styles {
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-serif;
+    }
+
+    a {
+      @apply hover:underline;
+    }
+  }
+}
+
+@layer components {
+  .theme-default-styles {
+    .form-button {
+      @apply border border-solid mt-3 mb-3 px-3 py-1 rounded-lg w-full;
+    }
+
+    .form-input {
+      @apply border border-solid mt-1 mb-3 p-1 rounded-lg w-full;
+    }
+
+    .form-label {
+      @apply block;
+    }
+
+    .page-breadcrumbs {
+      .page-breadcrumb {
+        @apply p-1 first:pl-0;
+        @apply sm:before:content-['/'] sm:before:pr-2 first:before:content-none;
+      }
+    }
+
+    .page-navigation {
+      .dropdown-item {
+        @apply font-serif;
+      }
+
+      .dropdown-label {
+        @apply font-serif;
+      }
+
+      .navigation-item {
+        @apply font-serif;
+      }
+    }
+
+    .page-subtitle {
+      @apply font-serif;
+    }
+
+    .page-title {
+      @apply font-serif;
+    }
+  }
+}
+
+@layer utilities {
+  .theme-default-styles {
+    .hr-fancy {
+      border-top-style: solid;
+      border-top-width: 2px;
+      opacity: 1;
+
+      &:after {
+        content: ' ';
+
+        /* Display */
+        display: block;
+        border-top-style: solid;
+        border-top-width: 1px;
+        margin: 0 10px;
+
+        /* Positioning */
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+}

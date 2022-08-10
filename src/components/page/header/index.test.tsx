@@ -10,11 +10,6 @@ import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
 describe('<PageHeader>', () => {
-  const theme = {
-    subtitle: 'text-blue-500',
-    title: 'text-xs',
-  };
-
   it('should display the default title', () => {
     const defaultTitle = 'Librum';
 
@@ -38,10 +33,7 @@ describe('<PageHeader>', () => {
   it('should match the snapshot', () => {
     const { asFragment } = render(
       <PageHeader />,
-      {
-        store: true,
-        theme
-      },
+      { store: true },
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -87,7 +79,6 @@ describe('<PageHeader>', () => {
         {
           router: true,
           store: true,
-          theme,
         },
       );
 
@@ -110,10 +101,7 @@ describe('<PageHeader>', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <PageHeader />,
-        {
-          store: true,
-          theme,
-        },
+        { store: true },
       );
 
       expect(asFragment()).toMatchSnapshot();
@@ -161,10 +149,7 @@ describe('<PageHeader>', () => {
 
       const { asFragment } = render(
         <PageHeader />,
-        {
-          store,
-          theme,
-        },
+        { store },
       );
 
       expect(asFragment()).toMatchSnapshot();

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormInput /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    type="button"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with children: elements should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button custom-button"
+    type="button"
+  >
+    <span
+      class="custom-icon"
+    />
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with className: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button custom-button"
+    type="button"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with cols: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button col-span-3"
+    type="button"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with type: button should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    type="button"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with type: reset should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    type="reset"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with type: submit should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    type="submit"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;

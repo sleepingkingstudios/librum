@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormField /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> when the form has data for the input should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value="alan.bradley@example.com"
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with className: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field custom-form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with cols: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field col-span-3"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with id: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="user-email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="user-email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with label: false should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with label: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Your Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with name: qualified value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="user_contact_email_address"
+      >
+        Email Address
+      </label>
+      <input
+        class="form-input"
+        id="user_contact_email_address"
+        name="user[contact][email_address]"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with type: password should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="password"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with type: text should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;

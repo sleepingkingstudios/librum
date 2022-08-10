@@ -6,7 +6,7 @@ exports[`<FormInput /> should match the snapshot 1`] = `
     action="#"
   >
     <input
-      class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
+      class="form-input"
       name="email"
       type="text"
       value=""
@@ -15,30 +15,61 @@ exports[`<FormInput /> should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with type: "password" should match the snapshot 1`] = `
+exports[`<FormInput /> when the form has data for the input should match the snapshot 1`] = `
 <DocumentFragment>
   <form
     action="#"
   >
     <input
-      class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
+      class="form-input"
+      name="email"
+      type="text"
+      value="alan.bradley@example.com"
+    />
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with className: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <input
+      class="form-input input-important"
+      name="email"
+      type="text"
+      value=""
+    />
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with id: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <input
+      class="form-input"
+      id="user-email"
+      name="email"
+      type="text"
+      value=""
+    />
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with type: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <input
+      class="form-input"
       name="email"
       type="password"
-      value=""
-    />
-  </form>
-</DocumentFragment>
-`;
-
-exports[`<FormInput /> with type: "text" should match the snapshot 1`] = `
-<DocumentFragment>
-  <form
-    action="#"
-  >
-    <input
-      class="bg-zinc-200 dark:bg-zinc-800 border border-solid border-zinc-900 dark:border-zinc-100 m-2 p-1 rounded-lg"
-      name="email"
-      type="text"
       value=""
     />
   </form>
