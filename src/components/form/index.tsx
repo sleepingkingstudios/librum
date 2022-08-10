@@ -17,6 +17,7 @@ export { FormButton } from './button';
 export { FormField } from './field';
 export { FormInput } from './input';
 export { FormRow } from './row';
+export { FormSubmitButton } from './submit-button';
 
 interface IFormProps {
   children: React.ReactNode;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FormInput /> should match the snapshot 1`] = `
+exports[`<FormButton /> should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button"
@@ -11,7 +11,7 @@ exports[`<FormInput /> should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with children: elements should match the snapshot 1`] = `
+exports[`<FormButton /> with children: elements should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button custom-button"
@@ -25,7 +25,7 @@ exports[`<FormInput /> with children: elements should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with className: value should match the snapshot 1`] = `
+exports[`<FormButton /> with className: value should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button custom-button"
@@ -36,7 +36,7 @@ exports[`<FormInput /> with className: value should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with cols: value should match the snapshot 1`] = `
+exports[`<FormButton /> with cols: value should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button col-span-3"
@@ -47,7 +47,19 @@ exports[`<FormInput /> with cols: value should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with type: button should match the snapshot 1`] = `
+exports[`<FormButton /> with disabled: true should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    disabled=""
+    type="button"
+  >
+    Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormButton /> with type: button should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button"
@@ -58,7 +70,7 @@ exports[`<FormInput /> with type: button should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with type: reset should match the snapshot 1`] = `
+exports[`<FormButton /> with type: reset should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button"
@@ -69,7 +81,7 @@ exports[`<FormInput /> with type: reset should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormInput /> with type: submit should match the snapshot 1`] = `
+exports[`<FormButton /> with type: submit should match the snapshot 1`] = `
 <DocumentFragment>
   <button
     class="form-button"

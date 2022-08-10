@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormInput /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    type="submit"
+  >
+    Hit It
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> when the form is submitting should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    disabled=""
+    type="submit"
+  >
+    Hit It
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with className: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button custom-button"
+    disabled=""
+    type="submit"
+  >
+    Hit It
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with cols: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button col-span-3"
+    disabled=""
+    type="submit"
+  >
+    Hit It
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with disabled: true should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    disabled=""
+    type="submit"
+  >
+    Hit It
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<FormInput /> with disabled: true when the form is submitting should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="form-button"
+    disabled=""
+    type="submit"
+  >
+    Hit It
+  </button>
+</DocumentFragment>
+`;

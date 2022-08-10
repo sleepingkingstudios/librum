@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import {
   Form,
-  FormButton,
   FormField,
   FormRow,
+  FormSubmitButton,
 } from '@components/form';
 import { Page } from '@components/page';
 import { useCreateSessionMutation } from '@session/api';
@@ -47,7 +47,7 @@ export const LoginPage = (): JSX.Element => {
         </FormRow>
 
         <FormRow cols={4}>
-          <FormButton type="submit">Submit</FormButton>
+          <FormSubmitButton>Log In</FormSubmitButton>
         </FormRow>
       </Form>
     </Page>

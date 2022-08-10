@@ -60,7 +60,7 @@ exports[`<LoginPage> should match the snapshot 1`] = `
           class="form-button"
           type="submit"
         >
-          Submit
+          Log In
         </button>
       </div>
     </form>

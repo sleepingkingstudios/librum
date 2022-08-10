@@ -62,7 +62,7 @@ describe('<LoginPage>', () => {
       <LoginPage />,
       { store: true }
     );
-    const submit = getByRole('button', { name: 'Submit' });
+    const submit = getByRole('button', { name: 'Log In' });
 
     expect(submit).toBeVisible();
   });
@@ -96,7 +96,7 @@ describe('<LoginPage>', () => {
         password: '',
       };
 
-      userEvent.click(getByRole('button', { name: 'Submit'}));
+      userEvent.click(getByRole('button', { name: 'Log In'}));
 
       await waitFor(() => {
         expect(mutation).toHaveBeenCalledWith(expected);
@@ -120,7 +120,7 @@ describe('<LoginPage>', () => {
 
         userEvent.type(getByLabelText('Password'), 'tronlives');
 
-        userEvent.click(getByRole('button', { name: 'Submit'}));
+        userEvent.click(getByRole('button', { name: 'Log In'}));
 
         await waitFor(() => {
           expect(mutation).toHaveBeenCalledWith(expected);
@@ -138,7 +138,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();
@@ -159,7 +159,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();
@@ -199,7 +199,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();
@@ -248,7 +248,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();

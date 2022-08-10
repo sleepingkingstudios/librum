@@ -7,8 +7,8 @@ import { Application } from './application';
 
 describe('<Application>', () => {
   it('should render the login page', () => {
-    const { getByText } = render(<Application />);
+    const { getByRole } = render(<Application />);
 
-    expect(getByText(/Log In/)).toBeVisible();
+    expect(getByRole('button', { name: 'Log In' })).toBeVisible();
   });
 });
