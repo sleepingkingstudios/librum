@@ -12,6 +12,8 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "paths": {
+      "@alerts": ["alerts"],
+      "@alerts/*": ["alerts/*"],
       "@components/*": ["components/*"],
       "@session": ["session"],
       "@session/*": ["session/*"],

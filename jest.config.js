@@ -83,6 +83,8 @@ module.exports = {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '\\.css': '<rootDir>/src/jest/mocks/style-mock.ts',
+    '^@alerts$': '<rootDir>/src/alerts',
+    '^@alerts/(.*)$': '<rootDir>/src/alerts/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@session$': '<rootDir>/src/session',
     '^@session/(.*)$': '<rootDir>/src/session/$1',

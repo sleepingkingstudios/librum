@@ -3,12 +3,10 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import {
-  ThemeContext,
-  defaultTheme,
-} from './context';
 import { useTheme } from './index';
-import type { Theme } from './types';
+import { defaultTheme } from './context';
+import { chiaroscuro } from './chiaroscuro';
+import { ThemeProvider } from './provider';
 
 const ThemeDisplay = (): JSX.Element => {
   const theme = useTheme();
@@ -30,18 +28,13 @@ describe('useTheme()', () => {
   });
 
   describe('with a provider', () => {
-    const theme: Theme = {
-      className: 'theme-custom',
-      name: 'custom-theme',
-    };
-
     it('should display the provided theme', () => {
-      const expected = JSON.stringify(theme);
+      const expected = JSON.stringify(chiaroscuro);
 
       render(
-        <ThemeContext.Provider value={theme}>
+        <ThemeProvider>
           <ThemeDisplay />
-        </ThemeContext.Provider>
+        </ThemeProvider>
       );
 
       expect(screen.getByText(/Theme:/)).toHaveTextContent(expected);
