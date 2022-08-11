@@ -19,17 +19,7 @@ exports[`<PageHeader> should match the snapshot 1`] = `
       Campaign Companion
     </small>
     <hr
-      class="hr-fancy my-1 block sm:hidden"
-    />
-    <nav
-      class="page-navigation relative z-10"
-    >
-      <ul
-        class="flex flex-col sm:flex-row"
-      />
-    </nav>
-    <hr
-      class="hr-fancy m-1"
+      class="hr-fancy my-1"
     />
   </header>
 </DocumentFragment>
@@ -54,17 +44,7 @@ exports[`<PageHeader> when the session is authenticated should match the snapsho
       Campaign Companion
     </small>
     <hr
-      class="hr-fancy my-1 block sm:hidden"
-    />
-    <nav
-      class="page-navigation relative z-10"
-    >
-      <ul
-        class="flex flex-col sm:flex-row"
-      />
-    </nav>
-    <hr
-      class="hr-fancy m-1"
+      class="hr-fancy my-1"
     />
     <div
       class="text-left mt-2"
@@ -207,7 +187,7 @@ exports[`<PageHeader> with navigation: value should match the snapshot 1`] = `
       </ul>
     </nav>
     <hr
-      class="hr-fancy m-1"
+      class="hr-fancy my-1"
     />
   </header>
 </DocumentFragment>
@@ -232,17 +212,7 @@ exports[`<PageHeader> with subtitle: null should match the snapshot 1`] = `
       Campaign Companion
     </small>
     <hr
-      class="hr-fancy my-1 block sm:hidden"
-    />
-    <nav
-      class="page-navigation relative z-10"
-    >
-      <ul
-        class="flex flex-col sm:flex-row"
-      />
-    </nav>
-    <hr
-      class="hr-fancy m-1"
+      class="hr-fancy my-1"
     />
   </header>
 </DocumentFragment>

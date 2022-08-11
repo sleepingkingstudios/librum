@@ -190,7 +190,7 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
       class="relative"
     >
       <div
-        class=""
+        class="gap-3 sm:grid sm:grid-cols-3 lg:grid-cols-6"
       >
         <div
           class="form-field"

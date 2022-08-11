@@ -4,9 +4,13 @@ import { PageNavigation } from '../navigation';
 import type { NavigationProps } from '../navigation';
 import { PageUser } from '../user';
 
-interface PageHeaderProps {
+interface IPageHeaderProps {
   title?: string;
   subtitle?: string;
+  navigation?: NavigationProps;
+}
+
+interface IRenderNavigation {
   navigation?: NavigationProps;
 }
 
@@ -24,22 +28,34 @@ const PageHeaderSubtitle = ({ subtitle }: { subtitle?: string; }): JSX.Element |
   )
 }
 
+const renderNavigation = ({ navigation }: IRenderNavigation): JSX.Element => {
+  if (navigation === null || navigation === undefined) { return null; }
+
+  if (navigation.length === 0) { return null; }
+
+  return (
+    <>
+      <hr className="hr-fancy my-1 block sm:hidden" />
+
+      <PageNavigation navigation={navigation} />
+    </>
+  );
+};
+
 export const PageHeader = ({
   title = 'Librum',
   subtitle = 'Campaign Companion',
   navigation
-}: PageHeaderProps): JSX.Element => {
+}: IPageHeaderProps): JSX.Element => {
   return (
     <header className={defaultClassName}>
       <span className="page-title">{ title }</span>
 
       <PageHeaderSubtitle subtitle={subtitle} />
 
-      <hr className="hr-fancy my-1 block sm:hidden" />
+      { renderNavigation({ navigation }) }
 
-      <PageNavigation navigation={navigation} />
-
-      <hr className="hr-fancy m-1" />
+      <hr className="hr-fancy my-1" />
 
       <PageUser />
     </header>

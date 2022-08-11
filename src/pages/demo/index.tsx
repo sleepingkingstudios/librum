@@ -131,7 +131,7 @@ export const DemoPage = (): JSX.Element => (
       initialValues={{}}
       useMutation={mockUseMutation}
     >
-      <FormRow>
+      <FormRow cols={6}>
         <FormField name="strength" />
         <FormField name="dexterity" />
         <FormField name="constitution" />
