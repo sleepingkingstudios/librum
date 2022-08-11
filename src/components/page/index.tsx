@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { PageAlerts } from './alerts';
 import type { Breadcrumbs } from './breadcrumbs';
 import { PageFooter } from './footer';
 import { PageHeader } from './header';
@@ -78,6 +79,8 @@ export const Page = ({
       />
 
       <main className="grow">
+        <PageAlerts />
+
         { children }
       </main>
 
