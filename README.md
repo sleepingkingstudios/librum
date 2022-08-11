@@ -20,6 +20,8 @@ You must specify which groups of data files to load by passing options to `thor`
 
 ### Client
 
+- Icons:
+  - [FontAwesome Icons](https://fontawesome.com/search?m=free)
 - Tailwind CSS:
   - [Official Docs](https://tailwindcss.com/docs/installation)
 - TypeScript

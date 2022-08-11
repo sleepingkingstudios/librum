@@ -3,7 +3,7 @@
 exports[`<FormRow /> should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="gap-3 sm:grid sm:grid-cols-3 lg:grid-cols-6"
+    class=""
   >
     <div
       class="row-item"
@@ -15,7 +15,7 @@ exports[`<FormRow /> should match the snapshot 1`] = `
 exports[`<FormRow /> with className: value should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="gap-3 sm:grid sm:grid-cols-3 lg:grid-cols-6 custom-row"
+    class="custom-row"
   >
     <div
       class="row-item"
@@ -51,7 +51,7 @@ exports[`<FormRow /> with colsSm: value should match the snapshot 1`] = `
 exports[`<FormRow /> with reverse: true should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="gap-3 sm:grid sm:grid-cols-3 lg:grid-cols-6"
+    class=""
     style="direction: rtl;"
   >
     <div

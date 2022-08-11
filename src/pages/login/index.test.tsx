@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { LoginPage } from './index';
 import type {
   Mutation,
+  MutationStatus,
   UseMutation,
 } from '@components/form/types';
 import { Page } from '@components/page';
@@ -28,6 +29,7 @@ const useMutation = useCreateSessionMutation as jest.MockedFunction<UseMutation>
 const mutation: jest.MockedFunction<Mutation> = jest.fn(
   () => ({ error: { status: 500, error: 'Something went wrong' } })
 );
+const mutationStatus: MutationStatus = { isLoading: false };
 
 mockPage.mockImplementation(
   ({ children }) => {
@@ -50,7 +52,7 @@ mockPage.mockImplementation(
   }
 );
 
-useMutation.mockImplementation(() => [mutation, {}]);
+useMutation.mockImplementation(() => [mutation, mutationStatus]);
 
 describe('<LoginPage>', () => {
   beforeEach(() => { mutation.mockClear(); });

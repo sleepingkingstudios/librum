@@ -138,6 +138,7 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
     </p>
     <form
       action="#"
+      class="relative"
     >
       <div
         class="form-field"
@@ -186,9 +187,10 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
     </p>
     <form
       action="#"
+      class="relative"
     >
       <div
-        class="gap-3 sm:grid sm:grid-cols-3 lg:grid-cols-6"
+        class=""
       >
         <div
           class="form-field"

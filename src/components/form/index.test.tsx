@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Field } from 'formik';
+import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 
 import '@testing-library/jest-dom';
 import { waitFor } from '@testing-library/react';
@@ -8,6 +9,7 @@ import userEvent from '@testing-library/user-event';
 import { Form } from './index';
 import type {
   Mutation,
+  MutationStatus,
   QueryParams,
   UseMutation,
 } from './types';
@@ -17,7 +19,8 @@ import type { Middleware } from '@utils/middleware';
 describe('<Form />', () => {
   it('should submit the form', async () => {
     const mutation: Mutation = jest.fn();
-    const useMutation: UseMutation = () => [mutation, {}];
+    const mutationStatus: MutationStatus = { isLoading: false };
+    const useMutation: UseMutation = () => [mutation, mutationStatus];
 
     const { getByRole } = render(
       <Form initialValues={{}} useMutation={useMutation}>
@@ -34,7 +37,8 @@ describe('<Form />', () => {
 
   it('should match the snapshot', () => {
     const mutation: Mutation = jest.fn();
-    const useMutation: UseMutation = () => [mutation, {}];
+    const mutationStatus: MutationStatus = { isLoading: false };
+    const useMutation: UseMutation = () => [mutation, mutationStatus];
 
     const { asFragment } = render(
       <Form initialValues={{}} useMutation={useMutation}>
@@ -45,6 +49,108 @@ describe('<Form />', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  describe('when the form is loading', () => {
+    it('should match the snapshot', () => {
+      const mutation: Mutation = jest.fn();
+      const mutationStatus: MutationStatus = { isLoading: true };
+      const useMutation: UseMutation = () => [mutation, mutationStatus];
+
+      const { asFragment } = render(
+        <Form initialValues={{}} useMutation={useMutation}>
+          <button type="submit">Submit</button>
+        </Form>
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with className: value', () => {
+    it('should match the snapshot', () => {
+      const mutation: Mutation = jest.fn();
+      const mutationStatus: MutationStatus = { isLoading: false };
+      const useMutation: UseMutation = () => [mutation, mutationStatus];
+
+      const { asFragment } = render(
+        <Form
+          className="custom-form"
+          initialValues={{}}
+          useMutation={useMutation}
+        >
+          <button type="submit">Submit</button>
+        </Form>
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with loadingAnimation: value', () => {
+    describe('when the form is loading', () => {
+      it('should match the snapshot', () => {
+        const mutation: Mutation = jest.fn();
+        const mutationStatus: MutationStatus = { isLoading: true };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
+
+        const { asFragment } = render(
+          <Form
+            loadingAnimation="pulse"
+            initialValues={{}}
+            useMutation={useMutation}
+          >
+            <button type="submit">Submit</button>
+          </Form>
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('with loadingIcon: value', () => {
+    describe('when the form is loading', () => {
+      it('should match the snapshot', () => {
+        const mutation: Mutation = jest.fn();
+        const mutationStatus: MutationStatus = { isLoading: true };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
+
+        const { asFragment } = render(
+          <Form
+            loadingIcon={faRadiation}
+            initialValues={{}}
+            useMutation={useMutation}
+          >
+            <button type="submit">Submit</button>
+          </Form>
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('with loadingMessage: value', () => {
+    describe('when the form is loading', () => {
+      it('should match the snapshot', () => {
+        const mutation: Mutation = jest.fn();
+        const mutationStatus: MutationStatus = { isLoading: true };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
+
+        const { asFragment } = render(
+          <Form
+            loadingMessage="Activating Reactor..."
+            initialValues={{}}
+            useMutation={useMutation}
+          >
+            <button type="submit">Submit</button>
+          </Form>
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+  });
+
   describe('with middleware', () => {
     const middleware: Middleware<
       Record<string, unknown>,
@@ -53,7 +159,8 @@ describe('<Form />', () => {
 
     it('should submit the form', async () => {
       const mutation: Mutation = jest.fn();
-      const useMutation: UseMutation = () => [mutation, {}];
+      const mutationStatus: MutationStatus = { isLoading: false };
+      const useMutation: UseMutation = () => [mutation, mutationStatus];
 
       const { getByRole } = render(
         <Form initialValues={{}} middleware={middleware} useMutation={useMutation}>
@@ -74,7 +181,8 @@ describe('<Form />', () => {
 
     it('should submit the form', async () => {
       const mutation: Mutation = jest.fn();
-      const useMutation: UseMutation = () => [mutation, {}];
+      const mutationStatus: MutationStatus = { isLoading: false };
+      const useMutation: UseMutation = () => [mutation, mutationStatus];
 
       const { getByRole } = render(
         <Form params={params} initialValues={{}} useMutation={useMutation}>
@@ -113,7 +221,8 @@ describe('<Form />', () => {
 
     it('should submit the form', async () => {
       const mutation: Mutation = jest.fn();
-      const useMutation: UseMutation = () => [mutation, {}];
+      const mutationStatus: MutationStatus = { isLoading: false };
+      const useMutation: UseMutation = () => [mutation, mutationStatus];
 
       const { getByRole } = render(
         <Form initialValues={defaultValues} useMutation={useMutation}>
@@ -138,7 +247,8 @@ describe('<Form />', () => {
 
       it('should submit the form', async () => {
         const mutation: Mutation = jest.fn();
-        const useMutation: UseMutation = () => [mutation, {}];
+        const mutationStatus: MutationStatus = { isLoading: false };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
 
         const { getByRole } = render(
           <Form initialValues={defaultValues} middleware={middleware} useMutation={useMutation}>
@@ -157,7 +267,8 @@ describe('<Form />', () => {
     describe('when the user inputs values', () => {
       it('should submit the form', async () => {
         const mutation: Mutation = jest.fn();
-        const useMutation: UseMutation = () => [mutation, {}];
+        const mutationStatus: MutationStatus = { isLoading: false };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
         const expectedValues = {
           launchSite: 'KSC',
           mission: {
@@ -189,7 +300,8 @@ describe('<Form />', () => {
 
         it('should submit the form', async () => {
           const mutation: Mutation = jest.fn();
-          const useMutation: UseMutation = () => [mutation, {}];
+          const mutationStatus: MutationStatus = { isLoading: false };
+          const useMutation: UseMutation = () => [mutation, mutationStatus];
           const expectedValues = {
             launchSite: 'KSC',
             mission: {
@@ -229,7 +341,8 @@ describe('<Form />', () => {
 
       it('should submit the form', async () => {
         const mutation: Mutation = jest.fn();
-        const useMutation: UseMutation = () => [mutation, {}];
+        const mutationStatus: MutationStatus = { isLoading: false };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
 
         const { getByRole } = render(
           <Form initialValues={initialValues} useMutation={useMutation}>
@@ -251,7 +364,8 @@ describe('<Form />', () => {
 
         it('should submit the form', async () => {
           const mutation: Mutation = jest.fn();
-          const useMutation: UseMutation = () => [mutation, {}];
+          const mutationStatus: MutationStatus = { isLoading: false };
+          const useMutation: UseMutation = () => [mutation, mutationStatus];
 
           const { getByRole } = render(
             <Form params={params} initialValues={initialValues} useMutation={useMutation}>
@@ -275,7 +389,8 @@ describe('<Form />', () => {
 
       it('should submit the form', async () => {
         const mutation: Mutation = jest.fn();
-        const useMutation: UseMutation = () => [mutation, {}];
+        const mutationStatus: MutationStatus = { isLoading: false };
+        const useMutation: UseMutation = () => [mutation, mutationStatus];
 
         const { getByRole } = render(
           <Form initialValues={defaultValues} params={params} useMutation={useMutation}>

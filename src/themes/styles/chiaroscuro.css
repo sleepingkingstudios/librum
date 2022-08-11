@@ -49,6 +49,11 @@
       @apply dark:text-zinc-100;
     }
 
+    .form-loading-overlay {
+      @apply bg-zinc-100/75;
+      @apply dark:bg-zinc-900/75;
+    }
+
     .form-input {
       @apply bg-zinc-100 dark:bg-zinc-900 border-zinc-500;
     }

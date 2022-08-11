@@ -5,6 +5,10 @@ import type {
 
 export type Mutation = (param?: unknown) => unknown;
 
+export type MutationStatus = {
+  isLoading: boolean;
+};
+
 export type OnSubmit = (
   values: FormikValues,
   formikHelpers?: FormikHelpers<FormikValues>
@@ -16,7 +20,7 @@ export type SubmitHandler = (values: FormikValues) => void;
 
 export type UseMutationResponse = readonly [
   Mutation,
-  unknown,
+  MutationStatus,
 ];
 
 export type UseMutation = () => UseMutationResponse;
