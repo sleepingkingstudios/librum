@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { LoginPage } from './index';
 import type {
   Mutation,
+  MutationStatus,
   UseMutation,
 } from '@components/form/types';
 import { Page } from '@components/page';
@@ -28,6 +29,7 @@ const useMutation = useCreateSessionMutation as jest.MockedFunction<UseMutation>
 const mutation: jest.MockedFunction<Mutation> = jest.fn(
   () => ({ error: { status: 500, error: 'Something went wrong' } })
 );
+const mutationStatus: MutationStatus = { isLoading: false };
 
 mockPage.mockImplementation(
   ({ children }) => {
@@ -50,7 +52,7 @@ mockPage.mockImplementation(
   }
 );
 
-useMutation.mockImplementation(() => [mutation, {}]);
+useMutation.mockImplementation(() => [mutation, mutationStatus]);
 
 describe('<LoginPage>', () => {
   beforeEach(() => { mutation.mockClear(); });
@@ -62,7 +64,7 @@ describe('<LoginPage>', () => {
       <LoginPage />,
       { store: true }
     );
-    const submit = getByRole('button', { name: 'Submit' });
+    const submit = getByRole('button', { name: 'Log In' });
 
     expect(submit).toBeVisible();
   });
@@ -96,7 +98,7 @@ describe('<LoginPage>', () => {
         password: '',
       };
 
-      userEvent.click(getByRole('button', { name: 'Submit'}));
+      userEvent.click(getByRole('button', { name: 'Log In'}));
 
       await waitFor(() => {
         expect(mutation).toHaveBeenCalledWith(expected);
@@ -120,7 +122,7 @@ describe('<LoginPage>', () => {
 
         userEvent.type(getByLabelText('Password'), 'tronlives');
 
-        userEvent.click(getByRole('button', { name: 'Submit'}));
+        userEvent.click(getByRole('button', { name: 'Log In'}));
 
         await waitFor(() => {
           expect(mutation).toHaveBeenCalledWith(expected);
@@ -138,7 +140,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();
@@ -159,7 +161,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();
@@ -199,7 +201,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();
@@ -248,7 +250,7 @@ describe('<LoginPage>', () => {
 
           userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Submit'}));
+          userEvent.click(getByRole('button', { name: 'Log In'}));
 
           await waitFor(() => {
             expect(mutation).toHaveBeenCalled();

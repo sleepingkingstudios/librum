@@ -5,7 +5,7 @@ import { render } from '@test-helpers/rendering';
 
 import { FormButton } from './index';
 
-describe('<FormInput />', () => {
+describe('<FormButton />', () => {
   it('should match the snapshot', () => {
     const { asFragment } = render(
       <FormButton>Button</FormButton>,
@@ -41,6 +41,16 @@ describe('<FormInput />', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <FormButton cols={3}>Button</FormButton>,
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with disabled: true', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <FormButton disabled>Button</FormButton>,
       );
 
       expect(asFragment()).toMatchSnapshot();

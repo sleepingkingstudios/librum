@@ -10,9 +10,10 @@ exports[`<LoginPage> should match the snapshot 1`] = `
     </h1>
     <form
       action="#"
+      class="w-full lg:w-1/2 relative"
     >
       <div
-        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
+        class=""
       >
         <div
           class="form-field"
@@ -31,10 +32,6 @@ exports[`<LoginPage> should match the snapshot 1`] = `
             value=""
           />
         </div>
-      </div>
-      <div
-        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
-      >
         <div
           class="form-field"
         >
@@ -54,13 +51,13 @@ exports[`<LoginPage> should match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-4"
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
       >
         <button
           class="form-button"
           type="submit"
         >
-          Submit
+          Log In
         </button>
       </div>
     </form>

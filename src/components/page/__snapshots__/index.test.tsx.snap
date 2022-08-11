@@ -118,7 +118,7 @@ exports[`<Page> should match the snapshot 1`] = `
         </ul>
       </nav>
       <hr
-        class="hr-fancy m-1"
+        class="hr-fancy my-1"
       />
     </header>
     <main
@@ -260,7 +260,7 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
         </ul>
       </nav>
       <hr
-        class="hr-fancy m-1"
+        class="hr-fancy my-1"
       />
       <div
         class="text-left mt-2"
@@ -434,7 +434,7 @@ exports[`<Page> with breadcrumbs: value should match the snapshot 1`] = `
         </ul>
       </nav>
       <hr
-        class="hr-fancy m-1"
+        class="hr-fancy my-1"
       />
     </header>
     <main
@@ -598,7 +598,7 @@ exports[`<Page> with navigation: value should match the snapshot 1`] = `
         </ul>
       </nav>
       <hr
-        class="hr-fancy m-1"
+        class="hr-fancy my-1"
       />
     </header>
     <main

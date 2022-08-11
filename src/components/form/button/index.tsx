@@ -1,11 +1,13 @@
 import * as React from 'react';
 
 import { joinClassNames } from '@utils/react-utils';
+import type { UpToTwelveColumns } from '@components/types';
 
 interface IFormButtonProps {
   className?: string;
   children: React.ReactNode;
-  cols?: (2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12);
+  disabled?: boolean;
+  cols?: UpToTwelveColumns;
   type?: "button" | "reset" | "submit";
 }
 
@@ -18,6 +20,7 @@ const columnSpanClassName = ({ cols }: { cols: number }): string | null => {
 export const FormButton = ({
   className,
   children,
+  disabled = false,
   cols = null,
   type = 'button',
 }: IFormButtonProps): JSX.Element => {
@@ -28,6 +31,12 @@ export const FormButton = ({
   );
 
   return (
-    <button className={joinedClassName} type={type}>{ children }</button>
+    <button
+      disabled={disabled}
+      className={joinedClassName}
+      type={type}
+    >
+      { children }
+    </button>
   );
 };

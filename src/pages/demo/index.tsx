@@ -10,6 +10,7 @@ import { Page } from '@components/page';
 import type { Breadcrumbs } from '@components/page';
 import type {
   Mutation,
+  MutationStatus,
   UseMutation,
   UseMutationResponse,
 } from '@components/form/types';
@@ -29,7 +30,11 @@ const breadcrumbs: Breadcrumbs = [
 ];
 
 const mockMutation: Mutation = () => null;
-const mockMutationResponse: UseMutationResponse = [mockMutation, 'ok'];
+const mockMutationStatus: MutationStatus = { isLoading: false };
+const mockMutationResponse: UseMutationResponse = [
+  mockMutation,
+  mockMutationStatus,
+];
 const mockUseMutation: UseMutation = () => mockMutationResponse;
 
 export const DemoPage = (): JSX.Element => (
@@ -126,7 +131,7 @@ export const DemoPage = (): JSX.Element => (
       initialValues={{}}
       useMutation={mockUseMutation}
     >
-      <FormRow>
+      <FormRow cols={6}>
         <FormField name="strength" />
         <FormField name="dexterity" />
         <FormField name="constitution" />

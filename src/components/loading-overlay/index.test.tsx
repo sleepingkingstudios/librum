@@ -1,55 +1,54 @@
 import * as React from 'react';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
 
-import { FormRow } from './index';
+import { LoadingOverlay } from './index';
 
-const Item = (): JSX.Element => (<div className="row-item" />);
-
-describe('<FormRow />', () => {
+describe('<LoadingOverlay />', () => {
   it('should match the snapshot', () => {
     const { asFragment } = render(
-      <FormRow><Item /></FormRow>,
+      <LoadingOverlay />
     );
 
     expect(asFragment()).toMatchSnapshot();
   });
 
-  describe('with className: value', () => {
+  describe('with animate: value', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
-        <FormRow className="custom-row"><Item /></FormRow>,
+        <LoadingOverlay animate="bounce" />
       );
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
-  describe('with cols: value', () => {
+  describe('with icon: value', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
-        <FormRow cols={12}><Item /></FormRow>,
+        <LoadingOverlay icon={faLightbulb} />
       );
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
-  describe('with colsSm: value', () => {
+  describe('with icon: value and animate: value', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
-        <FormRow cols={6} colsSm={4}><Item /></FormRow>,
+        <LoadingOverlay animate="ping" icon={faLightbulb} />
       );
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
-  describe('with reverse: true', () => {
+  describe('with message: value', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
-        <FormRow reverse><Item /></FormRow>,
+        <LoadingOverlay message="Greeting programs..." />
       );
 
       expect(asFragment()).toMatchSnapshot();

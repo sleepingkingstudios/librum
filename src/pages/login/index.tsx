@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import {
   Form,
-  FormButton,
   FormField,
   FormRow,
+  FormSubmitButton,
 } from '@components/form';
 import { Page } from '@components/page';
 import { useCreateSessionMutation } from '@session/api';
@@ -34,20 +35,22 @@ export const LoginPage = (): JSX.Element => {
       <h1>Log In</h1>
 
       <Form
+        className="w-full lg:w-1/2"
         initialValues={{ username: '', password: '' }}
+        loadingAnimation="bounce"
+        loadingIcon={faUser}
+        loadingMessage="Logging In..."
         middleware={middleware}
         useMutation={useCreateSessionMutation}
       >
-        <FormRow cols={2}>
+        <FormRow>
           <FormField name="username" />
-        </FormRow>
 
-        <FormRow cols={2}>
           <FormField name="password" type="password" />
         </FormRow>
 
-        <FormRow cols={4}>
-          <FormButton type="submit">Submit</FormButton>
+        <FormRow cols={2}>
+          <FormSubmitButton>Log In</FormSubmitButton>
         </FormRow>
       </Form>
     </Page>

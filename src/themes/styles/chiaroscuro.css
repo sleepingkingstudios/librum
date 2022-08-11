@@ -39,9 +39,19 @@
       @apply dark:active:bg-zinc-800 dark:hover:border-zinc-100 dark:hover:text-zinc-100;
     }
 
+    .form-button:disabled {
+      @apply border-zinc-500 text-zinc-500;
+      @apply active:bg-zinc-100 dark:active:bg-zinc-900;
+    }
+
     .form-label {
       @apply text-zinc-900;
       @apply dark:text-zinc-100;
+    }
+
+    .form-loading-overlay {
+      @apply bg-zinc-100/75;
+      @apply dark:bg-zinc-900/75;
     }
 
     .form-input {
