@@ -20,6 +20,7 @@ const fixtures: Alert[] = [
     uuid: generateUuid(),
   },
   {
+    context: 'engineering:thermal',
     dismissable: false,
     message: 'Reactor overheat imminent',
     persistent: false,
@@ -27,6 +28,7 @@ const fixtures: Alert[] = [
     uuid: generateUuid(),
   },
   {
+    context: 'science:observations',
     dismissable: false,
     message: 'Increase in three-eyed fish observed',
     persistent: true,
@@ -56,6 +58,37 @@ describe('Alerts utils', () => {
         } = alert;
 
         expect(values).toEqual(alerts);
+        expect(dismissable).toBe(true);
+        expect(icon).toBeUndefined();
+        expect(message).toEqual(props.message);
+        expect(persistent).toBe(false);
+        expect(type).toBe('info');
+        expect(typeof uuid).toBe('string');
+      });
+    });
+
+    describe('with context: value', () => {
+      const alerts: Alert[] = [];
+      const props: DisplayAlertProps = {
+        context: 'space:communications',
+        message: 'Attempting to connect to Moon base...',
+      };
+
+      it('should add the alert to alerts', () => {
+        const values: Alert[] = addAlert(alerts, props);
+        const alert: Alert = values.pop();
+        const {
+          context,
+          dismissable,
+          icon,
+          message,
+          persistent,
+          type,
+          uuid,
+        } = alert;
+
+        expect(values).toEqual(alerts);
+        expect(context).toEqual(props.context);
         expect(dismissable).toBe(true);
         expect(icon).toBeUndefined();
         expect(message).toEqual(props.message);
@@ -182,30 +215,66 @@ describe('Alerts utils', () => {
     });
 
     describe('when there are many alerts', () => {
-      const alerts: Alert[] = fixtures;
-      const props: DisplayAlertProps = {
-        message: 'Attempting to connect to Moon base...',
-      };
+      describe('with default props', () => {
+        const alerts: Alert[] = fixtures;
+        const props: DisplayAlertProps = {
+          message: 'Attempting to connect to Moon base...',
+        };
 
-      it('should add the alert to alerts', () => {
-        const values: Alert[] = addAlert(alerts, props);
-        const alert: Alert = values.pop();
-        const {
-          dismissable,
-          icon,
-          message,
-          persistent,
-          type,
-          uuid,
-        } = alert;
+        it('should add the alert to alerts', () => {
+          const values: Alert[] = addAlert(alerts, props);
 
-        expect(values).toEqual(alerts);
-        expect(dismissable).toBe(true);
-        expect(icon).toBeUndefined();
-        expect(message).toEqual(props.message);
-        expect(persistent).toBe(false);
-        expect(type).toBe('info');
-        expect(typeof uuid).toBe('string');
+          const alert: Alert = values.pop();
+          const {
+            dismissable,
+            icon,
+            message,
+            persistent,
+            type,
+            uuid,
+          } = alert;
+
+          expect(values).toEqual(alerts);
+          expect(dismissable).toBe(true);
+          expect(icon).toBeUndefined();
+          expect(message).toEqual(props.message);
+          expect(persistent).toBe(false);
+          expect(type).toBe('info');
+          expect(typeof uuid).toBe('string');
+        });
+      });
+
+      describe('with context: value', () => {
+        const alerts: Alert[] = fixtures;
+        const props: DisplayAlertProps = {
+          context: 'engineering:thermal',
+          message: 'Sub-zero temperatures detected outside',
+        };
+        const expected = [alerts[0], alerts[2]];
+
+        describe('when there is an existing alert with that context', () => {
+          it('should remove the previous alert and add the alert to alerts', () => {
+            const values: Alert[] = addAlert(alerts, props);
+
+            const alert: Alert = values.pop();
+            const {
+              dismissable,
+              icon,
+              message,
+              persistent,
+              type,
+              uuid,
+            } = alert;
+
+            expect(values).toEqual(expected);
+            expect(dismissable).toBe(true);
+            expect(icon).toBeUndefined();
+            expect(message).toEqual(props.message);
+            expect(persistent).toBe(false);
+            expect(type).toBe('info');
+            expect(typeof uuid).toBe('string');
+          });
+        });
       });
     });
   });
@@ -213,15 +282,43 @@ describe('Alerts utils', () => {
   describe('removeAlert()', () => {
     describe('when there are no alerts', () => {
       const alerts: Alert[] = [];
-      const uuid = generateUuid();
 
-      it('should return the alerts', () => {
-        expect(removeAlert(alerts, uuid)).toEqual(alerts);
+      describe('with a context', () => {
+        const context = 'space:theFinalFrontier';
+
+        it('should return the alerts', () => {
+          expect(removeAlert(alerts, context)).toEqual(alerts);
+        });
+      });
+
+      describe('with a uuid', () => {
+        const uuid = generateUuid();
+
+        it('should return the alerts', () => {
+          expect(removeAlert(alerts, uuid)).toEqual(alerts);
+        });
       });
     });
 
     describe('when there are many alerts', () => {
       const alerts: Alert[] = fixtures;
+
+      describe('with a context that does not match any alerts', () => {
+        const context = 'space:theFinalFrontier';
+
+        it('should return the alerts', () => {
+          expect(removeAlert(alerts, context)).toEqual(alerts);
+        });
+      });
+
+      describe('with a context matches an alert', () => {
+        const context = 'science:observations';
+        const expected = [alerts[0], alerts[1]];
+
+        it('should return the non-matching alerts', () => {
+          expect(removeAlert(alerts, context)).toEqual(expected);
+        });
+      });
 
       describe('with a uuid that does not match an alert', () => {
         const uuid = generateUuid();

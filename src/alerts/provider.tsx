@@ -25,7 +25,7 @@ export const AlertsProvider = ({
   const [alerts, setAlerts] = React.useState<Alert[]>(initialValue);
 
   const dismissAlert: DismissAlert =
-    (uuid) => setAlerts(removeAlert(alerts, uuid));
+    (uuidOrContext) => setAlerts(removeAlert(alerts, uuidOrContext));
   const dismissAllAlerts: DismissAllAlerts =
     ({ removePersistent }) => setAlerts(removeAllAlerts(alerts, { removePersistent }));
   const displayAlert: DisplayAlert =

@@ -3,6 +3,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 export type AlertType = "failure" | "info" | "success" | "warning";
 
 export type Alert = {
+  context?: string;
   dismissable: boolean;
   icon?: IconDefinition;
   message: string;
@@ -11,15 +12,16 @@ export type Alert = {
   uuid: string;
 }
 
-export type DismissAlert = (uuid: string) => void;
+export type DismissAlert = (uuidOrContext: string) => void;
 
-export type DismissAlertsOptions = {
+export type DismissAllAlertsOptions = {
   removePersistent: boolean;
 };
 
-export type DismissAllAlerts = (options?: DismissAlertsOptions) => void;
+export type DismissAllAlerts = (options?: DismissAllAlertsOptions) => void;
 
 export type DisplayAlertProps = {
+  context?: string;
   dismissable?: boolean;
   icon?: IconDefinition;
   message: string;

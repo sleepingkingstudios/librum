@@ -12,8 +12,8 @@ import { AlertsProvider } from './provider';
 import type {
   Alert,
   DismissAlert,
-  DismissAlertsOptions,
   DismissAllAlerts,
+  DismissAllAlertsOptions,
   DisplayAlert,
   DisplayAlertProps,
 } from './types';
@@ -31,7 +31,7 @@ interface IRenderDismissAlertButton {
 
 interface IRenderDismissAllAlertsButton {
   dismissAllAlerts: DismissAllAlerts,
-  options: DismissAlertsOptions,
+  options: DismissAllAlertsOptions,
 }
 
 interface IRenderDisplayAlertButton {
@@ -98,7 +98,7 @@ const AlertsDisplay = ({
     dismissAllAlerts,
     displayAlert,
   } = React.useContext(AlertsContext);
-  const options: DismissAlertsOptions = { removePersistent: dismissAll };
+  const options: DismissAllAlertsOptions = { removePersistent: dismissAll };
 
   return (
     <>
