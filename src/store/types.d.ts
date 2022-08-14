@@ -12,14 +12,15 @@ export type ApiError = { type: string, message: string, data: ApiData };
 export type ApiParam = Literal | ApiData;
 
 export type ApiFailure<Data extends ApiData = ApiData> =
-  { ok: false, error: ApiError, data?: Data };
+  { ok: false, error?: ApiError, data?: Data };
 
 export type ApiSuccess<Data extends ApiData = ApiData> =
-  { ok: true, data: Data };
+  { ok: true, data?: Data };
 
 export type ApiResponse<Data extends ApiData = ApiData> =
   ApiFailure<Data> | ApiSuccess<Data>;
 
+// See https://redux-toolkit.js.org/rtk-query/usage-with-typescript#type-safe-error-handling
 export type FetchFailure =
   { error: FetchBaseQueryError | SerializedError };
 
@@ -36,3 +37,19 @@ export type ActionCreator<
   Param = unknown,
   Payload extends ApiData = ApiData
 > = (param: Param) => Action<Payload>;
+
+export type Matcher<MatchOptions> =
+  (response: FetchResponse, options: MatchOptions) => void;
+
+export type MatchResponseProps<MatchOptions> = {
+  errorType?: string,
+  fn: Matcher<MatchOptions>,
+  matcher?: Matcher<MatchOptions>,
+  status: 'success' | 'failure',
+}
+
+export type MatchResponse<MatchOptions> = ({
+  errorType,
+  matcher,
+  status,
+}: MatchResponseProps) => Matcher<MatchOptions>;

@@ -60,8 +60,6 @@ const renderDismissButton = ({
   if (!dismissable) { return null; }
 
   const onClick = () => {
-    console.log('renderDismissButton onClick()');
-
     dismissAlert(uuid);
   }
 
