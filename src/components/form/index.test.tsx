@@ -13,6 +13,7 @@ import type {
   QueryParams,
   UseMutation,
 } from './types';
+import type { FetchPromise } from '@store/types';
 import { render } from '@test-helpers/rendering';
 import type { Middleware } from '@utils/middleware';
 
@@ -154,7 +155,7 @@ describe('<Form />', () => {
   describe('with middleware', () => {
     const middleware: Middleware<
       Record<string, unknown>,
-      Record<string, unknown>
+      FetchPromise<Record<string, unknown>>
     > = (nextFn, data) => nextFn({ ...data, secret: '12345' });
 
     it('should submit the form', async () => {
@@ -242,7 +243,7 @@ describe('<Form />', () => {
     describe('with middleware', () => {
       const middleware: Middleware<
         Record<string, unknown>,
-        Record<string, unknown>
+        FetchPromise<Record<string, unknown>>
       > = (nextFn, data) => nextFn({ ...data, secret: '12345' });
 
       it('should submit the form', async () => {

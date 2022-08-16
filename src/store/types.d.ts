@@ -1,6 +1,8 @@
 import type { SerializedError } from '@reduxjs/toolkit';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 
+import type { Annotated } from '@utils/annotations';
+
 type Literal = string | number | true | false | null;
 
 type DataItem = Literal | DataItem[] | Record<string, DataItem>;
@@ -30,6 +32,9 @@ export type FetchSuccess<Data extends ApiData = ApiData> =
 export type FetchResponse<Data extends ApiData = ApiData> =
   FetchFailure | FetchSuccess<Data>;
 
+export type FetchPromise<Data extends ApiData = ApiData> =
+  Promise<FetchResponse<Data>>;
+
 export type Action<Payload extends ApiData = ApiData> =
   { payload: Payload, type: string };
 
@@ -38,8 +43,12 @@ export type ActionCreator<
   Payload extends ApiData = ApiData
 > = (param: Param) => Action<Payload>;
 
-export type Matcher<MatchOptions> =
-  (response: FetchResponse, options: MatchOptions) => void;
+export type Matcher<MatchOptions> = (
+  (
+    response: FetchResponse,
+    options: MatchOptions,
+  ) => void
+) & Annotated;
 
 export type MatchResponseProps<MatchOptions> = {
   errorType?: string,

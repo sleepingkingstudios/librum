@@ -1,3 +1,4 @@
+import type { Annotations } from '@utils/annotations';
 import type {
   FetchResponse,
   Matcher,
@@ -27,4 +28,29 @@ export const matchResponse = ({
   if (matcher !== null) {
     return matcher(response, options);
   }
+};
+
+export const reduceMatchers = <MatchOptions extends Record<string, unknown>>(
+  matcherProps: MatchResponseProps<MatchOptions>[],
+  annotations: Annotations = null,
+): Matcher<MatchOptions> => {
+  const matcher: Matcher<MatchOptions> = matcherProps.reduce(
+    (
+      matcher: Matcher<MatchOptions>,
+      props: MatchResponseProps<MatchOptions>,
+    ) => matchResponse({
+      ...props,
+      matcher,
+    }),
+    null,
+  );
+
+  if (annotations !== null) {
+    matcher.annotations = {
+      type: 'matcher',
+      ...annotations,
+    };
+  }
+
+  return matcher;
 };

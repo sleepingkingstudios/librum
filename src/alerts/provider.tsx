@@ -37,6 +37,19 @@ export const AlertsProvider = ({
     displayAlert,
   };
 
+  dismissAlert.annotations = {
+    name: 'alerts:dismissAlert',
+    type: 'hook:function',
+  };
+  dismissAllAlerts.annotations = {
+    name: 'alerts:dismissAllAlerts',
+    type: 'hook:function',
+  };
+  displayAlert.annotations = {
+    name: 'alerts:displayAlert',
+    type: 'hook:function',
+  };
+
   return (
     <AlertsContext.Provider value={context}>
       { children }

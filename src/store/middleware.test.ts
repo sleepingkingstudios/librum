@@ -1,4 +1,5 @@
 import type { FetchResponse } from '@store/api';
+import type { Annotations } from '@utils/annotations';
 import { matcherMiddleware } from './middleware';
 import {
   buildSuccessResponse,
@@ -23,25 +24,50 @@ describe('store middleware', () => {
       expect(typeof matcherMiddleware).toBe('function');
     });
 
-    it('should return a function', () => {
-      expect(typeof matcherMiddleware(matcher, options))
-        .toBe('function');
+    describe('with a matcher', () => {
+      const builder = matcherMiddleware(matcher);
+      const middleware = builder(options);
+
+      it('should return a builder function', () => {
+        expect(typeof builder).toBe('function');
+      });
+
+      it('should return the middleware', () => {
+        expect(typeof middleware).toBe('function');
+      });
+
+      it('should call the inner function', async () => {
+        await middleware(fn, params);
+
+        expect(fn).toHaveBeenCalledWith(params);
+      });
+
+      it('should call the matcher', async () => {
+        await middleware(fn, params);
+
+        expect(matcher).toHaveBeenCalledWith(successResponse, options);
+      });
+
+      it('should not annotate the builder function', () => {
+        expect(builder.annotations).toBeUndefined();
+      });
     });
 
-    it('should call the inner function', async () => {
-      const middleware = matcherMiddleware(matcher, options);
+    describe('with a matcher and annotations', () => {
+      const annotations: Annotations = {
+        name: 'test:middleware',
+      };
+      const builder = matcherMiddleware(matcher, annotations);
 
-      await middleware(fn, params);
+      it('should annotate the builder function', () => {
+        const expected = {
+          matcher,
+          name: 'test:middleware',
+          type: 'middleware:matcher',
+        };
 
-      expect(fn).toHaveBeenCalledWith(params);
-    });
-
-    it('should call the matcher', async () => {
-      const middleware = matcherMiddleware(matcher, options);
-
-      await middleware(fn, params);
-
-      expect(matcher).toHaveBeenCalledWith(successResponse, options);
+        expect(builder.annotations).toEqual(expected);
+      });
     });
   });
 });
