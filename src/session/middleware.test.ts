@@ -1,10 +1,10 @@
+import type { FetchResponse } from '@api';
 import type {
   Session,
   User,
 } from '@session';
 import type { Login } from '@session/api';
 import { actions } from '@session/reducer';
-import type { FetchResponse } from '@store/api';
 
 import {
   createSession,

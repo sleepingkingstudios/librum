@@ -5,6 +5,7 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { LoginPage } from './index';
+import type { FetchResponse } from '@api';
 import type {
   Mutation,
   MutationStatus,
@@ -18,7 +19,6 @@ import type {
 } from '@session';
 import { useCreateSessionMutation } from '@session/api';
 import { useSelector } from '@store';
-import type { FetchResponse } from '@store/api';
 import { render } from '@test-helpers/rendering';
 
 jest.mock('@components/page');

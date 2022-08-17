@@ -1,64 +1,7 @@
-import type { SerializedError } from '@reduxjs/toolkit';
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
-
-import type { Annotated } from '@utils/annotations';
-
-type Literal = string | number | true | false | null;
-
-type DataItem = Literal | DataItem[] | Record<string, DataItem>;
-
-export type ApiData = Record<string, DataItem>;
-
-export type ApiError = { type: string, message: string, data: ApiData };
-
-export type ApiParam = Literal | ApiData;
-
-export type ApiFailure<Data extends ApiData = ApiData> =
-  { ok: false, error?: ApiError, data?: Data };
-
-export type ApiSuccess<Data extends ApiData = ApiData> =
-  { ok: true, data?: Data };
-
-export type ApiResponse<Data extends ApiData = ApiData> =
-  ApiFailure<Data> | ApiSuccess<Data>;
-
-// See https://redux-toolkit.js.org/rtk-query/usage-with-typescript#type-safe-error-handling
-export type FetchFailure =
-  { error: FetchBaseQueryError | SerializedError };
-
-export type FetchSuccess<Data extends ApiData = ApiData> =
-  { data: ApiSuccess<Data> };
-
-export type FetchResponse<Data extends ApiData = ApiData> =
-  FetchFailure | FetchSuccess<Data>;
-
-export type FetchPromise<Data extends ApiData = ApiData> =
-  Promise<FetchResponse<Data>>;
-
-export type Action<Payload extends ApiData = ApiData> =
+export type Action<Payload extends DataObject = DataObject> =
   { payload: Payload, type: string };
 
 export type ActionCreator<
   Param = unknown,
-  Payload extends ApiData = ApiData
+  Payload extends DataObject = DataObject
 > = (param: Param) => Action<Payload>;
-
-export type Matcher<MatchOptions> = (
-  (
-    response: FetchResponse,
-    options: MatchOptions,
-  ) => void
-) & Annotated;
-
-export type MatchResponseProps<MatchOptions> = {
-  errorType?: string,
-  fn: Matcher<MatchOptions>,
-  matcher?: Matcher<MatchOptions>,
-  status: 'success' | 'failure',
-}
-
-export type MatchResponse<MatchOptions> = ({
-  errorType,
-  matcher,
-  status,
-}: MatchResponseProps) => Matcher<MatchOptions>;

@@ -1,5 +1,5 @@
+import type { DataObject } from '@utils/types';
 import type {
-  ApiData,
   ApiError,
   ApiFailure,
   ApiSuccess,
@@ -32,7 +32,7 @@ export const isSuccess = (response: FetchResponse): boolean => {
   return 'data' in response;
 };
 
-export const getData = (response: FetchResponse): ApiData | null => {
+export const getData = (response: FetchResponse): DataObject | null => {
   if (isFailure(response)) {
     const errorData = getErrorData(response as FetchFailure);
 
@@ -40,7 +40,7 @@ export const getData = (response: FetchResponse): ApiData | null => {
 
     if (!('data' in errorData)) { return null; }
 
-    const data: ApiData = errorData.data;
+    const data: DataObject = errorData.data;
 
     return data;
   }
@@ -49,7 +49,7 @@ export const getData = (response: FetchResponse): ApiData | null => {
 
   if (!('data' in responseData)) { return null; }
 
-  const data: ApiData = responseData.data;
+  const data: DataObject = responseData.data;
 
   return data;
 };

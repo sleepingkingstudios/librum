@@ -1,20 +1,20 @@
 import { defaultTo } from 'lodash';
 
+import type { DataObject } from '@utils/types';
 import type {
-  ApiData,
   ApiError,
   FetchFailure,
   FetchSuccess,
 } from './types';
 
 interface IBuildFailureResponseOptions {
-  data?: ApiData;
+  data?: DataObject;
   error?: ApiError;
   status?: number;
 }
 
 interface IBuildSuccessResponseOptions {
-  data?: ApiData;
+  data?: DataObject;
 }
 
 export const buildFailureResponse = (

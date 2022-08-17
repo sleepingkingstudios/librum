@@ -21,7 +21,7 @@ import type { User } from '@session';
 import type {
   ApiParam,
   ApiResponse,
-} from '@store/api';
+} from '@api';
 
 type Dispatch = (arg: unknown) => unknown;
 

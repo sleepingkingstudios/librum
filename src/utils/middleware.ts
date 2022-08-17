@@ -1,4 +1,4 @@
-import type { FetchPromise } from '@store/types';
+import type { FetchPromise } from '@api';
 import type { Annotated } from './annotations';
 
 export type NextFunction<Param = unknown, Result = FetchPromise> = (

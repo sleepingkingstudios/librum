@@ -1,4 +1,8 @@
 import type {
+  ApiSuccess,
+  FetchResponse,
+} from '@api';
+import type {
   Session,
   User,
 } from '@session';
@@ -8,10 +12,6 @@ import type {
   ActionCreator,
   Dispatch,
 } from '@store';
-import type {
-  ApiSuccess,
-  FetchResponse,
-} from '@store/api';
 import type { Middleware } from '@utils/middleware';
 
 type SessionMiddleware = Middleware<

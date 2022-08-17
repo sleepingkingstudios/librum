@@ -1,5 +1,5 @@
 import { store } from './index';
-import { initialState as api } from './api';
+import { initialState as api } from '@api';
 import { initialState as session } from '@session';
 
 describe('store', () => {

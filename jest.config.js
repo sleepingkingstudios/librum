@@ -85,6 +85,8 @@ module.exports = {
     '\\.css': '<rootDir>/src/jest/mocks/style-mock.ts',
     '^@alerts$': '<rootDir>/src/alerts',
     '^@alerts/(.*)$': '<rootDir>/src/alerts/$1',
+    '^@api$': '<rootDir>/src/api',
+    '^@api/(.*)$': '<rootDir>/src/api/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@session$': '<rootDir>/src/session',
     '^@session/(.*)$': '<rootDir>/src/session/$1',

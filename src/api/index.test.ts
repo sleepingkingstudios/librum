@@ -6,7 +6,7 @@ import {
   ApiResponse,
   api,
   useGetStatusQuery,
-} from './api';
+} from './index';
 import {
   shouldDefineTheQueryHook,
   shouldPerformTheQuery,

@@ -7,6 +7,7 @@ import {
   isSuccess,
   responseMatches,
 } from './utils';
+import type { DataObject } from '@utils/types';
 import {
   buildFailureResponse,
   buildSuccessResponse,
@@ -14,14 +15,13 @@ import {
   serializedErrorResponse,
 } from './test-helpers';
 import type {
-  ApiData,
   ApiError,
   FetchFailure,
   FetchResponse,
   FetchSuccess,
 } from './types';
 
-const apiData: ApiData = {
+const apiData: DataObject = {
   name: 'Alan Bradley',
   role: 'user',
 };

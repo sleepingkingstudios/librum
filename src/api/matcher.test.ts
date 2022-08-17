@@ -1,15 +1,15 @@
-import type { Annotations } from '@utils/annotations';
 import {
   matchResponse,
   reduceMatchers,
 } from './matcher';
+import type { Annotations } from '@utils/annotations';
 import {
   buildFailureResponse,
   buildSuccessResponse,
   fetchErrorResponse,
   serializedErrorResponse,
 } from './test-helpers';
-import {
+import type {
   ApiError,
   FetchFailure,
   FetchResponse,

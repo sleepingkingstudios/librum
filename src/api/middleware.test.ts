@@ -1,4 +1,4 @@
-import type { FetchResponse } from '@store/api';
+import type { FetchResponse } from '@api';
 import type { Annotations } from '@utils/annotations';
 import { matcherMiddleware } from './middleware';
 import {

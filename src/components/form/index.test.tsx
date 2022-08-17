@@ -7,15 +7,15 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Form } from './index';
+import type { FetchPromise } from '@api';
+import { render } from '@test-helpers/rendering';
+import type { Middleware } from '@utils/middleware';
 import type {
   Mutation,
   MutationStatus,
   QueryParams,
   UseMutation,
 } from './types';
-import type { FetchPromise } from '@store/types';
-import { render } from '@test-helpers/rendering';
-import type { Middleware } from '@utils/middleware';
 
 describe('<Form />', () => {
   it('should submit the form', async () => {
