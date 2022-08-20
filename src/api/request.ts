@@ -82,7 +82,7 @@ export const buildRequest: BuildRequest = <Options extends DataObject = DataObje
     useRequest.annotations = {
       middleware: middlewareArray,
       params,
-      type: 'useRequest',
+      type: 'hooks:useRequest',
       ...annotations,
     };
   }

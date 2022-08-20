@@ -12,6 +12,7 @@ import type {
   ActionCreator,
   Dispatch,
 } from '@store';
+import type { Annotated } from '@utils/annotations';
 import type { Middleware } from '@utils/middleware';
 
 type SessionMiddleware = Middleware<
@@ -22,20 +23,24 @@ type SessionMiddleware = Middleware<
 >;
 
 type CreateSession = (
-  { actionCreator, dispatch }: {
-    actionCreator: ActionCreator<
-      { token: string, user: User },
-      Session
-    >,
-    dispatch: Dispatch,
-  }
-) => SessionMiddleware;
+  (
+    { actionCreator, dispatch }: {
+      actionCreator: ActionCreator<
+        { token: string, user: User },
+        Session
+      >,
+      dispatch: Dispatch,
+    }
+  ) => SessionMiddleware
+) & Annotated;
 
 type SetItem = (key: string, value: unknown) => unknown;
 
-type StoreSession = ({ setItem }: { setItem: SetItem }) => SessionMiddleware;
+type StoreSession = (
+  ({ setItem }: { setItem: SetItem }) => SessionMiddleware
+) & Annotated;
 
-export const createSession: CreateSession = ({ actionCreator, dispatch }) => {
+const createSession: CreateSession = ({ actionCreator, dispatch }) => {
   const middleware: SessionMiddleware = async (fn, login) => {
     const result = await fn(login);
 
@@ -53,7 +58,12 @@ export const createSession: CreateSession = ({ actionCreator, dispatch }) => {
   return middleware;
 };
 
-export const storeSession: StoreSession = ({ setItem }) => {
+createSession.annotations = {
+  name: 'sessions:createSession',
+  type: 'middleware',
+};
+
+const storeSession: StoreSession = ({ setItem }) => {
   const middleware: SessionMiddleware = async (fn, login) => {
     const result = await fn(login);
 
@@ -74,4 +84,14 @@ export const storeSession: StoreSession = ({ setItem }) => {
   };
 
   return middleware;
+};
+
+storeSession.annotations = {
+  name: 'sessions:storeSession',
+  type: 'middleware',
+};
+
+export {
+  createSession,
+  storeSession,
 };

@@ -3,13 +3,10 @@ import type { Annotations } from '@utils/annotations';
 import { matcherMiddleware } from './middleware';
 import {
   buildSuccessResponse,
+  wrapResponse,
 } from './test-helpers';
 
 const successResponse: FetchResponse = buildSuccessResponse();
-
-const wrapResponse = (response: FetchResponse): Promise<FetchResponse> => {
-  return new Promise((resolve) => resolve(response));
-};
 
 describe('store middleware', () => {
   describe('matcherMiddleware()', () => {

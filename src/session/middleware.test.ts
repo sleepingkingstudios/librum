@@ -57,6 +57,16 @@ describe('Session middleware', () => {
       expect(typeof middleware).toBe('function');
     });
 
+    it('should be annotated', () => {
+      const { annotations } = createSession;
+      const expected = {
+        name: 'sessions:createSession',
+        type: 'middleware',
+      };
+
+      expect(annotations).toEqual(expected);
+    });
+
     it('should call the next function', async () => {
       const dispatch = jest.fn();
       const middleware = createSession({ actionCreator, dispatch });
@@ -99,6 +109,16 @@ describe('Session middleware', () => {
       const middleware = storeSession({ setItem });
 
       expect(typeof middleware).toBe('function');
+    });
+
+    it('should be annotated', () => {
+      const { annotations } = storeSession;
+      const expected = {
+        name: 'sessions:storeSession',
+        type: 'middleware',
+      };
+
+      expect(annotations).toEqual(expected);
     });
 
     it('should call the next function', async () => {

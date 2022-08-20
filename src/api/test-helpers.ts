@@ -4,6 +4,7 @@ import type { DataObject } from '@utils/types';
 import type {
   ApiError,
   FetchFailure,
+  FetchResponse,
   FetchSuccess,
 } from './types';
 
@@ -81,4 +82,10 @@ export const fetchErrorResponse: FetchFailure = {
 
 export const serializedErrorResponse: FetchFailure = {
   error: { message: 'something went wrong' }
+};
+
+export const wrapResponse = (
+  response: FetchResponse
+): Promise<FetchResponse> => {
+  return new Promise((resolve) => resolve(response));
 };

@@ -107,7 +107,7 @@ describe('buildRequest()', () => {
         middleware: [] as unknown[],
         name: 'test:request',
         params: {},
-        type: 'useRequest',
+        type: 'hooks:useRequest',
       };
 
       expect(useRequest.annotations).toEqual(expected);
@@ -201,7 +201,7 @@ describe('buildRequest()', () => {
         middleware: [middlewareBuilder],
         name: 'test:request',
         params: {},
-        type: 'useRequest',
+        type: 'hooks:useRequest',
       };
 
       expect(useRequest.annotations).toEqual(expected);
@@ -305,7 +305,7 @@ describe('buildRequest()', () => {
         middleware: middlewareBuilders,
         name: 'test:request',
         params: {},
-        type: 'useRequest',
+        type: 'hooks:useRequest',
       };
 
       expect(useRequest.annotations).toEqual(expected);
@@ -376,7 +376,7 @@ describe('buildRequest()', () => {
         middleware: [] as unknown[],
         name: 'test:request',
         params,
-        type: 'useRequest',
+        type: 'hooks:useRequest',
       };
 
       expect(useRequest.annotations).toEqual(expected);

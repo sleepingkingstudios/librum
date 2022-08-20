@@ -53,7 +53,9 @@ export type MatchResponse<MatchOptions> = ({
   status,
 }: MatchResponseProps) => Matcher<MatchOptions>;
 
-export type Mutation = (param?: unknown) => unknown;
+export type Mutation = (
+  (param?: unknown) => unknown
+) & Annotated;
 
 export type MutationStatus = {
   isLoading: boolean;
@@ -64,4 +66,6 @@ export type UseMutationResponse = readonly [
   MutationStatus,
 ];
 
-export type UseMutation = () => UseMutationResponse;
+export type UseMutation = (
+  () => UseMutationResponse
+) & Annotated;

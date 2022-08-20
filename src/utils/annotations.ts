@@ -21,8 +21,6 @@ const formatFunction = (value: Function): unknown => {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const maybeAnnotated: (Function & Annotated) = value;
 
-  console.log('formatFunction()', value);
-
   if ('annotations' in maybeAnnotated) {
     return formatObject(maybeAnnotated.annotations);
   }
