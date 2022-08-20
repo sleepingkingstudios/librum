@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUser,
+  faUserXmark,
+} from '@fortawesome/free-solid-svg-icons';
 
+import { useAlerts } from '@alerts';
 import {
   actions,
   selector,
@@ -13,8 +17,16 @@ import {
 } from '@store';
 
 export const PageUser = (): JSX.Element => {
+  const { displayAlert } = useAlerts();
   const dispatch = useDispatch();
   const logout = () => {
+    displayAlert({
+      context: 'authentication:session',
+      icon: faUserXmark,
+      message: 'You have successfully logged out.',
+      type: 'warning',
+    });
+
     dispatch(actions.destroy());
 
     localStorage.removeItem('session');

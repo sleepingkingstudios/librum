@@ -8,7 +8,10 @@ import { selector as selectSession } from '@session';
 import type { Session } from '@session';
 import { ApiResponse } from './types';
 
-export { buildRequest } from './request';
+export {
+  buildRequest,
+  UseRequest,
+} from './request';
 export {
   ApiError,
   ApiFailure,

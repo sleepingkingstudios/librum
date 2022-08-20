@@ -1,10 +1,8 @@
 import { wrapMutation } from './utils';
-import type {
-  Mutation,
-  OnSubmit,
-  QueryParams,
-} from './types';
+import type { Mutation } from '@api';
+import type { OnSubmit } from './types';
 import type { Middleware } from '@utils/middleware';
+import type { DataObject } from '@utils/types';
 
 type MockMiddleware = jest.MockedFunction<
   Middleware<Record<string, unknown>>
@@ -124,7 +122,7 @@ describe('Form utils', () => {
     });
 
     describe('with params', () => {
-      const params: QueryParams = { id: 0 };
+      const params: DataObject = { id: 0 };
 
       it('should call the mutation', async () => {
         const mutation: Mutation = jest.fn();

@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import type { MutationStatus } from '@api';
 import {
   Form,
   FormButton,
@@ -8,12 +9,6 @@ import {
 } from '@components/form';
 import { Page } from '@components/page';
 import type { Breadcrumbs } from '@components/page';
-import type {
-  Mutation,
-  MutationStatus,
-  UseMutation,
-  UseMutationResponse,
-} from '@components/form/types';
 
 const breadcrumbs: Breadcrumbs = [
   {
@@ -29,13 +24,7 @@ const breadcrumbs: Breadcrumbs = [
   },
 ];
 
-const mockMutation: Mutation = () => null;
 const mockMutationStatus: MutationStatus = { isLoading: false };
-const mockMutationResponse: UseMutationResponse = [
-  mockMutation,
-  mockMutationStatus,
-];
-const mockUseMutation: UseMutation = () => mockMutationResponse;
 
 export const DemoPage = (): JSX.Element => (
   <Page breadcrumbs={breadcrumbs}>
@@ -114,7 +103,8 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{ generation: '1', version: 'red' }}
-      useMutation={mockUseMutation}
+      request={() => null}
+      status={mockMutationStatus}
     >
       <FormField name="version" />
 
@@ -129,7 +119,8 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{}}
-      useMutation={mockUseMutation}
+      request={() => null}
+      status={mockMutationStatus}
     >
       <FormRow cols={6}>
         <FormField name="strength" />

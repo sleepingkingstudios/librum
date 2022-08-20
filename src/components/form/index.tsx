@@ -6,16 +6,11 @@ import {
 } from 'formik';
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
+import type { MutationStatus } from '@api';
+import type { Request } from '@api/request';
 import { LoadingOverlay } from '@components/loading-overlay';
 import type { Animations } from '@components/types';
-import type { Middleware } from '@utils/middleware';
 import { joinClassNames } from '@utils/react-utils';
-import { wrapMutation } from './utils';
-import type {
-  OnSubmit,
-  QueryParams,
-  UseMutation,
-} from './types';
 
 export { FormButton } from './button';
 export { FormField } from './field';
@@ -30,9 +25,8 @@ interface IFormProps {
   loadingAnimation?: Animations;
   loadingIcon?: IconDefinition;
   loadingMessage?: string;
-  middleware?: Middleware | Middleware[];
-  params?: QueryParams;
-  useMutation: UseMutation;
+  request: Request;
+  status: MutationStatus;
 }
 
 interface IRenderLoadingOverlay {
@@ -67,21 +61,18 @@ export const Form = (
     loadingAnimation,
     loadingIcon,
     loadingMessage = null,
-    middleware,
-    params,
-    useMutation,
+    request,
+    status,
   }: IFormProps
 ): JSX.Element => {
-  const [mutation, status] = useMutation();
   const { isLoading } = status;
-  const onSubmit: OnSubmit = wrapMutation({ middleware, mutation, params });
   const joinedClassName = joinClassNames(
     className,
     'relative',
   );
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={request}>
       <FormWrapper className={joinedClassName}>
         {
           renderLoadingOverlay({
@@ -95,5 +86,5 @@ export const Form = (
         { children }
       </FormWrapper>
     </Formik>
-  )
+  );
 };
