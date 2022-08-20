@@ -8,6 +8,7 @@ import { selector as selectSession } from '@session';
 import type { Session } from '@session';
 import { ApiResponse } from './types';
 
+export { buildRequest } from './request';
 export {
   ApiError,
   ApiFailure,
@@ -18,6 +19,10 @@ export {
   FetchPromise,
   FetchResponse,
   FetchSuccess,
+  Mutation,
+  MutationStatus,
+  UseMutation,
+  UseMutationResponse,
 } from './types';
 
 export const api = createApi({
