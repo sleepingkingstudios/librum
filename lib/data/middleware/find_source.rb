@@ -44,7 +44,9 @@ module Data::Middleware
 
       return result unless result.failure? && optional?
 
+      # :nocov:
       success(nil)
+      # :nocov:
     end
 
     def find_game_system

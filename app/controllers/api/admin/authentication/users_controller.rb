@@ -2,7 +2,7 @@
 
 require 'cuprum/rails/actions/index'
 
-module Api::Authentication
+module Api::Admin::Authentication
   # API controller for managing Authentication::User entities.
   class UsersController < ApiController
     def self.resource
@@ -26,10 +26,18 @@ module Api::Authentication
       )
     end
 
-    action :create,  Actions::Api::Authentication::Users::Create
-    action :destroy, Actions::Api::Authentication::Users::Destroy, member: true
-    action :index,   Cuprum::Rails::Actions::Index
-    action :show,    Actions::Api::Authentication::Users::Show,    member: true
-    action :update,  Actions::Api::Authentication::Users::Update,  member: true
+    action :create,
+      Actions::Api::Admin::Authentication::Users::Create
+    action :destroy,
+      Actions::Api::Admin::Authentication::Users::Destroy,
+      member: true
+    action :index,
+      Cuprum::Rails::Actions::Index
+    action :show,
+      Actions::Api::Admin::Authentication::Users::Show,
+      member: true
+    action :update,
+      Actions::Api::Admin::Authentication::Users::Update,
+      member: true
   end
 end

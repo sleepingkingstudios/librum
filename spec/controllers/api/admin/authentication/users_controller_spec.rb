@@ -4,7 +4,7 @@ require 'rails_helper'
 
 require 'support/contracts/controller_contracts'
 
-RSpec.describe Api::Authentication::UsersController do
+RSpec.describe Api::Admin::Authentication::UsersController do
   include Spec::Support::Contracts::ControllerContracts
 
   describe '.resource' do
@@ -35,12 +35,12 @@ RSpec.describe Api::Authentication::UsersController do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Authentication::Users::Create,
+    Actions::Api::Admin::Authentication::Users::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::Authentication::Users::Destroy,
+    Actions::Api::Admin::Authentication::Users::Destroy,
     member: true
 
   include_contract 'should define action',
@@ -50,11 +50,11 @@ RSpec.describe Api::Authentication::UsersController do
 
   include_contract 'should define action',
     :show,
-    Actions::Api::Authentication::Users::Show,
+    Actions::Api::Admin::Authentication::Users::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::Authentication::Users::Update,
+    Actions::Api::Admin::Authentication::Users::Update,
     member: true
 end

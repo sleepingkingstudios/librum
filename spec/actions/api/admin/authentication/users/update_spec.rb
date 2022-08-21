@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/rspec/actions/update_contracts'
 
-RSpec.describe Actions::Api::Authentication::Users::Update do
+RSpec.describe Actions::Api::Admin::Authentication::Users::Update do
   include Cuprum::Rails::RSpec::Actions::UpdateContracts
 
   subject(:action) do

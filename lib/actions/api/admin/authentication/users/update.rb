@@ -2,7 +2,7 @@
 
 require 'cuprum/rails/actions/update'
 
-module Actions::Api::Authentication::Users
+module Actions::Api::Admin::Authentication::Users
   # Show action for the Authentication::User API.
   class Update < Cuprum::Rails::Actions::Update
     prepend Actions::Api::FindBySlug

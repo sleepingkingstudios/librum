@@ -30,8 +30,10 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    namespace :authentication do
-      api_resources :users
+    namespace :admin do
+      namespace :authentication do
+        api_resources :users
+      end
     end
 
     namespace :dnd5e do

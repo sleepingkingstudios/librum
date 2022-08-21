@@ -2,7 +2,7 @@
 
 require 'cuprum/rails/actions/create'
 
-module Actions::Api::Authentication::Users
+module Actions::Api::Admin::Authentication::Users
   # Create action for the Authentication::User API.
   class Create < Cuprum::Rails::Actions::Create
     prepend Actions::Api::GenerateSlug
