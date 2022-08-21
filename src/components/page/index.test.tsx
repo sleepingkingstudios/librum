@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { v4 as generateUuid } from 'uuid';
+import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -8,6 +10,8 @@ import type {
   Breadcrumb,
   Breadcrumbs,
 } from './breadcrumbs';
+import { AlertsProvider } from '@alerts';
+import type { Alert } from '@alerts';
 import { actions } from '@session';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
@@ -57,9 +61,9 @@ describe('<Page>', () => {
       }
     );
 
-    const footer = screen.getByText(content);
+    const contents = screen.getByText(content);
 
-    expect(footer).toBeVisible();
+    expect(contents).toBeVisible();
   });
 
   it('should match the snapshot', () => {
@@ -232,6 +236,66 @@ describe('<Page>', () => {
           store,
           theme: true,
         },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('when there are many alerts', () => {
+    const alerts: Alert[] = [
+      {
+        dismissable: true,
+        message: 'Successfully activated reactor',
+        persistent: false,
+        type: 'success',
+        uuid: generateUuid(),
+      },
+      {
+        dismissable: false,
+        icon: faRadiation,
+        message: 'Reactor overheat imminent',
+        persistent: false,
+        type: 'warning',
+        uuid: generateUuid(),
+      },
+      {
+        dismissable: false,
+        message: 'Increase in three-eyed fish observed',
+        persistent: true,
+        type: 'failure',
+        uuid: generateUuid(),
+      },
+    ];
+
+    it('should render the alerts', () => {
+      const { getByText } = render(
+        <AlertsProvider initialValue={alerts}>
+          <Page>Page Content Here...</Page>
+        </AlertsProvider>,
+        {
+          router: true,
+          store: true,
+        }
+      );
+
+      alerts.forEach((alert) => {
+        const { message } = alert;
+        const rendered = getByText(message);
+
+        expect(rendered).toBeVisible();
+      });
+    });
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <AlertsProvider initialValue={alerts}>
+          <Page>Page Content Here...</Page>
+        </AlertsProvider>,
+        {
+          router: true,
+          store: true,
+        }
       );
 
       expect(asFragment()).toMatchSnapshot();

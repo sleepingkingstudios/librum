@@ -10,7 +10,7 @@ import {
   HomePage,
   LoginPage,
   NotFoundPage,
-} from '../pages';
+} from '@pages';
 import { selector } from '@session';
 import type { Session } from '@session';
 

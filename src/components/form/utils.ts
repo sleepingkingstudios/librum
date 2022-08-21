@@ -3,18 +3,16 @@ import type {
   FormikValues,
 } from 'formik';
 
-import type {
-  Mutation,
-  OnSubmit,
-  QueryParams,
-} from './types';
+import type { OnSubmit } from './types';
+import type { Mutation } from '@api';
 import { applyMiddleware } from '@utils/middleware';
 import type { Middleware } from '@utils/middleware';
+import type { DataObject } from '@utils/types';
 
 type WrapMutation = {
   middleware?: Middleware | Middleware[];
   mutation: Mutation;
-  params?: QueryParams;
+  params?: DataObject;
 }
 
 export const wrapMutation = (

@@ -104,6 +104,26 @@
 
 @layer utilities {
   .theme-chiaroscuro {
+    .alert-failure {
+      @apply bg-red-500 border-red-600;
+      @apply dark:bg-red-600 dark:border-red-700;
+    }
+
+    .alert-info {
+      @apply bg-blue-300 border-blue-400;
+      @apply dark:bg-blue-700 dark:border-blue-600;
+    }
+
+    .alert-success {
+      @apply bg-emerald-500 border-emerald-600;
+      @apply dark:bg-emerald-700 dark:border-emerald-600;
+    }
+
+    .alert-warning {
+      @apply bg-amber-500 border-amber-600;
+      @apply dark:bg-amber-600 dark:border-amber-500;
+    }
+
     .hr-fancy {
       @apply after:border-zinc-900;
       @apply dark:after:border-zinc-100;
@@ -119,6 +139,11 @@
       @apply text-zinc-500;
       @apply hover:text-zinc-600;
       @apply dark:hover:text-zinc-400;
+    }
+
+    .link-plain {
+      @apply text-zinc-900 hover:text-black;
+      @apply dark:text-zinc-100 dark:hover:text-white;
     }
 
     .text-danger {

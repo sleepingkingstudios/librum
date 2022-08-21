@@ -12,7 +12,13 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "paths": {
+      "@alerts": ["alerts"],
+      "@alerts/*": ["alerts/*"],
+      "@api": ["api"],
+      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
+      "@pages": ["pages"],
+      "@pages/*": ["pages/*"],
       "@session": ["session"],
       "@session/*": ["session/*"],
       "@store": ["store"],

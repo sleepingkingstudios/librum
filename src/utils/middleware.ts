@@ -1,10 +1,23 @@
-export type NextFunction<Param = unknown, Result = unknown> =
-  (param: Param) => Result;
+import type { FetchPromise } from '@api';
+import type { Annotated } from './annotations';
 
-export type Middleware<Param = unknown, Result = unknown> =
-  (nextFn: NextFunction<Param, Result>, param: Param) => Result;
+export type NextFunction<Param = unknown, Result = FetchPromise> = (
+  param: Param,
+) => Result;
 
-export const applyMiddleware = <Param = unknown, Result = unknown> (
+export type Middleware<Param = unknown, Result = FetchPromise> = (
+  nextFn: NextFunction<Param, Result>,
+  param: Param,
+) => Result;
+
+export type MiddlewareBuilder<
+  Param = unknown,
+  Result = FetchPromise,
+> = (
+  (options: Record<string, unknown>) => Middleware<Param, Result>
+) & Annotated;
+
+export const applyMiddleware = <Param = unknown, Result = unknown>(
   initialFn: NextFunction<Param, Result>,
   middleware?: Middleware<Param, Result>[] | Middleware<Param, Result>
 ): NextFunction<Param, Result> => {

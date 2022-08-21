@@ -1,9 +1,14 @@
 import * as React from 'react';
+import { faUserXmark } from '@fortawesome/free-solid-svg-icons';
 
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 import { PageUser } from './index';
+import { useAlerts } from '@alerts';
+import type {
+  Alert as IAlert,
+} from '@alerts';
 import {
   actions,
   selector,
@@ -14,6 +19,19 @@ import type {
 } from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
+
+jest.mock('@alerts');
+
+const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
+
+mockUseAlerts.mockImplementation(
+  () => ({
+    alerts: [] as IAlert[],
+    dismissAlert: jest.fn(),
+    dismissAllAlerts: jest.fn(),
+    displayAlert: jest.fn(),
+  })
+);
 
 describe('<PageUser>', () => {
   it('should not show a user name', () => {
@@ -90,6 +108,35 @@ describe('<PageUser>', () => {
         userEvent.click(button);
 
         expect(queryByText(/currently logged in/)).toBeNull();
+      });
+
+      it('should display an alert', () => {
+        const displayAlert = jest.fn();
+        const expected = {
+          context: 'authentication:session',
+          icon: faUserXmark,
+          message: 'You have successfully logged out.',
+          type: 'warning',
+        };
+
+        mockUseAlerts.mockImplementationOnce(
+          () => ({
+            alerts: [] as IAlert[],
+            dismissAlert: jest.fn(),
+            dismissAllAlerts: jest.fn(),
+            displayAlert,
+          })
+        );
+
+        const { dispatch, store } = createStore();
+        dispatch(create({ token, user }));
+
+        const { getByRole } = render(<PageUser />, { store });
+        const button = getByRole('button', { name: 'Log Out' });
+
+        userEvent.click(button);
+
+        expect(displayAlert).toHaveBeenCalledWith(expected);
       });
 
       it('should update the store', () => {

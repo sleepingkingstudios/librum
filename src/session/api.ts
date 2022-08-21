@@ -1,6 +1,6 @@
 import type { User } from './types';
-import { api } from '@store';
-import type { ApiSuccess } from '@store/api';
+import { api } from '@api';
+import type { ApiSuccess } from '@api';
 
 export type Login = {
   password: string;

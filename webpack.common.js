@@ -13,7 +13,10 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
+      '@alerts': srcPath('alerts'),
+      '@api': srcPath('api'),
       '@components': srcPath('components'),
+      '@pages': srcPath('pages'),
       '@session': srcPath('session'),
       '@store': srcPath('store'),
       '@test-helpers': srcPath('test-helpers'),

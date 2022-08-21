@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+import { useAlerts } from '@alerts';
 import {
   Form,
   FormField,
@@ -9,26 +10,34 @@ import {
   FormSubmitButton,
 } from '@components/form';
 import { Page } from '@components/page';
-import { useCreateSessionMutation } from '@session/api';
-import {
-  createSession,
-  storeSession,
-} from '@session/middleware';
 import { actions } from '@session/reducer';
+import {
+  useMutation,
+  useRequest,
+} from './request';
 
 export const LoginPage = (): JSX.Element => {
+  const {
+    displayAlert,
+    dismissAlert,
+  } = useAlerts();
   const { create } = actions;
   const dispatch = useDispatch();
   const setItem = (key: string, value: string) => {
     localStorage.setItem(key, value);
   };
-  const middleware = [
-    createSession({
-      actionCreator: create,
-      dispatch,
-    }),
-    storeSession({ setItem }),
-  ];
+  const options = {
+    actionCreator: create,
+    dismissAlert,
+    dispatch,
+    displayAlert,
+    setItem,
+  };
+  const [mutation, status] = useMutation();
+  const request = useRequest({
+    mutation,
+    options,
+  });
 
   return (
     <Page navigation={[]}>
@@ -40,8 +49,8 @@ export const LoginPage = (): JSX.Element => {
         loadingAnimation="bounce"
         loadingIcon={faUser}
         loadingMessage="Logging In..."
-        middleware={middleware}
-        useMutation={useCreateSessionMutation}
+        request={request}
+        status={status}
       >
         <FormRow>
           <FormField name="username" />

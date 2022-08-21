@@ -2,17 +2,17 @@ import fetchMock from 'jest-fetch-mock';
 
 import '@testing-library/jest-dom';
 
+import type { ApiResponse } from '@api';
+import {
+  shouldDefineTheMutationHook,
+  shouldPerformTheMutation,
+} from '@test-helpers/api';
 import {
   sessionApi as api,
   useCreateSessionMutation,
 } from './api';
 import type { Login } from './api';
 import type { User } from './types';
-import type { ApiResponse } from '@store/api';
-import {
-  shouldDefineTheMutationHook,
-  shouldPerformTheMutation,
-} from '@test-helpers/api';
 
 beforeEach((): void => { fetchMock.resetMocks(); });
 

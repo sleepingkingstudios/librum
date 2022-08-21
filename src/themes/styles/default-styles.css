@@ -16,6 +16,10 @@
 
 @layer components {
   .theme-default-styles {
+    .alert {
+      @apply border border-solid mt-1 px-2 py-1 rounded-lg;
+    }
+
     .form-button {
       @apply border border-solid mt-3 mb-3 px-3 py-1 rounded-lg w-full;
     }

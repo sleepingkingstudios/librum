@@ -26,3 +26,8 @@ You must specify which groups of data files to load by passing options to `thor`
   - [Official Docs](https://tailwindcss.com/docs/installation)
 - TypeScript
   - [React Cheat Sheet](https://github.com/typescript-cheatsheets/react)
+
+#### Testing
+
+- Queries:
+  - [Testing Library Queries](https://testing-library.com/docs/queries/about)
