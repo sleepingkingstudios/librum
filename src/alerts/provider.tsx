@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { AlertsContext } from './context';
 import type {
@@ -22,7 +23,10 @@ export const AlertsProvider = ({
   initialValue = [] as Alert[],
   children,
 }: IAlertsProvider): JSX.Element => {
+  const didMount = React.useRef(false);
   const [alerts, setAlerts] = React.useState<Alert[]>(initialValue);
+  const location = useLocation();
+  const { pathname } = location;
 
   const dismissAlert: DismissAlert =
     (uuidOrContext) => setAlerts(removeAlert(alerts, uuidOrContext));
@@ -49,6 +53,20 @@ export const AlertsProvider = ({
     name: 'alerts:displayAlert',
     type: 'hook:function',
   };
+
+  React.useEffect(
+    () => {
+      if (!didMount.current) {
+        didMount.current = true;
+
+        return;
+      }
+
+      dismissAllAlerts({ removePersistent: false });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [pathname],
+  );
 
   return (
     <AlertsContext.Provider value={context}>

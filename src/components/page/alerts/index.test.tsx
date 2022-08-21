@@ -14,7 +14,8 @@ describe('<Alerts />', () => {
     const { asFragment } = render(
       <AlertsProvider>
         <PageAlerts />
-      </AlertsProvider>
+      </AlertsProvider>,
+      { router: true },
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -50,7 +51,8 @@ describe('<Alerts />', () => {
       const { asFragment } = render(
         <AlertsProvider initialValue={alerts}>
           <PageAlerts />
-        </AlertsProvider>
+        </AlertsProvider>,
+        { router: true },
       );
 
       expect(asFragment()).toMatchSnapshot();

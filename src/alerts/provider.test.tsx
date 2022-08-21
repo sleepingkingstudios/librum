@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { map } from 'lodash';
+import { Link } from 'react-router-dom';
 import { v4 as generateUuid } from 'uuid';
 import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 
-import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import { render } from '@test-helpers/rendering';
 
 import { AlertsContext } from './context';
 import { AlertsProvider } from './provider';
@@ -105,6 +106,7 @@ const AlertsDisplay = ({
       { renderDismissAlertButton({ dismissAlert, uuid: dismiss }) }
       { renderDismissAllAlertsButton({ dismissAllAlerts, options }) }
       { renderDisplayAlertButton({ alert: display, displayAlert }) }
+      <Link to="/other-location">Change Location</Link>
       <ul>
         { map(alerts, renderAlert) }
       </ul>
@@ -117,7 +119,8 @@ describe('<AlertsProvider />', () => {
     const { queryAllByRole } = render(
       <AlertsProvider>
         <AlertsDisplay />
-      </AlertsProvider>
+      </AlertsProvider>,
+      { router: true },
     );
 
     const items = queryAllByRole('listitem');
@@ -140,7 +143,8 @@ describe('<AlertsProvider />', () => {
       } = render(
         <AlertsProvider>
           <AlertsDisplay display={props} />
-        </AlertsProvider>
+        </AlertsProvider>,
+        { router: true },
       );
 
       const itemsBefore = queryAllByRole('listitem');
@@ -196,7 +200,8 @@ describe('<AlertsProvider />', () => {
       const { queryAllByRole } = render(
         <AlertsProvider initialValue={alerts}>
           <AlertsDisplay />
-        </AlertsProvider>
+        </AlertsProvider>,
+        { router: true },
       );
 
       const items = queryAllByRole('listitem');
@@ -220,7 +225,8 @@ describe('<AlertsProvider />', () => {
         } = render(
           <AlertsProvider initialValue={alerts}>
             <AlertsDisplay dismiss={alerts[1].uuid} />
-          </AlertsProvider>
+          </AlertsProvider>,
+          { router: true },
         );
 
         const button = getByRole('button', { name: 'Dismiss Alert' });
@@ -248,7 +254,8 @@ describe('<AlertsProvider />', () => {
         } = render(
           <AlertsProvider initialValue={alerts}>
             <AlertsDisplay dismissAll={false} />
-          </AlertsProvider>
+          </AlertsProvider>,
+          { router: true },
         );
 
         const button = getByRole('button', { name: 'Dismiss All Alerts' });
@@ -272,7 +279,8 @@ describe('<AlertsProvider />', () => {
           } = render(
             <AlertsProvider initialValue={alerts}>
               <AlertsDisplay dismissAll={true} />
-            </AlertsProvider>
+            </AlertsProvider>,
+            { router: true },
           );
 
           const button = getByRole('button', { name: 'Dismiss All Alerts' });
@@ -304,7 +312,8 @@ describe('<AlertsProvider />', () => {
         } = render(
           <AlertsProvider initialValue={alerts}>
             <AlertsDisplay display={props} />
-          </AlertsProvider>
+          </AlertsProvider>,
+          { router: true },
         );
 
         const button = getByRole('button', { name: 'Display Alert' });
@@ -314,6 +323,37 @@ describe('<AlertsProvider />', () => {
         const items = queryAllByRole('listitem');
 
         expect(items).toHaveLength(4);
+
+        expect(
+          map(items, (item: HTMLElement) => item.textContent)
+        ).toEqual(expected);
+      });
+    });
+
+    describe('when the location changes', () => {
+      it('should dismiss all non-persistent alerts', () => {
+        const expected = [
+          'Increase in three-eyed fish observed',
+        ];
+        const {
+          getByRole,
+          queryAllByRole,
+        } = render(
+          <AlertsProvider initialValue={alerts}>
+            <AlertsDisplay dismissAll={false} />
+          </AlertsProvider>,
+          { router: true },
+        );
+
+        const link = getByRole('link', { name: 'Change Location' });
+
+        expect(link).toBeVisible();
+
+        userEvent.click(link);
+
+        const items = queryAllByRole('listitem');
+
+        expect(items).toHaveLength(1);
 
         expect(
           map(items, (item: HTMLElement) => item.textContent)

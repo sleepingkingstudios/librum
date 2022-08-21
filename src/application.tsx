@@ -11,11 +11,11 @@ export const Application = (): JSX.Element => {
   return (
     <ReduxProvider store={store}>
       <ThemeProvider>
-        <AlertsProvider>
-          <BrowserRouter>
+        <BrowserRouter>
+          <AlertsProvider>
             <ApplicationRoutes />
-          </BrowserRouter>
-        </AlertsProvider>
+          </AlertsProvider>
+        </BrowserRouter>
       </ThemeProvider>
     </ReduxProvider>
   );

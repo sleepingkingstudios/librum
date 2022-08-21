@@ -3,9 +3,9 @@ import { map } from 'lodash';
 import { v4 as generateUuid } from 'uuid';
 import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 
-import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import { render } from '@test-helpers/rendering';
 
 import { useAlerts } from './index';
 import { AlertsProvider } from './provider';
@@ -117,7 +117,8 @@ describe('useAlerts', () => {
     const { queryAllByRole } = render(
       <AlertsProvider>
         <AlertsDisplay />
-      </AlertsProvider>
+      </AlertsProvider>,
+      { router: true },
     );
 
     const items = queryAllByRole('listitem');
@@ -140,7 +141,8 @@ describe('useAlerts', () => {
       } = render(
         <AlertsProvider>
           <AlertsDisplay display={props} />
-        </AlertsProvider>
+        </AlertsProvider>,
+        { router: true },
       );
 
       const itemsBefore = queryAllByRole('listitem');
@@ -196,7 +198,8 @@ describe('useAlerts', () => {
       const { queryAllByRole } = render(
         <AlertsProvider initialValue={alerts}>
           <AlertsDisplay />
-        </AlertsProvider>
+        </AlertsProvider>,
+        { router: true },
       );
 
       const items = queryAllByRole('listitem');
@@ -220,7 +223,8 @@ describe('useAlerts', () => {
         } = render(
           <AlertsProvider initialValue={alerts}>
             <AlertsDisplay dismiss={alerts[1].uuid} />
-          </AlertsProvider>
+          </AlertsProvider>,
+          { router: true },
         );
 
         const button = getByRole('button', { name: 'Dismiss Alert' });
@@ -248,7 +252,8 @@ describe('useAlerts', () => {
         } = render(
           <AlertsProvider initialValue={alerts}>
             <AlertsDisplay dismissAll={false} />
-          </AlertsProvider>
+          </AlertsProvider>,
+          { router: true },
         );
 
         const button = getByRole('button', { name: 'Dismiss All Alerts' });
@@ -272,7 +277,8 @@ describe('useAlerts', () => {
           } = render(
             <AlertsProvider initialValue={alerts}>
               <AlertsDisplay dismissAll={true} />
-            </AlertsProvider>
+            </AlertsProvider>,
+            { router: true },
           );
 
           const button = getByRole('button', { name: 'Dismiss All Alerts' });
@@ -304,7 +310,8 @@ describe('useAlerts', () => {
         } = render(
           <AlertsProvider initialValue={alerts}>
             <AlertsDisplay display={props} />
-          </AlertsProvider>
+          </AlertsProvider>,
+          { router: true },
         );
 
         const button = getByRole('button', { name: 'Display Alert' });
