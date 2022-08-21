@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/resource'
 
-RSpec.describe Actions::Api::Sessions::Create do
+RSpec.describe Actions::Api::Authentication::Sessions::Create do
   subject(:action) do
     described_class.new(
       repository: repository,

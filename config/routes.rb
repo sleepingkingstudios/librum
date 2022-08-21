@@ -36,6 +36,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :authentication do
+      api_resource :session, only: :create
+    end
+
     namespace :dnd5e do
       api_resources :conditions
     end
@@ -43,8 +47,6 @@ Rails.application.routes.draw do
     api_resources :game_systems
 
     api_resources :publishers
-
-    api_resource :session, only: :create
 
     namespace :sources do
       api_resources :books

@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'support/contracts/controller_contracts'
 require 'support/contracts/responder_contracts'
 
-RSpec.describe Api::SessionsController, type: :controller do
+RSpec.describe Api::Authentication::SessionsController, type: :controller do
   include Spec::Support::Contracts::ControllerContracts
 
   describe '::Responder' do
@@ -88,6 +88,6 @@ RSpec.describe Api::SessionsController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Sessions::Create,
+    Actions::Api::Authentication::Sessions::Create,
     member: false
 end

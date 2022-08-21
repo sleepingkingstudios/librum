@@ -4,11 +4,13 @@ require 'rails_helper'
 
 require 'support/contracts/routing_contracts'
 
-RSpec.describe "#{Api::SessionsController} routes", type: :routing do
+RSpec.describe "#{Api::Authentication::SessionsController} routes",
+  type: :routing \
+do
   include Spec::Support::Contracts::RoutingContracts
 
   include_contract 'should route to api resource',
-    'session',
+    'authentication/session',
     only:     %i[create],
     singular: true
 end

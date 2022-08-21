@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Api
+module Api::Authentication
   # API controller for managing authentication sessions.
   class SessionsController < ApiController
     # Responder class for authentication responses.
@@ -31,8 +31,8 @@ module Api
       super().merge(::Authentication::User => user_serializer)
     end
 
-    responder :json, Api::SessionsController::Responder
+    responder :json, Api::Authentication::SessionsController::Responder
 
-    action :create, Actions::Api::Sessions::Create
+    action :create, Actions::Api::Authentication::Sessions::Create
   end
 end

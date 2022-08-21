@@ -46,7 +46,7 @@ describe('Session API', () => {
       param,
       request: {
         method: 'POST',
-        url: '/api/session',
+        url: '/api/authentication/session',
       },
     });
   });

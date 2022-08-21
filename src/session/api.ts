@@ -12,7 +12,7 @@ export const sessionApi = api.injectEndpoints({
     createSession: builder.mutation<ApiSuccess<{ token: string, user: User }>, Login>({
       query: (body: Login) => ({
         method: 'POST',
-        url: 'session',
+        url: 'authentication/session',
         body,
       }),
     }),
