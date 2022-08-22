@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import type { MutationStatus } from '@api';
+import { DataList } from '@components/data-list';
 import {
   Form,
   FormButton,
@@ -9,6 +10,11 @@ import {
 } from '@components/form';
 import { Page } from '@components/page';
 import type { Breadcrumbs } from '@components/page';
+
+type ExampleObject = {
+  name: string;
+  description?: string;
+};
 
 const breadcrumbs: Breadcrumbs = [
   {
@@ -23,6 +29,15 @@ const breadcrumbs: Breadcrumbs = [
     url: '/demo',
   },
 ];
+
+const listData: ExampleObject = {
+  name: 'Magic Missile',
+  description: null,
+};
+
+const listDefaultValue = (
+  <em>(unknown)</em>
+);
 
 const mockMutationStatus: MutationStatus = { isLoading: false };
 
@@ -92,6 +107,17 @@ export const DemoPage = (): JSX.Element => (
     <p>This is a <a className="link-danger">danger link</a>.</p>
 
     <p>This is a <a className="link-muted">muted link</a>.</p>
+
+    <hr className="hr-muted m-5" />
+
+    <h2>Data</h2>
+
+    <p>This is a data list.</p>
+
+    <DataList
+      data={listData}
+      defaultValue={listDefaultValue}
+    />
 
     <hr className="hr-muted m-5" />
 

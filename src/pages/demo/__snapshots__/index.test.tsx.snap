@@ -130,6 +130,49 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
       class="hr-muted m-5"
     />
     <h2>
+      Data
+    </h2>
+    <p>
+      This is a data list.
+    </p>
+    <dl
+      class="data-list"
+    >
+      <div
+        class="data-list-item"
+      >
+        <dt
+          class="data-list-label"
+        >
+          Name
+        </dt>
+        <dd
+          class="data-list-value"
+        >
+          Magic Missile
+        </dd>
+      </div>
+      <div
+        class="data-list-item"
+      >
+        <dt
+          class="data-list-label"
+        >
+          Description
+        </dt>
+        <dd
+          class="data-list-value"
+        >
+          <em>
+            (unknown)
+          </em>
+        </dd>
+      </div>
+    </dl>
+    <hr
+      class="hr-muted m-5"
+    />
+    <h2>
       Forms
     </h2>
     <br />
