@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
     namespace :authentication do
       api_resource :session, only: :create
+
+      api_resource :user, only: :show
     end
 
     namespace :dnd5e do
