@@ -33,7 +33,10 @@ describe('(Integration) sessions', () => {
   it('should render the login form', () => {
     const { getByRole } = render(
       <LoginPage />,
-      { store: true }
+      {
+        router: true,
+        store: true,
+      },
     );
     const submit = getByRole('button', { name: 'Log In' });
 
@@ -43,7 +46,10 @@ describe('(Integration) sessions', () => {
   it('should not display the user message', () => {
     const { queryByText } = render(
       <LoginPage />,
-      { store: true }
+      {
+        router: true,
+        store: true,
+      },
     );
 
     expect(queryByText(/logged in/)).toBeNull();
@@ -53,7 +59,10 @@ describe('(Integration) sessions', () => {
     it('should call the mutation', async () => {
       const { getByRole } = render(
         <LoginPage />,
-        { store: true }
+        {
+          router: true,
+          store: true,
+        },
       );
       const expected = {
         username: '',
@@ -73,7 +82,10 @@ describe('(Integration) sessions', () => {
       it('should call the mutation', async () => {
         const { getByLabelText, getByRole } = render(
           <LoginPage />,
-          { store: true }
+          {
+            router: true,
+            store: true,
+          },
         );
         const expected = {
           username: 'Alan Bradley',
@@ -95,7 +107,10 @@ describe('(Integration) sessions', () => {
         it('should not display the user message', async () => {
           const { getByLabelText, getByRole, queryByText } = render(
             <LoginPage />,
-            { store: true }
+            {
+              router: true,
+              store: true,
+            },
           );
 
           userEvent.type(getByLabelText('Username'), 'Alan Bradley');
@@ -116,7 +131,10 @@ describe('(Integration) sessions', () => {
 
           const { getByLabelText, getByRole } = render(
             <LoginPage />,
-            { store: true }
+            {
+              router: true,
+              store: true,
+            },
           );
 
           userEvent.type(getByLabelText('Username'), 'Alan Bradley');
@@ -137,7 +155,10 @@ describe('(Integration) sessions', () => {
         it('should update the session', async () => {
           const { getByLabelText, getByRole, queryByText } = render(
             <LoginPage />,
-            { store: true }
+            {
+              router: true,
+              store: true,
+            },
           );
           const user: User = {
             email: 'alan.bradley@example.com',
@@ -179,7 +200,10 @@ describe('(Integration) sessions', () => {
 
           const { getByLabelText, getByRole } = render(
             <LoginPage />,
-            { store: true }
+            {
+              router: true,
+              store: true,
+            },
           );
           const user: User = {
             email: 'alan.bradley@example.com',

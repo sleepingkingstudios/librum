@@ -10,6 +10,7 @@ import {
   HomePage,
   LoginPage,
   NotFoundPage,
+  UserPage,
 } from '@pages';
 import { selector } from '@session';
 import type { Session } from '@session';
@@ -31,6 +32,7 @@ export const ApplicationRoutes = (): JSX.Element => {
       <Route path="/">
         <Route index element={<HomePage />} />
         <Route path="demo" element={<DemoPage />} />
+        <Route path="user" element={<UserPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

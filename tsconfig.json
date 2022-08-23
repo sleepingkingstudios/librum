@@ -26,6 +26,8 @@
       "@test-helpers/*": ["test-helpers/*"],
       "@themes": ["themes"],
       "@themes/*": ["themes/*"],
+      "@user": ["user"],
+      "@user/*": ["user/*"],
       "@utils/*": ["utils/*"],
     }
   },

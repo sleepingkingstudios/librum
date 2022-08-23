@@ -4,6 +4,7 @@ import {
   faUser,
   faUserXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import { useAlerts } from '@alerts';
 import {
@@ -47,7 +48,7 @@ export const PageUser = (): JSX.Element => {
 
       <span className="hidden sm:inline">You are currently logged in as </span>
 
-      { username }
+      <Link to="/user">{ username }</Link>
 
       <span className='float-right link-danger'>
         <button onClick={logout}>Log Out</button>

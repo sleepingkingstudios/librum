@@ -3,6 +3,7 @@ import { faUserXmark } from '@fortawesome/free-solid-svg-icons';
 
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import { render } from '@test-helpers/rendering';
 
 import { PageUser } from './index';
 import { useAlerts } from '@alerts';
@@ -17,7 +18,6 @@ import type {
   Session,
   User,
 } from '@session';
-import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
 
 jest.mock('@alerts');
@@ -63,25 +63,37 @@ describe('<PageUser>', () => {
     const token = '12345';
     const { create } = actions;
 
-    it('should show the user name', () => {
+    it('should show the user name link', () => {
       const { dispatch, store } = createStore();
       dispatch(create({ token, user }));
 
-      const { getByText } = render(<PageUser />, { store });
+      const { getByRole, getByText } = render(
+        <PageUser />,
+        {
+          router: true,
+          store,
+        },
+      );
 
       const notice = getByText(/currently logged in/);
 
       expect(notice).toBeVisible();
       expect(notice).toHaveTextContent('You are currently logged in as');
 
-      expect(getByText(user.username)).toBeVisible();
+      expect(getByRole('link', { name: user.username })).toBeVisible();
     });
 
     it('should show the logout link', () => {
       const { dispatch, store } = createStore();
       dispatch(create({ token, user }));
 
-      const { getByRole } = render(<PageUser />, { store });
+      const { getByRole } = render(
+        <PageUser />,
+        {
+          router: true,
+          store,
+        },
+      );
 
       expect(getByRole('button', { name: 'Log Out' })).toBeVisible();
     });
@@ -90,7 +102,13 @@ describe('<PageUser>', () => {
       const { dispatch, store } = createStore();
       dispatch(create({ token, user }));
 
-      const { asFragment } = render(<PageUser />, { store });
+      const { asFragment } = render(
+        <PageUser />,
+        {
+          router: true,
+          store,
+        },
+      );
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -102,7 +120,13 @@ describe('<PageUser>', () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
 
-        const { getByRole, queryByText } = render(<PageUser />, { store });
+        const { getByRole, queryByText } = render(
+          <PageUser />,
+          {
+            router: true,
+            store,
+          },
+        );
         const button = getByRole('button', { name: 'Log Out' });
 
         userEvent.click(button);
@@ -131,7 +155,13 @@ describe('<PageUser>', () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
 
-        const { getByRole } = render(<PageUser />, { store });
+        const { getByRole } = render(
+          <PageUser />,
+          {
+            router: true,
+            store,
+          },
+        );
         const button = getByRole('button', { name: 'Log Out' });
 
         userEvent.click(button);
@@ -145,7 +175,13 @@ describe('<PageUser>', () => {
         const { dispatch, getState, store } = createStore();
         dispatch(create({ token, user }));
 
-        const { getByRole } = render(<PageUser />, { store });
+        const { getByRole } = render(
+          <PageUser />,
+          {
+            router: true,
+            store,
+          },
+        );
         const button = getByRole('button', { name: 'Log Out' });
 
         userEvent.click(button);
@@ -161,7 +197,13 @@ describe('<PageUser>', () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
 
-        const { getByRole } = render(<PageUser />, { store });
+        const { getByRole } = render(
+          <PageUser />,
+          {
+            router: true,
+            store,
+          },
+        );
         const button = getByRole('button', { name: 'Log Out' });
 
         userEvent.click(button);

@@ -285,7 +285,11 @@ exports[`<Page> when the session is authenticated should match the snapshot 1`] 
         >
           You are currently logged in as 
         </span>
-        Alan Bradley
+        <a
+          href="/user"
+        >
+          Alan Bradley
+        </a>
         <span
           class="float-right link-danger"
         >

@@ -21,6 +21,7 @@ module.exports = {
       '@store': srcPath('store'),
       '@test-helpers': srcPath('test-helpers'),
       '@themes': srcPath('themes'),
+      '@user': srcPath('user'),
       '@utils': srcPath('utils'),
     },
   },
