@@ -149,7 +149,10 @@ describe('<PageHeader>', () => {
 
       const { asFragment } = render(
         <PageHeader />,
-        { store },
+        {
+          router: true,
+          store,
+        },
       );
 
       expect(asFragment()).toMatchSnapshot();

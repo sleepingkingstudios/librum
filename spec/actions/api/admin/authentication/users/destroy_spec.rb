@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/rspec/actions/destroy_contracts'
 
-RSpec.describe Actions::Api::Authentication::Users::Destroy do
+RSpec.describe Actions::Api::Admin::Authentication::Users::Destroy do
   include Cuprum::Rails::RSpec::Actions::DestroyContracts
 
   subject(:action) do

@@ -1,10 +1,26 @@
 # frozen_string_literal: true
 
-require 'cuprum/rails/actions/show'
+require 'cuprum/rails/action'
 
 module Actions::Api::Authentication::Users
-  # Show action for the Authentication::User API.
-  class Show < Cuprum::Rails::Actions::Show
-    prepend Actions::Api::FindBySlug
+  # Action to show the current authenticated user.
+  class Show < Cuprum::Rails::Action
+    private
+
+    def process(request:)
+      super
+
+      session = step { require_session }
+
+      { 'user' => session.current_user }
+    end
+
+    def require_session
+      return request.session if request.respond_to?(:session) && request.session
+
+      error = Errors::AuthenticationFailed.new
+
+      failure(error)
+    end
   end
 end

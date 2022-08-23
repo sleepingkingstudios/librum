@@ -2,12 +2,7 @@
 
 require 'rails_helper'
 
-require 'cuprum/rails/repository'
-require 'cuprum/rails/rspec/actions/show_contracts'
-
 RSpec.describe Actions::Api::Authentication::Users::Show do
-  include Cuprum::Rails::RSpec::Actions::ShowContracts
-
   subject(:action) do
     described_class.new(repository: repository, resource: resource)
   end
@@ -23,16 +18,46 @@ RSpec.describe Actions::Api::Authentication::Users::Show do
   end
   let(:user) { FactoryBot.create(:authentication_user) }
 
-  include_contract 'show action contract',
-    existing_entity:   -> { user },
-    primary_key_value: -> { SecureRandom.uuid } \
-  do
-    describe 'with id: a slug' do
-      let(:params) { { 'id' => user.slug } }
+  describe '.new' do
+    it 'should define the constructor' do
+      expect(described_class)
+        .to be_constructible
+        .with(0).arguments
+        .and_keywords(:repository, :resource)
+    end
+  end
 
-      include_contract 'should find the entity',
-        existing_entity: -> { user },
-        params:          -> { params }
+  describe '#call' do
+    it 'should define the method' do
+      expect(action).to be_callable.with(0).arguments.and_keywords(:request)
+    end
+
+    describe 'with an unauthenticated request' do
+      let(:request) { Cuprum::Rails::Request.new }
+      let(:expected_error) do
+        Errors::AuthenticationFailed.new
+      end
+
+      it 'should return a failing result' do
+        expect(action.call(request: request))
+          .to be_a_failing_result
+          .with_error(expected_error)
+      end
+    end
+
+    describe 'with an authenticated request' do
+      let(:credential) { FactoryBot.create(:generic_credential, :with_user) }
+      let(:session)    { Authentication::Session.new(credential: credential) }
+      let(:request)    { Authentication::Request.new(session: session) }
+      let(:expected_value) do
+        { 'user' => request.current_user }
+      end
+
+      it 'should return a passing request' do
+        expect(action.call(request: request))
+          .to be_a_passing_result
+          .with_value(expected_value)
+      end
     end
   end
 end

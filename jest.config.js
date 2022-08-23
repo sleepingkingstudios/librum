@@ -97,6 +97,8 @@ module.exports = {
     '^@test-helpers/(.*)$': '<rootDir>/src/test-helpers/$1',
     '^@themes$': '<rootDir>/src/themes',
     '^@themes/(.*)$': '<rootDir>/src/themes/$1',
+    '^@user$': '<rootDir>/src/user',
+    '^@user/(.*)$': '<rootDir>/src/user/$1',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
   },
 

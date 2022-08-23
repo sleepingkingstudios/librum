@@ -30,8 +30,16 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    namespace :admin do
+      namespace :authentication do
+        api_resources :users
+      end
+    end
+
     namespace :authentication do
-      api_resources :users
+      api_resource :session, only: :create
+
+      api_resource :user, only: :show
     end
 
     namespace :dnd5e do
@@ -41,8 +49,6 @@ Rails.application.routes.draw do
     api_resources :game_systems
 
     api_resources :publishers
-
-    api_resource :session, only: :create
 
     namespace :sources do
       api_resources :books

@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/rspec/actions/create_contracts'
 
-RSpec.describe Actions::Api::Authentication::Users::Create do
+RSpec.describe Actions::Api::Admin::Authentication::Users::Create do
   include Cuprum::Rails::RSpec::Actions::CreateContracts
 
   subject(:action) do
