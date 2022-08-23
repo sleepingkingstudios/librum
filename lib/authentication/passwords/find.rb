@@ -50,7 +50,7 @@ module Authentication::Passwords
         return credential
       end
 
-      failure(Authentication::Errors::InvalidPassword.new)
+      failure(Authentication::Errors::InvalidLogin.new)
     end
 
     def users_collection

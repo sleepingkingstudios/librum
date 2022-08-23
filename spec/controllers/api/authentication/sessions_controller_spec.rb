@@ -38,8 +38,8 @@ RSpec.describe Api::Authentication::SessionsController, type: :controller do
         end
       end
 
-      describe 'with a failing result with an InvalidPassword error' do
-        let(:error)  { ::Authentication::Errors::InvalidPassword.new }
+      describe 'with a failing result with an InvalidLogin error' do
+        let(:error)  { ::Authentication::Errors::InvalidLogin.new }
         let(:result) { Cuprum::Result.new(error: error) }
 
         include_contract 'should respond with', 422 do

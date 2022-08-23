@@ -32,7 +32,7 @@ RSpec.describe Actions::Api::Authentication::Sessions::Create do
 
   describe '#call' do
     let(:expected_error) do
-      Authentication::Errors::InvalidPassword.new
+      Authentication::Errors::InvalidLogin.new
     end
     let(:params)  { {} }
     let(:request) { instance_double(Cuprum::Rails::Request, params: params) }

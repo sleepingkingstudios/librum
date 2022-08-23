@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Authentication::Errors::InvalidPassword do
+RSpec.describe Authentication::Errors::InvalidLogin do
   subject(:error) { described_class.new(**constructor_options) }
 
   let(:constructor_options) { {} }
@@ -10,7 +10,7 @@ RSpec.describe Authentication::Errors::InvalidPassword do
   describe '::TYPE' do
     include_examples 'should define constant',
       :TYPE,
-      'authentication.errors.invalid_password'
+      'authentication.errors.invalid_login'
   end
 
   describe '.new' do
@@ -30,7 +30,7 @@ RSpec.describe Authentication::Errors::InvalidPassword do
   end
 
   describe '#message' do
-    let(:expected) { 'password does not match encrypted value' }
+    let(:expected) { 'invalid username or password' }
 
     include_examples 'should define reader', :message, -> { be == expected }
   end
