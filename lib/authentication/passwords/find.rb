@@ -6,7 +6,7 @@ require 'cuprum/collections/commands/find_one_matching'
 module Authentication::Passwords
   # Finds the password credential for the requested user and matches passwords.
   class Find < Cuprum::Command
-    # @param repository [Cuprum::Collections::Repository] The repository used to
+    # @param repository [Cuprum::Collections::Repository] the repository used to
     #   query the user and credential.
     def initialize(repository:)
       super()
@@ -14,6 +14,8 @@ module Authentication::Passwords
       @repository = repository
     end
 
+    # @return [Cuprum::Collections::Repository] the repository used to query the
+    #   user and credential.
     attr_reader :repository
 
     private
