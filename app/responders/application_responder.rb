@@ -24,6 +24,17 @@ class ApplicationResponder < Cuprum::Rails::Responders::JsonResponder
     render_failure(result.error, status: 404)
   end
 
+  match :failure, error: Cuprum::Rails::Errors::InvalidParameters do |result|
+    render_failure(result.error, status: 400)
+  end
+
+  match :failure, error: Authentication::Errors::InvalidPassword do |result|
+    render_failure(
+      Rails.env.development? ? result.error : authentication_error,
+      status: 401
+    )
+  end
+
   match :failure, error: Authentication::Errors::InvalidToken do |result|
     render_failure(
       Rails.env.development? ? result.error : authentication_error,

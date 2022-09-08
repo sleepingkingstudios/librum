@@ -9,18 +9,18 @@ Rails.application.routes.draw do
     def api_resource(resource_name, **options, &block)
       resource(
         resource_name,
-        options.reverse_merge(
+        **options.reverse_merge(
           format: :json,
           only:   API_ROUTES[1..]
         ),
-        *block
+        &block
       )
     end
 
     def api_resources(resource_name, **options, &block)
       resources(
         resource_name,
-        options.reverse_merge(
+        **options.reverse_merge(
           format: :json,
           only:   API_ROUTES
         ),
@@ -39,7 +39,11 @@ Rails.application.routes.draw do
     namespace :authentication do
       api_resource :session, only: :create
 
-      api_resource :user, only: :show
+      api_resource :user, only: :show do
+        api_resource :password,
+          controller: 'users/passwords',
+          only:       :update
+      end
     end
 
     namespace :dnd5e do
