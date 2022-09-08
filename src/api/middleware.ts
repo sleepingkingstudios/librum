@@ -4,6 +4,22 @@ import type {
   MiddlewareBuilder,
 } from '@utils/middleware';
 import type { Matcher } from './matcher';
+import {
+  convertToSnakeCase,
+} from './utils';
+
+const convertRequestToSnakeCase: MiddlewareBuilder = (): Middleware => (
+  async (fn, params) => {
+    return await fn(convertToSnakeCase(params));
+  }
+);
+
+convertRequestToSnakeCase.annotations = {
+  name: 'middleware:convertRequestToSnakeCase',
+  type: 'middleware:convertRequestToSnakeCase',
+};
+
+export { convertRequestToSnakeCase };
 
 export const matcherMiddleware = <MatchOptions extends Record<string, unknown>>(
   matcher: Matcher<unknown>,
