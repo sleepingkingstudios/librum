@@ -1,11 +1,12 @@
 import type { Annotations } from '@utils/annotations';
 import type {
-  FetchResponse,
   Matcher,
   MatchResponseProps,
 } from './types';
+import type { FetchResponse } from '../types';
 import { responseMatches } from './utils';
 
+export { matcherMiddleware } from './middleware';
 export {
   Matcher,
   MatchResponse,

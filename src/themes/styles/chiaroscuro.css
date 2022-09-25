@@ -32,14 +32,14 @@
 
 @layer components {
   .theme-chiaroscuro {
-    .form-button {
+    .button, .form-button {
       @apply border-zinc-800 text-zinc-800;
       @apply active:bg-zinc-200 hover:border-zinc-900 hover:text-zinc-900;
       @apply dark:border-zinc-200 dark:text-zinc-200;
       @apply dark:active:bg-zinc-800 dark:hover:border-zinc-100 dark:hover:text-zinc-100;
     }
 
-    .form-button:disabled {
+    .button:disabled, .form-button:disabled {
       @apply border-zinc-500 text-zinc-500;
       @apply active:bg-zinc-100 dark:active:bg-zinc-900;
     }
@@ -122,6 +122,13 @@
     .alert-warning {
       @apply bg-amber-500 border-amber-600;
       @apply dark:bg-amber-600 dark:border-amber-500;
+    }
+
+    .button-info {
+      @apply border-blue-600 text-blue-600;
+      @apply active:bg-blue-200 hover:border-blue-700 hover:text-blue-700;
+      @apply dark:border-blue-400 dark:text-blue-400;
+      @apply dark:active:bg-blue-900 dark:hover:border-blue-300 dark:hover:text-blue-300;
     }
 
     .hr-fancy {

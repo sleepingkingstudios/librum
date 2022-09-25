@@ -52,14 +52,14 @@ describe('LoginPage request', () => {
 
   describe('useRequest', () => {
     const action = { authenticated: true };
-    const actionCreator = jest.fn(() => action);
+    const createSession = jest.fn(() => action);
     const dismissAlert = jest.fn();
     const dispatch = jest.fn();
     const displayAlert = jest.fn();
     const setItem = jest.fn();
     const mutation = jest.fn(() => wrapResponse(successResponse));
     const options = {
-      actionCreator,
+      createSession,
       dismissAlert,
       dispatch,
       displayAlert,
@@ -75,7 +75,7 @@ describe('LoginPage request', () => {
     };
 
     beforeEach(() => {
-      actionCreator.mockClear();
+      createSession.mockClear();
       dismissAlert.mockClear();
       dispatch.mockClear();
       displayAlert.mockClear();
@@ -114,7 +114,7 @@ describe('LoginPage request', () => {
               type: 'matcher',
             },
             name: 'page:login:alerts',
-            type: 'middleware:matcher'
+            type: 'api:middleware:matcher'
           },
         ],
         name: 'pages:login:request',

@@ -33,26 +33,6 @@ export type FetchResponse<Data extends DataObject = DataObject> =
 export type FetchPromise<Data extends DataObject = DataObject> =
   Promise<FetchResponse<Data>>;
 
-export type Matcher<MatchOptions> = (
-  (
-    response: FetchResponse,
-    options: MatchOptions,
-  ) => void
-) & Annotated;
-
-export type MatchResponseProps<MatchOptions> = {
-  errorType?: string,
-  fn: Matcher<MatchOptions>,
-  matcher?: Matcher<MatchOptions>,
-  status: 'success' | 'failure',
-}
-
-export type MatchResponse<MatchOptions> = ({
-  errorType,
-  matcher,
-  status,
-}: MatchResponseProps) => Matcher<MatchOptions>;
-
 export type Mutation = (
   (param?: unknown) => unknown
 ) & Annotated;
