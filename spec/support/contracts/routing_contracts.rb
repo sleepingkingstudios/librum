@@ -10,15 +10,17 @@ module Spec::Support::Contracts
     module ShouldRouteToApiResourceContract
       extend RSpec::SleepingKingStudios::Contract
 
-      contract do |resource_name, only: nil, singular: false|
+      contract do |resource_name, controller: nil, only: nil, singular: false|
         if singular
           include_contract 'should route to singular api resource',
             resource_name,
-            only: only
+            controller: controller,
+            only:       only
         else
           include_contract 'should route to plural api resource',
             resource_name,
-            only: only
+            controller: controller,
+            only:       only
         end
       end
     end
@@ -26,7 +28,7 @@ module Spec::Support::Contracts
     module ShouldRouteToPluralApiResourceContract
       extend RSpec::SleepingKingStudios::Contract
 
-      contract do |resource_name, only: nil|
+      contract do |resource_name, controller: nil, only: nil|
         root_route      = "api/#{resource_name}"
         controller_name =
           resource_name
@@ -47,7 +49,7 @@ module Spec::Support::Contracts
         expected_routes &= Array(only).map(&:intern) unless Array(only).empty?
 
         describe "GET /#{root_route}" do
-          let(:configured_controller) { root_route }
+          let(:configured_controller) { controller || root_route }
 
           if expected_routes.include?(:index)
             it "should route to #{controller_name}#index" do
@@ -65,7 +67,7 @@ module Spec::Support::Contracts
         end
 
         describe "POST /#{root_route}" do
-          let(:configured_controller) { root_route }
+          let(:configured_controller) { controller || root_route }
 
           if expected_routes.include?(:create)
             it "should route to #{controller_name}#create" do
@@ -83,7 +85,7 @@ module Spec::Support::Contracts
         end
 
         describe "GET /#{root_route}/:id" do
-          let(:configured_controller) { root_route }
+          let(:configured_controller) { controller || root_route }
           let(:configured_resource_id) do
             '00000000-0000-0000-0000-000000000000'
           end
@@ -107,7 +109,7 @@ module Spec::Support::Contracts
         end
 
         describe "PATCH /#{root_route}/:id" do
-          let(:configured_controller) { root_route }
+          let(:configured_controller) { controller || root_route }
           let(:configured_resource_id) do
             '00000000-0000-0000-0000-000000000000'
           end
@@ -131,7 +133,7 @@ module Spec::Support::Contracts
         end
 
         describe "DELETE /#{root_route}/:id" do
-          let(:configured_controller) { root_route }
+          let(:configured_controller) { controller || root_route }
           let(:configured_resource_id) do
             '00000000-0000-0000-0000-000000000000'
           end
@@ -159,7 +161,7 @@ module Spec::Support::Contracts
     module ShouldRouteToSingularApiResourceContract
       extend RSpec::SleepingKingStudios::Contract
 
-      contract do |resource_name, only: nil|
+      contract do |resource_name, controller: nil, only: nil|
         root_route      = "api/#{resource_name}"
         controller_name =
           resource_name
@@ -179,7 +181,7 @@ module Spec::Support::Contracts
         expected_routes &= Array(only).map(&:intern) unless Array(only).empty?
 
         describe "GET /#{root_route}" do
-          let(:configured_controller) { root_route.pluralize }
+          let(:configured_controller) { controller || root_route.pluralize }
 
           if expected_routes.include?(:show)
             it "should route to #{controller_name}#show" do
@@ -197,7 +199,7 @@ module Spec::Support::Contracts
         end
 
         describe "POST /#{root_route}" do
-          let(:configured_controller) { root_route.pluralize }
+          let(:configured_controller) { controller || root_route.pluralize }
 
           if expected_routes.include?(:create)
             it "should route to #{controller_name}#create" do
@@ -215,7 +217,7 @@ module Spec::Support::Contracts
         end
 
         describe "PATCH /#{root_route}" do
-          let(:configured_controller) { root_route.pluralize }
+          let(:configured_controller) { controller || root_route.pluralize }
 
           if expected_routes.include?(:update)
             it "should route to #{controller_name}#update" do # rubocop:disable RSpec/ExampleLength
@@ -235,7 +237,7 @@ module Spec::Support::Contracts
         end
 
         describe "DELETE /#{root_route}" do
-          let(:configured_controller) { root_route.pluralize }
+          let(:configured_controller) { controller || root_route.pluralize }
 
           if expected_routes.include?(:destroy)
             it "should route to #{controller_name}#destroy" do # rubocop:disable RSpec/ExampleLength

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserUpdatePasswordForm /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+    class="w-full lg:w-1/2 relative"
+  >
+    <div
+      class=""
+    >
+      <div
+        class="form-field"
+      >
+        <label
+          class="form-label"
+          for="old_password"
+        >
+          Old Password
+        </label>
+        <input
+          class="form-input"
+          id="old_password"
+          name="oldPassword"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        class="form-field"
+      >
+        <label
+          class="form-label"
+          for="new_password"
+        >
+          New Password
+        </label>
+        <input
+          class="form-input"
+          id="new_password"
+          name="newPassword"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        class="form-field"
+      >
+        <label
+          class="form-label"
+          for="confirm_password"
+        >
+          Confirm Password
+        </label>
+        <input
+          class="form-input"
+          id="confirm_password"
+          name="confirmPassword"
+          type="password"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
+    >
+      <button
+        class="form-button"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="form-button button-info"
+        type="submit"
+      >
+        Update Password
+      </button>
+    </div>
+  </form>
+</DocumentFragment>
+`;

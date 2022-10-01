@@ -5,13 +5,13 @@ import type {
   DisplayAlert,
   DisplayAlertProps,
 } from '@alerts';
+import type { FetchResponse } from '@api';
 import { reduceMatchers } from '@api/matcher';
 import type {
   Matcher,
   MatchResponseProps,
 } from '@api/matcher';
-import { matcherMiddleware } from '@api/middleware';
-import type { FetchResponse } from '@api';
+import { matcherMiddleware } from '@api/matcher';
 
 interface IDisplayAlertsMatcherProps extends Record<string, unknown> {
   dismissAlert: DismissAlert;

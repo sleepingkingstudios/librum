@@ -1,3 +1,4 @@
+import type { DataObject } from '@utils/types';
 import {
   getData,
   getError,
@@ -5,9 +6,7 @@ import {
   hasError,
   isFailure,
   isSuccess,
-  responseMatches,
 } from './utils';
-import type { DataObject } from '@utils/types';
 import {
   buildFailureResponse,
   buildSuccessResponse,
@@ -364,143 +363,6 @@ describe('store utils', () => {
 
       it('should return true', () => {
         expect(isSuccess(response)).toBe(true);
-      });
-    });
-  });
-
-  describe('responseMatches()', () => {
-    it('should be a function', () => {
-      expect(typeof responseMatches).toBe('function');
-    });
-
-    describe('with status: "failure"', () => {
-      const status = 'failure';
-
-      describe('with a fetch error response', () => {
-        const response: FetchFailure = fetchErrorResponse;
-
-        it('should return true', () => {
-          expect(responseMatches({ response, status })).toBe(true);
-        });
-      });
-
-      describe('with a serialized error response', () => {
-        const response: FetchFailure = serializedErrorResponse;
-
-        it('should return true', () => {
-          expect(responseMatches({ response, status })).toBe(true);
-        });
-      });
-
-      describe('with a failed response', () => {
-        const response: FetchResponse = failureResponse;
-
-        it('should return true', () => {
-          expect(responseMatches({ response, status })).toBe(true);
-        });
-      });
-
-      describe('with a successful response', () => {
-        const response: FetchResponse = successResponse;
-
-        it('should return false', () => {
-          expect(responseMatches({ response, status })).toBe(false);
-        });
-      });
-    });
-
-    describe('with status: "failure" and an error type', () => {
-      const errorType = 'specific.error';
-      const status = 'failure';
-
-      describe('with a fetch error response', () => {
-        const response: FetchFailure = fetchErrorResponse;
-
-        it('should return false', () => {
-          expect(responseMatches({ errorType, response, status })).toBe(false);
-        });
-      });
-
-      describe('with a serialized error response', () => {
-        const response: FetchFailure = serializedErrorResponse;
-
-        it('should return false', () => {
-          expect(responseMatches({ errorType, response, status })).toBe(false);
-        });
-      });
-
-      describe('with a failed response', () => {
-        const response: FetchResponse = buildFailureResponse();
-
-        it('should return false', () => {
-          expect(responseMatches({ errorType, response, status })).toBe(false);
-        });
-      });
-
-      describe('with a failed response with a non-matching API error', () => {
-        const response: FetchResponse = failureResponseWithError;
-
-        it('should return false', () => {
-          expect(responseMatches({ errorType, response, status })).toBe(false);
-        });
-      });
-
-      describe('with a failed response with a matching API error', () => {
-        const response: FetchResponse = buildFailureResponse({
-          error: {
-            data: {},
-            message: 'something went wrong',
-            type: errorType,
-          },
-        });
-
-        it('should return true', () => {
-          expect(responseMatches({ errorType, response, status })).toBe(true);
-        });
-      });
-
-      describe('with a successful response', () => {
-        const response: FetchResponse = successResponse;
-
-        it('should return false', () => {
-          expect(responseMatches({ errorType, response, status })).toBe(false);
-        });
-      });
-    });
-
-    describe('with status: "success"', () => {
-      const status = 'success';
-
-      describe('with a fetch error response', () => {
-        const response: FetchFailure = fetchErrorResponse;
-
-        it('should return true', () => {
-          expect(responseMatches({ response, status })).toBe(false);
-        });
-      });
-
-      describe('with a serialized error response', () => {
-        const response: FetchFailure = serializedErrorResponse;
-
-        it('should return true', () => {
-          expect(responseMatches({ response, status })).toBe(false);
-        });
-      });
-
-      describe('with a failed response', () => {
-        const response: FetchResponse = buildFailureResponse();
-
-        it('should return false', () => {
-          expect(responseMatches({ response, status })).toBe(false);
-        });
-      });
-
-      describe('with a successful response', () => {
-        const response: FetchResponse = buildSuccessResponse();
-
-        it('should return true', () => {
-          expect(responseMatches({ response, status })).toBe(true);
-        });
       });
     });
   });

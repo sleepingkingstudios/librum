@@ -27,7 +27,7 @@ export const LoginPage = (): JSX.Element => {
     localStorage.setItem(key, value);
   };
   const options = {
-    actionCreator: create,
+    createSession: create,
     dismissAlert,
     dispatch,
     displayAlert,

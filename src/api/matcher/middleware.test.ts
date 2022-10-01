@@ -4,11 +4,11 @@ import { matcherMiddleware } from './middleware';
 import {
   buildSuccessResponse,
   wrapResponse,
-} from './test-helpers';
+} from '../test-helpers';
 
 const successResponse: FetchResponse = buildSuccessResponse();
 
-describe('store middleware', () => {
+describe('api matcher', () => {
   describe('matcherMiddleware()', () => {
     const matcher = jest.fn();
     const options = { callback: jest.fn() };
@@ -60,7 +60,7 @@ describe('store middleware', () => {
         const expected = {
           matcher,
           name: 'test:middleware',
-          type: 'middleware:matcher',
+          type: 'api:middleware:matcher',
         };
 
         expect(builder.annotations).toEqual(expected);

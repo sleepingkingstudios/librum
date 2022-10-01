@@ -3,6 +3,7 @@ import {
   capitalize,
   last,
   map,
+  snakeCase,
 } from 'lodash';
 import { useField } from 'formik';
 import type {
@@ -42,12 +43,12 @@ const columnSpanClassName = ({ cols }: { cols: number }): string | null => {
 };
 
 const convertNameToId = (name: string): string => (
-  name.replace(/\]/g, '').split('[').join('_')
+  name.replace(/\]/g, '').split('[').map(snakeCase).join('_')
 );
 
 const convertNameToLabel = (name: string): string => {
   const segment: string = last(name.split(/\[/));
-  const trimmed: string = segment.replace(/\]/, '');
+  const trimmed: string = snakeCase(segment.replace(/\]/, ''));
 
   return map(trimmed.split('_'), capitalize).join(' ');
 };

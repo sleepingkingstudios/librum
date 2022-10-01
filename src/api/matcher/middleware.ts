@@ -3,7 +3,7 @@ import type {
   Middleware,
   MiddlewareBuilder,
 } from '@utils/middleware';
-import type { Matcher } from './matcher';
+import type { Matcher } from './index';
 
 export const matcherMiddleware = <MatchOptions extends Record<string, unknown>>(
   matcher: Matcher<unknown>,
@@ -24,7 +24,7 @@ export const matcherMiddleware = <MatchOptions extends Record<string, unknown>>(
   if (annotations !== null) {
     builder.annotations = {
       matcher,
-      type: 'middleware:matcher',
+      type: 'api:middleware:matcher',
       ...annotations,
     };
   }

@@ -176,7 +176,33 @@ exports[`<FormField /> with label: value should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<FormField /> with name: qualified value should match the snapshot 1`] = `
+exports[`<FormField /> with name: qualified value in camelCase should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="user_contact_email_address"
+      >
+        Email Address
+      </label>
+      <input
+        class="form-input"
+        id="user_contact_email_address"
+        name="user[contact][emailAddress]"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> with name: qualified value in snake_case should match the snapshot 1`] = `
 <DocumentFragment>
   <form
     action="#"

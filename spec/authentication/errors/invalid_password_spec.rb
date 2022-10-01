@@ -30,7 +30,7 @@ RSpec.describe Authentication::Errors::InvalidPassword do
   end
 
   describe '#message' do
-    let(:expected) { 'invalid username or password' }
+    let(:expected) { 'password does not match encrypted value' }
 
     include_examples 'should define reader', :message, -> { be == expected }
   end

@@ -1,21 +1,21 @@
 import {
   matchResponse,
   reduceMatchers,
-} from './matcher';
+} from './index';
 import type { Annotations } from '@utils/annotations';
+import type { Matcher } from './types';
 import {
   buildFailureResponse,
   buildSuccessResponse,
   fetchErrorResponse,
   serializedErrorResponse,
-} from './test-helpers';
+} from '../test-helpers';
 import type {
   ApiError,
   FetchFailure,
   FetchResponse,
   FetchSuccess,
-  Matcher,
-} from './types';
+} from '../types';
 
 const apiError: ApiError = {
   data: {},
@@ -28,7 +28,7 @@ const failureResponseWithError: FetchFailure = buildFailureResponse({
 });
 const successResponse: FetchSuccess = buildSuccessResponse();
 
-describe('store matchers', () => {
+describe('api matcher', () => {
   describe('matchResponse()', () => {
     const options: Record<string, unknown> = { callback: jest.fn() };
 
@@ -90,7 +90,7 @@ describe('store matchers', () => {
 
     describe('with status: "failure" and an error type', () => {
       const onFailure = jest.fn();
-      const errorType = 'specific.error';
+      const errorType = 'specific.error_type';
       const matcher: Matcher<unknown> = matchResponse({
         errorType,
         fn: onFailure,

@@ -27,7 +27,7 @@ RSpec.describe Authentication::Passwords::Find do
     let(:username) { 'Ed Dillinger' }
     let(:password) { 'mastercontrolprogram' }
     let(:expected_error) do
-      Authentication::Errors::InvalidPassword.new
+      Authentication::Errors::InvalidLogin.new
     end
 
     it 'should define the method' do

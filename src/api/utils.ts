@@ -8,12 +8,6 @@ import type {
   FetchSuccess,
 } from './types';
 
-interface IResponseMatchesProps {
-  errorType?: string,
-  response: FetchResponse,
-  status: 'success' | 'failure',
-}
-
 const getErrorData = (response: FetchFailure): ApiFailure | null => {
   const { error } = response;
 
@@ -90,26 +84,4 @@ export const hasError = (response: FetchResponse): boolean => {
   if (errorData === null) { return false; }
 
   return 'error' in errorData;
-};
-
-export const responseMatches = ({
-  errorType = null,
-  response,
-  status,
-}: IResponseMatchesProps): boolean => {
-  if (status === 'success') {
-    return isSuccess(response);
-  }
-
-  if (!isFailure(response)) {
-    return false;
-  }
-
-  if (errorType === null) { return true; }
-
-  const error = getError(response);
-
-  if (error === null) { return false; }
-
-  return error.type === errorType;
 };

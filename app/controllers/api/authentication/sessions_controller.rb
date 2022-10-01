@@ -11,7 +11,7 @@ module Api::Authentication
         end
       end
 
-      match :failure, error: ::Authentication::Errors::InvalidPassword \
+      match :failure, error: ::Authentication::Errors::InvalidLogin \
       do |result|
         render_failure(result.error, status: 422)
       end

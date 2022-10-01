@@ -210,7 +210,18 @@ describe('<FormField />', () => {
     });
   });
 
-  describe('with name: qualified value', () => {
+  describe('with name: qualified value in camelCase', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <FormField name="user[contact][emailAddress]" />,
+        { wrapper: formWrapper({ onSubmit: jest.fn() }) },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with name: qualified value in snake_case', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <FormField name="user[contact][email_address]" />,

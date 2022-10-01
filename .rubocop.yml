@@ -91,3 +91,7 @@ Style/Documentation:
   Exclude:
     - db/migrate/*
     - spec/**/*
+
+Style/NestedParenthesizedCalls:
+  Exclude:
+    - spec/**/*

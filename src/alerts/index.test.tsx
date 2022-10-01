@@ -3,10 +3,10 @@ import { map } from 'lodash';
 import { v4 as generateUuid } from 'uuid';
 import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { render } from '@test-helpers/rendering';
+import userEvent from '@testing-library/user-event';
 
+import { render } from '@test-helpers/rendering';
 import { useAlerts } from './index';
 import { AlertsProvider } from './provider';
 import type {

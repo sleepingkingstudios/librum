@@ -33,7 +33,7 @@ describe('LoginPage middleware', () => {
       const expected = {
         matcher: formatValue(displayAlertsMatcher),
         name: 'page:login:alerts',
-        type: 'middleware:matcher',
+        type: 'api:middleware:matcher',
       };
 
       expect(formatValue(annotations)).toEqual(expected);

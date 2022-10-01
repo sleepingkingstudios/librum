@@ -20,6 +20,10 @@
       @apply border border-solid mt-1 px-2 py-1 rounded-lg;
     }
 
+    .button {
+      @apply border border-solid mt-3 mb-3 px-3 py-1 rounded-lg w-full;
+    }
+
     .data-list {
       .data-list-item {
         @apply mb-3;

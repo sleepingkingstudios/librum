@@ -53,7 +53,7 @@ describe('<LoginPage>', () => {
 
   it('should initialize the request', () => {
     const options = {
-      actionCreator: expect.any(Function) as anyMockedFunction,
+      createSession: expect.any(Function) as anyMockedFunction,
       dismissAlert: expect.any(Function) as anyMockedFunction,
       dispatch: expect.any(Function) as anyMockedFunction,
       displayAlert: expect.any(Function) as anyMockedFunction,
