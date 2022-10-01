@@ -36,7 +36,7 @@ describe('Session API', () => {
     },
   };
 
-  describe('GET /api/status', () => {
+  describe('POST /api/authentication/session', () => {
     const endpoint = 'createSession';
 
     shouldPerformTheMutation({
@@ -51,9 +51,7 @@ describe('Session API', () => {
     });
   });
 
-  describe('useGetStatusQuery', () => {
-    const data: ApiResponse = { ok: true, data: {} };
-
+  describe('useCreateSessionMutation', () => {
     shouldDefineTheMutationHook({
       api,
       data,

@@ -11,6 +11,7 @@ import { Page } from '@components/page';
 import type { Breadcrumbs } from '@components/page';
 import type { User } from '@session';
 import { useGetUserQuery } from '@user/api';
+import { UserUpdatePassword } from './update-password';
 
 type EmptyUser = {
   email: null;
@@ -67,6 +68,16 @@ const renderLoadingOverlay = (
   );
 };
 
+const renderSecurity = (
+  { isLoading }: { isLoading: boolean }
+): JSX.Element => {
+  if (isLoading) { return (<>Loading...</>); }
+
+  return (
+    <UserUpdatePassword />
+  );
+}
+
 export const UserPage = (): JSX.Element => {
   const alertDisplayed = React.useRef(false);
   const {
@@ -117,6 +128,10 @@ export const UserPage = (): JSX.Element => {
         { renderLoadingOverlay({ isLoading }) }
 
         <DataList data={userData} defaultValue={defaultValue} />
+
+        <h2 className="mb-2">Security</h2>
+
+        { renderSecurity({ isLoading }) }
       </div>
     </Page>
   );

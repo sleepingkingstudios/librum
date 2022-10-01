@@ -93,8 +93,6 @@ describe('Session middleware', () => {
       it('should dispatch the action', () => {
         const action = destroySession({});
 
-        console.log('action:', action);
-
         clearSessionOnExpiredMatcher(response, options);
 
         expect(dispatch).toHaveBeenCalledWith(action);
