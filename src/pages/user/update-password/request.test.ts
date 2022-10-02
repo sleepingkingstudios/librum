@@ -69,15 +69,9 @@ describe('<UserUpdatePasswordForm /> request', () => {
     });
 
     it('should call the mutation', async () => {
-      const expected = {
-        old_password: 'tronlives',
-        new_password: 'ifightfortheusers',
-        confirm_password: 'ifightfortheusers',
-      };
-
       await request(values);
 
-      expect(mutation).toHaveBeenCalledWith(expected);
+      expect(mutation).toHaveBeenCalledWith(values);
     });
 
     it('should be annotated', () => {
@@ -94,10 +88,6 @@ describe('<UserUpdatePasswordForm /> request', () => {
           {
             name: 'pages:user:updatePassword:closeFormOnSuccess',
             type: 'middleware',
-          },
-          {
-            name: 'api:middleware:convertRequestToSnakeCase',
-            type: 'api:middleware:convertRequestToSnakeCase',
           },
           {
             matcher: {

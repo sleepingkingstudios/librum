@@ -1,6 +1,5 @@
 import { buildRequest } from '@api';
 import type { UseMutation } from '@api';
-import { convertRequestToSnakeCase } from '@api/middleware';
 import { clearSessionOnExpired } from '@session/middleware';
 import { useUpdateUserPasswordMutation } from '@user/password/api';
 import {
@@ -22,7 +21,6 @@ export const useRequest = buildRequest(
     middleware: [
       clearSessionOnExpired,
       closeFormOnSuccess,
-      convertRequestToSnakeCase,
       displayAlerts,
     ],
   },
