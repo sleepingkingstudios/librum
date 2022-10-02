@@ -22,6 +22,8 @@ You must specify which groups of data files to load by passing options to `thor`
 
 - Icons:
   - [FontAwesome Icons](https://fontawesome.com/search?m=free)
+- Querying:
+  - [RTK Query](https://redux-toolkit.js.org/tutorials/typescript)
 - Tailwind CSS:
   - [Official Docs](https://tailwindcss.com/docs/installation)
 - TypeScript

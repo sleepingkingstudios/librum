@@ -1,11 +1,9 @@
-import {
-  createApi,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 import type { RootState } from '@store/index';
 import { selector as selectSession } from '@session';
 import type { Session } from '@session';
+import { baseQuery } from './base-query';
 import { ApiResponse } from './types';
 
 export {
@@ -29,7 +27,7 @@ export {
 } from './types';
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({
+  baseQuery: baseQuery({
     baseUrl: '/api',
     prepareHeaders: (headers, { getState }) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
