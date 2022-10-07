@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import '@testing-library/jest-dom';
-import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import type {
@@ -69,11 +68,9 @@ describe('(Integration) sessions', () => {
         password: '',
       };
 
-      userEvent.click(getByRole('button', { name: 'Log In'}));
+      await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-      await waitFor(() => {
-        expect(mutation).toHaveBeenCalledWith(expected);
-      });
+      expect(mutation).toHaveBeenCalledWith(expected);
     });
   });
 
@@ -92,15 +89,13 @@ describe('(Integration) sessions', () => {
           password: 'tronlives',
         };
 
-        userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+        await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
 
-        userEvent.type(getByLabelText('Password'), 'tronlives');
+        await userEvent.type(getByLabelText('Password'), 'tronlives');
 
-        userEvent.click(getByRole('button', { name: 'Log In'}));
+        await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-        await waitFor(() => {
-          expect(mutation).toHaveBeenCalledWith(expected);
-        });
+        expect(mutation).toHaveBeenCalledWith(expected);
       });
 
       describe('when the api returns a failing response', () => {
@@ -113,15 +108,13 @@ describe('(Integration) sessions', () => {
             },
           );
 
-          userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+          await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
 
-          userEvent.type(getByLabelText('Password'), 'tronlives');
+          await userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Log In'}));
+          await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-          await waitFor(() => {
-            expect(mutation).toHaveBeenCalled();
-          });
+          expect(mutation).toHaveBeenCalled();
 
           expect(queryByText(/Logged in/)).toBeNull();
         });
@@ -137,15 +130,13 @@ describe('(Integration) sessions', () => {
             },
           );
 
-          userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+          await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
 
-          userEvent.type(getByLabelText('Password'), 'tronlives');
+          await userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Log In'}));
+          await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-          await waitFor(() => {
-            expect(mutation).toHaveBeenCalled();
-          });
+          expect(mutation).toHaveBeenCalled();
 
           expect(localStorage.getItem('session')).toBeNull();
         });
@@ -180,15 +171,13 @@ describe('(Integration) sessions', () => {
 
           mutation.mockImplementationOnce(() => response);
 
-          userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+          await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
 
-          userEvent.type(getByLabelText('Password'), 'tronlives');
+          await userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Log In'}));
+          await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-          await waitFor(() => {
-            expect(mutation).toHaveBeenCalled();
-          });
+          expect(mutation).toHaveBeenCalled();
 
           const message = queryByText(/logged in/);
 
@@ -231,15 +220,13 @@ describe('(Integration) sessions', () => {
 
           mutation.mockImplementationOnce(() => response);
 
-          userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+          await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
 
-          userEvent.type(getByLabelText('Password'), 'tronlives');
+          await userEvent.type(getByLabelText('Password'), 'tronlives');
 
-          userEvent.click(getByRole('button', { name: 'Log In'}));
+          await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-          await waitFor(() => {
-            expect(mutation).toHaveBeenCalled();
-          });
+          expect(mutation).toHaveBeenCalled();
 
           expect(localStorage.getItem('session')).toBe(value);
         });

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { FormikValues } from 'formik';
 
-import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
@@ -30,11 +29,9 @@ describe('<FormField />', () => {
       { wrapper: FormWrapper },
     );
 
-    userEvent.click(getByRole('button', { name: 'Submit'}));
+    await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-    await waitFor(() => {
-      expect(submitHandler).toHaveBeenCalledWith(initialValues);
-    });
+    expect(submitHandler).toHaveBeenCalledWith(initialValues);
   });
 
   it('should match the snapshot', () => {
@@ -63,11 +60,9 @@ describe('<FormField />', () => {
 
       expect(input).toBeVisible();
 
-      userEvent.type(input, 'alan.bradley@example.com');
+      await userEvent.type(input, 'alan.bradley@example.com');
 
-      await waitFor(() => {
-        expect(input).toHaveValue('alan.bradley@example.com');
-      });
+      expect(input).toHaveValue('alan.bradley@example.com');
     });
 
     it('should pass the value to the form', async () => {
@@ -86,14 +81,12 @@ describe('<FormField />', () => {
         { wrapper: FormWrapper },
       );
 
-      userEvent.type(getByRole('textbox'), 'alan.bradley@example.com');
+      await userEvent.type(getByRole('textbox'), 'alan.bradley@example.com');
 
-      userEvent.click(getByRole('button', { name: 'Submit'}));
+      await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-      await waitFor(() => {
-        expect(submitHandler).toHaveBeenCalledWith({
-          email: 'alan.bradley@example.com'
-        });
+      expect(submitHandler).toHaveBeenCalledWith({
+        email: 'alan.bradley@example.com'
       });
     });
   });
@@ -133,11 +126,9 @@ describe('<FormField />', () => {
         { wrapper: FormWrapper },
       );
 
-      userEvent.click(getByRole('button', { name: 'Submit'}));
+      await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-      await waitFor(() => {
-        expect(submitHandler).toHaveBeenCalledWith(initialValues);
-      });
+      expect(submitHandler).toHaveBeenCalledWith(initialValues);
     });
 
     it('should match the snapshot', () => {

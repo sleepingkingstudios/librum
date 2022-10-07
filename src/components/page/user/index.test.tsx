@@ -116,7 +116,7 @@ describe('<PageUser>', () => {
     describe('when the user clicks the logout button', () => {
       afterEach(() => { localStorage.clear(); });
 
-      it('should not show a user name', () => {
+      it('should not show a user name', async () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
 
@@ -129,12 +129,12 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(queryByText(/currently logged in/)).toBeNull();
       });
 
-      it('should display an alert', () => {
+      it('should display an alert', async () => {
         const displayAlert = jest.fn();
         const expected = {
           context: 'authentication:session',
@@ -164,12 +164,12 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(displayAlert).toHaveBeenCalledWith(expected);
       });
 
-      it('should update the store', () => {
+      it('should update the store', async () => {
         const expected = { authenticated: false };
 
         const { dispatch, getState, store } = createStore();
@@ -184,14 +184,14 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         const state = getState() as { session: Session };
 
         expect(selector(state)).toEqual(expected);
       });
 
-      it('should clear the stored session', () => {
+      it('should clear the stored session', async () => {
         localStorage.setItem('session', JSON.stringify({ authenticated: true }));
 
         const { dispatch, store } = createStore();
@@ -206,7 +206,7 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(localStorage.getItem('session')).toBeNull();
       });

@@ -57,7 +57,7 @@ describe('<Alert />', () => {
     });
 
     describe('dismissing the alert', () => {
-      it('should dismiss the alert', () => {
+      it('should dismiss the alert', async () => {
         const { uuid } = dismissableAlert;
         const dismissAlert = jest.fn();
 
@@ -78,7 +78,7 @@ describe('<Alert />', () => {
 
         expect(button).toBeVisible();
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(dismissAlert).toHaveBeenCalledWith(uuid);
       });

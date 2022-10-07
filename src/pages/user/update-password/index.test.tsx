@@ -27,28 +27,28 @@ describe('<UserUpdatePassword />', () => {
   });
 
   describe('when the user clicks the Change Password link', () => {
-    it('should display the change password form', () => {
+    it('should display the change password form', async () => {
       const { getByRole, getByText } = render(
         <UserUpdatePassword />,
         { store: true },
       );
       const link = getByText('Change Password');
 
-      userEvent.click(link);
+      await userEvent.click(link);
 
       const button = getByRole('button', { name: 'Update Password' });
 
       expect(button).toBeVisible();
     });
 
-    it('should match the snapshot', () => {
+    it('should match the snapshot', async () => {
       const { asFragment, getByText } = render(
         <UserUpdatePassword />,
         { store: true },
       );
       const link = getByText('Change Password');
 
-      userEvent.click(link);
+      await userEvent.click(link);
 
       expect(asFragment()).toMatchSnapshot();
     });

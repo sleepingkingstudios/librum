@@ -4,7 +4,6 @@ import {
   FormikValues,
 } from 'formik';
 
-import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
@@ -27,11 +26,9 @@ describe('<Form />', () => {
       </BasicForm>
     );
 
-    userEvent.click(getByRole('button', { name: 'Submit'}));
+    await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-    await waitFor(() => {
-      expect(submitHandler).toHaveBeenCalledWith({});
-    });
+    expect(submitHandler).toHaveBeenCalledWith({});
   });
 
   it('should match the snapshot', () => {
@@ -78,11 +75,9 @@ describe('<Form />', () => {
         </BasicForm>
       );
 
-      userEvent.click(getByRole('button', { name: 'Submit'}));
+      await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-      await waitFor(() => {
-        expect(submitHandler).toHaveBeenCalledWith(defaultValues);
-      });
+      expect(submitHandler).toHaveBeenCalledWith(defaultValues);
     });
 
     describe('when the user inputs values', () => {
@@ -105,15 +100,13 @@ describe('<Form />', () => {
           </BasicForm>
         );
 
-        userEvent.type(getByLabelText('Launch Site'), 'KSC');
+        await userEvent.type(getByLabelText('Launch Site'), 'KSC');
 
-        userEvent.type(getByLabelText('Mission Name'), 'Warlock IV');
+        await userEvent.type(getByLabelText('Mission Name'), 'Warlock IV');
 
-        userEvent.click(getByRole('button', { name: 'Submit'}));
+        await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-        await waitFor(() => {
-          expect(submitHandler).toHaveBeenCalledWith(expectedValues);
-        });
+        expect(submitHandler).toHaveBeenCalledWith(expectedValues);
       });
     });
 
@@ -138,11 +131,9 @@ describe('<Form />', () => {
           </BasicForm>
         );
 
-        userEvent.click(getByRole('button', { name: 'Submit'}));
+        await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-        await waitFor(() => {
-          expect(submitHandler).toHaveBeenCalledWith(initialValues);
-        });
+        expect(submitHandler).toHaveBeenCalledWith(initialValues);
       });
     });
   });

@@ -20,10 +20,6 @@ describe('<DropdownItem>', () => {
       const link = getByRole('link', { name: defaultProps.label });
 
       expect(link).toBeVisible();
-
-      userEvent.click(link);
-
-      expect(link).not.toBeVisible();
     });
 
     it('should match the snapshot', () => {
@@ -31,6 +27,21 @@ describe('<DropdownItem>', () => {
         render(<DropdownItem {...defaultProps} />, { router: true });
 
       expect(asFragment()).toMatchSnapshot();
+    });
+
+    describe('when the user clicks the link', () => {
+      it('should not render a link', async () => {
+        const { getByRole, getByText } =
+          render(<DropdownItem {...defaultProps} />, { router: true });
+
+        const link = getByRole('link', { name: defaultProps.label });
+
+        await userEvent.click(link);
+
+        expect(link).not.toBeVisible();
+
+        expect(getByText(defaultProps.label)).toBeVisible();
+      });
     });
   });
 

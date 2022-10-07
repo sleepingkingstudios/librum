@@ -40,14 +40,14 @@ describe('<Dropdown>', () => {
       expect(button).toBeVisible();
     });
 
-    it('should call setOpen', () => {
+    it('should call setOpen', async () => {
       const updateState = jest.fn();
       const { getByRole } =
         render(<Dropdown {...closedProps} setOpen={updateState} />);
 
       const button = getByRole('button', { name: defaultProps.label });
 
-      userEvent.click(button);
+      await userEvent.click(button);
 
       expect(updateState).toHaveBeenCalledWith(defaultProps.label);
     });
@@ -81,14 +81,14 @@ describe('<Dropdown>', () => {
       expect(button).toBeVisible();
     });
 
-    it('should call setOpen', () => {
+    it('should call setOpen', async () => {
       const updateState = jest.fn();
       const { getByRole } =
         render(<Dropdown {...closedProps} setOpen={updateState} />);
 
       const button = getByRole('button', { name: defaultProps.label });
 
-      userEvent.click(button);
+      await userEvent.click(button);
 
       expect(updateState).toHaveBeenCalledWith(defaultProps.label);
     });
@@ -123,7 +123,7 @@ describe('<Dropdown>', () => {
       expect(button).toBeVisible();
     });
 
-    it('should call setOpen', () => {
+    it('should call setOpen', async () => {
       const updateState = jest.fn();
       const { getByRole } = render(
         <Dropdown {...openProps} setOpen={updateState} />,
@@ -132,7 +132,7 @@ describe('<Dropdown>', () => {
 
       const button = getByRole('button', { name: defaultProps.label });
 
-      userEvent.click(button);
+      await userEvent.click(button);
 
       expect(updateState).toHaveBeenCalledWith(null);
     });

@@ -3,7 +3,6 @@ import { Field } from 'formik';
 import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 
 import '@testing-library/jest-dom';
-import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Form } from './index';
@@ -21,11 +20,9 @@ describe('<Form />', () => {
       </Form>
     );
 
-    userEvent.click(getByRole('button', { name: 'Submit'}));
+    await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-    await waitFor(() => {
-      expect(request).toHaveBeenCalledWith({}, expect.anything());
-    });
+    expect(request).toHaveBeenCalledWith({}, expect.anything());
   });
 
   it('should match the snapshot', () => {
@@ -175,11 +172,9 @@ describe('<Form />', () => {
         </Form>
       );
 
-      userEvent.click(getByRole('button', { name: 'Submit'}));
+      await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-      await waitFor(() => {
-        expect(request).toHaveBeenCalledWith(defaultValues, expect.anything());
-      });
+      expect(request).toHaveBeenCalledWith(defaultValues, expect.anything());
     });
 
     describe('when the user inputs values', () => {
@@ -201,18 +196,16 @@ describe('<Form />', () => {
           </Form>
         );
 
-        userEvent.type(getByLabelText('Launch Site'), 'KSC');
+        await userEvent.type(getByLabelText('Launch Site'), 'KSC');
 
-        userEvent.type(getByLabelText('Mission Name'), 'Warlock IV');
+        await userEvent.type(getByLabelText('Mission Name'), 'Warlock IV');
 
-        userEvent.click(getByRole('button', { name: 'Submit'}));
+        await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-        await waitFor(() => {
-          expect(request).toHaveBeenCalledWith(
-            expectedValues,
-            expect.anything(),
-          );
-        });
+        expect(request).toHaveBeenCalledWith(
+          expectedValues,
+          expect.anything(),
+        );
       });
     });
 
@@ -236,14 +229,12 @@ describe('<Form />', () => {
           </Form>
         );
 
-        userEvent.click(getByRole('button', { name: 'Submit'}));
+        await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-        await waitFor(() => {
-          expect(request).toHaveBeenCalledWith(
-            initialValues,
-            expect.anything(),
-          );
-        });
+        expect(request).toHaveBeenCalledWith(
+          initialValues,
+          expect.anything(),
+        );
       });
     });
   });

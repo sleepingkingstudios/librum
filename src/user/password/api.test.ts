@@ -3,10 +3,7 @@ import fetchMock from 'jest-fetch-mock';
 import '@testing-library/jest-dom';
 
 import type { ApiResponse } from '@api';
-import {
-  shouldDefineTheMutationHook,
-  shouldPerformTheMutation,
-} from '@test-helpers/api';
+import { shouldPerformTheMutation } from '@test-helpers/api';
 import {
   userPasswordApi as api,
   useUpdateUserPasswordMutation,
@@ -42,11 +39,8 @@ describe('User Password API', () => {
   });
 
   describe('useUpdateUserPasswordMutation', () => {
-    shouldDefineTheMutationHook({
-      api,
-      data,
-      param,
-      useMutation: useUpdateUserPasswordMutation,
+    it('should be a function', () => {
+      expect(typeof useUpdateUserPasswordMutation).toBe('function');
     });
   });
 });
