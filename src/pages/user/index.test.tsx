@@ -48,7 +48,7 @@ beforeEach(() => {
 describe('<UserPage>', () => {
   describe('when the user is loading', () => {
     beforeEach(() => {
-      mockUseQuery.mockImplementationOnce(() => ({
+      mockUseQuery.mockImplementation(() => ({
         isLoading: true,
         refetch: () => null,
       }));
@@ -77,7 +77,7 @@ describe('<UserPage>', () => {
 
   describe('when the user has failed to load', () => {
     beforeEach(() => {
-      mockUseQuery.mockImplementationOnce(() => ({
+      mockUseQuery.mockImplementation(() => ({
         error: {
           message: 'Something went wrong',
         },
@@ -122,7 +122,7 @@ describe('<UserPage>', () => {
     };
 
     beforeEach(() => {
-      mockUseQuery.mockImplementationOnce(() => ({
+      mockUseQuery.mockImplementation(() => ({
         data: {
           ok: true,
           data: { user },

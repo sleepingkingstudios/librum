@@ -16,10 +16,12 @@ jest.mock('@alerts');
 
 const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
 
+const dismissAlert = jest.fn();
+
 mockUseAlerts.mockImplementation(
   () => ({
     alerts: [] as IAlert[],
-    dismissAlert: jest.fn(),
+    dismissAlert,
     dismissAllAlerts: jest.fn(),
     displayAlert: jest.fn(),
   })
@@ -33,6 +35,8 @@ describe('<Alert />', () => {
     type: 'info',
     uuid: generateUuid(),
   };
+
+  beforeEach(() => { dismissAlert.mockClear(); });
 
   it('should match the snapshot', () => {
     const { asFragment } = render(
@@ -59,17 +63,6 @@ describe('<Alert />', () => {
     describe('dismissing the alert', () => {
       it('should dismiss the alert', async () => {
         const { uuid } = dismissableAlert;
-        const dismissAlert = jest.fn();
-
-        mockUseAlerts.mockImplementationOnce(
-          () => ({
-            alerts: [] as IAlert[],
-            dismissAlert,
-            dismissAllAlerts: jest.fn(),
-            displayAlert: jest.fn(),
-          })
-        );
-
         const { getByRole } = render(
           <Alert alert={dismissableAlert} />
         );

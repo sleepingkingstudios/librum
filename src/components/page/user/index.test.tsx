@@ -24,16 +24,20 @@ jest.mock('@alerts');
 
 const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
 
+const displayAlert = jest.fn();
+
 mockUseAlerts.mockImplementation(
   () => ({
     alerts: [] as IAlert[],
     dismissAlert: jest.fn(),
     dismissAllAlerts: jest.fn(),
-    displayAlert: jest.fn(),
+    displayAlert,
   })
 );
 
 describe('<PageUser>', () => {
+  beforeEach(() => { displayAlert.mockClear(); });
+
   it('should not show a user name', () => {
     const { queryByText } = render(<PageUser />, { store: true });
 
@@ -135,24 +139,14 @@ describe('<PageUser>', () => {
       });
 
       it('should display an alert', async () => {
-        const displayAlert = jest.fn();
         const expected = {
           context: 'authentication:session',
           icon: faUserXmark,
           message: 'You have successfully logged out.',
           type: 'warning',
         };
-
-        mockUseAlerts.mockImplementationOnce(
-          () => ({
-            alerts: [] as IAlert[],
-            dismissAlert: jest.fn(),
-            dismissAllAlerts: jest.fn(),
-            displayAlert,
-          })
-        );
-
         const { dispatch, store } = createStore();
+
         dispatch(create({ token, user }));
 
         const { getByRole } = render(
