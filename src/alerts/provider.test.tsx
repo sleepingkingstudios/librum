@@ -133,7 +133,7 @@ describe('<AlertsProvider />', () => {
       message: 'Attempting to connect to Moon base...',
     };
 
-    it('should display the alert', () => {
+    it('should display the alert', async () => {
       const expected = [
         'Attempting to connect to Moon base...',
       ];
@@ -153,7 +153,7 @@ describe('<AlertsProvider />', () => {
 
       const button = getByRole('button', { name: 'Display Alert' });
 
-      userEvent.click(button);
+      await userEvent.click(button);
 
       const itemsAfter = queryAllByRole('listitem');
 
@@ -214,7 +214,7 @@ describe('<AlertsProvider />', () => {
     });
 
     describe('dismissing an alert', () => {
-      it('should dismiss the alert', () => {
+      it('should dismiss the alert', async () => {
         const expected = [
           'Successfully activated reactor',
           'Increase in three-eyed fish observed',
@@ -231,7 +231,7 @@ describe('<AlertsProvider />', () => {
 
         const button = getByRole('button', { name: 'Dismiss Alert' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         const items = queryAllByRole('listitem');
 
@@ -244,7 +244,7 @@ describe('<AlertsProvider />', () => {
     });
 
     describe('dismissing all alerts', () => {
-      it('should dismiss all non-persistent alerts', () => {
+      it('should dismiss all non-persistent alerts', async () => {
         const expected = [
           'Increase in three-eyed fish observed',
         ];
@@ -260,7 +260,7 @@ describe('<AlertsProvider />', () => {
 
         const button = getByRole('button', { name: 'Dismiss All Alerts' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         const items = queryAllByRole('listitem');
 
@@ -272,7 +272,7 @@ describe('<AlertsProvider />', () => {
       });
 
       describe('with removePersistent: true', () => {
-        it('should dismiss all alerts', () => {
+        it('should dismiss all alerts', async () => {
           const {
             getByRole,
             queryAllByRole,
@@ -285,7 +285,7 @@ describe('<AlertsProvider />', () => {
 
           const button = getByRole('button', { name: 'Dismiss All Alerts' });
 
-          userEvent.click(button);
+          await userEvent.click(button);
 
           const items = queryAllByRole('listitem');
 
@@ -299,7 +299,7 @@ describe('<AlertsProvider />', () => {
         message: 'Attempting to connect to Moon base...',
       };
 
-      it('should display the alert', () => {
+      it('should display the alert', async () => {
         const expected = [
           'Successfully activated reactor',
           'Reactor overheat imminent',
@@ -318,7 +318,7 @@ describe('<AlertsProvider />', () => {
 
         const button = getByRole('button', { name: 'Display Alert' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         const items = queryAllByRole('listitem');
 
@@ -331,7 +331,7 @@ describe('<AlertsProvider />', () => {
     });
 
     describe('when the location changes', () => {
-      it('should dismiss all non-persistent alerts', () => {
+      it('should dismiss all non-persistent alerts', async () => {
         const expected = [
           'Increase in three-eyed fish observed',
         ];
@@ -349,7 +349,7 @@ describe('<AlertsProvider />', () => {
 
         expect(link).toBeVisible();
 
-        userEvent.click(link);
+        await userEvent.click(link);
 
         const items = queryAllByRole('listitem');
 

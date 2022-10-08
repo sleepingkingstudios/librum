@@ -84,7 +84,7 @@ describe('<PageNavigation>', () => {
   });
 
   describe('when the user clicks a navigation item', () => {
-    it('should render the navigation items', () => {
+    it('should render the navigation items', async () => {
       const {
         getByRole,
         getByText,
@@ -93,7 +93,7 @@ describe('<PageNavigation>', () => {
         { router: true }
       );
 
-      userEvent.click(getByRole('link', { name: 'Launch Sites' }));
+      await userEvent.click(getByRole('link', { name: 'Launch Sites' }));
 
       expect(getByRole('link', { name: 'Home' })).toBeVisible();
       expect(getByText('Launch Sites')).toBeVisible();
@@ -101,7 +101,7 @@ describe('<PageNavigation>', () => {
   });
 
   describe('when the user opens a dropdown toggle', () => {
-    it('should render the open dropdown links', () => {
+    it('should render the open dropdown links', async () => {
       const {
         getByRole,
         queryByRole,
@@ -110,14 +110,14 @@ describe('<PageNavigation>', () => {
         { router: true }
       );
 
-      userEvent.click(getByRole('button', { name: 'Rockets' }));
+      await userEvent.click(getByRole('button', { name: 'Rockets' }));
 
       expect(getByRole('link', { name: 'Engines' })).toBeVisible();
       expect(getByRole('link', { name: 'Fuel Tanks' })).toBeVisible();
       expect(queryByRole('link', { name: 'Strategies' })).toBeNull();
     });
 
-    it('should match the snapshot', () => {
+    it('should match the snapshot', async () => {
       const {
         asFragment,
         getByRole,
@@ -126,13 +126,13 @@ describe('<PageNavigation>', () => {
         { router: true }
       );
 
-      userEvent.click(getByRole('button', { name: 'Rockets' }));
+      await userEvent.click(getByRole('button', { name: 'Rockets' }));
 
       expect(asFragment()).toMatchSnapshot();
     });
 
     describe('when the user closes the dropdown toggle', () => {
-      it('should not render the dropdown links', () => {
+      it('should not render the dropdown links', async () => {
         const {
           getByRole,
           queryByRole,
@@ -141,8 +141,8 @@ describe('<PageNavigation>', () => {
           { router: true }
         );
 
-        userEvent.click(getByRole('button', { name: 'Rockets' }));
-        userEvent.click(getByRole('button', { name: 'Rockets' }));
+        await userEvent.click(getByRole('button', { name: 'Rockets' }));
+        await userEvent.click(getByRole('button', { name: 'Rockets' }));
 
         expect(queryByRole('link', { name: 'Engines' })).toBeNull();
         expect(queryByRole('link', { name: 'Fuel Tanks' })).toBeNull();
@@ -151,7 +151,7 @@ describe('<PageNavigation>', () => {
     });
 
     describe('when the user opens another dropdown toggle', () => {
-      it('should render the open dropdown links', () => {
+      it('should render the open dropdown links', async () => {
         const {
           getByRole,
           queryByRole,
@@ -160,8 +160,8 @@ describe('<PageNavigation>', () => {
           { router: true }
         );
 
-        userEvent.click(getByRole('button', { name: 'Rockets' }));
-        userEvent.click(getByRole('button', { name: 'Administration' }));
+        await userEvent.click(getByRole('button', { name: 'Rockets' }));
+        await userEvent.click(getByRole('button', { name: 'Administration' }));
 
         expect(queryByRole('link', { name: 'Engines' })).toBeNull();
         expect(queryByRole('link', { name: 'Fuel Tanks' })).toBeNull();

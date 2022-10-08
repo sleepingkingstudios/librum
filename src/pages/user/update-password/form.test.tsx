@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import '@testing-library/jest-dom';
-import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
@@ -87,17 +86,15 @@ describe('<UserUpdatePasswordForm />', () => {
         confirmPassword: 'ifightfortheusers'
       };
 
-      userEvent.type(getByLabelText('Old Password'), 'tronlives');
+      await userEvent.type(getByLabelText('Old Password'), 'tronlives');
 
-      userEvent.type(getByLabelText('New Password'), 'ifightfortheusers');
+      await userEvent.type(getByLabelText('New Password'), 'ifightfortheusers');
 
-      userEvent.type(getByLabelText('Confirm Password'), 'ifightfortheusers');
+      await userEvent.type(getByLabelText('Confirm Password'), 'ifightfortheusers');
 
-      userEvent.click(getByRole('button', { name: 'Update Password'}));
+      await userEvent.click(getByRole('button', { name: 'Update Password'}));
 
-      await waitFor(() => {
-        expect(request).toHaveBeenCalledWith(expected, expect.anything());
-      });
+      expect(request).toHaveBeenCalledWith(expected, expect.anything());
     });
   });
 });

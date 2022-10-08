@@ -48,7 +48,7 @@ beforeEach(() => {
 describe('<UserPage>', () => {
   describe('when the user is loading', () => {
     beforeEach(() => {
-      mockUseQuery.mockImplementationOnce(() => ({
+      mockUseQuery.mockImplementation(() => ({
         isLoading: true,
         refetch: () => null,
       }));
@@ -77,7 +77,7 @@ describe('<UserPage>', () => {
 
   describe('when the user has failed to load', () => {
     beforeEach(() => {
-      mockUseQuery.mockImplementationOnce(() => ({
+      mockUseQuery.mockImplementation(() => ({
         error: {
           message: 'Something went wrong',
         },
@@ -122,7 +122,7 @@ describe('<UserPage>', () => {
     };
 
     beforeEach(() => {
-      mockUseQuery.mockImplementationOnce(() => ({
+      mockUseQuery.mockImplementation(() => ({
         data: {
           ok: true,
           data: { user },
@@ -181,28 +181,28 @@ describe('<UserPage>', () => {
     });
 
     describe('when the user clicks the Change Password link', () => {
-      it('should display the change password form', () => {
+      it('should display the change password form', async () => {
         const { getByRole, getByText } = render(
           <UserPage />,
           { store: true },
         );
         const link = getByText('Change Password');
 
-        userEvent.click(link);
+        await userEvent.click(link);
 
         const button = getByRole('button', { name: 'Update Password' });
 
         expect(button).toBeVisible();
       });
 
-      it('should match the snapshot', () => {
+      it('should match the snapshot', async () => {
         const { asFragment, getByText } = render(
           <UserPage />,
           { store: true },
         );
         const link = getByText('Change Password');
 
-        userEvent.click(link);
+        await userEvent.click(link);
 
         expect(asFragment()).toMatchSnapshot();
       });

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import '@testing-library/jest-dom';
-import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
@@ -91,15 +90,13 @@ describe('<LoginPage>', () => {
         password: 'tronlives',
       };
 
-      userEvent.type(getByLabelText('Username'), 'Alan Bradley');
+      await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
 
-      userEvent.type(getByLabelText('Password'), 'tronlives');
+      await userEvent.type(getByLabelText('Password'), 'tronlives');
 
-      userEvent.click(getByRole('button', { name: 'Log In'}));
+      await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-      await waitFor(() => {
-        expect(request).toHaveBeenCalledWith(expected, expect.anything());
-      });
+      expect(request).toHaveBeenCalledWith(expected, expect.anything());
     });
   });
 });

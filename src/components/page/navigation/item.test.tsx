@@ -13,7 +13,7 @@ describe('<NavigationItem>', () => {
   };
 
   describe('when the pathname does not match the url', () => {
-    it('should render the link', () => {
+    it('should render the link', async () => {
       const { getByRole } =
         render(<NavigationItem {...defaultProps} />, { router: true });
 
@@ -21,7 +21,7 @@ describe('<NavigationItem>', () => {
 
       expect(link).toBeVisible();
 
-      userEvent.click(link);
+      await userEvent.click(link);
 
       expect(link).not.toBeVisible();
     });

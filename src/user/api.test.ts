@@ -8,10 +8,7 @@ import {
 } from './api';
 import type { ApiResponse } from '@api';
 import type { User } from '@session/types';
-import {
-  shouldDefineTheQueryHook,
-  shouldPerformTheQuery,
-} from '@test-helpers/api';
+import { shouldPerformTheQuery } from '@test-helpers/api';
 
 beforeEach((): void => { fetchMock.resetMocks(); });
 
@@ -43,10 +40,8 @@ describe('User API', () => {
   });
 
   describe('useGetUserQuery', () => {
-    shouldDefineTheQueryHook({
-      api,
-      data,
-      useQuery: useGetUserQuery,
+    it('should be a function', () => {
+      expect(typeof useGetUserQuery).toBe('function');
     });
   });
 });

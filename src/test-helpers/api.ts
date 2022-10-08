@@ -1,17 +1,10 @@
-import * as React from 'react';
 import fetchMock from 'jest-fetch-mock';
-import { Provider } from "react-redux";
 import {
   Middleware,
   Reducer,
   configureStore,
 } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
-
-import {
-  act,
-  renderHook,
-} from "@testing-library/react-hooks";
 
 import {
   actions,
@@ -37,28 +30,6 @@ type Response = {
   status: 'fulfilled' | 'rejected';
 }
 
-type MutationHookStatus = {
-  data?: unknown;
-  isError: true | false;
-  isLoading: true | false;
-  isSuccess: true | false;
-}
-
-type MutationHook = () => readonly [
-  (param?: unknown) => unknown,
-  MutationHookStatus,
-];
-
-type QueryHookResponse = {
-  data?: unknown;
-  isError: true | false;
-  isFetching: true | false;
-  isLoading: true | false;
-  isSuccess: true | false;
-};
-
-type QueryHook = (param?: unknown) => QueryHookResponse;
-
 type Store = ReturnType<typeof configureStore>;
 
 interface IApiService {
@@ -74,20 +45,6 @@ interface IDispatchRequest {
   endpoint: string;
   param?: ApiParam;
   store?: Store;
-}
-
-interface IShouldDefineTheMutationHook {
-  api: IApiService;
-  data: ApiResponse;
-  param?: ApiParam;
-  useMutation: MutationHook;
-}
-
-interface IShouldDefineTheQueryHook {
-  api: IApiService;
-  data: ApiResponse;
-  param?: ApiParam;
-  useQuery: QueryHook;
 }
 
 interface IShouldMatchTheRequest {
@@ -181,18 +138,6 @@ const shouldMatchTheRequest = (
   Object.entries(headers).forEach(([header, value]) => {
     expect(request.headers.get(header)).toBe(value);
   });
-};
-
-const wrapperFor = ({ api }: { api: IApiService }) => {
-  const Wrapper = ({ children }: { children: React.ReactNode }) => {
-    const store = createApiStore({ api });
-
-    return (
-      <Provider store={store}>{ children }</Provider>
-    );
-  };
-
-  return Wrapper;
 };
 
 // eslint-disable-next-line jest/no-export
@@ -334,150 +279,6 @@ export const shouldPerformTheQuery = (
         });
 
         shouldMatchTheRequest(authenticatedRequest({ request, token }));
-      });
-    });
-  });
-};
-
-// eslint-disable-next-line jest/no-export
-export const shouldDefineTheMutationHook = (
-  {
-    api,
-    data,
-    param,
-    useMutation,
-  }: IShouldDefineTheMutationHook
-) => {
-  describe('should define the mutation hook', () => {
-    describe('with a successful response', () => {
-      it('should return the data', async () => {
-        fetchMock.doMock();
-        fetchMock.mockResponse(JSON.stringify(data));
-
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(
-          () => useMutation(),
-          { wrapper: wrapperFor({ api }) },
-        );
-        const updateTimeout = 5000;
-        const [performMutation, initialResponse] = result.current;
-
-        expect(initialResponse.data).toBeUndefined();
-        expect(initialResponse.isLoading).toBe(false);
-
-        act(() => { void performMutation(param); });
-
-        const loadingResponse = result.current[1];
-        expect(loadingResponse.data).toBeUndefined();
-        expect(loadingResponse.isLoading).toBe(true);
-
-        await waitForNextUpdate({ timeout: updateTimeout });
-
-        const loadedResponse = result.current[1];
-        expect(loadedResponse.data).toEqual(data);
-        expect(loadedResponse.isLoading).toBe(false);
-        expect(loadedResponse.isSuccess).toBe(true);
-      });
-    });
-
-    describe('with a failing response', () => {
-      it('should set the status', async () => {
-        fetchMock.doMock();
-        fetchMock.mockReject(new Error('Internal Server Error'));
-
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(
-          () => useMutation(),
-          { wrapper: wrapperFor({ api }) },
-        );
-        const updateTimeout = 5000;
-        const [performMutation, initialResponse] = result.current;
-
-        expect(initialResponse.data).toBeUndefined();
-        expect(initialResponse.isLoading).toBe(false);
-
-        act(() => { void performMutation(param); });
-
-        const loadingResponse = result.current[1];
-        expect(loadingResponse.data).toBeUndefined();
-        expect(loadingResponse.isLoading).toBe(true);
-
-        await waitForNextUpdate({ timeout: updateTimeout });
-
-        const loadedResponse = result.current[1];
-        expect(loadedResponse.data).toBeUndefined();
-        expect(loadedResponse.isLoading).toBe(false);
-        expect(loadedResponse.isError).toBe(true);
-      });
-    });
-  });
-};
-
-// eslint-disable-next-line jest/no-export
-export const shouldDefineTheQueryHook = (
-  {
-    api,
-    data,
-    param,
-    useQuery,
-  }: IShouldDefineTheQueryHook
-) => {
-  describe('should define the query hook', () => {
-    describe('with a successful response', () => {
-      it('should return the data', async () => {
-        fetchMock.doMock();
-        fetchMock.mockResponse(JSON.stringify(data));
-
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(
-          () => useQuery(param),
-          { wrapper: wrapperFor({ api }) },
-        );
-        const updateTimeout = 5000;
-        const initialResponse = result.current;
-
-        expect(initialResponse.data).toBeUndefined();
-        expect(initialResponse.isLoading).toBe(true);
-
-        await waitForNextUpdate({ timeout: updateTimeout });
-        const nextResponse = result.current;
-
-        expect(nextResponse.data).toBeDefined();
-        expect(nextResponse.isLoading).toBe(false);
-        expect(nextResponse.isSuccess).toBe(true);
-      });
-    });
-
-    describe('with a failing response', () => {
-      it('should set the status', async () => {
-        fetchMock.doMock();
-        fetchMock.mockReject(new Error('Internal Server Error'));
-
-        const {
-          result,
-          waitForNextUpdate,
-        } = renderHook(
-          () => useQuery(param),
-          { wrapper: wrapperFor({ api }) },
-        );
-        const updateTimeout = 5000;
-        const initialResponse = result.current;
-
-        expect(initialResponse.data).toBeUndefined();
-        expect(initialResponse.isLoading).toBe(true);
-
-        await waitForNextUpdate({ timeout: updateTimeout });
-        const nextResponse = result.current;
-
-        expect(nextResponse.data).toBeUndefined();
-        expect(nextResponse.isLoading).toBe(false);
-        expect(nextResponse.isError).toBe(true);
       });
     });
   });

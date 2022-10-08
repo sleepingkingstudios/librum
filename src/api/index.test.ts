@@ -7,10 +7,7 @@ import {
   api,
   useGetStatusQuery,
 } from './index';
-import {
-  shouldDefineTheQueryHook,
-  shouldPerformTheQuery,
-} from '@test-helpers/api';
+import { shouldPerformTheQuery } from '@test-helpers/api';
 
 beforeEach((): void => { fetchMock.resetMocks(); });
 
@@ -30,12 +27,8 @@ describe('Status API', () => {
   });
 
   describe('useGetStatusQuery', () => {
-    const data: ApiResponse = { ok: true, data: {} };
-
-    shouldDefineTheQueryHook({
-      api,
-      data,
-      useQuery: useGetStatusQuery,
+    it('should be a function', () => {
+      expect(typeof useGetStatusQuery).toBe('function');
     });
   });
 });

@@ -79,9 +79,11 @@ const customRender = (
   component: React.ReactElement,
   options?: customRenderOptions
 ): RenderResult => {
-  if (!options) { return render(component); }
+  let wrapped: React.ReactElement = (
+    <React.StrictMode>{ component }</React.StrictMode>
+  );
 
-  let wrapped: React.ReactElement = component;
+  if (!options) { return render(wrapped); }
 
   if ('router' in options && options.router) {
     wrapped = withRouter(wrapped, { initialEntries: options.initialEntries });

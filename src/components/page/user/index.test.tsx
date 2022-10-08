@@ -24,16 +24,20 @@ jest.mock('@alerts');
 
 const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
 
+const displayAlert = jest.fn();
+
 mockUseAlerts.mockImplementation(
   () => ({
     alerts: [] as IAlert[],
     dismissAlert: jest.fn(),
     dismissAllAlerts: jest.fn(),
-    displayAlert: jest.fn(),
+    displayAlert,
   })
 );
 
 describe('<PageUser>', () => {
+  beforeEach(() => { displayAlert.mockClear(); });
+
   it('should not show a user name', () => {
     const { queryByText } = render(<PageUser />, { store: true });
 
@@ -116,7 +120,7 @@ describe('<PageUser>', () => {
     describe('when the user clicks the logout button', () => {
       afterEach(() => { localStorage.clear(); });
 
-      it('should not show a user name', () => {
+      it('should not show a user name', async () => {
         const { dispatch, store } = createStore();
         dispatch(create({ token, user }));
 
@@ -129,30 +133,20 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(queryByText(/currently logged in/)).toBeNull();
       });
 
-      it('should display an alert', () => {
-        const displayAlert = jest.fn();
+      it('should display an alert', async () => {
         const expected = {
           context: 'authentication:session',
           icon: faUserXmark,
           message: 'You have successfully logged out.',
           type: 'warning',
         };
-
-        mockUseAlerts.mockImplementationOnce(
-          () => ({
-            alerts: [] as IAlert[],
-            dismissAlert: jest.fn(),
-            dismissAllAlerts: jest.fn(),
-            displayAlert,
-          })
-        );
-
         const { dispatch, store } = createStore();
+
         dispatch(create({ token, user }));
 
         const { getByRole } = render(
@@ -164,12 +158,12 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(displayAlert).toHaveBeenCalledWith(expected);
       });
 
-      it('should update the store', () => {
+      it('should update the store', async () => {
         const expected = { authenticated: false };
 
         const { dispatch, getState, store } = createStore();
@@ -184,14 +178,14 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         const state = getState() as { session: Session };
 
         expect(selector(state)).toEqual(expected);
       });
 
-      it('should clear the stored session', () => {
+      it('should clear the stored session', async () => {
         localStorage.setItem('session', JSON.stringify({ authenticated: true }));
 
         const { dispatch, store } = createStore();
@@ -206,7 +200,7 @@ describe('<PageUser>', () => {
         );
         const button = getByRole('button', { name: 'Log Out' });
 
-        userEvent.click(button);
+        await userEvent.click(button);
 
         expect(localStorage.getItem('session')).toBeNull();
       });

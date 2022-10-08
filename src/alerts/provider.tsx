@@ -23,10 +23,10 @@ export const AlertsProvider = ({
   initialValue = [] as Alert[],
   children,
 }: IAlertsProvider): JSX.Element => {
-  const didMount = React.useRef(false);
   const [alerts, setAlerts] = React.useState<Alert[]>(initialValue);
   const location = useLocation();
   const { pathname } = location;
+  const lastPathname = React.useRef(pathname);
 
   const dismissAlert: DismissAlert =
     (uuidOrContext) => setAlerts(removeAlert(alerts, uuidOrContext));
@@ -56,16 +56,13 @@ export const AlertsProvider = ({
 
   React.useEffect(
     () => {
-      if (!didMount.current) {
-        didMount.current = true;
+      if (lastPathname.current === pathname) { return; }
 
-        return;
-      }
+      lastPathname.current = pathname;
 
-      dismissAllAlerts({ removePersistent: false });
+      setAlerts(removeAllAlerts(alerts, { removePersistent: false }));
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [pathname],
+    [alerts, lastPathname, pathname, setAlerts],
   );
 
   return (

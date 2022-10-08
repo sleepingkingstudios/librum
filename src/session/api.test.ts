@@ -3,10 +3,7 @@ import fetchMock from 'jest-fetch-mock';
 import '@testing-library/jest-dom';
 
 import type { ApiResponse } from '@api';
-import {
-  shouldDefineTheMutationHook,
-  shouldPerformTheMutation,
-} from '@test-helpers/api';
+import { shouldPerformTheMutation } from '@test-helpers/api';
 import {
   sessionApi as api,
   useCreateSessionMutation,
@@ -52,11 +49,8 @@ describe('Session API', () => {
   });
 
   describe('useCreateSessionMutation', () => {
-    shouldDefineTheMutationHook({
-      api,
-      data,
-      param,
-      useMutation: useCreateSessionMutation,
+    it('should be a function', () => {
+      expect(typeof useCreateSessionMutation).toBe('function');
     });
   });
 });
