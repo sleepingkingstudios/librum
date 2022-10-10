@@ -16,22 +16,15 @@ import {
   ApiFailure,
   ApiSuccess,
 } from '../types';
-import type {
-  Response,
-  UseQueryResult,
-} from './types';
+import {
+  defaultResponse,
+  defaultResult,
+} from './test-helpers';
+import type { Response } from './types';
 
 jest.mock('@session/utils');
 
 describe('API hooks utils', () => {
-  const defaultResult: UseQueryResult= {
-    isUninitialized: false,
-    isLoading: false,
-    isSuccess: false,
-    isError: false,
-    refetch: jest.fn(),
-  };
-
   describe('camelizeErrorType()', () => {
     it('should be a function', () => {
       expect(typeof camelizeErrorType).toBe('function');
@@ -354,16 +347,6 @@ describe('API hooks utils', () => {
       dismissAlert: jest.fn(),
       dismissAllAlerts: jest.fn(),
       displayAlert,
-    };
-    const defaultResponse: Response = {
-      hasData: false,
-      hasError: false,
-      isUninitialized: false,
-      isLoading: false,
-      isErrored: false,
-      isFailure: false,
-      isSuccess: false,
-      status: 'unknown',
     };
     const dispatch = jest.fn();
 

@@ -38,8 +38,6 @@ export const useQueryRequest = <
   options?: Record<string, unknown>,
   useQuery: UseQuery,
 }): Response<Data> => {
-  // @todo: Parameter processing here.
-
   const result: UseQueryResult = useQuery(arg);
   const {
     isError,
@@ -107,8 +105,6 @@ export const useQueryRequest = <
         dispatch,
         response,
       });
-
-      console.log('useEffect(), hasLoaded:', hasLoaded.current, 'authenticationError:', authenticationError);
 
       if (authenticationError) { return; }
     }

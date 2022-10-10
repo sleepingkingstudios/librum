@@ -17,7 +17,10 @@ import type {
   ApiSuccess,
   Effect,
 } from '../types';
-import type { Response } from './types';
+import {
+  defaultResult as genericResult,
+  defaultResponse,
+} from './test-helpers';
 
 jest.mock('@alerts');
 jest.mock('@store/hooks');
@@ -40,21 +43,8 @@ mockUseStoreDispatch.mockImplementation(() => dispatch);
 describe('API hooks useQueryRequest()', () => {
   const refetch = jest.fn();
   const defaultResult = {
-    isUninitialized: false,
-    isLoading: false,
-    isSuccess: false,
-    isError: false,
+    ...genericResult,
     refetch,
-  };
-  const defaultResponse: Response = {
-    hasData: false,
-    hasError: false,
-    isErrored: false,
-    isFailure: false,
-    isLoading: false,
-    isSuccess: false,
-    isUninitialized: false,
-    status: 'unknown',
   };
   const useQuery = jest.fn(() => defaultResult);
 
