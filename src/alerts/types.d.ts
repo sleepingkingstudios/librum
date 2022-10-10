@@ -42,6 +42,7 @@ export type DisplayAlert = (
 export type AlertsContext = {
   alerts: Alert[],
   dismissAlert: DismissAlert,
+  dismissAllAlerts: DismissAllAlerts,
   displayAlert: DisplayAlert,
 };
 

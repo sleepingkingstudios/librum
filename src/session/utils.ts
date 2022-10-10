@@ -1,5 +1,9 @@
 import type { Session } from './types';
 
+export const clearStoredSession = (): void => {
+  localStorage.removeItem('session');
+};
+
 export const getStoredSession = (): Session => {
   const defaultSession: Session = { authenticated: false };
   const storedValue: string | null = localStorage.getItem('session');

@@ -1,5 +1,11 @@
 import { camelCase } from 'lodash';
+import { faUserClock } from '@fortawesome/free-solid-svg-icons';
 
+import type { AlertsContext } from '@alerts/types';
+import { actions as sessionActions } from '@session';
+import { clearStoredSession } from '@session/utils';
+import type { Dispatch } from '@store';
+import { expiredSessionError } from '../errors';
 import type {
   ApiError,
   ApiFailure,
@@ -7,6 +13,7 @@ import type {
 } from '../types';
 import type {
   FetchError,
+  Response,
   ResponseStatus,
   UseQueryError,
   UseQueryResult,
@@ -104,4 +111,34 @@ export const extractStatus = (result: UseQueryResult): ResponseStatus => {
   if (result.isUninitialized) { return 'uninitialized'; }
 
   return 'unknown';
+};
+
+export const handleAuthenticationError = ({
+  alerts,
+  dispatch,
+  response,
+}: {
+  alerts: AlertsContext,
+  dispatch: Dispatch,
+  response: Response,
+}): boolean => {
+  const { errorType } = response;
+  const { displayAlert } = alerts;
+
+  if (errorType === expiredSessionError) {
+    dispatch(sessionActions.destroy());
+
+    clearStoredSession();
+
+    displayAlert({
+      context: 'authentication:session',
+      icon: faUserClock,
+      message: 'Your login session has expired',
+      type: 'warning',
+    });
+
+    return true;
+  }
+
+  return false;
 };

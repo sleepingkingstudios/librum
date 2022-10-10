@@ -1,17 +1,27 @@
+import { faUserClock } from '@fortawesome/free-solid-svg-icons';
+
 import {
   camelizeErrorType,
   extractData,
   extractError,
   extractStatus,
+  handleAuthenticationError
 } from './utils';
+import type { Alert } from '@alerts';
+import { actions as sessionActions } from '@session';
+import { clearStoredSession } from '@session/utils';
+import { expiredSessionError } from '../errors';
 import {
   ApiError,
   ApiFailure,
   ApiSuccess,
 } from '../types';
 import type {
+  Response,
   UseQueryResult,
 } from './types';
+
+jest.mock('@session/utils');
 
 describe('API hooks utils', () => {
   const defaultResult: UseQueryResult= {
@@ -19,6 +29,7 @@ describe('API hooks utils', () => {
     isLoading: false,
     isSuccess: false,
     isError: false,
+    refetch: jest.fn(),
   };
 
   describe('camelizeErrorType()', () => {
@@ -332,6 +343,102 @@ describe('API hooks utils', () => {
 
       it('should return "success"', () => {
         expect(extractStatus(successResult)).toBe('success');
+      });
+    });
+  });
+
+  describe('handleAuthenticationError()', () => {
+    const displayAlert = jest.fn();
+    const alerts = {
+      alerts: [] as Alert[],
+      dismissAlert: jest.fn(),
+      dismissAllAlerts: jest.fn(),
+      displayAlert,
+    };
+    const defaultResponse: Response = {
+      hasData: false,
+      hasError: false,
+      isUninitialized: false,
+      isLoading: false,
+      isErrored: false,
+      isFailure: false,
+      isSuccess: false,
+      status: 'unknown',
+    };
+    const dispatch = jest.fn();
+
+    it('should be a function', () => {
+      expect(typeof handleAuthenticationError).toBe('function');
+    });
+
+    describe('with a failure response', () => {
+      const response: Response = {
+        ...defaultResponse,
+        isFailure: true,
+        status: 'failure',
+      };
+
+      it('should not clear the session', () => {
+        handleAuthenticationError({ alerts, dispatch, response });
+
+        expect(dispatch).not.toHaveBeenCalled();
+        expect(displayAlert).not.toHaveBeenCalled();
+        expect(clearStoredSession).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('with a failure response with an error', () => {
+      const error = {
+        data: {},
+        message: 'Something went wrong',
+        type: 'spec.errors.genericError',
+      };
+      const response: Response = {
+        ...defaultResponse,
+        error,
+        errorType: 'spec.errors.genericError',
+        hasError: true,
+        isFailure: true,
+        status: 'failure',
+      };
+
+      it('should not clear the session', () => {
+        handleAuthenticationError({ alerts, dispatch, response });
+
+        expect(dispatch).not.toHaveBeenCalled();
+        expect(displayAlert).not.toHaveBeenCalled();
+        expect(clearStoredSession).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('with a failure response with an expired session error', () => {
+      const error: ApiError = {
+        data: {},
+        message: 'The auth session has expired',
+        type: expiredSessionError,
+      };
+      const response: Response = {
+        ...defaultResponse,
+        error,
+        errorType: expiredSessionError,
+        hasError: true,
+        isFailure: true,
+        status: 'failure',
+      };
+      const expectedAction = sessionActions.destroy();
+      const expectedAlert = {
+        context: 'authentication:session',
+        icon: faUserClock,
+        message: 'Your login session has expired',
+        type: 'warning',
+      };
+
+      it('should clear the session', () => {
+        handleAuthenticationError({ alerts, dispatch, response });
+
+        expect(dispatch).toHaveBeenCalledWith(expectedAction);
+        expect(displayAlert).toHaveBeenCalledWith(expectedAlert);
+        expect(clearStoredSession).toHaveBeenCalled();
       });
     });
   });

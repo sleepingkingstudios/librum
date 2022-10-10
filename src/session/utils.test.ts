@@ -2,9 +2,46 @@ import type {
   Session,
   User,
 } from './types';
-import { getStoredSession } from './utils';
+import {
+  clearStoredSession,
+  getStoredSession,
+} from './utils';
 
 describe('Session utils', () => {
+  describe('clearStoredSession()', () => {
+    afterEach(() => { localStorage.clear(); });
+
+    it('should clear the stored session', () => {
+      clearStoredSession();
+
+      expect(localStorage.getItem('session')).toBeNull();
+    });
+
+    describe('when localStorage["session"] exists', () => {
+      const user: User = {
+        email: 'alan.bradley@example.com',
+        id: '00000000-0000-0000-0000-000000000000',
+        role: 'user',
+        slug: 'alan-bradley',
+        username: 'Alan Bradley',
+      };
+      const session = {
+        authenticated: true,
+        token: '12345',
+        user,
+      };
+      const value = JSON.stringify(session);
+
+      it('should clear the stored session', () => {
+        localStorage.setItem('session', value);
+
+        clearStoredSession();
+
+        expect(localStorage.getItem('session')).toBeNull();
+      });
+    });
+  });
+
   describe('getStoredSession()', () => {
     const defaultSession: Session = { authenticated: false };
 

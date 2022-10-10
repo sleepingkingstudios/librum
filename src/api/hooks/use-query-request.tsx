@@ -1,11 +1,17 @@
 import * as React from 'react';
 
+import { useAlerts } from '@alerts';
+import type { AlertsContext } from '@alerts/types';
+import type { Dispatch } from '@store';
+import { useStoreDispatch } from '@store/hooks';
+import type {
+  Effect,
+  EffectOptions,
+} from '../effects/types';
 import type {
   ApiError,
 } from '../types';
 import type {
-  Effect,
-  EffectOptions,
   Response,
   ResponseStatus,
   UseQuery,
@@ -16,9 +22,12 @@ import {
   extractData,
   extractError,
   extractStatus,
+  handleAuthenticationError,
 } from './utils';
 
-export const useQueryRequest = <Data extends Record<string, unknown> = Record<string, unknown>>({
+export const useQueryRequest = <
+  Data extends Record<string, unknown> = Record<string, unknown>
+>({
   arg,
   effects = [],
   options = {},
@@ -26,7 +35,7 @@ export const useQueryRequest = <Data extends Record<string, unknown> = Record<st
 }: {
   arg?: unknown,
   effects?: Effect[],
-  options?: EffectOptions,
+  options?: Record<string, unknown>,
   useQuery: UseQuery,
 }): Response<Data> => {
   // @todo: Parameter processing here.
@@ -37,6 +46,7 @@ export const useQueryRequest = <Data extends Record<string, unknown> = Record<st
     isLoading,
     isSuccess,
     isUninitialized,
+    refetch,
   } = result;
   const data: Record<string, unknown> | undefined = extractData(result);
   const error: ApiError | undefined = extractError(result);
@@ -51,6 +61,15 @@ export const useQueryRequest = <Data extends Record<string, unknown> = Record<st
     isUninitialized,
     status,
   };
+  const memoStatus = React.useRef(null);
+  const alerts: AlertsContext = useAlerts();
+  const dispatch: Dispatch = useStoreDispatch();
+  const mergedOptions: EffectOptions = {
+    ...options,
+    alerts,
+    dispatch,
+  };
+  const hasLoaded = React.useRef(false);
 
   if (data) {
     response.data = data as Data;
@@ -69,15 +88,36 @@ export const useQueryRequest = <Data extends Record<string, unknown> = Record<st
   }
 
   React.useEffect(() => {
+    if(status === 'loading') { hasLoaded.current = true; }
+
+    if(status === memoStatus.current) { return; }
+
+    memoStatus.current = status;
+
+    if (status === 'failure') {
+      if (!hasLoaded.current) {
+        // The component is reloaded after a failure, so manually trigger a refetch.
+        refetch();
+
+        return;
+      }
+
+      const authenticationError = handleAuthenticationError({
+        alerts,
+        dispatch,
+        response,
+      });
+
+      console.log('useEffect(), hasLoaded:', hasLoaded.current, 'authenticationError:', authenticationError);
+
+      if (authenticationError) { return; }
+    }
+
     effects.forEach(
-      (effect: Effect) => { effect(response, options); }
+      (effect: Effect) => { effect(response, mergedOptions); }
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [effects, options, status]);
-
-  // @todo: List of effects here.
-
-  // console.log('useQueryResult(), response:', response);
+  }, [effects, mergedOptions, status]);
 
   return response;
 };

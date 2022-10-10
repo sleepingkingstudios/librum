@@ -4,10 +4,10 @@ import type {
   ApiError,
   ApiFailure,
 } from '../types';
-
-export type Effect = (response: Response, options?: EffectOptions) => void;
-
-export type EffectOptions = Record<string, unknown>;
+import type {
+  Effect,
+  EffectOptions,
+} from '../effects/types';
 
 export type FetchError = {
   data: ApiFailure,
@@ -33,11 +33,23 @@ export type ResponseStatus =
 
 export type UseQuery = (
   arg?: unknown,
-  effects?: Effect[],
-  options?: Record<string, unknown>,
 ) => UseQueryResult;
 
 export type UseQueryError = FetchBaseQueryError | SerializedError;
+
+export type UseQueryRequest<
+  Data extends Record<string, unknown> = Record<string, unknown>
+> = ({
+  arg,
+  effects,
+  options,
+  useQuery,
+}: {
+  arg?: unknown,
+  effects?: Effect[],
+  options?: EffectOptions,
+  useQuery: UseQuery,
+}) => Response<Data>;
 
 export type UseQueryResult = {
   data?: Record<string, unknown>,
@@ -46,4 +58,5 @@ export type UseQueryResult = {
   isLoading: boolean,
   isSuccess: boolean,
   isUninitialized: boolean,
+  refetch: () => void,
 };
