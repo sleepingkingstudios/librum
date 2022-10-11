@@ -44,12 +44,14 @@ export type UseQueryRequest<
   effects,
   options,
   useQuery,
-}: {
+}: UseQueryRequestProps) => Response<Data>;
+
+export type UseQueryRequestProps = {
   arg?: unknown,
   effects?: Effect[],
   options?: EffectOptions,
   useQuery: UseQuery,
-}) => Response<Data>;
+};
 
 export type UseQueryResult = {
   data?: Record<string, unknown>,

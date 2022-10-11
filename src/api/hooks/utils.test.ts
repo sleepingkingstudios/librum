@@ -9,7 +9,6 @@ import {
 } from './utils';
 import type { Alert } from '@alerts';
 import { actions as sessionActions } from '@session';
-import { clearStoredSession } from '@session/utils';
 import { expiredSessionError } from '../errors';
 import {
   ApiError,
@@ -21,8 +20,6 @@ import {
   defaultResult,
 } from './test-helpers';
 import type { Response } from './types';
-
-jest.mock('@session/utils');
 
 describe('API hooks utils', () => {
   describe('camelizeErrorType()', () => {
@@ -350,6 +347,8 @@ describe('API hooks utils', () => {
     };
     const dispatch = jest.fn();
 
+    afterEach(() => { localStorage.clear(); });
+
     it('should be a function', () => {
       expect(typeof handleAuthenticationError).toBe('function');
     });
@@ -362,11 +361,13 @@ describe('API hooks utils', () => {
       };
 
       it('should not clear the session', () => {
+        localStorage.setItem('session', JSON.stringify({ authenticated: true }));
+
         handleAuthenticationError({ alerts, dispatch, response });
 
         expect(dispatch).not.toHaveBeenCalled();
         expect(displayAlert).not.toHaveBeenCalled();
-        expect(clearStoredSession).not.toHaveBeenCalled();
+        expect(localStorage.getItem('session')).not.toBeNull();
       });
     });
 
@@ -386,11 +387,13 @@ describe('API hooks utils', () => {
       };
 
       it('should not clear the session', () => {
+        localStorage.setItem('session', JSON.stringify({ authenticated: true }));
+
         handleAuthenticationError({ alerts, dispatch, response });
 
         expect(dispatch).not.toHaveBeenCalled();
         expect(displayAlert).not.toHaveBeenCalled();
-        expect(clearStoredSession).not.toHaveBeenCalled();
+        expect(localStorage.getItem('session')).not.toBeNull();
       });
     });
 
@@ -417,11 +420,13 @@ describe('API hooks utils', () => {
       };
 
       it('should clear the session', () => {
+        localStorage.setItem('session', JSON.stringify({ authenticated: true }));
+
         handleAuthenticationError({ alerts, dispatch, response });
 
         expect(dispatch).toHaveBeenCalledWith(expectedAction);
         expect(displayAlert).toHaveBeenCalledWith(expectedAlert);
-        expect(clearStoredSession).toHaveBeenCalled();
+        expect(localStorage.getItem('session')).toBeNull();
       });
     });
   });

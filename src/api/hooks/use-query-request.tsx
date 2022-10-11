@@ -93,6 +93,7 @@ export const useQueryRequest = <
     memoStatus.current = status;
 
     if (status === 'failure') {
+
       if (!hasLoaded.current) {
         // The component is reloaded after a failure, so manually trigger a refetch.
         refetch();
