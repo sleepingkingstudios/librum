@@ -12,8 +12,9 @@ import type { ApiError } from '../types';
 import type {
   Response,
   ResponseStatus,
-  UseQuery,
-  UseQueryResult,
+  UseMutation,
+  UseMutationRequest,
+  UseMutationTrigger,
 } from './types';
 import {
   camelizeErrorType,
@@ -23,26 +24,26 @@ import {
   handleAuthenticationError,
 } from './utils';
 
-export const useQueryRequest = <
+export const useMutationRequest: UseMutationRequest = <
   Data extends Record<string, unknown> = Record<string, unknown>
 >({
-  arg,
   effects = [],
   options = {},
-  useQuery,
+  useMutation,
 }: {
-  arg?: unknown,
   effects?: Effect[],
   options?: Record<string, unknown>,
-  useQuery: UseQuery,
-}): Response<Data> => {
-  const result: UseQueryResult = useQuery(arg);
+  useMutation: UseMutation,
+}): [UseMutationTrigger, Response<Data>] => {
+  const [
+    trigger,
+    result,
+  ] = useMutation();
   const {
     isError,
     isLoading,
     isSuccess,
     isUninitialized,
-    refetch,
   } = result;
   const data: Record<string, unknown> | undefined = extractData(result);
   const error: ApiError | undefined = extractError(result);
@@ -65,7 +66,6 @@ export const useQueryRequest = <
     alerts,
     dispatch,
   };
-  const hasLoaded = React.useRef(false);
 
   if (data) {
     response.data = data as Data;
@@ -84,20 +84,11 @@ export const useQueryRequest = <
   }
 
   React.useEffect(() => {
-    if(status === 'loading') { hasLoaded.current = true; }
-
     if(status === memoStatus.current) { return; }
 
     memoStatus.current = status;
 
     if (status === 'failure') {
-      if (!hasLoaded.current) {
-        // The component is reloaded after a failure, so manually trigger a refetch.
-        refetch();
-
-        return;
-      }
-
       const authenticationError = handleAuthenticationError({
         alerts,
         dispatch,
@@ -113,5 +104,5 @@ export const useQueryRequest = <
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effects, mergedOptions, status]);
 
-  return response;
+  return [trigger, response];
 };

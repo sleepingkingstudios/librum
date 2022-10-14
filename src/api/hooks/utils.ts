@@ -15,11 +15,14 @@ import type {
   FetchError,
   Response,
   ResponseStatus,
+  UseMutationResult,
   UseQueryError,
   UseQueryResult,
 } from './types';
 
-const extractApiFailure = (result: UseQueryResult): ApiFailure | undefined => {
+type Result = UseMutationResult | UseQueryResult;
+
+const extractApiFailure = (result: Result): ApiFailure | undefined => {
   if (!hasApiError(result)) { return; }
 
   const error = result.error as FetchError;
@@ -28,17 +31,17 @@ const extractApiFailure = (result: UseQueryResult): ApiFailure | undefined => {
   return data;
 };
 
-const extractApiSuccess = (result: UseQueryResult): ApiSuccess | undefined => {
-  const maybeData = result.data;
+const extractApiSuccess = (result: Result): ApiSuccess | undefined => {
+  const { data } = result;
 
-  if (typeof maybeData === 'undefined') { return; }
+  if (typeof data === 'undefined' || data === null) { return; }
 
-  if (!('ok' in maybeData && 'data' in maybeData)) { return; }
+  if (!('ok' in data && 'data' in data)) { return; }
 
-  return maybeData as ApiSuccess;
+  return data as ApiSuccess;
 };
 
-const hasApiError = (result: UseQueryResult): boolean => {
+const hasApiError = (result: Result): boolean => {
   if (!('error' in result)) { return false; }
 
   const error: UseQueryError = result.error;
@@ -61,7 +64,7 @@ export const camelizeErrorType = (errorType: string): string => {
     .join('.');
 };
 
-export const extractData = (result: UseQueryResult): Record<string, unknown> | undefined => {
+export const extractData = (result: Result): Record<string, unknown> | undefined => {
   const { isError, isSuccess } = result;
 
   if (isError) {
@@ -87,7 +90,7 @@ export const extractData = (result: UseQueryResult): Record<string, unknown> | u
   return;
 };
 
-export const extractError = (result: UseQueryResult): ApiError | undefined => {
+export const extractError = (result: Result): ApiError | undefined => {
   const { isError } = result;
 
   if (!isError) { return; }
@@ -101,7 +104,7 @@ export const extractError = (result: UseQueryResult): ApiError | undefined => {
   return error;
 };
 
-export const extractStatus = (result: UseQueryResult): ResponseStatus => {
+export const extractStatus = (result: Result): ResponseStatus => {
   if (result.isSuccess) { return 'success'; }
 
   if (result.isError) { return hasApiError(result) ? 'failure' : 'errored'; }

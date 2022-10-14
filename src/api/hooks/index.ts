@@ -5,4 +5,6 @@ export type {
   UseQueryRequestProps,
 } from './types';
 
+export { useMutationRequest } from './use-mutation-request';
+
 export { useQueryRequest } from './use-query-request';

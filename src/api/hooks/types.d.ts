@@ -4,10 +4,7 @@ import type {
   ApiError,
   ApiFailure,
 } from '../types';
-import type {
-  Effect,
-  EffectOptions,
-} from '../effects/types';
+import type { Effect } from '../effects/types';
 
 export type FetchError = {
   data: ApiFailure,
@@ -31,6 +28,37 @@ export type Response<Data = Record<string, unknown>> = {
 export type ResponseStatus =
   'unknown' | 'uninitialized' | 'loading' | 'errored' | 'failure' | 'success';
 
+export type UseMutation = () => readonly [
+  UseMutationTrigger,
+  UseMutationResult,
+];
+
+export type UseMutationRequest<
+  Data extends Record<string, unknown> = Record<string, unknown>
+> = ({
+  arg,
+  effects,
+  options,
+  useMutation,
+}: UseMutationRequestProps) => [UseMutationTrigger, Response<Data>];
+
+export type UseMutationRequestProps = {
+  effects?: Effect[],
+  options?: Record<string, unknown>,
+  useMutation: UseMutation,
+};
+
+export type UseMutationResult = {
+  data?: Record<string, unknown>,
+  error?: UseQueryError,
+  isError: boolean,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isUninitialized: boolean,
+};
+
+export type UseMutationTrigger = (arg?: unknown) => Promise<unknown>;
+
 export type UseQuery = (
   arg?: unknown,
 ) => UseQueryResult;
@@ -49,7 +77,7 @@ export type UseQueryRequest<
 export type UseQueryRequestProps = {
   arg?: unknown,
   effects?: Effect[],
-  options?: EffectOptions,
+  options?: Record<string, unknown>,
   useQuery: UseQuery,
 };
 
