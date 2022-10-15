@@ -3,7 +3,6 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 
 import type { AlertsContext } from '@alerts/types';
 import type { Dispatch } from '@store';
-import type { Annotated } from '@utils/annotations';
 import type {
   DataObject,
   Literal,
@@ -22,9 +21,9 @@ export type ApiSuccess<Data extends DataObject = DataObject> =
 export type ApiResponse<Data extends DataObject = DataObject> =
   ApiFailure<Data> | ApiSuccess<Data>;
 
-export type Effect<Options extends EffectOptions = EffectOptions> = (
-  (response: Response, options?: Options) => void
-) & Annotated;
+export type Effect<
+  Options extends EffectOptions = EffectOptions,
+> = (response: Response, options?: Options) => void;
 
 export type EffectOptions<
   Options extends Record<string, unknown> = Record<string, unknown>,

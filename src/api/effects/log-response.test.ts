@@ -37,11 +37,4 @@ describe('API effects logResponse()', () => {
 
     expect(log).toHaveBeenCalledWith(`${label}, response:`, response);
   });
-
-  it('should be annotated', () => {
-    expect(effect.annotations).toEqual({
-      name: 'api:effects:logResponse',
-      type: 'api:effects:logResponse',
-    });
-  });
 });

@@ -1,5 +1,4 @@
 import type { DisplayAlertProps } from '@alerts';
-import type { Annotations } from '@utils/annotations';
 import type {
   Effect,
   EffectOptions,
@@ -63,31 +62,16 @@ const parseFunction = (directive: AlertDirective): MatchFunction => {
 
 export const displayAlerts = (
   directives: AlertDirective[],
-  annotations?: Annotations,
-): Effect => {
-  const effect: Effect = (response: Response, options: EffectOptions) => {
-    const matcher: Matcher = match(response, options);
+): Effect => (response: Response, options: EffectOptions) => {
+  const matcher: Matcher = match(response, options);
 
-    directives.reduce(
-      (memo: Matcher, directive: AlertDirective): Matcher => {
-        const condition = parseCondition(directive);
-        const fn = parseFunction(directive);
+  directives.reduce(
+    (memo: Matcher, directive: AlertDirective): Matcher => {
+      const condition = parseCondition(directive);
+      const fn = parseFunction(directive);
 
-        return memo.on(condition, fn);
-      },
-      matcher,
-    );
-  };
-
-  if (annotations) {
-    effect.annotations = {
-      options: {
-        alerts: directives,
-      },
-      type: 'api:effects:displayAlerts',
-      ...annotations,
-    }
-  }
-
-  return effect;
+      return memo.on(condition, fn);
+    },
+    matcher,
+  );
 };

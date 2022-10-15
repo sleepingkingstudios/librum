@@ -55,23 +55,6 @@ describe('API effects displayAlerts()', () => {
     expect(typeof effect).toBe('function');
   });
 
-  describe('with annotations', () => {
-    const annotated: Effect = displayAlerts(
-      directives,
-      { name: 'spec.displayAlerts' },
-    );
-
-    it('should annotate the effect', () => {
-      expect(annotated.annotations).toEqual({
-        options: {
-          alerts: directives,
-        },
-        name: 'spec.displayAlerts',
-        type: 'api:effects:displayAlerts',
-      });
-    });
-  });
-
   describe('with a response that does not match any directives', () => {
     const successResponse: Response = {
       ...defaultResponse,
