@@ -7,6 +7,10 @@ import {
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 import type { MutationStatus } from '@api';
+import type {
+  Response,
+  UseMutationTrigger,
+} from '@api/hooks/types';
 import type { Request } from '@api/request';
 import { LoadingOverlay } from '@components/loading-overlay';
 import type { Animations } from '@components/types';
@@ -25,8 +29,8 @@ interface IFormProps {
   loadingAnimation?: Animations;
   loadingIcon?: IconDefinition;
   loadingMessage?: string;
-  request: Request;
-  status: MutationStatus;
+  request: Request | UseMutationTrigger;
+  status: MutationStatus | Response;
 }
 
 interface IRenderLoadingOverlay {

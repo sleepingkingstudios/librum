@@ -5,87 +5,45 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { LoginPage } from './index';
-import type {
-  Mutation,
-  MutationStatus,
-  UseRequest,
-} from '@api';
-import { Page } from '@components/page';
 import {
-  useMutation,
-  useRequest,
-} from './request';
+  defaultResponse,
+  loadingResponse,
+  failureResponse,
+  successResponse,
+} from '@api/hooks/test-helpers';
+import { Page } from '@components/page';
+import { useRequest } from './request';
 
 jest.mock('@components/page');
-jest.mock('@session/api');
 jest.mock('./request');
 
-const mockMutation = useMutation as jest.MockedFunction<Mutation>;
 const mockPage = Page as jest.MockedFunction<typeof Page>;
-const mockRequest = useRequest as jest.MockedFunction<UseRequest>;
-const mutation = jest.fn();
-const mutationStatus: MutationStatus = { isLoading: false };
+const mockRequest = useRequest as jest.MockedFunction<typeof useRequest>;
 const request = jest.fn();
 
-mockMutation.mockImplementation(
-  () => [mutation, mutationStatus],
-);
-
+mockRequest.mockImplementation(() => [request, defaultResponse]);
 mockPage.mockImplementation(
   ({ children }) => (<div id="page">{ children }</div>)
 );
 
-mockRequest.mockImplementation(() => request);
-
-type anyMockedFunction = jest.MockedFunction<() => unknown>;
-
 describe('<LoginPage>', () => {
   it('should render the form', () => {
-    const { getByRole } = render(
-      <LoginPage />,
-      { store: true }
-    );
+    const { getByRole } = render(<LoginPage />);
     const submit = getByRole('button', { name: 'Log In' });
 
     expect(submit).toBeVisible();
   });
 
-  it('should initialize the request', () => {
-    const options = {
-      createSession: expect.any(Function) as anyMockedFunction,
-      dismissAlert: expect.any(Function) as anyMockedFunction,
-      dispatch: expect.any(Function) as anyMockedFunction,
-      displayAlert: expect.any(Function) as anyMockedFunction,
-      setItem: expect.any(Function) as anyMockedFunction,
-    };
-
-    render(
-      <LoginPage />,
-      { store: true }
-    );
-
-    expect(useRequest).toHaveBeenCalledWith({
-      mutation,
-      options,
-    });
-  });
-
   it('should match the snapshot', () => {
-    const { asFragment } = render(
-      <LoginPage />,
-      { store: true }
-    );
+    const { asFragment } = render(<LoginPage />);
 
     expect(asFragment()).toMatchSnapshot();
   });
 
-  describe('when the user submits the form', () => {
-    it('should call the request', async () => {
-      const { getByLabelText, getByRole } = render(
-        <LoginPage />,
-        { store: true }
-      );
-      const expected = {
+  describe('when the user clicks the "Log In" button', () => {
+    it('should submit the form', async () => {
+      const { getByLabelText, getByRole } = render(<LoginPage />);
+      const expectedParams = {
         username: 'Alan Bradley',
         password: 'tronlives',
       };
@@ -96,7 +54,43 @@ describe('<LoginPage>', () => {
 
       await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-      expect(request).toHaveBeenCalledWith(expected, expect.anything());
+      expect(request).toHaveBeenCalledWith(expectedParams, expect.anything());
+    });
+  });
+
+  describe('when the request is loading', () => {
+    beforeEach(() => {
+      mockRequest.mockImplementation(() => [request, loadingResponse]);
+    })
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(<LoginPage />);
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('when the request returns a failing response', () => {
+    beforeEach(() => {
+      mockRequest.mockImplementation(() => [request, failureResponse]);
+    })
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(<LoginPage />);
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('when the request returns a successful response', () => {
+    beforeEach(() => {
+      mockRequest.mockImplementation(() => [request, successResponse]);
+    })
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(<LoginPage />);
+
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 });

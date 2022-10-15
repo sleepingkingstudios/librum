@@ -35,12 +35,7 @@ export type UseMutation = () => readonly [
 
 export type UseMutationRequest<
   Data extends Record<string, unknown> = Record<string, unknown>
-> = ({
-  arg,
-  effects,
-  options,
-  useMutation,
-}: UseMutationRequestProps) => [UseMutationTrigger, Response<Data>];
+> = (opts?: UseMutationRequestProps) => [UseMutationTrigger, Response<Data>];
 
 export type UseMutationRequestProps = {
   effects?: Effect[],
@@ -55,6 +50,7 @@ export type UseMutationResult = {
   isLoading: boolean,
   isSuccess: boolean,
   isUninitialized: boolean,
+  reset: () => void,
 };
 
 export type UseMutationTrigger = (arg?: unknown) => Promise<unknown>;

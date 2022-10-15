@@ -11,6 +11,8 @@ import type {
 } from '../types';
 import type {
   Response,
+  ResponseStatus,
+  UseMutationResult,
   UseQueryResult,
 } from './types';
 
@@ -59,15 +61,16 @@ export const defaultResponse: Response = {
   isErrored: false,
   isFailure: false,
   isSuccess: false,
-  status: 'unknown',
+  status: 'unknown' as ResponseStatus,
 };
 
-export const defaultResult: UseQueryResult = {
+export const defaultResult: UseMutationResult & UseQueryResult = {
   isUninitialized: false,
   isLoading: false,
   isSuccess: false,
   isError: false,
   refetch: jest.fn(),
+  reset: jest.fn(),
 };
 
 export const failureResponse = {
@@ -76,7 +79,7 @@ export const failureResponse = {
   errorType: error.type,
   hasError: true,
   isFailure: true,
-  status: 'failure',
+  status: 'failure' as ResponseStatus,
 };
 
 export const failureResult = {
@@ -100,7 +103,7 @@ export const failureResultWithData = {
 export const loadingResponse = {
   ...defaultResponse,
   isLoading: true,
-  status: 'loading',
+  status: 'loading' as ResponseStatus,
 };
 
 export const loadingResult = {
@@ -113,7 +116,7 @@ export const successResponse = {
   data,
   hasData: true,
   isSuccess: true,
-  status: 'success',
+  status: 'success' as ResponseStatus,
 };
 
 export const successResult = {

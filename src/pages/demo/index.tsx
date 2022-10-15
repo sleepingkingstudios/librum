@@ -129,7 +129,7 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{ generation: '1', version: 'red' }}
-      request={() => null}
+      request={(): null => null}
       status={mockMutationStatus}
     >
       <FormField name="version" />
@@ -145,7 +145,7 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{}}
-      request={() => null}
+      request={(): null => null}
       status={mockMutationStatus}
     >
       <FormRow cols={6}>

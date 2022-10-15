@@ -21,4 +21,10 @@ export const getStoredSession = (): Session => {
   } catch (error) {
     return defaultSession;
   }
-}
+};
+
+export const setStoredSession = (session: Session): void => {
+  const value = JSON.stringify(session);
+
+  localStorage.setItem('session', value);
+};

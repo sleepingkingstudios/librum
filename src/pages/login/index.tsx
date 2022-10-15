@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { useAlerts } from '@alerts';
 import {
   Form,
   FormField,
@@ -10,34 +8,10 @@ import {
   FormSubmitButton,
 } from '@components/form';
 import { Page } from '@components/page';
-import { actions } from '@session/reducer';
-import {
-  useMutation,
-  useRequest,
-} from './request';
+import { useRequest } from './request';
 
 export const LoginPage = (): JSX.Element => {
-  const {
-    displayAlert,
-    dismissAlert,
-  } = useAlerts();
-  const { create } = actions;
-  const dispatch = useDispatch();
-  const setItem = (key: string, value: string) => {
-    localStorage.setItem(key, value);
-  };
-  const options = {
-    createSession: create,
-    dismissAlert,
-    dispatch,
-    displayAlert,
-    setItem,
-  };
-  const [mutation, status] = useMutation();
-  const request = useRequest({
-    mutation,
-    options,
-  });
+  const [request, status] = useRequest();
 
   return (
     <Page navigation={[]}>
