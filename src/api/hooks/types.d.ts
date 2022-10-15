@@ -34,13 +34,19 @@ export type UseMutation = () => readonly [
 ];
 
 export type UseMutationRequest<
-  Data extends Record<string, unknown> = Record<string, unknown>
-> = (opts?: UseMutationRequestProps) => [UseMutationTrigger, Response<Data>];
+  Data extends Record<string, unknown> = Record<string, unknown>,
+  Options extends Record<string, unknown> = Record<string, unknown>,
+> = (opts?: UseMutationRequestProps<Options>) => [
+  UseMutationTrigger,
+  Response<Data>,
+];
 
-export type UseMutationRequestProps = {
+export type UseMutationRequestProps<
+  Options extends Record<string, unknown> = Record<string, unknown>
+> = {
   effects?: Effect[],
-  options?: Record<string, unknown>,
-  useMutation: UseMutation,
+  options?: Options,
+  useMutation?: UseMutation,
 };
 
 export type UseMutationResult = {

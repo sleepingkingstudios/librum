@@ -1,30 +1,68 @@
-import { buildRequest } from '@api';
-import type { UseMutation } from '@api';
-import { clearSessionOnExpired } from '@session/middleware';
-import { useUpdateUserPasswordMutation } from '@user/password/api';
 import {
-  closeFormOnSuccess,
-  displayAlerts,
-} from './middleware';
+  faUserLock,
+  faUserSlash,
+} from '@fortawesome/free-solid-svg-icons';
 
-const useMutation: UseMutation = useUpdateUserPasswordMutation;
+import { displayAlerts } from '@api/effects';
+import { useMutationRequest } from '@api/hooks';
+import type {
+  Effect,
+  EffectOptions,
+} from '@api/effects/types';
+import type {
+  Response,
+  UseMutationRequest,
+} from '@api/hooks/types';
+import { useUpdateUserPasswordMutation } from '@user/password/api';
 
-useMutation.annotations = {
-  name: 'useUpdateUserPasswordMutation',
-  type: 'hooks:useMutation',
+type Options = { closeForm: () => void };
+
+const closeFormOnSuccess: Effect = (
+  response: Response,
+  options: EffectOptions<Options>
+) => {
+  const { isSuccess } = response;
+  const { closeForm } = options;
+
+  if (!isSuccess) { return; }
+
+  closeForm();
 };
 
-export { useMutation };
+const effects: Effect[] = [
+  closeFormOnSuccess,
+  displayAlerts([
+    {
+      status: 'failure',
+      display: {
+        context: 'pages:user:updatePassword:alerts',
+        icon: faUserSlash,
+        message: 'Unable to update password.',
+        type: 'failure',
+      },
+    },
+    {
+      status: 'success',
+      display: {
+        context: 'pages:user:updatePassword:alerts',
+        icon: faUserLock,
+        message: 'Successfully updated password.',
+        type: 'success',
+      },
+    },
+  ]),
+];
 
-export const useRequest = buildRequest(
-  {
-    middleware: [
-      clearSessionOnExpired,
-      closeFormOnSuccess,
-      displayAlerts,
-    ],
-  },
-  {
-    name: 'pages:user:updatePassword:request',
-  },
-);
+export const useRequest: UseMutationRequest = ({
+  options,
+}: {
+  options: Options,
+}) => {
+  const [trigger, response] = useMutationRequest({
+    effects,
+    options,
+    useMutation: useUpdateUserPasswordMutation,
+  });
+
+  return [trigger, response];
+};

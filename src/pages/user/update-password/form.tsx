@@ -1,18 +1,12 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 
-import { useAlerts } from '@alerts';
 import {
   Form,
   FormField,
   FormRow,
   FormSubmitButton,
 } from '@components/form';
-import { actions } from '@session/reducer';
-import {
-  useMutation,
-  useRequest,
-} from './request';
+import { useRequest } from './request';
 
 type UserUpdatePasswordFormProps = {
   closeForm: () => void,
@@ -21,24 +15,8 @@ type UserUpdatePasswordFormProps = {
 export const UserUpdatePasswordForm = (
   { closeForm }: UserUpdatePasswordFormProps
 ): JSX.Element => {
-  const { destroy } = actions;
-  const { displayAlert } = useAlerts();
-  const dispatch = useDispatch();
-  const setItem = (key: string, value: string) => {
-    localStorage.setItem(key, value);
-  };
-  const options = {
-    closeForm,
-    destroySession: destroy,
-    dispatch,
-    displayAlert,
-    setItem,
-  };
-  const [mutation, status] = useMutation();
-  const request = useRequest({
-    mutation,
-    options,
-  });
+  const options = { closeForm };
+  const [request, status] = useRequest({ options });
 
   return (
     <Form

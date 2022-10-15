@@ -9,7 +9,9 @@ export type Effect<Options extends EffectOptions = EffectOptions> = (
   (response: Response, options?: Options) => void
 ) & Annotated;
 
-export type EffectOptions = Record<string, unknown> & {
+export type EffectOptions<
+  Options extends Record<string, unknown> = Record<string, unknown>,
+> = Options & {
   alerts: AlertsContext,
   dispatch: Dispatch,
 };

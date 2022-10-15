@@ -1,109 +1,123 @@
+import '@testing-library/jest-dom';
+import { renderHook } from '@testing-library/react';
 import {
-  useMutation,
-  useRequest,
-} from './request';
+  faUserLock,
+  faUserSlash,
+} from '@fortawesome/free-solid-svg-icons';
+
+import { useRequest } from './request';
+import { useAlerts } from '@alerts';
+import type { Alert } from '@alerts';
 import {
-  buildSuccessResponse,
-  wrapResponse,
-} from '@api/test-helpers';
-import { formatValue } from '@utils/annotations';
+  defaultResult,
+  defaultResponse,
+  failureResult,
+  failureResponse,
+  successResult,
+  successResponse,
+} from '@api/hooks/test-helpers';
+import { useUpdateUserPasswordMutation } from '@user/password/api';
+import { useStoreDispatch } from '@store/hooks';
 
-const successResponse = buildSuccessResponse();
+jest.mock('@alerts');
+jest.mock('@store/hooks');
+jest.mock('@user/password/api');
 
-describe('<UserUpdatePasswordForm /> request', () => {
-  describe('useMutation', () => {
-    it('should be a function', () => {
-      expect(typeof useMutation).toBe('function');
-    });
+const displayAlert = jest.fn();
+const alerts = {
+  alerts: [] as Alert[],
+  dismissAlert: jest.fn(),
+  dismissAllAlerts: jest.fn(),
+  displayAlert,
+};
+const mockAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
+const mockDispatch = useStoreDispatch as jest.MockedFunction<
+  typeof useStoreDispatch
+>;
+const trigger = jest.fn();
+const mockMutation = useUpdateUserPasswordMutation as jest.MockedFunction<
+  typeof useUpdateUserPasswordMutation
+>;
 
-    it('should be annotated', () => {
-      const expected = {
-        name: 'useUpdateUserPasswordMutation',
-        type: 'hooks:useMutation',
-      };
+mockAlerts.mockImplementation(() => alerts);
+mockDispatch.mockImplementation(() => jest.fn());
+mockMutation.mockImplementation(() => [trigger, defaultResult]);
 
-      expect(useMutation.annotations).toEqual(expected);
-    });
-  });
+beforeEach(() => {
+  displayAlert.mockClear();
+  mockMutation.mockClear();
+  trigger.mockClear();
+});
 
-  describe('useRequest', () => {
-    const action = { authenticated: false };
+describe('<UserUpdatePasswordForm />', () => {
+  describe('useRequest()', () => {
     const closeForm = jest.fn();
-    const destroySession = jest.fn(() => action);
-    const dispatch = jest.fn();
-    const displayAlert = jest.fn();
-    const setItem = jest.fn();
-    const mutation = jest.fn(() => wrapResponse(successResponse));
-    const options = {
-      closeForm,
-      destroySession,
-      dispatch,
-      displayAlert,
-      setItem,
-    };
-    const request = useRequest({
-      mutation,
-      options,
-    });
-    const values = {
-      oldPassword: 'tronlives',
-      newPassword: 'ifightfortheusers',
-      confirmPassword: 'ifightfortheusers',
-    };
+    const options = { closeForm };
 
-    beforeEach(() => {
-      closeForm.mockClear();
-      destroySession.mockClear();
-      dispatch.mockClear();
-      displayAlert.mockClear();
-      mutation.mockClear();
-      setItem.mockClear();
+    beforeEach(() => { closeForm.mockClear(); });
+
+    it('should call the mutation', () => {
+      renderHook(() => useRequest({ options }));
+
+      expect(mockMutation).toHaveBeenCalled();
     });
 
-    it('should be a function', () => {
-      expect(typeof useRequest).toBe('function');
+    it('should return the trigger and response', () => {
+      const { result } = renderHook(() => useRequest({ options }));
+
+      expect(result.current).toEqual([trigger, defaultResponse]);
     });
 
-    it('should return a function', () => {
-      expect(typeof request).toBe('function');
+    describe('when the mutation returns a failure response', () => {
+      beforeEach(() => {
+        mockMutation.mockImplementation(() => [trigger, failureResult])
+      });
+
+      it('should return the trigger and response', () => {
+        const { result } = renderHook(() => useRequest({ options }));
+
+        expect(result.current).toEqual([trigger, failureResponse]);
+      });
+
+      it('should display an alert', () => {
+        renderHook(() => useRequest({ options }));
+
+        expect(displayAlert).toHaveBeenCalledWith({
+          context: 'pages:user:updatePassword:alerts',
+          icon: faUserSlash,
+          message: 'Unable to update password.',
+          type: 'failure',
+        });
+      });
     });
 
-    it('should call the mutation', async () => {
-      await request(values);
+    describe('when the mutation returns a success response', () => {
+      beforeEach(() => {
+        mockMutation.mockImplementation(() => [trigger, successResult])
+      });
 
-      expect(mutation).toHaveBeenCalledWith(values);
-    });
+      it('should return the trigger and response', () => {
+        const { result } = renderHook(() => useRequest({ options }));
 
-    it('should be annotated', () => {
-      const expected = {
-        middleware: [
-          {
-            matcher: {
-              name: 'session:middleware:clearSessionOnExpired',
-              type: 'matcher',
-            },
-            name: 'session:middleware:clearSessionOnExpired',
-            type: 'api:middleware:matcher'
-          },
-          {
-            name: 'pages:user:updatePassword:closeFormOnSuccess',
-            type: 'middleware',
-          },
-          {
-            matcher: {
-              name: 'pages:user:updatePassword:alerts',
-              type: 'matcher',
-            },
-            name: 'pages:user:updatePassword:alerts',
-            type: 'api:middleware:matcher'
-          },
-        ],
-        name: 'pages:user:updatePassword:request',
-        params: {},
-        type: 'hooks:useRequest',
-      };
+        expect(result.current).toEqual([trigger, successResponse]);
+      });
 
-      expect(formatValue(useRequest.annotations)).toEqual(expected);
+      it('should close the form', () => {
+        renderHook(() => useRequest({ options }));
+
+        expect(closeForm).toHaveBeenCalled();
+      });
+
+      it('should display an alert', () => {
+        renderHook(() => useRequest({ options }));
+
+        expect(displayAlert).toHaveBeenCalledWith({
+          context: 'pages:user:updatePassword:alerts',
+          icon: faUserLock,
+          message: 'Successfully updated password.',
+          type: 'success',
+        });
+      });
     });
   });
 });

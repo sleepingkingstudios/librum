@@ -47,13 +47,12 @@ beforeEach(() => {
   dismissAlert.mockClear();
   displayAlert.mockClear();
   dispatch.mockClear();
+  mockMutation.mockClear();
   trigger.mockClear();
 });
 
-describe('LoginPage request', () => {
+describe('<LoginPage />', () => {
   describe('useRequest()', () => {
-    beforeEach(() => { mockMutation.mockClear(); });
-
     it('should call the mutation', () => {
       renderHook(() => useRequest());
 
