@@ -6,12 +6,10 @@ import {
 } from 'formik';
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
-import type { MutationStatus } from '@api';
 import type {
   Response,
   UseMutationTrigger,
 } from '@api/hooks/types';
-import type { Request } from '@api/request';
 import { LoadingOverlay } from '@components/loading-overlay';
 import type { Animations } from '@components/types';
 import { joinClassNames } from '@utils/react-utils';
@@ -22,18 +20,18 @@ export { FormInput } from './input';
 export { FormRow } from './row';
 export { FormSubmitButton } from './submit-button';
 
-interface IFormProps {
+interface FormProps {
   children: React.ReactNode;
   className?: string;
   initialValues?: FormikValues;
   loadingAnimation?: Animations;
   loadingIcon?: IconDefinition;
   loadingMessage?: string;
-  request: Request | UseMutationTrigger;
-  status: MutationStatus | Response;
+  request: UseMutationTrigger;
+  status: Response;
 }
 
-interface IRenderLoadingOverlay {
+interface RenderLoadingOverlay {
   isLoading: boolean;
   loadingAnimation?: Animations;
   loadingIcon?: IconDefinition;
@@ -45,7 +43,7 @@ const renderLoadingOverlay = ({
   loadingAnimation,
   loadingIcon,
   loadingMessage,
-}: IRenderLoadingOverlay): JSX.Element => {
+}: RenderLoadingOverlay): JSX.Element => {
   if (!isLoading) { return null; }
 
   return (
@@ -67,7 +65,7 @@ export const Form = (
     loadingMessage = null,
     request,
     status,
-  }: IFormProps
+  }: FormProps
 ): JSX.Element => {
   const { isLoading } = status;
   const joinedClassName = joinClassNames(

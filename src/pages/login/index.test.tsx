@@ -70,7 +70,7 @@ describe('<LoginPage>', () => {
     });
   });
 
-  describe('when the request returns a failing response', () => {
+  describe('when the request returns a failure response', () => {
     beforeEach(() => {
       mockRequest.mockImplementation(() => [request, failureResponse]);
     })

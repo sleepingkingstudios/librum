@@ -6,13 +6,16 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import { Form } from './index';
-import type { MutationStatus } from '@api';
+import {
+  defaultResponse,
+  loadingResponse,
+} from '@api/hooks/test-helpers';
 import { render } from '@test-helpers/rendering';
 
 describe('<Form />', () => {
   it('should submit the form', async () => {
     const request = jest.fn();
-    const status: MutationStatus = { isLoading: false };
+    const status = defaultResponse;
 
     const { getByRole } = render(
       <Form initialValues={{}} status={status} request={request}>
@@ -27,7 +30,7 @@ describe('<Form />', () => {
 
   it('should match the snapshot', () => {
     const request = jest.fn();
-    const status: MutationStatus = { isLoading: false };
+    const status = defaultResponse;
 
     const { asFragment } = render(
       <Form initialValues={{}} status={status} request={request}>
@@ -41,7 +44,7 @@ describe('<Form />', () => {
   describe('when the form is loading', () => {
     it('should match the snapshot', () => {
       const request = jest.fn();
-      const status: MutationStatus = { isLoading: true };
+      const status = loadingResponse;
 
       const { asFragment } = render(
         <Form initialValues={{}} status={status} request={request}>
@@ -56,7 +59,7 @@ describe('<Form />', () => {
   describe('with className: value', () => {
     it('should match the snapshot', () => {
       const request = jest.fn();
-      const status: MutationStatus = { isLoading: false };
+      const status = defaultResponse;
 
       const { asFragment } = render(
         <Form
@@ -77,7 +80,7 @@ describe('<Form />', () => {
     describe('when the form is loading', () => {
       it('should match the snapshot', () => {
         const request = jest.fn();
-        const status: MutationStatus = { isLoading: true };
+        const status = loadingResponse;
 
         const { asFragment } = render(
           <Form
@@ -99,7 +102,7 @@ describe('<Form />', () => {
     describe('when the form is loading', () => {
       it('should match the snapshot', () => {
         const request = jest.fn();
-        const status: MutationStatus = { isLoading: true };
+        const status = loadingResponse;
 
         const { asFragment } = render(
           <Form
@@ -121,7 +124,7 @@ describe('<Form />', () => {
     describe('when the form is loading', () => {
       it('should match the snapshot', () => {
         const request = jest.fn();
-        const status: MutationStatus = { isLoading: true };
+        const status = loadingResponse;
 
         const { asFragment } = render(
           <Form
@@ -162,7 +165,7 @@ describe('<Form />', () => {
 
     it('should submit the form', async () => {
       const request = jest.fn();
-      const status: MutationStatus = { isLoading: false };
+      const status = defaultResponse;
 
       const { getByRole } = render(
         <Form initialValues={defaultValues} status={status} request={request}>
@@ -180,7 +183,7 @@ describe('<Form />', () => {
     describe('when the user inputs values', () => {
       it('should submit the form', async () => {
         const request = jest.fn();
-        const status: MutationStatus = { isLoading: false };
+        const status = defaultResponse;
         const expectedValues = {
           launchSite: 'KSC',
           mission: {
@@ -219,7 +222,7 @@ describe('<Form />', () => {
 
       it('should submit the form', async () => {
         const request = jest.fn();
-        const status: MutationStatus = { isLoading: false };
+        const status = defaultResponse;
 
         const { getByRole } = render(
           <Form initialValues={initialValues} status={status} request={request}>
