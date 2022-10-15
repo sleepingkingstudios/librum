@@ -10,15 +10,13 @@ import type {
   ApiError,
   ApiFailure,
   ApiSuccess,
-} from '../types';
-import type {
   FetchError,
   Response,
   ResponseStatus,
   UseMutationResult,
   UseQueryError,
   UseQueryResult,
-} from './types';
+} from '../types';
 
 type Result = UseMutationResult | UseQueryResult;
 

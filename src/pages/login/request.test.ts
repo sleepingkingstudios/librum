@@ -12,7 +12,7 @@ import {
   failureResponse,
   successResult,
   successResponse,
-} from '@api/hooks/test-helpers';
+} from '@api/test-helpers';
 import { useCreateSessionMutation } from '@session/api';
 import { actions as sessionActions } from '@session/reducer';
 import { useStoreDispatch } from '@store/hooks';

@@ -11,15 +11,15 @@ import type { Alert } from '@alerts';
 import { actions as sessionActions } from '@session';
 import { expiredSessionError } from '../errors';
 import {
+  defaultResponse,
+  defaultResult,
+} from '../test-helpers';
+import {
   ApiError,
   ApiFailure,
   ApiSuccess,
+  Response,
 } from '../types';
-import {
-  defaultResponse,
-  defaultResult,
-} from './test-helpers';
-import type { Response } from './types';
 
 describe('API hooks utils', () => {
   describe('camelizeErrorType()', () => {

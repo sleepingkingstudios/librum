@@ -7,11 +7,11 @@ import type {
 import {
   defaultOptions,
   defaultResponse,
-} from '../hooks/test-helpers';
+} from '../test-helpers';
 import type {
   Effect,
   Response,
-} from './types';
+} from '../types';
 
 describe('API effects displayAlerts()', () => {
   const dismissAlert = jest.fn();

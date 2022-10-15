@@ -3,16 +3,14 @@ import {
   faUserSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { displayAlerts } from '@api/effects';
-import { useMutationRequest } from '@api/hooks';
 import type {
   Effect,
   EffectOptions,
-} from '@api/effects/types';
-import type {
   Response,
   UseMutationRequest,
-} from '@api/hooks/types';
+} from '@api';
+import { displayAlerts } from '@api/effects';
+import { useMutationRequest } from '@api/hooks';
 import { useUpdateUserPasswordMutation } from '@user/password/api';
 
 type Options = { closeForm: () => void };

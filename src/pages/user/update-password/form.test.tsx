@@ -10,7 +10,7 @@ import {
   loadingResponse,
   failureResponse,
   successResponse,
-} from '@api/hooks/test-helpers';
+} from '@api/test-helpers';
 import { useRequest } from './request';
 
 jest.mock('./request');

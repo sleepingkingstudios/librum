@@ -1,17 +1,17 @@
 import type { DisplayAlertProps } from '@alerts';
 import type { Annotations } from '@utils/annotations';
-import type { ResponseStatus } from '../hooks/types';
+import type {
+  Effect,
+  EffectOptions,
+  Response,
+  ResponseStatus,
+} from '../types';
 import { match } from './matcher';
 import type {
   MatchFunction,
   Matcher,
   MatcherProps,
 } from './matcher';
-import type {
-  Effect,
-  EffectOptions,
-  Response,
-} from './types';
 
 export type AlertDirective = {
   dismiss: string,

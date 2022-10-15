@@ -1,8 +1,8 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import type { DisplayAlertProps } from '@alerts';
+import type { Effect } from '@api';
 import { displayAlerts } from '@api/effects';
-import type { Effect } from '@api/effects';
 import { useQueryRequest } from '@api/hooks';
 import type { User } from '@session';
 import { useGetUserQuery } from '@user/api';

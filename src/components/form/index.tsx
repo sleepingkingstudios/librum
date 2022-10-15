@@ -9,7 +9,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import type {
   Response,
   UseMutationTrigger,
-} from '@api/hooks/types';
+} from '@api';
 import { LoadingOverlay } from '@components/loading-overlay';
 import type { Animations } from '@components/types';
 import { joinClassNames } from '@utils/react-utils';

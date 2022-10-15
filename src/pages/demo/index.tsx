@@ -3,7 +3,7 @@ import * as React from 'react';
 import type {
   Response,
   ResponseStatus,
-} from '@api/hooks/types';
+} from '@api';
 import { DataList } from '@components/data-list';
 import {
   Form,

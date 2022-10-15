@@ -5,16 +5,14 @@ import type { AlertsContext } from '@alerts/types';
 import type { Dispatch } from '@store';
 import { useStoreDispatch } from '@store/hooks';
 import type {
+  ApiError,
   Effect,
   EffectOptions,
-} from '../effects/types';
-import type { ApiError } from '../types';
-import type {
   Response,
   ResponseStatus,
   UseQuery,
   UseQueryResult,
-} from './types';
+} from '../types';
 import {
   camelizeErrorType,
   extractData,

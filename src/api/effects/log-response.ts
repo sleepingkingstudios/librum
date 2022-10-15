@@ -2,7 +2,7 @@ import type {
   Effect,
   EffectOptions,
   Response,
-} from './types';
+} from '../types';
 
 type LogFunction = (...args: unknown[]) => void;
 

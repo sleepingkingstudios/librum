@@ -6,7 +6,7 @@ import {
   defaultOptions,
   failureResult,
   loadingResult,
-} from '@api/hooks/test-helpers';
+} from '@api/test-helpers';
 import { useGetUserQuery } from '@user/api';
 
 jest.mock('@alerts');

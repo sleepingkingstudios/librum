@@ -11,17 +11,17 @@ import type {
 import { actions as sessionActions } from '@session';
 import { useStoreDispatch } from '@store/hooks';
 import { expiredSessionError } from '../errors';
+import {
+  defaultResult,
+  defaultResponse,
+} from '../test-helpers';
 import type {
   ApiError,
   ApiFailure,
   ApiSuccess,
   Effect,
+  UseMutation,
 } from '../types';
-import {
-  defaultResult,
-  defaultResponse,
-} from './test-helpers';
-import type { UseMutation } from './types';
 
 jest.mock('@alerts');
 jest.mock('@store/hooks');

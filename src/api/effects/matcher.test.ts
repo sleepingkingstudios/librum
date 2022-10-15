@@ -2,11 +2,11 @@ import { match } from './matcher';
 import {
   defaultOptions,
   defaultResponse,
-} from '../hooks/test-helpers';
+} from '../test-helpers';
 import type {
   EffectOptions,
   Response,
-} from './types';
+} from '../types';
 
 describe('API effects matcher', () => {
   const options: EffectOptions = {

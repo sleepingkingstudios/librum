@@ -1,8 +1,8 @@
 import type {
+  EffectOptions,
   Response,
   ResponseStatus,
-} from '../hooks/types';
-import type { EffectOptions } from './types';
+} from '../types';
 
 export type MatchFunction = (response: Response, options: EffectOptions) => void;
 

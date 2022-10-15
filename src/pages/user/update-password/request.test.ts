@@ -15,7 +15,7 @@ import {
   failureResponse,
   successResult,
   successResponse,
-} from '@api/hooks/test-helpers';
+} from '@api/test-helpers';
 import { useUpdateUserPasswordMutation } from '@user/password/api';
 import { useStoreDispatch } from '@store/hooks';
 

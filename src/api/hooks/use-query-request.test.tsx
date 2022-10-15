@@ -11,16 +11,16 @@ import type {
 import { actions as sessionActions } from '@session';
 import { useStoreDispatch } from '@store/hooks';
 import { expiredSessionError } from '../errors';
+import {
+  defaultResult as genericResult,
+  defaultResponse,
+} from '../test-helpers';
 import type {
   ApiError,
   ApiFailure,
   ApiSuccess,
   Effect,
 } from '../types';
-import {
-  defaultResult as genericResult,
-  defaultResponse,
-} from './test-helpers';
 
 jest.mock('@alerts');
 jest.mock('@store/hooks');

@@ -9,7 +9,7 @@ import { Form } from './index';
 import {
   defaultResponse,
   loadingResponse,
-} from '@api/hooks/test-helpers';
+} from '@api/test-helpers';
 import { render } from '@test-helpers/rendering';
 
 describe('<Form />', () => {

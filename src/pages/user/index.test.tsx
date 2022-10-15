@@ -4,12 +4,12 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import { UserPage } from './index';
-import type { Response } from '@api/hooks/types';
+import type { Response } from '@api';
 import {
   failureResponse,
   loadingResponse,
   successResponse,
-} from '@api/hooks/test-helpers';
+} from '@api/test-helpers';
 import { Page } from '@components/page';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';

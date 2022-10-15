@@ -1,15 +1,13 @@
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 
-import { displayAlerts } from '@api/effects';
 import type {
   Effect,
   EffectOptions,
-} from '@api/effects/types';
-import { useMutationRequest } from '@api/hooks';
-import type {
   Response,
   UseMutationRequest,
-} from '@api/hooks/types';
+} from '@api';
+import { displayAlerts } from '@api/effects';
+import { useMutationRequest } from '@api/hooks';
 import type {
   Session,
   User,
