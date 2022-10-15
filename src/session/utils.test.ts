@@ -2,9 +2,49 @@ import type {
   Session,
   User,
 } from './types';
-import { getStoredSession } from './utils';
+import {
+  clearStoredSession,
+  getStoredSession,
+  setStoredSession,
+} from './utils';
 
 describe('Session utils', () => {
+  describe('clearStoredSession()', () => {
+    afterEach(() => { localStorage.clear(); });
+
+    it('should clear the stored session', () => {
+      clearStoredSession();
+
+      expect(localStorage.getItem('session')).toBeNull();
+    });
+
+    describe('when localStorage["session"] exists', () => {
+      const user: User = {
+        email: 'alan.bradley@example.com',
+        id: '00000000-0000-0000-0000-000000000000',
+        role: 'user',
+        slug: 'alan-bradley',
+        username: 'Alan Bradley',
+      };
+      const session = {
+        authenticated: true,
+        token: '12345',
+        user,
+      };
+      const value = JSON.stringify(session);
+
+      beforeEach(() => {
+        localStorage.setItem('session', value);
+      });
+
+      it('should clear the stored session', () => {
+        clearStoredSession();
+
+        expect(localStorage.getItem('session')).toBeNull();
+      });
+    });
+  });
+
   describe('getStoredSession()', () => {
     const defaultSession: Session = { authenticated: false };
 
@@ -63,6 +103,44 @@ describe('Session utils', () => {
         localStorage.setItem('session', value);
 
         expect(getStoredSession()).toEqual(session);
+      });
+    });
+  });
+
+  describe('setStoredSession()', () => {
+    const user: User = {
+      email: 'alan.bradley@example.com',
+      id: '00000000-0000-0000-0000-000000000000',
+      role: 'user',
+      slug: 'alan-bradley',
+      username: 'Alan Bradley',
+    };
+    const session = {
+      authenticated: true,
+      token: '12345',
+      user,
+    };
+    const value = JSON.stringify(session);
+
+    afterEach(() => { localStorage.clear(); });
+
+    it('should set the stored session', () => {
+      setStoredSession(session);
+
+      expect(localStorage.getItem('session')).toEqual(value);
+    });
+
+    describe('when localStorage["session"] exists', () => {
+      const otherValue = JSON.stringify({ authenticated: false });
+
+      beforeEach(() => {
+        localStorage.setItem('session', otherValue);
+      });
+
+      it('should set the stored session', () => {
+        setStoredSession(session);
+
+        expect(localStorage.getItem('session')).toEqual(value);
       });
     });
   });

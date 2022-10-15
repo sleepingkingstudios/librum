@@ -1,58 +1,35 @@
 import * as React from 'react';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import { UserPage } from './index';
-import { useAlerts } from '@alerts';
+import type { Response } from '@api';
+import {
+  failureResponse,
+  loadingResponse,
+  successResponse,
+} from '@api/test-helpers';
 import { Page } from '@components/page';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
-import { useGetUserQuery } from '@user/api';
+import { useGetUserRequest } from './request';
 
-jest.mock('@alerts');
 jest.mock('@components/page');
-jest.mock('@user/api');
+jest.mock('./request');
 
-const dismissAlert = jest.fn();
-const dismissAllAlerts = jest.fn();
-const displayAlert = jest.fn();
 const mockPage = Page as jest.MockedFunction<typeof Page>;
-const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
-const mockUseQuery =
-  useGetUserQuery as jest.MockedFunction<typeof useGetUserQuery>;
+const mockUseRequest = useGetUserRequest as jest.MockedFunction<typeof useGetUserRequest>;
 
 mockPage.mockImplementation(
   ({ children }) => (<div id="page">{ children }</div>)
 );
 
-mockUseAlerts.mockImplementation(() => ({
-  alerts: [],
-  dismissAlert,
-  dismissAllAlerts,
-  displayAlert,
-}));
-
-mockUseQuery.mockImplementation(() => ({
-  isLoading: false,
-  refetch: () => null,
-}));
-
-beforeEach(() => {
-  dismissAlert.mockClear();
-  dismissAllAlerts.mockClear();
-  displayAlert.mockClear();
-});
-
 describe('<UserPage>', () => {
   describe('when the user is loading', () => {
-    beforeEach(() => {
-      mockUseQuery.mockImplementation(() => ({
-        isLoading: true,
-        refetch: () => null,
-      }));
-    });
+    const response = loadingResponse as Response<{ user: User }>;
+
+    beforeEach(() => { mockUseRequest.mockImplementation(() => response); });
 
     it('should display the loading overlay', () => {
       const { getByText } = render(
@@ -76,31 +53,9 @@ describe('<UserPage>', () => {
   });
 
   describe('when the user has failed to load', () => {
-    beforeEach(() => {
-      mockUseQuery.mockImplementation(() => ({
-        error: {
-          message: 'Something went wrong',
-        },
-        isLoading: false,
-        refetch: () => null,
-      }));
-    });
+    const response = failureResponse as Response<{ user: User }>;
 
-    it('should display an alert', () => {
-      const expected = {
-        context: 'pages:user:request',
-        icon: faUser,
-        message: 'Unable to load current user.',
-        type: 'failure',
-      };
-
-      render(
-        <UserPage />,
-        { store: true },
-      );
-
-      expect(displayAlert).toHaveBeenCalledWith(expected);
-    });
+    beforeEach(() => { mockUseRequest.mockImplementation(() => response); });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(
@@ -120,17 +75,12 @@ describe('<UserPage>', () => {
       slug: 'alan-bradley',
       username: 'Alan Bradley',
     };
+    const response = {
+      ...successResponse,
+      data: { user },
+    } as Response<{ user: User }>;
 
-    beforeEach(() => {
-      mockUseQuery.mockImplementation(() => ({
-        data: {
-          ok: true,
-          data: { user },
-        },
-        isLoading: false,
-        refetch: () => null,
-      }));
-    });
+    beforeEach(() => { mockUseRequest.mockImplementation(() => response); });
 
     it('should render the user information', () => {
       const expectedLabels = [
@@ -160,15 +110,6 @@ describe('<UserPage>', () => {
       expect(definitions.map(
         (definition) => definition.textContent)
       ).toEqual(expectedDefinitions);
-    });
-
-    it('should not display an alert', () => {
-      render(
-        <UserPage />,
-        { store: true },
-      );
-
-      expect(displayAlert).not.toHaveBeenCalled();
     });
 
     it('should match the snapshot', () => {

@@ -18,8 +18,6 @@ module Actions::Api::Authentication::Sessions
     def process(request:)
       super
 
-      sleep 5
-
       credential = step { find_credential }
       session    = Authentication::Session.new(credential: credential)
       token      = step { build_token(session) }

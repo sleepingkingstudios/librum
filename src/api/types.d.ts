@@ -1,7 +1,8 @@
 import type { SerializedError } from '@reduxjs/toolkit';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 
-import type { Annotated } from '@utils/annotations';
+import type { AlertsContext } from '@alerts/types';
+import type { Dispatch } from '@store';
 import type {
   DataObject,
   Literal,
@@ -20,32 +21,100 @@ export type ApiSuccess<Data extends DataObject = DataObject> =
 export type ApiResponse<Data extends DataObject = DataObject> =
   ApiFailure<Data> | ApiSuccess<Data>;
 
-// See https://redux-toolkit.js.org/rtk-query/usage-with-typescript#type-safe-error-handling
-export type FetchFailure =
-  { error: FetchBaseQueryError | SerializedError };
+export type Effect<
+  Options extends EffectOptions = EffectOptions,
+> = (response: Response, options?: Options) => void;
 
-export type FetchSuccess<Data extends DataObject = DataObject> =
-  { data: ApiSuccess<Data> };
-
-export type FetchResponse<Data extends DataObject = DataObject> =
-  FetchFailure | FetchSuccess<Data>;
-
-export type FetchPromise<Data extends DataObject = DataObject> =
-  Promise<FetchResponse<Data>>;
-
-export type Mutation = (
-  (param?: unknown) => unknown
-) & Annotated;
-
-export type MutationStatus = {
-  isLoading: boolean;
+export type EffectOptions<
+  Options extends Record<string, unknown> = Record<string, unknown>,
+> = Options & {
+  alerts: AlertsContext,
+  dispatch: Dispatch,
 };
 
-export type UseMutationResponse = readonly [
-  Mutation,
-  MutationStatus,
+export type FetchError = {
+  data: ApiFailure,
+  status: number,
+};
+
+export type Response<Data = Record<string, unknown>> = {
+  data?: Data,
+  error?: ApiError,
+  errorType?: string,
+  hasData: boolean,
+  hasError: boolean,
+  isErrored: boolean,
+  isFailure: boolean,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isUninitialized: boolean,
+  status: ResponseStatus,
+};
+
+export type ResponseStatus =
+  'unknown' | 'uninitialized' | 'loading' | 'errored' | 'failure' | 'success';
+
+export type UseMutation = () => readonly [
+  UseMutationTrigger,
+  UseMutationResult,
 ];
 
-export type UseMutation = (
-  () => UseMutationResponse
-) & Annotated;
+export type UseMutationRequest<
+  Data extends Record<string, unknown> = Record<string, unknown>,
+  Options extends Record<string, unknown> = Record<string, unknown>,
+> = (opts?: UseMutationRequestProps<Options>) => [
+  UseMutationTrigger,
+  Response<Data>,
+];
+
+export type UseMutationRequestProps<
+  Options extends Record<string, unknown> = Record<string, unknown>
+> = {
+  effects?: Effect[],
+  options?: Options,
+  useMutation?: UseMutation,
+};
+
+export type UseMutationResult = {
+  data?: Record<string, unknown>,
+  error?: UseQueryError,
+  isError: boolean,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isUninitialized: boolean,
+  reset: () => void,
+};
+
+export type UseMutationTrigger = (arg?: unknown) => Promise<unknown>;
+
+export type UseQuery = (
+  arg?: unknown,
+) => UseQueryResult;
+
+export type UseQueryError = FetchBaseQueryError | SerializedError;
+
+export type UseQueryRequest<
+  Data extends Record<string, unknown> = Record<string, unknown>
+> = ({
+  arg,
+  effects,
+  options,
+  useQuery,
+}: UseQueryRequestProps) => Response<Data>;
+
+export type UseQueryRequestProps = {
+  arg?: unknown,
+  effects?: Effect[],
+  options?: Record<string, unknown>,
+  useQuery: UseQuery,
+};
+
+export type UseQueryResult = {
+  data?: Record<string, unknown>,
+  error?: UseQueryError,
+  isError: boolean,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isUninitialized: boolean,
+  refetch: () => void,
+};

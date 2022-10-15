@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import type { MutationStatus } from '@api';
+import type {
+  Response,
+  ResponseStatus,
+} from '@api';
 import { DataList } from '@components/data-list';
 import {
   Form,
@@ -39,7 +42,16 @@ const listDefaultValue = (
   <em>(unknown)</em>
 );
 
-const mockMutationStatus: MutationStatus = { isLoading: false };
+const defaultResponse: Response = {
+  hasData: false,
+  hasError: false,
+  isUninitialized: false,
+  isLoading: false,
+  isErrored: false,
+  isFailure: false,
+  isSuccess: false,
+  status: 'unknown' as ResponseStatus,
+};
 
 export const DemoPage = (): JSX.Element => (
   <Page breadcrumbs={breadcrumbs}>
@@ -129,8 +141,8 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{ generation: '1', version: 'red' }}
-      request={() => null}
-      status={mockMutationStatus}
+      request={(): null => null}
+      status={defaultResponse}
     >
       <FormField name="version" />
 
@@ -145,8 +157,8 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{}}
-      request={() => null}
-      status={mockMutationStatus}
+      request={(): null => null}
+      status={defaultResponse}
     >
       <FormRow cols={6}>
         <FormField name="strength" />

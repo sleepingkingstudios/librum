@@ -1,254 +1,149 @@
+import '@testing-library/jest-dom';
+import { renderHook } from '@testing-library/react';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 
+import { useRequest } from './request';
+import { useAlerts } from '@alerts';
+import type { Alert } from '@alerts';
 import {
-  useMutation,
-  useRequest,
-} from './request';
-import type {
-  FetchFailure,
-  FetchSuccess,
-} from '@api';
-import {
-  buildFailureResponse,
-  buildSuccessResponse,
-  fetchErrorResponse,
-  serializedErrorResponse,
-  wrapResponse,
+  defaultResult,
+  defaultResponse,
+  failureResult,
+  failureResponse,
+  successResult,
+  successResponse,
 } from '@api/test-helpers';
-import { formatValue } from '@utils/annotations';
+import { useCreateSessionMutation } from '@session/api';
+import { actions as sessionActions } from '@session/reducer';
+import { useStoreDispatch } from '@store/hooks';
 
-const user = {
-  email: 'alan.bradley@example.com',
-  id: 0,
-  role: 'user',
-  slug: 'alan-bradley',
-  username: 'Alan Bradley',
+jest.mock('@alerts');
+jest.mock('@session/api');
+jest.mock('@store/hooks');
+
+const dismissAlert = jest.fn();
+const displayAlert = jest.fn();
+const alerts = {
+  alerts: [] as Alert[],
+  dismissAlert,
+  dismissAllAlerts: jest.fn(),
+  displayAlert,
 };
-const session = {
-  authenticated: true,
-  token: '12345',
-  user,
-};
-const failureResponse = buildFailureResponse();
-const successResponse = buildSuccessResponse({
-  data: session,
+const mockAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
+const dispatch = jest.fn();
+const mockDispatch = useStoreDispatch as jest.MockedFunction<
+  typeof useStoreDispatch
+>;
+const trigger = jest.fn();
+const mockMutation = useCreateSessionMutation as jest.MockedFunction<
+  typeof useCreateSessionMutation
+>;
+
+mockAlerts.mockImplementation(() => alerts);
+mockDispatch.mockImplementation(() => dispatch);
+mockMutation.mockImplementation(() => [trigger, defaultResult]);
+
+beforeEach(() => {
+  dismissAlert.mockClear();
+  displayAlert.mockClear();
+  dispatch.mockClear();
+  mockMutation.mockClear();
+  trigger.mockClear();
 });
 
-describe('LoginPage request', () => {
-  describe('useMutation', () => {
-    it('should be a function', () => {
-      expect(typeof useMutation).toBe('function');
+describe('<LoginPage />', () => {
+  describe('useRequest()', () => {
+    it('should call the mutation', () => {
+      renderHook(() => useRequest());
+
+      expect(mockMutation).toHaveBeenCalled();
     });
 
-    it('should be annotated', () => {
-      const expected = {
-        name: 'useCreateSessionMutation',
-        type: 'hooks:useMutation',
+    it('should return the trigger and response', () => {
+      const { result } = renderHook(() => useRequest());
+
+      expect(result.current).toEqual([trigger, defaultResponse]);
+    });
+
+    describe('when the mutation returns a failure response', () => {
+      beforeEach(() => {
+        mockMutation.mockImplementation(() => [trigger, failureResult])
+      });
+
+      it('should return the trigger and response', () => {
+        const { result } = renderHook(() => useRequest());
+
+        expect(result.current).toEqual([trigger, failureResponse]);
+      });
+
+      it('should display an alert', () => {
+        renderHook(() => useRequest());
+
+        expect(displayAlert).toHaveBeenCalledWith({
+          context: 'authentication:session',
+          icon: faUserSlash,
+          message: 'User not found with the provided username and password.',
+          type: 'failure',
+        });
+      });
+    });
+
+    describe('when the mutation returns a success response', () => {
+      const user = {
+        email: 'alan.bradley@example.com',
+        id: '0',
+        role: 'user',
+        slug: 'alan-bradley',
+        username: 'Alan Bradley',
+      };
+      const token = '12345';
+      const session = {
+        authenticated: true,
+        token,
+        user,
+      };
+      const data = { token, user };
+      const result = {
+        ...successResult,
+        data: { ok: true, data },
+      };
+      const response = {
+        ...successResponse,
+        data,
       };
 
-      expect(useMutation.annotations).toEqual(expected);
-    });
-  });
-
-  describe('useRequest', () => {
-    const action = { authenticated: true };
-    const createSession = jest.fn(() => action);
-    const dismissAlert = jest.fn();
-    const dispatch = jest.fn();
-    const displayAlert = jest.fn();
-    const setItem = jest.fn();
-    const mutation = jest.fn(() => wrapResponse(successResponse));
-    const options = {
-      createSession,
-      dismissAlert,
-      dispatch,
-      displayAlert,
-      setItem,
-    };
-    const request = useRequest({
-      mutation,
-      options,
-    });
-    const values = {
-      username: 'Tron',
-      password: 'ifightfortheusers',
-    };
-
-    beforeEach(() => {
-      createSession.mockClear();
-      dismissAlert.mockClear();
-      dispatch.mockClear();
-      displayAlert.mockClear();
-      mutation.mockClear();
-      setItem.mockClear();
-    });
-
-    it('should be a function', () => {
-      expect(typeof useRequest).toBe('function');
-    });
-
-    it('should return a function', () => {
-      expect(typeof request).toBe('function');
-    });
-
-    it('should call the mutation', async () => {
-      await request(values);
-
-      expect(mutation).toHaveBeenCalledWith(values);
-    });
-
-    it('should be annotated', () => {
-      const expected = {
-        middleware: [
-          {
-            name: 'sessions:createSession',
-            type: 'middleware',
-          },
-          {
-            name: 'sessions:storeSession',
-            type: 'middleware',
-          },
-          {
-            matcher: {
-              name: 'page:login:alerts',
-              type: 'matcher',
-            },
-            name: 'page:login:alerts',
-            type: 'api:middleware:matcher'
-          },
-        ],
-        name: 'pages:login:request',
-        params: {},
-        type: 'hooks:useRequest',
-      };
-
-      expect(formatValue(useRequest.annotations)).toEqual(expected);
-    });
-
-    describe('when the mutation returns a fetch error response', () => {
-      const response: FetchFailure = fetchErrorResponse;
-
       beforeEach(() => {
-        mutation.mockImplementationOnce(() => wrapResponse(response));
+        mockMutation.mockImplementation(() => [trigger, result])
       });
 
-      it('should not create a session', async () => {
-        await request(values);
+      afterEach(() => { localStorage.clear(); });
 
-        expect(dispatch).not.toHaveBeenCalled();
+      it('should return the trigger and response', () => {
+        const { result } = renderHook(() => useRequest());
+
+        expect(result.current).toEqual([trigger, response]);
       });
 
-      it('should not store a session', async () => {
-        await request(values);
-
-        expect(setItem).not.toHaveBeenCalled();
-      });
-
-      it('should display an alert', async () => {
-        const expected = {
-          context: 'authentication:session',
-          icon: faUserSlash,
-          message: 'User not found with the provided username and password.',
-          type: 'failure',
-        };
-
-        await request(values);
-
-        expect(displayAlert).toHaveBeenCalledWith(expected);
-      });
-    });
-
-    describe('when the mutation returns a serialized error response', () => {
-      const response: FetchFailure = serializedErrorResponse;
-
-      beforeEach(() => {
-        mutation.mockImplementationOnce(() => wrapResponse(response));
-      });
-
-      it('should not create a session', async () => {
-        await request(values);
-
-        expect(dispatch).not.toHaveBeenCalled();
-      });
-
-      it('should not store a session', async () => {
-        await request(values);
-
-        expect(setItem).not.toHaveBeenCalled();
-      });
-
-      it('should display an alert', async () => {
-        const expected = {
-          context: 'authentication:session',
-          icon: faUserSlash,
-          message: 'User not found with the provided username and password.',
-          type: 'failure',
-        };
-
-        await request(values);
-
-        expect(displayAlert).toHaveBeenCalledWith(expected);
-      });
-    });
-
-    describe('when the mutation returns a failing response', () => {
-      const response: FetchFailure = failureResponse;
-
-      beforeEach(() => {
-        mutation.mockImplementationOnce(() => wrapResponse(response));
-      });
-
-      it('should not create a session', async () => {
-        await request(values);
-
-        expect(dispatch).not.toHaveBeenCalled();
-      });
-
-      it('should not store a session', async () => {
-        await request(values);
-
-        expect(setItem).not.toHaveBeenCalled();
-      });
-
-      it('should display an alert', async () => {
-        const expected = {
-          context: 'authentication:session',
-          icon: faUserSlash,
-          message: 'User not found with the provided username and password.',
-          type: 'failure',
-        };
-
-        await request(values);
-
-        expect(displayAlert).toHaveBeenCalledWith(expected);
-      });
-    });
-
-    describe('when the mutation returns a successful response', () => {
-      const response: FetchSuccess = successResponse;
-
-      beforeEach(() => {
-        mutation.mockImplementationOnce(() => wrapResponse(response));
-      });
-
-      it('should create the session', async () => {
-        await request(values);
-
-        expect(dispatch).toHaveBeenCalledWith(action);
-      });
-
-      it('should store the session', async () => {
-        const expected = JSON.stringify(session);
-
-        await request(values);
-
-        expect(setItem).toHaveBeenCalledWith('session', expected);
-      });
-
-      it('should clear the error', async () => {
-        await request(values);
+      it('should dismiss the alert', () => {
+        renderHook(() => useRequest());
 
         expect(dismissAlert).toHaveBeenCalledWith('authentication:session');
+      });
+
+      it('should create the session', () => {
+        const expectedAction = sessionActions.create({ token, user });
+
+        renderHook(() => useRequest());
+
+        expect(dispatch).toHaveBeenCalledWith(expectedAction);
+      });
+
+      it('should store the session', () => {
+        const expected = JSON.stringify(session);
+
+        renderHook(() => useRequest());
+
+        expect(localStorage.getItem('session')).toEqual(expected);
       });
     });
   });

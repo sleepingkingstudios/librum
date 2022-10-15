@@ -7,23 +7,20 @@ import { baseQuery } from './base-query';
 import { ApiResponse } from './types';
 
 export {
-  buildRequest,
-  UseRequest,
-} from './request';
-export {
   ApiError,
   ApiFailure,
   ApiParam,
   ApiResponse,
   ApiSuccess,
-  FetchFailure,
-  FetchPromise,
-  FetchResponse,
-  FetchSuccess,
-  Mutation,
-  MutationStatus,
+  Effect,
+  EffectOptions,
+  Response,
+  ResponseStatus,
   UseMutation,
-  UseMutationResponse,
+  UseMutationRequest,
+  UseMutationTrigger,
+  UseQuery,
+  UseQueryRequest,
 } from './types';
 
 export const api = createApi({

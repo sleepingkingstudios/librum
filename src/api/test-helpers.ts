@@ -1,91 +1,124 @@
-import { defaultTo } from 'lodash';
-
-import type { DataObject } from '@utils/types';
+import type {
+  Alert,
+  AlertsContext,
+} from '@alerts';
+import type { Dispatch } from '@store';
 import type {
   ApiError,
-  FetchFailure,
-  FetchResponse,
-  FetchSuccess,
+  ApiFailure,
+  ApiSuccess,
+  EffectOptions,
+  Response,
+  ResponseStatus,
+  UseMutationResult,
+  UseQueryResult,
 } from './types';
 
-interface IBuildFailureResponseOptions {
-  data?: DataObject;
-  error?: ApiError;
-  status?: number;
+const alerts: AlertsContext = {
+  alerts: [] as Alert[],
+  dismissAlert: jest.fn(),
+  dismissAllAlerts: jest.fn(),
+  displayAlert: jest.fn(),
 }
-
-interface IBuildSuccessResponseOptions {
-  data?: DataObject;
-}
-
-export const buildFailureResponse = (
-  options?: IBuildFailureResponseOptions
-): FetchFailure => {
-  if (options === null || options == undefined) {
-    return { error: { data: {}, status: 400 }};
-  }
-
-  const data = defaultTo(options.data, null);
-  const error = defaultTo(options.error, null);
-  const status = defaultTo(options.status, 400);
-
-  if (error === null) {
-    return { error: { data: {}, status }};
-  }
-
-  if (data === null) {
-    return {
-      error: {
-        status,
-        data: {
-          ok: false,
-          error,
-        },
-      },
-    };
-  }
-
-  return {
-    error: {
-      status,
-      data: {
-        ok: false,
-        data,
-        error,
-      },
-    },
-  };
-};
-
-export const buildSuccessResponse = (
-  options?: IBuildSuccessResponseOptions
-): FetchSuccess => {
-  if (options === null || options == undefined) {
-    return { data: { ok: true } }
-  }
-
-  const data = defaultTo(options.data, null);
-
-  if (data === null) {
-    return { data: { ok: true } }
-  }
-
-  return { data: { data, ok: true } };
-};
-
-export const fetchErrorResponse: FetchFailure = {
-  error: {
-    error: 'something went wrong',
-    status: 'FETCH_ERROR',
+const dispatch: Dispatch = jest.fn();
+const data: Record<string, unknown> = {
+  user: {
+    firstName: 'Alan',
+    lastName: 'Bradley',
   },
 };
-
-export const serializedErrorResponse: FetchFailure = {
-  error: { message: 'something went wrong' }
+const error: ApiError = {
+  data: {},
+  message: 'Something went wrong',
+  type: 'spec.errors.genericError',
+};
+const apiFailure: ApiFailure = {
+  ok: false,
+  error,
+};
+const apiFailureWithData: ApiFailure = {
+  ok: false,
+  data,
+  error,
+};
+const apiSuccess: ApiSuccess = {
+  ok: true,
+  data,
 };
 
-export const wrapResponse = (
-  response: FetchResponse
-): Promise<FetchResponse> => {
-  return new Promise((resolve) => resolve(response));
+export const defaultOptions: EffectOptions = {
+  alerts,
+  dispatch,
+};
+
+export const defaultResponse: Response = {
+  hasData: false,
+  hasError: false,
+  isUninitialized: false,
+  isLoading: false,
+  isErrored: false,
+  isFailure: false,
+  isSuccess: false,
+  status: 'unknown' as ResponseStatus,
+};
+
+export const defaultResult: UseMutationResult & UseQueryResult = {
+  isUninitialized: false,
+  isLoading: false,
+  isSuccess: false,
+  isError: false,
+  refetch: jest.fn(),
+  reset: jest.fn(),
+};
+
+export const failureResponse = {
+  ...defaultResponse,
+  error,
+  errorType: error.type,
+  hasError: true,
+  isFailure: true,
+  status: 'failure' as ResponseStatus,
+};
+
+export const failureResult = {
+  ...defaultResult,
+  error: {
+    data: apiFailure,
+    status: 400,
+  },
+  isError: true,
+};
+
+export const failureResultWithData = {
+  ...defaultResult,
+  error: {
+    data: apiFailureWithData,
+    status: 400,
+  },
+  isError: true,
+};
+
+export const loadingResponse = {
+  ...defaultResponse,
+  isLoading: true,
+  status: 'loading' as ResponseStatus,
+};
+
+export const loadingResult = {
+  ...defaultResult,
+  isLoading: true,
+};
+
+export const successResponse = {
+  ...defaultResponse,
+  data,
+  hasData: true,
+  isSuccess: true,
+  status: 'success' as ResponseStatus,
+};
+
+export const successResult = {
+  ...defaultResult,
+  data: apiSuccess,
+  isSuccess: true,
 };

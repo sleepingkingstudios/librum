@@ -14,15 +14,13 @@ import {
   removeAllAlerts,
 } from './utils';
 
-interface IAlertsProvider {
-  children: React.ReactNode;
-  initialValue?: Alert[],
-}
-
 export const AlertsProvider = ({
   initialValue = [] as Alert[],
   children,
-}: IAlertsProvider): JSX.Element => {
+}: {
+  children: React.ReactNode,
+  initialValue?: Alert[],
+}): JSX.Element => {
   const [alerts, setAlerts] = React.useState<Alert[]>(initialValue);
   const location = useLocation();
   const { pathname } = location;
@@ -39,19 +37,6 @@ export const AlertsProvider = ({
     dismissAlert,
     dismissAllAlerts,
     displayAlert,
-  };
-
-  dismissAlert.annotations = {
-    name: 'alerts:dismissAlert',
-    type: 'hook:function',
-  };
-  dismissAllAlerts.annotations = {
-    name: 'alerts:dismissAllAlerts',
-    type: 'hook:function',
-  };
-  displayAlert.annotations = {
-    name: 'alerts:displayAlert',
-    type: 'hook:function',
   };
 
   React.useEffect(

@@ -1,7 +1,5 @@
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
-import { Annotated } from '@utils/annotations';
-
 export type AlertType = "failure" | "info" | "success" | "warning";
 
 export type Alert = {
@@ -14,17 +12,13 @@ export type Alert = {
   uuid: string;
 }
 
-export type DismissAlert = (
-  (uuidOrContext: string) => void
-) & Annotated;
+export type DismissAlert = (uuidOrContext: string) => void;
 
 export type DismissAllAlertsOptions = {
   removePersistent: boolean;
 };
 
-export type DismissAllAlerts = (
-  (options?: DismissAllAlertsOptions) => void
-) & Annotated;
+export type DismissAllAlerts = (options?: DismissAllAlertsOptions) => void;
 
 export type DisplayAlertProps = {
   context?: string;
@@ -35,13 +29,12 @@ export type DisplayAlertProps = {
   type?: AlertType;
 }
 
-export type DisplayAlert = (
-  (alert: DisplayAlertProps) => void
-) & Annotated;
+export type DisplayAlert = (alert: DisplayAlertProps) => void;
 
 export type AlertsContext = {
   alerts: Alert[],
   dismissAlert: DismissAlert,
+  dismissAllAlerts: DismissAllAlerts,
   displayAlert: DisplayAlert,
 };
 

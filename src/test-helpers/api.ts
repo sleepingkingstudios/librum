@@ -32,7 +32,7 @@ type Response = {
 
 type Store = ReturnType<typeof configureStore>;
 
-interface IApiService {
+interface ApiService {
   endpoints: {
     [name: string]: Endpoint;
   };
@@ -40,37 +40,37 @@ interface IApiService {
   reducer: Reducer;
 }
 
-interface IDispatchRequest {
-  api: IApiService;
+interface DispatchRequest {
+  api: ApiService;
   endpoint: string;
   param?: ApiParam;
   store?: Store;
 }
 
-interface IShouldMatchTheRequest {
+interface ShouldMatchTheRequest {
   headers?: { [name: string]: string };
   method?: string;
   url: string;
 }
 
-interface IShouldPerformTheMutation {
-  api: IApiService;
+interface ShouldPerformTheMutation {
+  api: ApiService;
   data: ApiResponse;
   endpoint: string;
   param?: ApiParam;
-  request: IShouldMatchTheRequest;
+  request: ShouldMatchTheRequest;
 }
 
-interface IShouldPerformTheQuery {
-  api: IApiService;
+interface ShouldPerformTheQuery {
+  api: ApiService;
   data: ApiResponse;
   endpoint: string;
   param?: ApiParam;
-  request: IShouldMatchTheRequest;
+  request: ShouldMatchTheRequest;
 }
 
 const authenticatedRequest = (
-  { request, token }: { request: IShouldMatchTheRequest, token: string }
+  { request, token }: { request: ShouldMatchTheRequest, token: string }
 ) => {
   const { headers, method, url } = request;
   const authenticatedHeaders = {
@@ -85,7 +85,7 @@ const authenticatedRequest = (
   };
 }
 
-const createApiStore = ({ api }: { api: IApiService }): Store => {
+const createApiStore = ({ api }: { api: ApiService }): Store => {
   const middleware = (
     getDefaultMiddleware: GetDefaultMiddleware,
   ) => getDefaultMiddleware().concat(api.middleware);
@@ -109,7 +109,7 @@ const dispatchRequest = async (
     endpoint,
     param,
     store,
-  }: IDispatchRequest
+  }: DispatchRequest
 ) => {
   let configuredStore = store;
 
@@ -124,7 +124,7 @@ const dispatchRequest = async (
 };
 
 const shouldMatchTheRequest = (
-  { method = 'GET', headers = {}, url }: IShouldMatchTheRequest
+  { method = 'GET', headers = {}, url }: ShouldMatchTheRequest
 ) => {
   const request = fetchMock.mock.calls[0][0];
 
@@ -148,7 +148,7 @@ export const shouldPerformTheMutation = (
     endpoint,
     param,
     request,
-  }: IShouldPerformTheMutation
+  }: ShouldPerformTheMutation
 ) => {
   describe('should perform the mutation', () => {
     // eslint-disable-next-line jest/expect-expect
@@ -218,7 +218,7 @@ export const shouldPerformTheQuery = (
     endpoint,
     param,
     request,
-  }: IShouldPerformTheQuery
+  }: ShouldPerformTheQuery
 ) => {
   describe('should perform the query', () => {
     // eslint-disable-next-line jest/expect-expect

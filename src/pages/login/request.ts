@@ -1,30 +1,70 @@
-import { buildRequest } from '@api';
-import type { UseMutation } from '@api';
+import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
+
+import type {
+  Effect,
+  EffectOptions,
+  Response,
+  UseMutationRequest,
+} from '@api';
+import { displayAlerts } from '@api/effects';
+import { useMutationRequest } from '@api/hooks';
+import type {
+  Session,
+  User,
+} from '@session';
 import { useCreateSessionMutation } from '@session/api';
-import {
-  createSession,
-  storeSession,
-} from '@session/middleware';
-import { displayAlerts } from './middleware';
+import { actions as sessionActions } from '@session/reducer';
+import { setStoredSession } from '@session/utils';
+import type { Action } from '@store';
 
-const useMutation: UseMutation = useCreateSessionMutation;
+const createSession: Effect = (
+  response: Response<{ token: string, user: User }>,
+  options: EffectOptions,
+): void => {
+  const { data, isSuccess } = response;
 
-useMutation.annotations = {
-  name: 'useCreateSessionMutation',
-  type: 'hooks:useMutation',
+  if (!isSuccess) { return; }
+
+  const { create } = sessionActions;
+  const { dispatch } = options;
+  const { token, user } = data;
+  const action: Action<Session> = create({ token, user });
+
+  dispatch(action);
+
+  const session: Session = {
+    authenticated: true,
+    token,
+    user,
+  };
+
+  setStoredSession(session);
 };
 
-export { useMutation };
+const effects: Effect[] = [
+  createSession,
+  displayAlerts([
+    {
+      dismiss: 'authentication:session',
+      status: 'success',
+    },
+    {
+      display:  {
+        context: 'authentication:session',
+        icon: faUserSlash,
+        message: 'User not found with the provided username and password.',
+        type: 'failure',
+      },
+      status: 'failure',
+    }
+  ]),
+];
 
-export const useRequest = buildRequest(
-  {
-    middleware: [
-      createSession,
-      storeSession,
-      displayAlerts,
-    ],
-  },
-  {
-    name: 'pages:login:request',
-  },
-);
+export const useRequest: UseMutationRequest = () => {
+  const [trigger, response] = useMutationRequest({
+    effects,
+    useMutation: useCreateSessionMutation,
+  });
+
+  return [trigger, response];
+};

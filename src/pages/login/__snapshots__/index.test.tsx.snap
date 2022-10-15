@@ -64,3 +64,223 @@ exports[`<LoginPage> should match the snapshot 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`<LoginPage> when the request is loading should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="page"
+  >
+    <h1>
+      Log In
+    </h1>
+    <form
+      action="#"
+      class="w-full lg:w-1/2 relative"
+    >
+      <div
+        class="form-loading-overlay absolute grid h-full place-content-center w-full"
+      >
+        <div
+          class="inline-block text-center"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-user animate-bounce motion-reduce:animate-none h-10 w-10"
+            data-icon="user"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"
+              fill="currentColor"
+            />
+          </svg>
+          <br />
+          Logging In...
+        </div>
+      </div>
+      <div
+        class=""
+      >
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
+      >
+        <button
+          class="form-button"
+          type="submit"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<LoginPage> when the request returns a failure response should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="page"
+  >
+    <h1>
+      Log In
+    </h1>
+    <form
+      action="#"
+      class="w-full lg:w-1/2 relative"
+    >
+      <div
+        class=""
+      >
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
+      >
+        <button
+          class="form-button"
+          type="submit"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<LoginPage> when the request returns a successful response should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="page"
+  >
+    <h1>
+      Log In
+    </h1>
+    <form
+      action="#"
+      class="w-full lg:w-1/2 relative"
+    >
+      <div
+        class=""
+      >
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="form-field"
+        >
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="gap-3 sm:grid sm:grid-cols-1 lg:grid-cols-2"
+      >
+        <button
+          class="form-button"
+          type="submit"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
