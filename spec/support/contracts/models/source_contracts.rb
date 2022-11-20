@@ -38,6 +38,9 @@ module Spec::Support::Contracts::Models
         include_contract 'should define data properties'
 
         include_contract 'should define data property',
+          :legacy,
+          predicate: true
+        include_contract 'should define data property',
           :official,
           predicate: true
         include_contract 'should define data property',

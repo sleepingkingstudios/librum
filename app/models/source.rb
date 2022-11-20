@@ -5,6 +5,7 @@ class Source < ApplicationRecord
   extend Models::DataProperties
 
   ### Attributes
+  data_property :legacy,   predicate: true
   data_property :official, predicate: true
   data_property :playtest, predicate: true
 
