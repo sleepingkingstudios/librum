@@ -114,6 +114,7 @@ module Spec::Support::Contracts
           :name,
           :slug,
           *attr_names,
+          legacy:   -> { configured_object.legacy? },
           official: -> { configured_object.official? },
           playtest: -> { configured_object.playtest? },
           **attr_pairs

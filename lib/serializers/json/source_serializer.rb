@@ -10,6 +10,7 @@ module Serializers::Json
       :name,
       :slug
 
+    attribute(:legacy,   &:present?)
     attribute(:official, &:present?)
     attribute(:playtest, &:present?)
   end
