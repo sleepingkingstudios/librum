@@ -108,6 +108,7 @@ module Spec::Support::Contracts
 
         include_contract 'should serialize record attributes',
           object,
+          :game_setting_id,
           :game_system_id,
           :publisher_id,
           :data,

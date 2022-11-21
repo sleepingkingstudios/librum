@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_28_071647) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_235147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -51,6 +51,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_28_071647) do
     t.index ["slug"], name: "index_dnd5e_conditions_on_slug"
     t.index ["source_id", "slug"], name: "index_dnd5e_conditions_on_source_id_and_slug", unique: true
     t.index ["source_id"], name: "index_dnd5e_conditions_on_source_id"
+  end
+
+  create_table "game_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "publisher_id"
+    t.index ["name"], name: "index_game_settings_on_name", unique: true
+    t.index ["publisher_id"], name: "index_game_settings_on_publisher_id"
+    t.index ["slug"], name: "index_game_settings_on_slug", unique: true
   end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -98,6 +109,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_28_071647) do
     t.datetime "updated_at", null: false
     t.uuid "game_system_id"
     t.uuid "publisher_id"
+    t.uuid "game_setting_id"
+    t.index ["game_setting_id"], name: "index_sources_on_game_setting_id"
     t.index ["game_system_id"], name: "index_sources_on_game_system_id"
     t.index ["name", "game_system_id", "publisher_id"], name: "index_sources_on_name_and_game_system_id_and_publisher_id", unique: true
     t.index ["publisher_id"], name: "index_sources_on_publisher_id"
