@@ -8,8 +8,8 @@ FactoryBot.define do
       sequence(:setting_index) { |index| index }
     end
 
-    name { "Setting #{setting_index}" }
-    slug { "setting-#{setting_index}" }
+    name { "Game Setting #{setting_index}" }
+    slug { "game-setting-#{setting_index}" }
 
     trait :with_publisher do
       publisher { create(:publisher) }
