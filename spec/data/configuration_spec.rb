@@ -19,6 +19,7 @@ RSpec.describe Data::Configuration do
     let(:expected) do
       [
         Publisher,
+        GameSetting,
         GameSystem,
         Sources::Book,
         Sources::Website
