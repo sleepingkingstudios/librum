@@ -53,6 +53,9 @@ module Spec::Support::Contracts::Models
 
         ### Associations
         include_contract 'should belong to',
+          :game_setting,
+          association: -> { FactoryBot.create(:game_setting, :with_publisher) }
+        include_contract 'should belong to',
           :game_system,
           association: -> { FactoryBot.create(:game_system, :with_publisher) }
         include_contract 'should belong to',

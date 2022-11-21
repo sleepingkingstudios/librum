@@ -77,13 +77,30 @@ module Spec::Support::Contracts::Models
 
           context "when the #{model_name} has many #{display_name}" do
             let(:associations) do
-              Array.new(3) do
-                FactoryBot.build(factory_name, inverse_name => subject)
+              # :nocov:
+              case options[:association]
+              when Proc
+                instance_exec(&options[:association])
+              when nil
+                Array.new(3) do
+                  FactoryBot.build(factory_name, inverse_name => subject)
+                end
+              else
+                options[:association]
               end
+              # :nocov:
             end
             let(:association_value) { subject.send(association_name) }
 
-            before(:example) { associations.map(&:save!) }
+            before(:example) do
+              if options[:before_example].is_a?(Proc)
+                instance_exec(&options[:before_example])
+              end
+
+              subject.save!
+
+              associations.map(&:save!)
+            end
 
             it { expect(association_value).to contain_exactly(*associations) }
           end

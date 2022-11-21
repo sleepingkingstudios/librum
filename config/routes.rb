@@ -50,6 +50,8 @@ Rails.application.routes.draw do
       api_resources :conditions
     end
 
+    api_resources :game_settings
+
     api_resources :game_systems
 
     api_resources :publishers

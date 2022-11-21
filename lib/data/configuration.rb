@@ -13,6 +13,7 @@ module Data
     # The core Librum record classes, required to load any system data.
     CORE_CLASSES = [
       ::Publisher,
+      ::GameSetting,
       ::GameSystem,
       ::Sources::Book,
       ::Sources::Website
