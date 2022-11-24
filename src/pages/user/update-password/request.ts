@@ -10,6 +10,7 @@ import type {
   UseMutationRequest,
 } from '@api';
 import { displayAlerts } from '@api/effects';
+import { invalidPasswordError } from '@api/errors';
 import { useMutationRequest } from '@api/hooks';
 import { useUpdateUserPasswordMutation } from '@user/password/api';
 
@@ -30,6 +31,15 @@ const closeFormOnSuccess: Effect = (
 const effects: Effect[] = [
   closeFormOnSuccess,
   displayAlerts([
+    {
+      errorType: invalidPasswordError,
+      display: {
+        context: 'pages:user:updatePassword:alerts',
+        icon: faUserSlash,
+        message: 'Password does not match current password.',
+        type: 'failure',
+      },
+    },
     {
       status: 'failure',
       display: {

@@ -8,6 +8,7 @@ import {
 import { useRequest } from './request';
 import { useAlerts } from '@alerts';
 import type { Alert } from '@alerts';
+import { invalidPasswordError } from '@api/errors';
 import {
   defaultResult,
   defaultResponse,
@@ -86,6 +87,39 @@ describe('<UserUpdatePasswordForm />', () => {
           context: 'pages:user:updatePassword:alerts',
           icon: faUserSlash,
           message: 'Unable to update password.',
+          type: 'failure',
+        });
+      });
+    });
+
+    describe('when the mutation returns an invalid password response', () => {
+      const error = {
+        data: {},
+        message: 'password does not match encrypted value',
+        type: invalidPasswordError,
+      };
+      const errorResult = {
+        ...failureResult,
+        error: {
+          data: {
+            ok: false,
+            error,
+          },
+          status: 400,
+        },
+      }
+
+      beforeEach(() => {
+        mockMutation.mockImplementation(() => [trigger, errorResult])
+      });
+
+      it('should display an alert', () => {
+        renderHook(() => useRequest({ options }));
+
+        expect(displayAlert).toHaveBeenCalledWith({
+          context: 'pages:user:updatePassword:alerts',
+          icon: faUserSlash,
+          message: 'Password does not match current password.',
           type: 'failure',
         });
       });
