@@ -142,7 +142,7 @@ export const DemoPage = (): JSX.Element => (
     <Form
       initialValues={{ generation: '1', version: 'red' }}
       request={(): null => null}
-      status={defaultResponse}
+      response={defaultResponse}
     >
       <FormField name="version" />
 
@@ -158,7 +158,7 @@ export const DemoPage = (): JSX.Element => (
     <Form
       initialValues={{}}
       request={(): null => null}
-      status={defaultResponse}
+      response={defaultResponse}
     >
       <FormRow cols={6}>
         <FormField name="strength" />

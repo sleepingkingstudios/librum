@@ -16,14 +16,14 @@ export const UserUpdatePasswordForm = (
   { closeForm }: UserUpdatePasswordFormProps
 ): JSX.Element => {
   const options = { closeForm };
-  const [request, status] = useRequest({ options });
+  const [request, response] = useRequest({ options });
 
   return (
     <Form
       className="w-full lg:w-1/2"
       initialValues={{ oldPassword: '', newPassword: '', confirmPassword: '' }}
       request={request}
-      status={status}
+      response={response}
     >
       <FormRow>
         <FormField name="oldPassword" type="password" />

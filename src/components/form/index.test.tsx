@@ -30,10 +30,10 @@ mockHandleSubmit.mockImplementation(performRequest);
 describe('<Form />', () => {
   it('should wrap the request in a submit handler', () => {
     const request = jest.fn();
-    const status = defaultResponse;
+    const response = defaultResponse;
 
     render(
-      <Form initialValues={{}} status={status} request={request}>
+      <Form initialValues={{}} request={request} response={response}>
         <button type="submit">Submit</button>
       </Form>
     );
@@ -43,10 +43,10 @@ describe('<Form />', () => {
 
   it('should submit the form', async () => {
     const request = jest.fn();
-    const status = defaultResponse;
+    const response = defaultResponse;
 
     const { getByRole } = render(
-      <Form initialValues={{}} status={status} request={request}>
+      <Form initialValues={{}} request={request} response={response}>
         <button type="submit">Submit</button>
       </Form>
     );
@@ -58,10 +58,10 @@ describe('<Form />', () => {
 
   it('should match the snapshot', () => {
     const request = jest.fn();
-    const status = defaultResponse;
+    const response = defaultResponse;
 
     const { asFragment } = render(
-      <Form initialValues={{}} status={status} request={request}>
+      <Form initialValues={{}} request={request} response={response}>
         <button type="submit">Submit</button>
       </Form>
     );
@@ -72,10 +72,10 @@ describe('<Form />', () => {
   describe('when the form is loading', () => {
     it('should match the snapshot', () => {
       const request = jest.fn();
-      const status = loadingResponse;
+      const response = loadingResponse;
 
       const { asFragment } = render(
-        <Form initialValues={{}} status={status} request={request}>
+        <Form initialValues={{}} request={request} response={response}>
           <button type="submit">Submit</button>
         </Form>
       );
@@ -87,14 +87,14 @@ describe('<Form />', () => {
   describe('with className: value', () => {
     it('should match the snapshot', () => {
       const request = jest.fn();
-      const status = defaultResponse;
+      const response = defaultResponse;
 
       const { asFragment } = render(
         <Form
           className="custom-form"
           initialValues={{}}
-          status={status}
           request={request}
+          response={response}
         >
           <button type="submit">Submit</button>
         </Form>
@@ -108,14 +108,14 @@ describe('<Form />', () => {
     describe('when the form is loading', () => {
       it('should match the snapshot', () => {
         const request = jest.fn();
-        const status = loadingResponse;
+        const response = loadingResponse;
 
         const { asFragment } = render(
           <Form
             loadingAnimation="pulse"
             initialValues={{}}
-            status={status}
             request={request}
+            response={response}
           >
             <button type="submit">Submit</button>
           </Form>
@@ -130,14 +130,14 @@ describe('<Form />', () => {
     describe('when the form is loading', () => {
       it('should match the snapshot', () => {
         const request = jest.fn();
-        const status = loadingResponse;
+        const response = loadingResponse;
 
         const { asFragment } = render(
           <Form
             loadingIcon={faRadiation}
             initialValues={{}}
-            status={status}
             request={request}
+            response={response}
           >
             <button type="submit">Submit</button>
           </Form>
@@ -152,14 +152,14 @@ describe('<Form />', () => {
     describe('when the form is loading', () => {
       it('should match the snapshot', () => {
         const request = jest.fn();
-        const status = loadingResponse;
+        const response = loadingResponse;
 
         const { asFragment } = render(
           <Form
             loadingMessage="Activating Reactor..."
             initialValues={{}}
-            status={status}
             request={request}
+            response={response}
           >
             <button type="submit">Submit</button>
           </Form>
@@ -193,10 +193,10 @@ describe('<Form />', () => {
 
     it('should submit the form', async () => {
       const request = jest.fn();
-      const status = defaultResponse;
+      const response = defaultResponse;
 
       const { getByRole } = render(
-        <Form initialValues={defaultValues} status={status} request={request}>
+        <Form initialValues={defaultValues} request={request} response={response}>
           <Fields />
 
           <button type="submit">Submit</button>
@@ -211,7 +211,7 @@ describe('<Form />', () => {
     describe('when the user inputs values', () => {
       it('should submit the form', async () => {
         const request = jest.fn();
-        const status = defaultResponse;
+        const response = defaultResponse;
         const expectedValues = {
           launchSite: 'KSC',
           mission: {
@@ -220,7 +220,7 @@ describe('<Form />', () => {
         };
 
         const { getByRole, getByLabelText } = render(
-          <Form initialValues={defaultValues} status={status} request={request}>
+          <Form initialValues={defaultValues} request={request} response={response}>
             <Fields />
 
             <button type="submit">Submit</button>
@@ -247,10 +247,10 @@ describe('<Form />', () => {
 
       it('should submit the form', async () => {
         const request = jest.fn();
-        const status = defaultResponse;
+        const response = defaultResponse;
 
         const { getByRole } = render(
-          <Form initialValues={initialValues} status={status} request={request}>
+          <Form initialValues={initialValues} request={request} response={response}>
             <Fields />
 
             <button type="submit">Submit</button>

@@ -29,7 +29,7 @@ interface FormProps {
   loadingIcon?: IconDefinition;
   loadingMessage?: string;
   request: UseMutationTrigger;
-  status: Response;
+  response: Response;
 }
 
 interface RenderLoadingOverlay {
@@ -65,10 +65,10 @@ export const Form = (
     loadingIcon,
     loadingMessage = null,
     request,
-    status,
+    response,
   }: FormProps
 ): JSX.Element => {
-  const { isLoading } = status;
+  const { isLoading } = response;
   const joinedClassName = joinClassNames(
     className,
     'relative',
