@@ -13,6 +13,7 @@ import type {
 import { LoadingOverlay } from '@components/loading-overlay';
 import type { Animations } from '@components/types';
 import { joinClassNames } from '@utils/react-utils';
+import { handleSubmit } from './utils';
 
 export { FormButton } from './button';
 export { FormField } from './field';
@@ -74,7 +75,7 @@ export const Form = (
   );
 
   return (
-    <Formik initialValues={initialValues} onSubmit={request}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit(request)}>
       <FormWrapper className={joinedClassName}>
         {
           renderLoadingOverlay({

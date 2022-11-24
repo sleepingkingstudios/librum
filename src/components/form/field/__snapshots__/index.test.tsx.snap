@@ -52,6 +52,37 @@ exports[`<FormField /> when the form has data for the input should match the sna
 </DocumentFragment>
 `;
 
+exports[`<FormField /> when the form has server errors should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="form-field"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        class="form-input"
+        id="email"
+        name="email"
+        type="text"
+        value=""
+      />
+      <span
+        class="form-field-errors"
+      >
+        can't be blank, invalid format
+      </span>
+    </div>
+  </form>
+</DocumentFragment>
+`;
+
 exports[`<FormField /> with className: value should match the snapshot 1`] = `
 <DocumentFragment>
   <form

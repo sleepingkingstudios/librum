@@ -54,7 +54,7 @@ describe('<LoginPage>', () => {
 
       await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-      expect(request).toHaveBeenCalledWith(expectedParams, expect.anything());
+      expect(request).toHaveBeenCalledWith(expectedParams);
     });
   });
 
