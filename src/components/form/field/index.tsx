@@ -5,15 +5,20 @@ import {
   map,
   snakeCase,
 } from 'lodash';
-import { useField } from 'formik';
+import {
+  useField,
+  useFormikContext,
+} from 'formik';
 import type {
   FieldHookConfig,
   FieldInputProps,
 } from 'formik';
 
+import type { UpToTwelveColumns } from '@components/types';
 import { joinClassNames } from '@utils/react-utils';
 import { FormInput } from '../input';
-import type { UpToTwelveColumns } from '@components/types';
+import type { FormStatus } from '../types';
+import { getServerErrors } from '../utils';
 
 interface IFormFieldProps {
   className?: string;
@@ -61,6 +66,12 @@ const renderComponent = ({
   <FormInput field={field} id={id} type={type} />
 );
 
+const renderErrors = ({ errors }: { errors: string[] }): JSX.Element => {
+  if (errors.length === 0) { return; }
+
+  return (<FormFieldErrors errors={errors} />);
+};
+
 const renderLabel = ({ id, label }: IFormLabelProps): JSX.Element => {
   if (label === false) {
     return null;
@@ -69,7 +80,11 @@ const renderLabel = ({ id, label }: IFormLabelProps): JSX.Element => {
   return (
     <label className="form-label" htmlFor={id}>{ label }</label>
   );
-}
+};
+
+const FormFieldErrors = ({ errors }: { errors: string[] }): JSX.Element => (
+  <span className="form-field-errors">{ errors.join(', ') }</span>
+);
 
 export const FormField = ({
   className = null,
@@ -91,12 +106,17 @@ export const FormField = ({
     name,
   };
   const [field] = useField(fieldConfig);
+  const context = useFormikContext();
+  const status = context.status as FormStatus;
+  const errors = getServerErrors({ name, status });
 
   return (
     <div className={joinedClassName}>
       { renderLabel({ id: configuredId, label: configuredLabel }) }
 
       { renderComponent({ id: configuredId, field, type }) }
+
+      { renderErrors({ errors }) }
     </div>
   );
 };

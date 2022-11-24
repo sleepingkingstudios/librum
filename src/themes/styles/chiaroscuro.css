@@ -44,6 +44,10 @@
       @apply active:bg-zinc-100 dark:active:bg-zinc-900;
     }
 
+    .form-field-errors {
+      @apply text-red-500;
+    }
+
     .form-label {
       @apply text-zinc-900;
       @apply dark:text-zinc-100;

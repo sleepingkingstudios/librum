@@ -1,22 +1,32 @@
 import * as React from 'react';
-import { FormikValues } from 'formik';
 
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
 
 import { FormField } from './index';
+import { formWrapper } from '@components/form/test-helpers';
 import type {
   OnSubmit,
   SubmitHandler,
 } from '../types';
-import { formWrapper } from '@components/form/test-helpers';
+import { getServerErrors } from '../utils';
+
+jest.mock('../utils');
+
+const mockGetServerErrors = getServerErrors as jest.MockedFunction<typeof getServerErrors>;
+
+mockGetServerErrors.mockImplementation(() => []);
 
 describe('<FormField />', () => {
+  const options = { setStatus: jest.fn() };
+  const submitHandler: jest.MockedFunction<SubmitHandler> = jest.fn();
+  const onSubmit: OnSubmit =
+    (values) => submitHandler(values, options);
+
+  beforeEach(() => { submitHandler.mockClear(); });
+
   it('should pass the value to the form', async () => {
-    const submitHandler: SubmitHandler = jest.fn();
-    const onSubmit: OnSubmit =
-      (values: FormikValues) => submitHandler(values);
     const initialValues = { email: '' };
 
     const FormWrapper = formWrapper({
@@ -31,7 +41,7 @@ describe('<FormField />', () => {
 
     await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-    expect(submitHandler).toHaveBeenCalledWith(initialValues);
+    expect(submitHandler).toHaveBeenCalledWith(initialValues, options);
   });
 
   it('should match the snapshot', () => {
@@ -41,6 +51,79 @@ describe('<FormField />', () => {
     );
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  describe('when the form has data for the input', () => {
+    it('should show the value in the input', () => {
+      const initialValues = { email: 'alan.bradley@example.com' };
+
+      const FormWrapper = formWrapper({
+        initialValues,
+        onSubmit: jest.fn(),
+        submitButton: true,
+      });
+      const { getByRole } = render(
+        <FormField name="email" />,
+        { wrapper: FormWrapper },
+      );
+      const input = getByRole('textbox');
+
+      expect(input).toBeVisible();
+      expect(input).toHaveValue(initialValues['email']);
+    });
+
+    it('should pass the value to the form', async () => {
+      const initialValues = { email: 'alan.bradley@example.com' };
+
+      const FormWrapper = formWrapper({
+        initialValues,
+        onSubmit,
+        submitButton: true,
+      });
+      const { getByRole } = render(
+        <FormField name="email" />,
+        { wrapper: FormWrapper },
+      );
+
+      await userEvent.click(getByRole('button', { name: 'Submit'}));
+
+      expect(submitHandler).toHaveBeenCalledWith(initialValues, options);
+    });
+
+    it('should match the snapshot', () => {
+      const initialValues = { email: 'alan.bradley@example.com' };
+      const FormWrapper = formWrapper({
+        initialValues,
+        onSubmit: jest.fn(),
+      });
+      const { asFragment } = render(
+        <FormField name="email" />,
+        { wrapper: FormWrapper },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('when the form has server errors', () => {
+    const errors = ["can't be blank", 'invalid format'];
+
+    beforeEach(() => {
+      mockGetServerErrors.mockImplementation(() => errors);
+    });
+
+    afterEach(() => {
+      mockGetServerErrors.mockImplementation(() => []);
+    });
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <FormField name="email" />,
+        { wrapper: formWrapper({ onSubmit: jest.fn() }) },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 
   describe('when the user enters text', () => {
@@ -66,9 +149,6 @@ describe('<FormField />', () => {
     });
 
     it('should pass the value to the form', async () => {
-      const submitHandler: SubmitHandler = jest.fn();
-      const onSubmit: OnSubmit =
-        (values: FormikValues) => submitHandler(values);
       const initialValues = { email: '' };
 
       const FormWrapper = formWrapper({
@@ -87,62 +167,8 @@ describe('<FormField />', () => {
 
       expect(submitHandler).toHaveBeenCalledWith({
         email: 'alan.bradley@example.com'
-      });
-    });
-  });
-
-  describe('when the form has data for the input', () => {
-    it('should show the value in the input', () => {
-      const initialValues = { email: 'alan.bradley@example.com' };
-
-      const FormWrapper = formWrapper({
-        initialValues,
-        onSubmit: jest.fn(),
-        submitButton: true,
-      });
-      const { getByRole } = render(
-        <FormField name="email" />,
-        { wrapper: FormWrapper },
-      );
-      const input = getByRole('textbox');
-
-      expect(input).toBeVisible();
-      expect(input).toHaveValue(initialValues['email']);
-    });
-
-    it('should pass the value to the form', async () => {
-      const submitHandler: SubmitHandler = jest.fn();
-      const onSubmit: OnSubmit =
-        (values: FormikValues) => submitHandler(values);
-      const initialValues = { email: 'alan.bradley@example.com' };
-
-      const FormWrapper = formWrapper({
-        initialValues,
-        onSubmit,
-        submitButton: true,
-      });
-      const { getByRole } = render(
-        <FormField name="email" />,
-        { wrapper: FormWrapper },
-      );
-
-      await userEvent.click(getByRole('button', { name: 'Submit'}));
-
-      expect(submitHandler).toHaveBeenCalledWith(initialValues);
-    });
-
-    it('should match the snapshot', () => {
-      const initialValues = { email: 'alan.bradley@example.com' };
-      const FormWrapper = formWrapper({
-        initialValues,
-        onSubmit: jest.fn(),
-      });
-      const { asFragment } = render(
-        <FormField name="email" />,
-        { wrapper: FormWrapper },
-      );
-
-      expect(asFragment()).toMatchSnapshot();
+      },
+      options);
     });
   });
 

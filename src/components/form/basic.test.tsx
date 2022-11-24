@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  Field,
-  FormikValues,
-} from 'formik';
+import { Field } from 'formik';
 
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
@@ -15,11 +12,14 @@ import type {
 } from './types';
 
 describe('<Form />', () => {
-  it('should submit the form', async () => {
-    const submitHandler: SubmitHandler = jest.fn();
-    const onSubmit: OnSubmit =
-      (values: FormikValues) => submitHandler(values);
+  const options = { setStatus: jest.fn() };
+  const submitHandler: jest.MockedFunction<SubmitHandler> = jest.fn();
+  const onSubmit: OnSubmit =
+    (values) => submitHandler(values, options);
 
+  beforeEach(() => { submitHandler.mockClear(); });
+
+  it('should submit the form', async () => {
     const { getByRole } = render(
       <BasicForm initialValues={{}} onSubmit={onSubmit}>
         <button type="submit">Submit</button>
@@ -28,7 +28,7 @@ describe('<Form />', () => {
 
     await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-    expect(submitHandler).toHaveBeenCalledWith({});
+    expect(submitHandler).toHaveBeenCalledWith({}, options);
   });
 
   it('should match the snapshot', () => {
@@ -63,10 +63,6 @@ describe('<Form />', () => {
     };
 
     it('should submit the form', async () => {
-      const submitHandler: SubmitHandler = jest.fn();
-      const onSubmit: OnSubmit =
-        (values: FormikValues) => submitHandler(values);
-
       const { getByRole } = render(
         <BasicForm initialValues={defaultValues} onSubmit={onSubmit}>
           <Fields />
@@ -77,14 +73,11 @@ describe('<Form />', () => {
 
       await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-      expect(submitHandler).toHaveBeenCalledWith(defaultValues);
+      expect(submitHandler).toHaveBeenCalledWith(defaultValues, options);
     });
 
     describe('when the user inputs values', () => {
       it('should submit the form', async () => {
-        const submitHandler: SubmitHandler = jest.fn();
-        const onSubmit: OnSubmit =
-          (values: FormikValues) => submitHandler(values);
         const expectedValues = {
           launchSite: 'KSC',
           mission: {
@@ -106,7 +99,7 @@ describe('<Form />', () => {
 
         await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-        expect(submitHandler).toHaveBeenCalledWith(expectedValues);
+        expect(submitHandler).toHaveBeenCalledWith(expectedValues, options);
       });
     });
 
@@ -119,10 +112,6 @@ describe('<Form />', () => {
       };
 
       it('should submit the form', async () => {
-        const submitHandler: SubmitHandler = jest.fn();
-        const onSubmit: OnSubmit =
-          (values: FormikValues) => submitHandler(values);
-
         const { getByRole } = render(
           <BasicForm initialValues={initialValues} onSubmit={onSubmit}>
             <Fields />
@@ -133,7 +122,7 @@ describe('<Form />', () => {
 
         await userEvent.click(getByRole('button', { name: 'Submit'}));
 
-        expect(submitHandler).toHaveBeenCalledWith(initialValues);
+        expect(submitHandler).toHaveBeenCalledWith(initialValues, options);
       });
     });
   });

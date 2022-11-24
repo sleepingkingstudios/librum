@@ -11,7 +11,7 @@ import { Page } from '@components/page';
 import { useRequest } from './request';
 
 export const LoginPage = (): JSX.Element => {
-  const [request, status] = useRequest();
+  const [request, response] = useRequest();
 
   return (
     <Page navigation={[]}>
@@ -24,7 +24,7 @@ export const LoginPage = (): JSX.Element => {
         loadingIcon={faUser}
         loadingMessage="Logging In..."
         request={request}
-        status={status}
+        response={response}
       >
         <FormRow>
           <FormField name="username" />

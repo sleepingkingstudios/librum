@@ -59,7 +59,7 @@ describe('<UserUpdatePasswordForm />', () => {
 
       await userEvent.click(getByRole('button', { name: 'Update Password'}));
 
-      expect(request).toHaveBeenCalledWith(expectedParams, expect.anything());
+      expect(request).toHaveBeenCalledWith(expectedParams);
     });
   });
 

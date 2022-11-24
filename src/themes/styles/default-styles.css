@@ -42,6 +42,12 @@
       @apply border border-solid mt-3 mb-3 px-3 py-1 rounded-lg w-full;
     }
 
+    .form-field-errors {
+      @apply relative text-sm;
+
+      top: -0.75rem;
+    }
+
     .form-input {
       @apply border border-solid mt-1 mb-3 p-1 rounded-lg w-full;
     }

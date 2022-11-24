@@ -13,6 +13,7 @@ import type {
 import { LoadingOverlay } from '@components/loading-overlay';
 import type { Animations } from '@components/types';
 import { joinClassNames } from '@utils/react-utils';
+import { handleSubmit } from './utils';
 
 export { FormButton } from './button';
 export { FormField } from './field';
@@ -28,7 +29,7 @@ interface FormProps {
   loadingIcon?: IconDefinition;
   loadingMessage?: string;
   request: UseMutationTrigger;
-  status: Response;
+  response: Response;
 }
 
 interface RenderLoadingOverlay {
@@ -64,17 +65,17 @@ export const Form = (
     loadingIcon,
     loadingMessage = null,
     request,
-    status,
+    response,
   }: FormProps
 ): JSX.Element => {
-  const { isLoading } = status;
+  const { isLoading } = response;
   const joinedClassName = joinClassNames(
     className,
     'relative',
   );
 
   return (
-    <Formik initialValues={initialValues} onSubmit={request}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit(request)}>
       <FormWrapper className={joinedClassName}>
         {
           renderLoadingOverlay({
