@@ -1,5 +1,13 @@
 import * as React from 'react';
 
+export const AlignmentShims = () => {
+  <>
+    <span className="text-center" />
+    <span className="text-left" />
+    <span className="text-right" />
+  </>
+};
+
 export const AnimationShims = () => {
   <>
     <span className="animate-bounce" />

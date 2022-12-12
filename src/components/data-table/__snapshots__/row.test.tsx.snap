@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataTableRow /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+        >
+          Hephaestus VI
+        </td>
+        <td
+          class="data-table-cell-mission-objective"
+        >
+          40 Eridani A
+        </td>
+        <td
+          class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+        >
+          1,000 km/s
+        </td>
+        <td
+          class="data-table-cell-launch-date text-center"
+        >
+          TBD
+        </td>
+        <td
+          class="data-table-cell-actions"
+        >
+          <span
+            class="data-table-actions"
+          >
+            Launch
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
