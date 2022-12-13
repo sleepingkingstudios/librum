@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { kebabCase } from 'lodash';
 
 import { joinClassNames } from '@utils/react-utils';
 import { DataTableBody } from './body';
@@ -18,7 +19,7 @@ export const DataTable = ({
   name,
   scope,
 }: DataTableProps): JSX.Element => {
-  const suffix = scope ? `${scope}-${name}` : name;
+  const suffix = kebabCase(scope ? `${scope}-${name}` : name);
   const tableData = mapping ? mapping(data) : (data[name] || []);
 
   return (

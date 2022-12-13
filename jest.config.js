@@ -88,6 +88,7 @@ module.exports = {
     '^@api$': '<rootDir>/src/api',
     '^@api/(.*)$': '<rootDir>/src/api/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@pages$': '<rootDir>/src/pages',
     '^@pages/(.*)$': '<rootDir>/src/pages/$1',
     '^@session$': '<rootDir>/src/session',

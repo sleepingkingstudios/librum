@@ -55,16 +55,16 @@ describe('<DataTable />', () => {
     },
   ];
   const name = 'spaceMissions';
+  const expectedHeader = [
+    'Mission Name',
+    'Objective',
+    'Delta V',
+    'Launch Date',
+    ' ',
+  ];
 
   describe('when there is no matching data', () => {
     const data = {};
-    const expectedHeader = [
-      'Mission Name',
-      'Objective',
-      'Delta V',
-      'Launch Date',
-      ' ',
-    ];
     const expectedMessage = 'There are no matching space missions.';
 
     it('should render the header cells', () => {
@@ -97,13 +97,6 @@ describe('<DataTable />', () => {
 
   describe('when there are no rows', () => {
     const data: { 'spaceMissions': SpaceMission[] } = { 'spaceMissions': [] };
-    const expectedHeader = [
-      'Mission Name',
-      'Objective',
-      'Delta V',
-      'Launch Date',
-      ' ',
-    ];
     const expectedMessage = 'There are no matching space missions.';
 
     it('should render the header cells', () => {
@@ -160,13 +153,6 @@ describe('<DataTable />', () => {
         },
       ],
     };
-    const expectedHeader = [
-      'Mission Name',
-      'Objective',
-      'Delta V',
-      'Launch Date',
-      ' ',
-    ];
     const expectedBody = [
       'Chronos IX',
       'Titan',
@@ -223,13 +209,6 @@ describe('<DataTable />', () => {
 
     describe('when there are no rows', () => {
       const data: { 'spaceMissions': SpaceMission[] } = { 'spaceMissions': [] };
-      const expectedHeader = [
-        'Mission Name',
-        'Objective',
-        'Delta V',
-        'Launch Date',
-        ' ',
-      ];
       const expectedMessage = 'You are not going to space today.';
 
       it('should render the header cells', () => {
@@ -281,13 +260,6 @@ describe('<DataTable />', () => {
 
     describe('when there are no rows', () => {
       const data: { 'spaceMissions': SpaceMission[] } = { 'spaceMissions': [] };
-      const expectedHeader = [
-        'Mission Name',
-        'Objective',
-        'Delta V',
-        'Launch Date',
-        ' ',
-      ];
 
       it('should render the header cells', () => {
         const { getAllByRole } = render(
@@ -398,13 +370,6 @@ describe('<DataTable />', () => {
         },
       ],
     };
-    const expectedHeader = [
-      'Mission Name',
-      'Objective',
-      'Delta V',
-      'Launch Date',
-      ' ',
-    ];
     const expectedBody = [
       'Chronos IX',
       'Titan',
@@ -464,6 +429,58 @@ describe('<DataTable />', () => {
       );
 
       expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with scope: value', () => {
+    const scope = 'rocketry';
+
+    describe('when there are no rows', () => {
+      const data: { 'spaceMissions': SpaceMission[] } = { 'spaceMissions': [] };
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <DataTable columns={columns} data={data} name={name} scope={scope} />,
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+
+    describe('when there are many rows', () => {
+      const data: { spaceMissions: SpaceMission[] } = {
+        spaceMissions: [
+          {
+            deltaV: '1,000 km/s',
+            launchDate: '2050',
+            missionObjective: 'Titan',
+            ordinal: 'IX',
+            program: 'Chronos',
+          },
+          {
+            deltaV: '10,000 km/s',
+            launchDate: '2150',
+            missionObjective: 'Alpha Centauri A',
+            ordinal: 'X',
+            program: 'Chiron',
+          },
+          {
+            deltaV: '100,000 km/s',
+            launchDate: '3050',
+            missionObjective: 'Andromeda',
+            ordinal: 'XI',
+            program: 'Perseus',
+          },
+        ],
+      };
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <DataTable columns={columns} data={data} name={name} scope={scope} />,
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
     });
   });
 });

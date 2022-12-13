@@ -37,7 +37,7 @@ export const DataTableBody = ({
     return (
       <tbody>
         <tr>
-          <td colSpan={columns.length}>
+          <td className="data-table-empty" colSpan={columns.length}>
             { emptyMessageFor({ emptyMessage, name }) }
           </td>
         </tr>

@@ -3,7 +3,7 @@
 exports[`<DataTable /> when there are many rows should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-spaceMissions"
+    class="data-table data-table-space-missions"
   >
     <table>
       <thead
@@ -140,7 +140,7 @@ exports[`<DataTable /> when there are many rows should match the snapshot 1`] = 
 exports[`<DataTable /> when there are no rows should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-spaceMissions"
+    class="data-table data-table-space-missions"
   >
     <table>
       <thead
@@ -177,6 +177,7 @@ exports[`<DataTable /> when there are no rows should match the snapshot 1`] = `
       <tbody>
         <tr>
           <td
+            class="data-table-empty"
             colspan="5"
           >
             There are no matching space missions.
@@ -191,7 +192,7 @@ exports[`<DataTable /> when there are no rows should match the snapshot 1`] = `
 exports[`<DataTable /> when there is no matching data should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-spaceMissions"
+    class="data-table data-table-space-missions"
   >
     <table>
       <thead
@@ -228,6 +229,7 @@ exports[`<DataTable /> when there is no matching data should match the snapshot 
       <tbody>
         <tr>
           <td
+            class="data-table-empty"
             colspan="5"
           >
             There are no matching space missions.
@@ -242,7 +244,7 @@ exports[`<DataTable /> when there is no matching data should match the snapshot 
 exports[`<DataTable /> with emptyMessage: component when there are no rows should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-spaceMissions"
+    class="data-table data-table-space-missions"
   >
     <table>
       <thead
@@ -279,6 +281,7 @@ exports[`<DataTable /> with emptyMessage: component when there are no rows shoul
       <tbody>
         <tr>
           <td
+            class="data-table-empty"
             colspan="5"
           >
             <span
@@ -297,7 +300,7 @@ exports[`<DataTable /> with emptyMessage: component when there are no rows shoul
 exports[`<DataTable /> with emptyMessage: string when there are no rows should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-spaceMissions"
+    class="data-table data-table-space-missions"
   >
     <table>
       <thead
@@ -334,6 +337,7 @@ exports[`<DataTable /> with emptyMessage: string when there are no rows should m
       <tbody>
         <tr>
           <td
+            class="data-table-empty"
             colspan="5"
           >
             You are not going to space today.
@@ -348,7 +352,7 @@ exports[`<DataTable /> with emptyMessage: string when there are no rows should m
 exports[`<DataTable /> with mapping: function should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-spaceMissions"
+    class="data-table data-table-space-missions"
   >
     <table>
       <thead
@@ -474,6 +478,195 @@ exports[`<DataTable /> with mapping: function should match the snapshot 1`] = `
             >
               Launch
             </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+</DocumentFragment>
+`;
+
+exports[`<DataTable /> with scope: value when there are many rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <figure
+    class="data-table data-table-rocketry-space-missions"
+  >
+    <table>
+      <thead
+        class="data-table-header"
+      >
+        <tr>
+          <th
+            class="data-table-header-mission-name"
+          >
+            Mission Name
+          </th>
+          <th
+            class="data-table-header-mission-objective"
+          >
+            Objective
+          </th>
+          <th
+            class="data-table-header-delta-v text-right"
+          >
+            Delta V
+          </th>
+          <th
+            class="data-table-header-launch-date text-center"
+          >
+            Launch Date
+          </th>
+          <th
+            class="data-table-header-actions"
+          >
+             
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            class="data-table-cell-mission-name"
+          >
+            Chronos IX
+          </td>
+          <td
+            class="data-table-cell-mission-objective"
+          >
+            Titan
+          </td>
+          <td
+            class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          >
+            1,000 km/s
+          </td>
+          <td
+            class="data-table-cell-launch-date text-center"
+          >
+            2050
+          </td>
+          <td
+            class="data-table-cell-actions"
+          >
+            <span
+              class="data-table-actions"
+            >
+              Launch
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="data-table-cell-mission-name"
+          >
+            Chiron X
+          </td>
+          <td
+            class="data-table-cell-mission-objective"
+          >
+            Alpha Centauri A
+          </td>
+          <td
+            class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          >
+            10,000 km/s
+          </td>
+          <td
+            class="data-table-cell-launch-date text-center"
+          >
+            2150
+          </td>
+          <td
+            class="data-table-cell-actions"
+          >
+            <span
+              class="data-table-actions"
+            >
+              Launch
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="data-table-cell-mission-name"
+          >
+            Perseus XI
+          </td>
+          <td
+            class="data-table-cell-mission-objective"
+          >
+            Andromeda
+          </td>
+          <td
+            class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          >
+            100,000 km/s
+          </td>
+          <td
+            class="data-table-cell-launch-date text-center"
+          >
+            3050
+          </td>
+          <td
+            class="data-table-cell-actions"
+          >
+            <span
+              class="data-table-actions"
+            >
+              Launch
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+</DocumentFragment>
+`;
+
+exports[`<DataTable /> with scope: value when there are no rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <figure
+    class="data-table data-table-rocketry-space-missions"
+  >
+    <table>
+      <thead
+        class="data-table-header"
+      >
+        <tr>
+          <th
+            class="data-table-header-mission-name"
+          >
+            Mission Name
+          </th>
+          <th
+            class="data-table-header-mission-objective"
+          >
+            Objective
+          </th>
+          <th
+            class="data-table-header-delta-v text-right"
+          >
+            Delta V
+          </th>
+          <th
+            class="data-table-header-launch-date text-center"
+          >
+            Launch Date
+          </th>
+          <th
+            class="data-table-header-actions"
+          >
+             
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            class="data-table-empty"
+            colspan="5"
+          >
+            There are no matching space missions.
           </td>
         </tr>
       </tbody>

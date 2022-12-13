@@ -108,6 +108,7 @@ exports[`<DataTableBody /> when there are no rows should match the snapshot 1`] 
     <tbody>
       <tr>
         <td
+          class="data-table-empty"
           colspan="5"
         >
           There are no matching space missions.
@@ -164,6 +165,7 @@ exports[`<DataTableBody /> with emptyMessage: component when there are no rows s
     <tbody>
       <tr>
         <td
+          class="data-table-empty"
           colspan="5"
         >
           <span
@@ -184,6 +186,7 @@ exports[`<DataTableBody /> with emptyMessage: string when there are no rows shou
     <tbody>
       <tr>
         <td
+          class="data-table-empty"
           colspan="5"
         >
           You are not going to space today.

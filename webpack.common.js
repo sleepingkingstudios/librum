@@ -16,6 +16,7 @@ module.exports = {
       '@alerts': srcPath('alerts'),
       '@api': srcPath('api'),
       '@components': srcPath('components'),
+      '@core': srcPath('core'),
       '@pages': srcPath('pages'),
       '@session': srcPath('session'),
       '@store': srcPath('store'),
