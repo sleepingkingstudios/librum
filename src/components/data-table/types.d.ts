@@ -20,6 +20,7 @@ export type DataTableColumn = {
 export type DataTableData = Record<string, Record<string, unknown>[]>;
 
 export type DataTableProps = {
+  collapse?: boolean,
   columns: DataTableColumn[],
   data: DataTableData,
   emptyMessage?: React.ComponentType | string;

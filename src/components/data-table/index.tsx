@@ -12,6 +12,7 @@ export type {
 } from './types';
 
 export const DataTable = ({
+  collapse,
   columns,
   data,
   emptyMessage,
@@ -21,9 +22,14 @@ export const DataTable = ({
 }: DataTableProps): JSX.Element => {
   const suffix = kebabCase(scope ? `${scope}-${name}` : name);
   const tableData = mapping ? mapping(data) : (data[name] || []);
+  const joinedClassName = joinClassNames(
+    'data-table',
+    collapse ? 'data-table-collapse' : null,
+    `data-table-${suffix}`,
+  );
 
   return (
-    <figure className={joinClassNames('data-table', `data-table-${suffix}`)}>
+    <figure className={joinedClassName}>
       <table>
         <DataTableHeader columns={columns} />
 

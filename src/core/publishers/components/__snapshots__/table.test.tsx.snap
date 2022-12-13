@@ -3,7 +3,7 @@
 exports[`<PublishersTable /> when there are many rows should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-core-publishers"
+    class="data-table data-table-collapse data-table-core-publishers"
   >
     <table>
       <thead
@@ -31,16 +31,19 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
         <tr>
           <td
             class="data-table-cell-name"
+            data-label="Name"
           >
             Crystal Sphere Publications
           </td>
           <td
             class="data-table-cell-website"
+            data-label="Website"
           >
             www.example.com/crystal-sphere-publications
           </td>
           <td
             class="data-table-cell-actions"
+            data-label="Actions"
           >
              
           </td>
@@ -48,16 +51,19 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
         <tr>
           <td
             class="data-table-cell-name"
+            data-label="Name"
           >
             Flumph Free Press
           </td>
           <td
             class="data-table-cell-website"
+            data-label="Website"
           >
             www.example.com/flumph-free-press
           </td>
           <td
             class="data-table-cell-actions"
+            data-label="Actions"
           >
              
           </td>
@@ -65,16 +71,19 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
         <tr>
           <td
             class="data-table-cell-name"
+            data-label="Name"
           >
             Spelljammer Monthly
           </td>
           <td
             class="data-table-cell-website"
+            data-label="Website"
           >
             www.example.com/spelljammer-monthly
           </td>
           <td
             class="data-table-cell-actions"
+            data-label="Actions"
           >
              
           </td>
@@ -88,7 +97,7 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
 exports[`<PublishersTable /> when there is no matching data should match the snapshot 1`] = `
 <DocumentFragment>
   <figure
-    class="data-table data-table-core-publishers"
+    class="data-table data-table-collapse data-table-core-publishers"
   >
     <table>
       <thead

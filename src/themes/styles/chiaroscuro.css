@@ -4,28 +4,36 @@
 
 @layer base {
   .theme-chiaroscuro {
-    @apply bg-zinc-100 text-zinc-800;
-    @apply dark:bg-zinc-900 dark:text-zinc-200;
+    --bg-color: #fafafa; /* zinc-100 */
+    --bg-color-dark: #18181b; /* zinc-900 */
+    --bg-color-accent: #e4e4e7; /* zinc-200 */
+    --bg-color-accent-dark: #27272a; /* zinc-800 */
+
+    --link-color: #3b82f6; /* blue-500 */
+    --link-color-hover: #2563eb; /* blue-600 */
+    --link-color-hover-dark: #60a5fa; /* blue-400 */
+
+    --muted-color: #a1a1aa; /* zinc-400 */
+    --muted-color-dark: #52525b; /* zinc-600 */
+
+    --text-color: var(--bg-color-accent-dark);
+    --text-color-dark: var(--bg-color-accent);
+    --text-color-strong: var(--bg-color-dark);
+    --text-color-strong-dark: var(--bg-color);
+
+    @apply dark:bg-[color:var(--bg-color-dark)] dark:text-[color:var(--text-color-dark)];
 
     h1, h2, h3, h4, h5, h6 {
-      @apply text-zinc-900;
-      @apply dark:text-zinc-100;
+      @apply dark:text-[color:var(--text-color-strong-dark)];
     }
 
     a {
-      @apply text-blue-500;
-      @apply hover:text-blue-600;
-      @apply dark:hover:text-blue-400;
+      @apply dark:hover:text-[color:var(--link-color-hover-dark)];
     }
 
     hr {
-      @apply border-zinc-900;
-      @apply dark:border-zinc-100;
-    }
-
-    .hr-muted {
-      @apply border-zinc-400 after:border-zinc-400;
-      @apply dark:border-zinc-600 dark:after:border-zinc-600;
+      @apply border-[color:var(--bg-color-dark)] after:border-[color:var(--bg-color-dark)];
+      @apply dark:border-[color:var(--bg-color)] dark:after:border-[color:var(--bg-color)];
     }
   }
 }
@@ -42,6 +50,13 @@
     .button:disabled, .form-button:disabled {
       @apply border-zinc-500 text-zinc-500;
       @apply active:bg-zinc-100 dark:active:bg-zinc-900;
+    }
+
+    .data-table {
+      tbody tr:nth-child(odd) {;
+        @apply bg-[color:var(--bg-color-accent)];
+        @apply dark:bg-[color:var(--bg-color-accent-dark)];
+      }
     }
 
     .form-field-errors {
@@ -138,6 +153,11 @@
     .hr-fancy {
       @apply after:border-zinc-900;
       @apply dark:after:border-zinc-100;
+    }
+
+    .hr-muted {
+      @apply border-zinc-400 after:border-zinc-400;
+      @apply dark:border-zinc-600 dark:after:border-zinc-600;
     }
 
     .link-danger {

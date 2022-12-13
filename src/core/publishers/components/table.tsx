@@ -25,6 +25,7 @@ export const PublishersTable = ({
   data: DataTableData,
 }): JSX.Element => (
   <DataTable
+    collapse
     columns={columns}
     data={data}
     name="publishers"

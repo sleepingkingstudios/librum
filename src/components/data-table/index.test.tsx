@@ -200,6 +200,114 @@ describe('<DataTable />', () => {
     });
   });
 
+  describe('with collapse: true', () => {
+    describe('when there are no rows', () => {
+      const data: { 'spaceMissions': SpaceMission[] } = { 'spaceMissions': [] };
+      const expectedMessage = 'There are no matching space missions.';
+
+      it('should render the header cells', () => {
+        const { getAllByRole } = render(
+          <DataTable collapse columns={columns} data={data} name={name} />,
+        );
+        const cells = getAllByRole('columnheader');
+
+        expect(cells).toHaveLength(5);
+        expect(cells.map(cell => cell.textContent)).toEqual(expectedHeader);
+      });
+
+      it('should display the empty message', () => {
+        const { getByRole } = render(
+          <DataTable collapse columns={columns} data={data} name={name} />,
+        );
+        const cell = getByRole('cell');
+
+        expect(cell.textContent).toBe(expectedMessage);
+      });
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <DataTable collapse columns={columns} data={data} name={name} />,
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+
+
+    describe('when there are many rows', () => {
+      const data: { spaceMissions: SpaceMission[] } = {
+        spaceMissions: [
+          {
+            deltaV: '1,000 km/s',
+            launchDate: '2050',
+            missionObjective: 'Titan',
+            ordinal: 'IX',
+            program: 'Chronos',
+          },
+          {
+            deltaV: '10,000 km/s',
+            launchDate: '2150',
+            missionObjective: 'Alpha Centauri A',
+            ordinal: 'X',
+            program: 'Chiron',
+          },
+          {
+            deltaV: '100,000 km/s',
+            launchDate: '3050',
+            missionObjective: 'Andromeda',
+            ordinal: 'XI',
+            program: 'Perseus',
+          },
+        ],
+      };
+      const expectedBody = [
+        'Chronos IX',
+        'Titan',
+        '1,000 km/s',
+        '2050',
+        'Launch',
+        'Chiron X',
+        'Alpha Centauri A',
+        '10,000 km/s',
+        '2150',
+        'Launch',
+        'Perseus XI',
+        'Andromeda',
+        '100,000 km/s',
+        '3050',
+        'Launch',
+      ];
+
+      it('should render the header cells', () => {
+        const { getAllByRole } = render(
+          <DataTable collapse columns={columns} data={data} name={name} />,
+        );
+        const cells = getAllByRole('columnheader');
+
+        expect(cells).toHaveLength(5);
+        expect(cells.map(cell => cell.textContent)).toEqual(expectedHeader);
+      });
+
+      it('should display the formatted data', () => {
+        const { getAllByRole } = render(
+          <DataTable collapse columns={columns} data={data} name={name} />,
+        );
+        const cells = getAllByRole('cell');
+
+        expect(cells).toHaveLength(15);
+        expect(cells.map(cell => cell.textContent)).toEqual(expectedBody);
+      });
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <DataTable collapse columns={columns} data={data} name={name} />,
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+  });
+
   describe('with emptyMessage: component', () => {
     const EmptyMessage = (): JSX.Element => (
       <span className="data-table-empty-message">

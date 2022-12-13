@@ -6,7 +6,10 @@ import type {
   ColumnValueFunction,
   DataTableColumn,
 } from './types';
-import { alignmentClass } from './utils';
+import {
+  alignmentClass,
+  labelFor,
+} from './utils';
 
 type CellProps = {
   column: DataTableColumn,
@@ -86,9 +89,10 @@ export const DataTableCell = ({
     alignmentClass(column),
     column.numeric ? 'lining-nums tabular-nums' : null,
   );
+  const label = labelFor({ column, force: true });
   const value = valueFor({ column, data });
 
   return (
-    <td className={joinedClassName}>{ value }</td>
+    <td className={joinedClassName} data-label={label}>{ value }</td>
   );
 };

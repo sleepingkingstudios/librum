@@ -7,6 +7,7 @@ exports[`<DataTableCell /> with a basic column should match the snapshot 1`] = `
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus VI
         </td>
@@ -23,6 +24,7 @@ exports[`<DataTableCell /> with a basic column when the data does not have a mat
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
            
         </td>
@@ -39,6 +41,7 @@ exports[`<DataTableCell /> with a basic column when the data has a null property
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
            
         </td>
@@ -55,6 +58,7 @@ exports[`<DataTableCell /> with a basic column when the data has an empty proper
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
            
         </td>
@@ -71,6 +75,7 @@ exports[`<DataTableCell /> with a basic column when the data has an undefined pr
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
            
         </td>
@@ -87,6 +92,7 @@ exports[`<DataTableCell /> with a column with align: value should match the snap
       <tr>
         <td
           class="data-table-cell-mission-name text-center"
+          data-label="Mission Name"
         >
           Hephaestus VI
         </td>
@@ -103,6 +109,7 @@ exports[`<DataTableCell /> with a column with default: component should match th
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus VI
         </td>
@@ -119,6 +126,7 @@ exports[`<DataTableCell /> with a column with default: component when the data d
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           <span
             class="data-table-cell-default"
@@ -139,6 +147,7 @@ exports[`<DataTableCell /> with a column with default: component when the data h
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           <span
             class="data-table-cell-default"
@@ -159,6 +168,7 @@ exports[`<DataTableCell /> with a column with default: component when the data h
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           <span
             class="data-table-cell-default"
@@ -179,6 +189,7 @@ exports[`<DataTableCell /> with a column with default: component when the data h
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           <span
             class="data-table-cell-default"
@@ -199,6 +210,7 @@ exports[`<DataTableCell /> with a column with default: function should match the
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus VI
         </td>
@@ -215,6 +227,7 @@ exports[`<DataTableCell /> with a column with default: function when the data do
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus ?
         </td>
@@ -231,6 +244,7 @@ exports[`<DataTableCell /> with a column with default: function when the data ha
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus ?
         </td>
@@ -247,6 +261,7 @@ exports[`<DataTableCell /> with a column with default: function when the data ha
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus ?
         </td>
@@ -263,6 +278,7 @@ exports[`<DataTableCell /> with a column with default: function when the data ha
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus ?
         </td>
@@ -279,6 +295,7 @@ exports[`<DataTableCell /> with a column with default: string should match the s
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus VI
         </td>
@@ -295,6 +312,7 @@ exports[`<DataTableCell /> with a column with default: string when the data does
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           N/A
         </td>
@@ -311,6 +329,7 @@ exports[`<DataTableCell /> with a column with default: string when the data has 
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           N/A
         </td>
@@ -327,6 +346,7 @@ exports[`<DataTableCell /> with a column with default: string when the data has 
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           N/A
         </td>
@@ -343,6 +363,7 @@ exports[`<DataTableCell /> with a column with default: string when the data has 
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           N/A
         </td>
@@ -359,6 +380,7 @@ exports[`<DataTableCell /> with a column with numeric: true should match the sna
       <tr>
         <td
           class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          data-label="Delta V"
         >
           1,000 km/s
         </td>
@@ -375,6 +397,7 @@ exports[`<DataTableCell /> with a column with value: component should match the 
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           <span
             class="data-table-cell-mission-name"
@@ -395,6 +418,7 @@ exports[`<DataTableCell /> with a column with value: function should match the s
       <tr>
         <td
           class="data-table-cell-mission-name"
+          data-label="Mission Name"
         >
           Hephaestus VI
         </td>

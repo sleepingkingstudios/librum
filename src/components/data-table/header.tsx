@@ -1,29 +1,12 @@
 import * as React from 'react';
-import {
-  capitalize,
-  kebabCase,
-} from 'lodash';
+import { kebabCase } from 'lodash';
 
 import { joinClassNames } from '@utils/react-utils';
 import { DataTableColumn } from './types';
-import { alignmentClass } from './utils';
-
-const labelFor = ({ column }: { column: DataTableColumn }): string => {
-  if (!('label' in column)) { return titleCase(column.name); }
-
-  const { label } = column;
-
-  if (label === false) { return ' '; }
-
-  return label;
-};
-
-const titleCase = (str: string):string => {
-  return kebabCase(str)
-    .split('-')
-    .map(capitalize)
-    .join(' ');
-};
+import {
+  alignmentClass,
+  labelFor,
+} from './utils';
 
 const DataTableHeaderCell = ({
   column,
