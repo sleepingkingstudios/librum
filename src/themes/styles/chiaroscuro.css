@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  .theme-chiaroscuro {
+  .theme-default-styles.theme-chiaroscuro {
     --bg-color: #fafafa; /* zinc-100 */
     --bg-color-dark: #18181b; /* zinc-900 */
     --bg-color-accent: #e4e4e7; /* zinc-200 */
@@ -39,7 +39,7 @@
 }
 
 @layer components {
-  .theme-chiaroscuro {
+  .theme-default-styles.theme-chiaroscuro {
     .button, .form-button {
       @apply border-zinc-800 text-zinc-800;
       @apply active:bg-zinc-200 hover:border-zinc-900 hover:text-zinc-900;
@@ -122,7 +122,7 @@
 }
 
 @layer utilities {
-  .theme-chiaroscuro {
+  .theme-default-styles.theme-chiaroscuro {
     .alert-failure {
       @apply bg-red-500 border-red-600;
       @apply dark:bg-red-600 dark:border-red-700;
