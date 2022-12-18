@@ -20,6 +20,8 @@
       "@core/*": ["core/*"],
       "@pages": ["pages"],
       "@pages/*": ["pages/*"],
+      "@resources": ["resources"],
+      "@resources/*": ["resources/*"],
       "@session": ["session"],
       "@session/*": ["session/*"],
       "@store": ["store"],

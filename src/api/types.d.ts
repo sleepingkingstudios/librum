@@ -118,3 +118,7 @@ export type UseQueryResult = {
   isUninitialized: boolean,
   refetch: () => void,
 };
+
+export type UseWrappedQueryRequest<
+  Data extends Record<string, unknown> = Record<string, unknown>
+> = (props?: { arg?: unknown }) => Response<Data>;

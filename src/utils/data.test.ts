@@ -4,7 +4,7 @@ import {
 } from './data';
 import type { DataObject } from './types';
 
-describe('Data', () => {
+describe('Data utils', () => {
   describe('convertToCamelCase', () => {
     it('should be a function', () => {
       expect(typeof convertToCamelCase).toBe('function');

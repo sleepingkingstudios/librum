@@ -18,6 +18,7 @@ module.exports = {
       '@components': srcPath('components'),
       '@core': srcPath('core'),
       '@pages': srcPath('pages'),
+      '@resources': srcPath('resources'),
       '@session': srcPath('session'),
       '@store': srcPath('store'),
       '@test-helpers': srcPath('test-helpers'),

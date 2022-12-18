@@ -1,16 +1,5 @@
-import {
-  capitalize,
-  kebabCase,
-} from 'lodash';
-
+import { titleCase } from '@utils/text';
 import { DataTableColumn } from './types';
-
-const titleCase = (str: string):string => (
-  kebabCase(str)
-    .split('-')
-    .map(capitalize)
-    .join(' ')
-);
 
 export const alignmentClass = (column: DataTableColumn): string => {
   if (column.align) { return `text-${column.align}`; }
