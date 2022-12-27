@@ -1,6 +1,7 @@
 import {
   capitalize,
   kebabCase,
+  snakeCase,
 } from 'lodash';
 
 export const titleCase = (str?: string): string => (
@@ -9,3 +10,7 @@ export const titleCase = (str?: string): string => (
     .map(capitalize)
     .join(' ')
 );
+
+export const upperCamelCase = (str: string): string => {
+  return snakeCase(str).split('_').map(capitalize).join('');
+};
