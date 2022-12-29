@@ -1,6 +1,4 @@
 import { injectEndpoint } from './endpoint';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { api } from '@api';
 
 jest.mock('@api');
 

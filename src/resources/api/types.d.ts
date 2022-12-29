@@ -1,8 +1,12 @@
+export type ResourceApiParams = {
+  endpoints?: Record<string, false | ResourceEndpointDefinition>,
+} & ResourceApiProperties;
+
 export type ResourceApiProperties = {
   baseUrl?: string,
   resourceName: string,
-  singularName?: string,
   scope?: string,
+  singularName?: string,
 };
 
 export type ResourceEndpointDefinition = {
@@ -14,7 +18,6 @@ export type ResourceEndpointDefinition = {
 export type ResourceEndpointProperties = {
   action: string,
   endpoint: ResourceEndpointDefinition,
-  plural?: boolean,
 } & ResourceApiProperties;
 
 export type ResourceMutationParams = {
