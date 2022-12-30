@@ -14,7 +14,7 @@ import {
 } from '@api/test-helpers';
 import { useCreateSessionMutation } from '@session/api';
 import { actions as sessionActions } from '@session/reducer';
-import { useStoreDispatch } from '@store/hooks';
+import { useStoreDispatch as mockUseStoreDispatch } from '@store/hooks';
 
 jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@session/api');
@@ -22,22 +22,18 @@ jest.mock('@store/hooks');
 
 const alerts = mockUseAlerts();
 const { dismissAlert, displayAlert } = alerts;
-const dispatch = jest.fn();
-const mockDispatch = useStoreDispatch as jest.MockedFunction<
-  typeof useStoreDispatch
->;
+const dispatch = mockUseStoreDispatch();
 const trigger = jest.fn();
 const mockMutation = useCreateSessionMutation as jest.MockedFunction<
   typeof useCreateSessionMutation
 >;
 
-mockDispatch.mockImplementation(() => dispatch);
 mockMutation.mockImplementation(() => [trigger, defaultResult]);
 
 beforeEach(() => {
   dismissAlert.mockClear();
   displayAlert.mockClear();
-  dispatch.mockClear();
+  (dispatch as jest.MockedFunction<typeof dispatch>).mockClear();
   mockMutation.mockClear();
   trigger.mockClear();
 });

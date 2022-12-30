@@ -6,7 +6,7 @@ import { useMutationRequest } from './use-mutation-request';
 import type { DisplayAlertProps } from '@alerts';
 import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import { actions as sessionActions } from '@session';
-import { useStoreDispatch } from '@store/hooks';
+import { useStoreDispatch as mockUseStoreDispatch } from '@store/hooks';
 import { expiredSessionError } from '../errors';
 import {
   defaultResult,
@@ -25,10 +25,7 @@ jest.mock('@store/hooks');
 
 const alerts = mockUseAlerts();
 const { displayAlert } = alerts;
-const dispatch = jest.fn();
-const mockUseStoreDispatch = useStoreDispatch as jest.MockedFunction<typeof useStoreDispatch>;
-
-mockUseStoreDispatch.mockImplementation(() => dispatch);
+const dispatch = mockUseStoreDispatch();
 
 describe('API hooks useMutationRequest()', () => {
   const trigger = jest.fn();
