@@ -3,11 +3,8 @@ import { renderHook } from '@testing-library/react';
 import { faUserClock } from '@fortawesome/free-solid-svg-icons';
 
 import { useMutationRequest } from './use-mutation-request';
-import { useAlerts } from '@alerts';
-import type {
-  Alert,
-  DisplayAlertProps,
-} from '@alerts';
+import type { DisplayAlertProps } from '@alerts';
+import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import { actions as sessionActions } from '@session';
 import { useStoreDispatch } from '@store/hooks';
 import { expiredSessionError } from '../errors';
@@ -23,22 +20,14 @@ import type {
   UseMutation,
 } from '../types';
 
-jest.mock('@alerts');
+jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store/hooks');
 
-const dismissAllAlerts = jest.fn();
-const displayAlert = jest.fn();
-const alerts = {
-  alerts: [] as Alert[],
-  dismissAlert: jest.fn(),
-  dismissAllAlerts,
-  displayAlert,
-};
+const alerts = mockUseAlerts();
+const { displayAlert } = alerts;
 const dispatch = jest.fn();
-const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
 const mockUseStoreDispatch = useStoreDispatch as jest.MockedFunction<typeof useStoreDispatch>;
 
-mockUseAlerts.mockImplementation(() => alerts);
 mockUseStoreDispatch.mockImplementation(() => dispatch);
 
 describe('API hooks useMutationRequest()', () => {

@@ -6,8 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { useRequest } from './request';
-import { useAlerts } from '@alerts';
-import type { Alert } from '@alerts';
+import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import { invalidPasswordError } from '@api/errors';
 import {
   defaultResult,
@@ -20,18 +19,12 @@ import {
 import { useUpdateUserPasswordMutation } from '@user/password/api';
 import { useStoreDispatch } from '@store/hooks';
 
-jest.mock('@alerts');
+jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store/hooks');
 jest.mock('@user/password/api');
 
-const displayAlert = jest.fn();
-const alerts = {
-  alerts: [] as Alert[],
-  dismissAlert: jest.fn(),
-  dismissAllAlerts: jest.fn(),
-  displayAlert,
-};
-const mockAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
+const alerts = mockUseAlerts();
+const { displayAlert } = alerts;
 const mockDispatch = useStoreDispatch as jest.MockedFunction<
   typeof useStoreDispatch
 >;
@@ -40,7 +33,6 @@ const mockMutation = useUpdateUserPasswordMutation as jest.MockedFunction<
   typeof useUpdateUserPasswordMutation
 >;
 
-mockAlerts.mockImplementation(() => alerts);
 mockDispatch.mockImplementation(() => jest.fn());
 mockMutation.mockImplementation(() => [trigger, defaultResult]);
 

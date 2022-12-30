@@ -1,30 +1,23 @@
 import { renderHook } from '@testing-library/react';
 
 import { useGetUserRequest } from './request';
-import { useAlerts } from '@alerts';
+import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import {
-  defaultOptions,
   failureResult,
   loadingResult,
 } from '@api/test-helpers';
 import { useGetUserQuery } from '@user/api';
 
-jest.mock('@alerts');
+jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store/hooks');
 jest.mock('@user/api');
 
+const alerts = mockUseAlerts();
+const { displayAlert } = alerts;
 const mockUseGetUserQuery = useGetUserQuery as jest.MockedFunction<typeof useGetUserQuery>;
-const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
-
-mockUseAlerts.mockImplementation(() => defaultOptions.alerts);
 
 describe('UserPage request', () => {
-  const options = defaultOptions;
-  const { alerts } = options;
-  const { displayAlert } = alerts;
-  const mockDisplayAlert = displayAlert as jest.MockedFunction<typeof displayAlert>;
-
-  beforeEach(() => { mockDisplayAlert.mockClear(); });
+  beforeEach(() => { displayAlert.mockClear(); });
 
   describe('with a failing response', () => {
     it('should display an alert', () => {
@@ -36,7 +29,7 @@ describe('UserPage request', () => {
 
       rerender();
 
-      expect(mockDisplayAlert).toHaveBeenCalled();
+      expect(displayAlert).toHaveBeenCalled();
     });
   });
 });

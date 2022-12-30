@@ -6,10 +6,7 @@ import '@testing-library/jest-dom';
 import { render } from '@test-helpers/rendering';
 
 import { PageUser } from './index';
-import { useAlerts } from '@alerts';
-import type {
-  Alert as IAlert,
-} from '@alerts';
+import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import {
   actions,
   selector,
@@ -20,20 +17,9 @@ import type {
 } from '@session';
 import { createStore } from '@test-helpers/store';
 
-jest.mock('@alerts');
+jest.mock('@alerts', () => require('@alerts/mocks'));
 
-const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
-
-const displayAlert = jest.fn();
-
-mockUseAlerts.mockImplementation(
-  () => ({
-    alerts: [] as IAlert[],
-    dismissAlert: jest.fn(),
-    dismissAllAlerts: jest.fn(),
-    displayAlert,
-  })
-);
+const { displayAlert } = mockUseAlerts();
 
 describe('<PageUser>', () => {
   beforeEach(() => { displayAlert.mockClear(); });
