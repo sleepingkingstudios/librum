@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-import type {
-  Response,
-  UseWrappedQueryRequest,
-} from '@api/types';
+import type { Response } from '@api/types';
 import type { DataTableData } from '@components/data-table/types';
 import { LoadingOverlay } from '@components/loading-overlay';
+import type { UseResourceQuery } from '@resources/api/types';
 import { titleCase } from '@utils/text';
 
 type DataTableProps = {
@@ -19,7 +17,7 @@ type ResourcesTableProps = {
   Table: DataTableType,
   loader?: JSX.Element,
   resourceName: string,
-  useRequest: UseWrappedQueryRequest,
+  useRequest: UseResourceQuery,
 };
 
 const renderContent = ({

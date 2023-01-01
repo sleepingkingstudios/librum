@@ -1,3 +1,5 @@
+import type { Response } from '@api';
+
 export type ResourceApiParams = {
   endpoints?: Record<string, false | ResourceEndpointDefinition>,
 } & ResourceApiProperties;
@@ -30,3 +32,5 @@ export type ResourceQueryParams = {
   params?: Record<string, string>,
   wildcards?: Record<string, string>,
 };
+
+export type UseResourceQuery = (arg?: ResourceQueryParams) => Response;

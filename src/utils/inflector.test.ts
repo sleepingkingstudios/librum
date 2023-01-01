@@ -1,9 +1,58 @@
 import {
+  pastTense,
   pluralize,
   singularize,
 } from './inflector';
 
 describe('Utils inflector', () => {
+  describe('pastTense()', () => {
+    it('should be a function', () => {
+      expect(typeof pastTense).toBe('function');
+    });
+
+    describe('with undefined', () => {
+      it('should return an empty string', () => {
+        expect(pastTense(undefined)).toBe('');
+      });
+    });
+
+    describe('with null', () => {
+      it('should return an empty string', () => {
+        expect(pastTense(null)).toBe('');
+      });
+    });
+
+    describe('with an empty string', () => {
+      it('should return an empty string', () => {
+        expect(pastTense('')).toBe('');
+      });
+    });
+
+    describe('with a word with basic conjugation', () => {
+      it('should convert the word to past tense', () => {
+        expect(pastTense('process')).toBe('processed');
+      });
+    });
+
+    describe('with a word ending in "e"', () => {
+      it('should convert the word to past tense', () => {
+        expect(pastTense('create')).toBe('created');
+      });
+    });
+
+    describe('with a word ending in "ind"', () => {
+      it('should convert the word to past tense', () => {
+        expect(pastTense('find')).toBe('found');
+      });
+    });
+
+    describe('with a word ending in "y"', () => {
+      it('should convert the word to past tense', () => {
+        expect(pastTense('destroy')).toBe('destroyed');
+      });
+    });
+  });
+
   describe('pluralize()', () => {
     const shouldPluralize = (singular: string, plural: string) => {
       it('should pluralize the word', () => {
