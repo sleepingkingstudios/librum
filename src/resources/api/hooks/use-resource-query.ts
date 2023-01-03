@@ -1,14 +1,10 @@
-import type {
-  Effect,
-  UseQuery,
-} from '@api';
 import { displayAlerts } from '@api/effects';
 import { useQueryRequest } from '@api/hooks';
-import type { AlertDirective } from '@api/effects/display-alerts';
 import { generateAlerts } from '../effects';
 import type {
   ResourceQueryParams,
   UseResourceQuery,
+  UseResourceQueryProps,
 } from '../types';
 
 export const useResourceQuery = ({
@@ -20,16 +16,7 @@ export const useResourceQuery = ({
   scope,
   singularName,
   useQuery,
-}: {
-  action: string,
-  alerts?: false | AlertDirective[],
-  effects?: Effect[],
-  member: boolean,
-  resourceName: string,
-  scope?: string,
-  singularName?: string,
-  useQuery: UseQuery,
-}): UseResourceQuery => {
+}: UseResourceQueryProps): UseResourceQuery => {
   const configuredEffects = effects ? [...effects] : [];
 
   if (alerts === undefined || alerts === null) {

@@ -45,17 +45,39 @@ const renderNavigation = ({
   return (<PageNavigation navigation={navigation} />);
 };
 
+const renderTitle = ({
+  subtitle,
+  title,
+}: {
+  subtitle?: string,
+  title?: string,
+}): JSX.Element => {
+  if (!title || title.length === 0) { return null; }
+
+  if (!subtitle || subtitle.length === 0) {
+    return (<span aria-label="title">{ title }</span>);
+  }
+
+  return (<span aria-label="title">{ `${title}: ${subtitle}` }</span>);
+};
+
 export const Page = ({
   breadcrumbs,
   children,
   navigation,
+  subtitle,
+  title,
 }: {
   breadcrumbs?: Breadcrumbs,
   children: React.ReactNode,
   navigation?: JSX.Element | NavigationProps,
+  subtitle?: string,
+  title?: string,
 }): JSX.Element => {
   return (
     <div className="mock-page">
+      { renderTitle({ subtitle, title }) }
+
       { renderNavigation({ navigation }) }
 
       { children }

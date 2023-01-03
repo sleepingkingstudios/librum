@@ -1,4 +1,9 @@
-import type { Response } from '@api';
+import type {
+  Effect,
+  Response,
+  UseQuery,
+} from '@api';
+import type { AlertDirective } from '@api/effects/display-alerts';
 
 export type ResourceApiParams = {
   endpoints?: Record<string, false | ResourceEndpointDefinition>,
@@ -34,3 +39,14 @@ export type ResourceQueryParams = {
 };
 
 export type UseResourceQuery = (arg?: ResourceQueryParams) => Response;
+
+export type UseResourceQueryProps = {
+  action: string,
+  alerts?: false | AlertDirective[],
+  effects?: Effect[],
+  member: boolean,
+  resourceName: string,
+  scope?: string,
+  singularName?: string,
+  useQuery: UseQuery,
+};

@@ -8,6 +8,13 @@ import type {
   ResourceEndpointDefinition,
 } from './types';
 
+export { useResourceQuery } from './hooks/use-resource-query';
+
+export type {
+  ResourceApiProperties,
+  ResourceEndpointDefinition,
+} from './types';
+
 const defaultEndpoints: Record<string, ResourceEndpointDefinition> = {
   index: {
     member: false,

@@ -11,14 +11,14 @@ type DataTableProps = {
   name: string,
 };
 
-type DataTableType = (props: DataTableProps) => JSX.Element;
-
 type ResourcesTableProps = {
   Table: DataTableType,
   loader?: JSX.Element,
   resourceName: string,
   useRequest: UseResourceQuery,
 };
+
+export type DataTableType = (props: DataTableProps) => JSX.Element;
 
 const renderContent = ({
   Table,
