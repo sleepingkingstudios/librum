@@ -11,20 +11,15 @@ import {
   failureResponse,
   successResponse,
 } from '@api/test-helpers';
-import { Page } from '@components/page';
 import { useRequest } from './request';
 
-jest.mock('@components/page');
+jest.mock('@components/page', () => require('@components/page/mocks'));
 jest.mock('./request');
 
-const mockPage = Page as jest.MockedFunction<typeof Page>;
 const mockRequest = useRequest as jest.MockedFunction<typeof useRequest>;
 const request = jest.fn();
 
 mockRequest.mockImplementation(() => [request, defaultResponse]);
-mockPage.mockImplementation(
-  ({ children }) => (<div id="page">{ children }</div>)
-);
 
 describe('<LoginPage>', () => {
   it('should render the form', () => {

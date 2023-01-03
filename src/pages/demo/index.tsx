@@ -13,6 +13,7 @@ import {
 } from '@components/form';
 import { Page } from '@components/page';
 import type { Breadcrumbs } from '@components/page';
+import { CoreNavigation } from '@core/navigation';
 
 type ExampleObject = {
   name: string;
@@ -54,7 +55,7 @@ const defaultResponse: Response = {
 };
 
 export const DemoPage = (): JSX.Element => (
-  <Page breadcrumbs={breadcrumbs}>
+  <Page breadcrumbs={breadcrumbs} navigation={<CoreNavigation />}>
     <h1>Demo</h1>
 
     <p>

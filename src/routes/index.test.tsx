@@ -18,7 +18,7 @@ const mockDemoPage = DemoPage as jest.MockedFunction<typeof DemoPage>;
 const mockHomePage = HomePage as jest.MockedFunction<typeof HomePage>;
 const mockLoginPage = LoginPage as jest.MockedFunction<typeof LoginPage>;
 const mockNotFoundPage = NotFoundPage as jest.MockedFunction<typeof NotFoundPage>;
-const mockUserPage = UserPage as jest.MockedFunction<typeof NotFoundPage>;
+const mockUserPage = UserPage as jest.MockedFunction<typeof UserPage>;
 
 mockDemoPage.mockImplementation(() => (<div id="page">Demo Page</div>))
 mockHomePage.mockImplementation(() => (<div id="page">Home Page</div>));

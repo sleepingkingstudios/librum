@@ -16,6 +16,7 @@ import { actions } from '@session';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
+import { PageNavigation } from './navigation';
 
 describe('<Page>', () => {
   it('should render the header', () => {
@@ -119,6 +120,55 @@ describe('<Page>', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <Page breadcrumbs={breadcrumbs}>Page Content Here...</Page>,
+        {
+          router: true,
+          store: true,
+          theme: true,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with navigation: component', () => {
+    const navigation = [
+      {
+        label: 'Home',
+        url: '/',
+      },
+      {
+        label: 'Launch Sites',
+        url: '/launch-sites',
+      },
+      {
+        label: 'Rockets',
+        items: [
+          {
+            label: 'Engines',
+            url: '/rockets/engines',
+          },
+          {
+            label: 'Fuel Tanks',
+            url: '/rockets/fuel-tanks',
+          },
+        ],
+      },
+      {
+        label: 'Administration',
+        items: [
+          {
+            label: 'Strategies',
+            url: '/administration/strategies',
+          },
+        ],
+      },
+    ];
+    const Navigation = () => (<PageNavigation navigation={navigation} />);
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <Page navigation={<Navigation />}>Page Content Here...</Page>,
         {
           router: true,
           store: true,

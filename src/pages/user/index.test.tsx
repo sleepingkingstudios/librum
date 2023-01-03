@@ -10,20 +10,15 @@ import {
   loadingResponse,
   successResponse,
 } from '@api/test-helpers';
-import { Page } from '@components/page';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { useGetUserRequest } from './request';
 
-jest.mock('@components/page');
+jest.mock('@components/page', () => require('@components/page/mocks'));
+jest.mock('@core/navigation', () => require('@core/navigation/mocks'));
 jest.mock('./request');
 
-const mockPage = Page as jest.MockedFunction<typeof Page>;
 const mockUseRequest = useGetUserRequest as jest.MockedFunction<typeof useGetUserRequest>;
-
-mockPage.mockImplementation(
-  ({ children }) => (<div id="page">{ children }</div>)
-);
 
 describe('<UserPage>', () => {
   describe('when the user is loading', () => {

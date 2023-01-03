@@ -3,8 +3,23 @@
 exports[`<DemoPage /> should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <ul
+      aria-label="navigation"
+    >
+      <li>
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li>
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
     <h1>
       Demo
     </h1>
@@ -407,6 +422,19 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
         </button>
       </div>
     </form>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li>
+        Home@ /
+      </li>
+      <li>
+        Admin
+      </li>
+      <li>
+        Demo@ /demo
+      </li>
+    </ul>
   </div>
 </DocumentFragment>
 `;

@@ -3,8 +3,73 @@
 exports[`<NotFoundPage> should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <article>
+      <h1
+        class="text-danger"
+      >
+        Not Found
+      </h1>
+      <p
+        class="text-danger"
+      >
+        This place is not a place of honor.
+        <br />
+        No highly esteemed deed is commemorated here.
+        <br />
+        Nothing valued is here.
+      </p>
+      <p
+        class="text-danger"
+      >
+        What is here was dangerous and repulsive to us.
+        <br />
+        This message is a warning about danger.
+      </p>
+      <p
+        class="text-danger"
+      >
+        The danger is still present, in your time, as it was in ours.
+      </p>
+      <hr
+        class="hr-fancy hr-muted m-5"
+      />
+      <p
+        class="text-xl"
+      >
+        <a
+          class="link-danger"
+          href="/"
+        >
+          Turn Back
+        </a>
+      </p>
+    </article>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<NotFoundPage> with navigation: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <ul
+      aria-label="navigation"
+    >
+      <li>
+        Nav Item @ /
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li>
+            Dropdown Item @ /
+          </li>
+        </ul>
+      </li>
+    </ul>
     <article>
       <h1
         class="text-danger"

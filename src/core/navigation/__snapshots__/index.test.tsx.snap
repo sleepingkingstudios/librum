@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CoreNavigation /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <ul
+      aria-label="navigation"
+    >
+      <li>
+        Home @ /
+      </li>
+      <li>
+        Publishers @ /publishers
+      </li>
+      <li>
+        Game Systems @ /game_systems
+      </li>
+      <li>
+        Sources
+        <ul>
+          <li>
+            Books @ /sources/books
+          </li>
+          <li>
+            Websites @ /sources/websites
+          </li>
+        </ul>
+      </li>
+      <li>
+        Admin
+        <ul>
+          <li>
+            Users @ /admin/users
+          </li>
+        </ul>
+      </li>
+    </ul>
+    This space unintentionally left blank.
+  </div>
+</DocumentFragment>
+`;

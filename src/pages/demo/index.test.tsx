@@ -1,16 +1,10 @@
 import * as React from 'react';
 
 import { DemoPage } from './index';
-import { Page } from '@components/page';
 import { render } from '@test-helpers/rendering';
 
-jest.mock('@components/page');
-
-const mockPage = Page as jest.MockedFunction<typeof Page>;
-
-mockPage.mockImplementation(
-  ({ children }) => (<div id="page">{ children }</div>)
-);
+jest.mock('@components/page', () => require('@components/page/mocks'));
+jest.mock('@core/navigation', () => require('@core/navigation/mocks'));
 
 describe('<DemoPage />', () => {
   it('should match the snapshot', () => {

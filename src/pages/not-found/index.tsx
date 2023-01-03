@@ -2,9 +2,14 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Page } from '@components/page';
+import type { NavigationProps } from '@components/page';
 
-export const NotFoundPage = (): JSX.Element => (
-  <Page>
+export const NotFoundPage = ({
+  navigation,
+}: {
+  navigation?: NavigationProps,
+}): JSX.Element => (
+  <Page navigation={navigation}>
     <article>
       <h1 className="text-danger">
         Not Found

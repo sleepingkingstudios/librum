@@ -3,16 +3,10 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { NotFoundPage } from './index';
-import { Page } from '@components/page';
+import type { NavigationProps } from '@components/page';
 import { render } from '@test-helpers/rendering';
 
-jest.mock('@components/page');
-
-const mockPage = Page as jest.MockedFunction<typeof Page>;
-
-mockPage.mockImplementation(
-  ({ children }) => (<div id="page">{ children }</div>)
-);
+jest.mock('@components/page', () => require('@components/page/mocks'));
 
 describe('<NotFoundPage>', () => {
   it('should navigate back to the home page', () => {
@@ -29,5 +23,21 @@ describe('<NotFoundPage>', () => {
     );
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  describe('with navigation: value', () => {
+    const navigation: NavigationProps = [
+      { label: 'Nav Item', url: '/' },
+      { label: 'Dropdown', items: [{ label: 'Dropdown Item', url: '/' }] },
+    ];
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <NotFoundPage navigation={navigation} />,
+        { router: true }
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 });
