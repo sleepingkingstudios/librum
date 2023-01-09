@@ -1,0 +1,1 @@
+export { generateResourcesApi } from './api';

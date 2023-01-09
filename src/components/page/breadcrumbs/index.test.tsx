@@ -3,15 +3,12 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { PageBreadcrumbs } from './index';
-import type {
-  Breadcrumb,
-  Breadcrumbs,
-} from './types';
+import type { Breadcrumb } from './types';
 import { render } from '@test-helpers/rendering';
 
 describe('<PageBreadcrumbs />', () => {
   describe('with breadcrumbs: an empty array', () => {
-    const breadcrumbs: Breadcrumbs = [];
+    const breadcrumbs: Breadcrumb[] = [];
 
     it('should match the snapshot', () => {
       const { asFragment } = render(
@@ -24,7 +21,7 @@ describe('<PageBreadcrumbs />', () => {
   });
 
   describe('with breadcrumbs: an array of breadcrumbs', () => {
-    const breadcrumbs: Breadcrumbs = [
+    const breadcrumbs: Breadcrumb[] = [
       {
         label: 'Home',
         url: '/',

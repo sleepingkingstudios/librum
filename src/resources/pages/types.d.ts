@@ -1,6 +1,6 @@
 import type { UseQuery } from '@api';
 import type {
-  Breadcrumbs,
+  Breadcrumb,
   NavigationProps,
 } from '@components/page';
 import type { DataTableType } from '@resources/components/table';
@@ -12,7 +12,7 @@ type ResourceConfiguration = {
 };
 
 type ResourcePageProps = {
-  breadcrumbs?: Breadcrumbs,
+  breadcrumbs?: JSX.Element | Breadcrumb[],
   navigation?: JSX.Element | NavigationProps,
   subtitle?: string,
   title?: string,

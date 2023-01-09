@@ -12,7 +12,7 @@ import {
   FormRow,
 } from '@components/form';
 import { Page } from '@components/page';
-import type { Breadcrumbs } from '@components/page';
+import type { Breadcrumb } from '@components/page';
 import { CoreNavigation } from '@core/navigation';
 
 type ExampleObject = {
@@ -20,7 +20,7 @@ type ExampleObject = {
   description?: string;
 };
 
-const breadcrumbs: Breadcrumbs = [
+const breadcrumbs: Breadcrumb[] = [
   {
     label: 'Home',
     url: '/',

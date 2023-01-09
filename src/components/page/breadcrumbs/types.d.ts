@@ -3,5 +3,3 @@ export type Breadcrumb = {
   label: string;
   url?: string;
 };
-
-export type Breadcrumbs = Breadcrumb[];

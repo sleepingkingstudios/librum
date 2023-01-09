@@ -1,18 +1,12 @@
 import * as React from 'react';
 
 import { PageBreadcrumb } from './breadcrumb';
-import type {
-  Breadcrumb,
-  Breadcrumbs,
-} from './types';
+import type { Breadcrumb } from './types';
 
-export type {
-  Breadcrumb,
-  Breadcrumbs,
-} from './types';
+export type { Breadcrumb } from './types';
 
 export const PageBreadcrumbs = (
-  { breadcrumbs }: { breadcrumbs: Breadcrumbs }
+  { breadcrumbs }: { breadcrumbs: Breadcrumb[] }
 ): JSX.Element => {
   if (breadcrumbs.length === 0) { return null; }
 

@@ -10,7 +10,7 @@ import {
   successResult,
 } from '@api/test-helpers';
 import type { DataTableData } from '@components/data-table';
-import type { Breadcrumbs } from '@components/page';
+import type { Breadcrumb } from '@components/page';
 import { PageNavigation } from '@components/page/navigation/mocks';
 import { render } from '@test-helpers/rendering';
 
@@ -126,7 +126,7 @@ describe('<ResourceIndexPage />', () => {
   });
 
   describe('with breadcrumbs: value', () => {
-    const breadcrumbs: Breadcrumbs = [
+    const breadcrumbs: Breadcrumb[] = [
       { label: 'Home' },
       { label: 'Library' },
       { label: 'Rare Books' },

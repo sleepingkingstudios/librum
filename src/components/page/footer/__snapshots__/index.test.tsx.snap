@@ -17,6 +17,55 @@ exports[`<PageFooter> should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<PageFooter> with breadcrumbs: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <footer
+    class="mt-3 shrink-0 text-center sm:text-left"
+  >
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Admin
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/example"
+        >
+          Example
+        </a>
+      </li>
+    </ul>
+    <hr
+      class="hr-fancy mb-2"
+    />
+    <span
+      class="text-muted"
+    >
+      What lies beyond the furthest reaches of the sky?
+    </span>
+  </footer>
+</DocumentFragment>
+`;
+
 exports[`<PageFooter> with breadcrumbs: value should match the snapshot 1`] = `
 <DocumentFragment>
   <footer

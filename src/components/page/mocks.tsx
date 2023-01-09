@@ -2,33 +2,19 @@ import * as React from 'react';
 
 import type {
   Breadcrumb,
-  Breadcrumbs,
   NavigationProps,
 } from './index';
+import { PageBreadcrumbs } from './breadcrumbs/mocks';
 import { PageNavigation } from './navigation/mocks';
 
 const renderBreadcrumbs = ({
   breadcrumbs,
 }: {
-  breadcrumbs: Breadcrumbs,
+  breadcrumbs: Breadcrumb[],
 }): JSX.Element => {
   if (!breadcrumbs || breadcrumbs.length === 0) { return null; }
 
-  return (
-    <ul aria-label="breadcrumbs">
-      {
-        breadcrumbs.map((breadcrumb: Breadcrumb) => (
-          <li key={breadcrumb.label}>
-            { breadcrumb.label }
-
-            { breadcrumb.url ? `@ ${breadcrumb.url}` : null }
-
-            { breadcrumb.active ? '(active)' : null }
-          </li>
-        ))
-      }
-    </ul>
-  );
+  return (<PageBreadcrumbs breadcrumbs={breadcrumbs} />);
 };
 
 const renderNavigation = ({
@@ -68,7 +54,7 @@ export const Page = ({
   subtitle,
   title,
 }: {
-  breadcrumbs?: Breadcrumbs,
+  breadcrumbs?: Breadcrumb[],
   children: React.ReactNode,
   navigation?: JSX.Element | NavigationProps,
   subtitle?: string,

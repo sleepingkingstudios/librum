@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { PageAlerts } from './alerts';
-import type { Breadcrumbs } from './breadcrumbs';
+import type { Breadcrumb } from './breadcrumbs';
 import { PageFooter } from './footer';
 import { PageHeader } from './header';
 import type { NavigationProps } from './navigation';
@@ -10,14 +10,13 @@ import { joinClassNames } from '@utils/react-utils';
 
 export type {
   Breadcrumb,
-  Breadcrumbs,
 } from './breadcrumbs';
 export type { NavigationProps } from './navigation';
 
 interface PageProps {
   title?: string;
   subtitle?: string;
-  breadcrumbs?: Breadcrumbs;
+  breadcrumbs?: Breadcrumb[] | JSX.Element;
   children: React.ReactNode,
   navigation?: NavigationProps | JSX.Element;
 }

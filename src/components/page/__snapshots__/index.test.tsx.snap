@@ -263,6 +263,84 @@ exports[`<Page> when there are many alerts should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<Page> with breadcrumbs: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col max-w-screen-lg min-h-screen mx-auto p-3 theme-default"
+  >
+    <header
+      class="mb-3 text-center sm:text-left"
+    >
+      <span
+        class="page-title"
+      >
+        Librum
+      </span>
+      <br
+        class="block sm:hidden"
+      />
+      <small
+        class="page-subtitle m-0 sm:ml-2"
+      >
+        Campaign Companion
+      </small>
+      <hr
+        class="hr-fancy my-1"
+      />
+    </header>
+    <main
+      class="grow"
+    >
+      Page Content Here...
+    </main>
+    <footer
+      class="mt-3 shrink-0 text-center sm:text-left"
+    >
+      <ul
+        class="flex flex-col sm:flex-row page-breadcrumbs"
+      >
+        <li
+          class="page-breadcrumb"
+        >
+          <span
+            class="page-breadcrumb-empty"
+          >
+            Breadcrumb One
+          </span>
+        </li>
+        <li
+          class="page-breadcrumb"
+        >
+          <span
+            class="page-breadcrumb-empty"
+          >
+            Breadcrumb Two
+          </span>
+        </li>
+        <li
+          class="page-breadcrumb"
+        >
+          <a
+            class="page-breadcrumb-link"
+            href="/example"
+          >
+            Breadcrumb Three
+          </a>
+        </li>
+      </ul>
+      <hr
+        class="hr-fancy mb-2"
+      />
+      <span
+        class="text-muted"
+      >
+        What lies beyond the furthest reaches of the sky?
+      </span>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`<Page> with breadcrumbs: value should match the snapshot 1`] = `
 <DocumentFragment>
   <div

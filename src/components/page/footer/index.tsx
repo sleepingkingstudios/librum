@@ -1,15 +1,29 @@
 import * as React from 'react';
 
 import { PageBreadcrumbs } from '../breadcrumbs';
-import type { Breadcrumbs } from '../breadcrumbs';
+import type { Breadcrumb } from '../breadcrumbs';
 
 const defaultClassName = 'mt-3 shrink-0 text-center sm:text-left';
 
-export const PageFooter = (
-  { breadcrumbs = [] }: { breadcrumbs?: Breadcrumbs }
-): JSX.Element => (
+const renderBreadcrumbs = ({
+  breadcrumbs = [],
+}: {
+  breadcrumbs?: Breadcrumb[] | JSX.Element,
+}): JSX.Element => {
+  if (!breadcrumbs) { return null; }
+
+  if (!('length' in breadcrumbs)) { return breadcrumbs; }
+
+  return (<PageBreadcrumbs breadcrumbs={breadcrumbs} />);
+};
+
+export const PageFooter = ({
+  breadcrumbs = [],
+}: {
+  breadcrumbs?: Breadcrumb[] | JSX.Element,
+}): JSX.Element => (
   <footer className={defaultClassName}>
-    <PageBreadcrumbs breadcrumbs={breadcrumbs} />
+    { renderBreadcrumbs({ breadcrumbs }) }
 
     <hr className="hr-fancy mb-2" />
 

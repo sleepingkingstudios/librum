@@ -426,13 +426,13 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
       aria-label="breadcrumbs"
     >
       <li>
-        Home@ /
+        Home @ /
       </li>
       <li>
         Admin
       </li>
       <li>
-        Demo@ /demo
+        Demo @ /demo
       </li>
     </ul>
   </div>
