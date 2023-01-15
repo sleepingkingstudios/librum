@@ -2,20 +2,15 @@ import type {
   UseMutation,
   UseQuery,
 } from '@api';
-import { injectEndpoint } from './endpoint';
 import type {
-  ResourceApiParams,
-  ResourceEndpointDefinition,
-} from './types';
+  ResourceApiEndpointConfiguration,
+  ResourceConfiguration,
+} from '../types';
+import { injectEndpoint } from './endpoint';
 
 export { useResourceQuery } from './hooks/use-resource-query';
 
-export type {
-  ResourceApiProperties,
-  ResourceEndpointDefinition,
-} from './types';
-
-const defaultEndpoints: Record<string, ResourceEndpointDefinition> = {
+const defaultEndpoints: ResourceApiEndpointConfiguration = {
   index: {
     member: false,
     method: 'GET',
@@ -23,14 +18,18 @@ const defaultEndpoints: Record<string, ResourceEndpointDefinition> = {
   },
 };
 
+type GenerateResourcesApiProps = {
+  endpoints?: ResourceApiEndpointConfiguration,
+} & ResourceConfiguration;
+
 export const generateResourcesApi = ({
   baseUrl,
   endpoints,
   resourceName,
   singularName,
   scope,
-}: ResourceApiParams): Record<string, UseMutation | UseQuery> => {
-  const configured: Record<string, false | ResourceEndpointDefinition> = {
+}: GenerateResourcesApiProps): Record<string, UseMutation | UseQuery> => {
+  const configured: ResourceApiEndpointConfiguration = {
     ...defaultEndpoints,
     ...(endpoints || {}),
   };
@@ -44,9 +43,11 @@ export const generateResourcesApi = ({
         if (endpoint === false) { return memo; }
 
         const injected = injectEndpoint({
-          action,
           baseUrl,
-          endpoint,
+          endpoint: {
+            action,
+            ...endpoint,
+          },
           resourceName,
           singularName,
           scope,
@@ -59,19 +60,4 @@ export const generateResourcesApi = ({
       },
       {},
     );
-
-
-  const injected = injectEndpoint({
-    action: 'index',
-    baseUrl,
-    endpoint: {
-      member: false,
-      method: 'GET',
-      url: '',
-    },
-    resourceName,
-    scope,
-  });
-
-  return injected;
 };

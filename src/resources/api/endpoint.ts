@@ -10,7 +10,10 @@ import type {
 } from '@api';
 import { upperCamelCase } from '@utils/text';
 import type {
-  ResourceEndpointProperties,
+  ResourceApiEndpoint,
+  ResourceConfiguration,
+} from '../types';
+import type {
   ResourceMutationParams,
   ResourceQueryParams,
 } from './types';
@@ -19,10 +22,10 @@ import {
   generateResourceUrl,
 } from './utils';
 
-export type Builder = {
-  mutation: BuilderQueryFunction,
-  query: BuilderQueryFunction,
-};
+type BuildEndpointProps = {
+  action: string,
+  endpointName: string,
+} & InjectEndpointProps;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type BuilderQueryFunction = <Response = unknown, Param = unknown>({
@@ -31,11 +34,21 @@ type BuilderQueryFunction = <Response = unknown, Param = unknown>({
   query: InnerQueryFunction,
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }) => NativeEndpointDefinition<any, any, any, any, string>;
+
+type InjectEndpointProps = {
+  endpoint: ResourceApiEndpoint,
+} & ResourceConfiguration;
+
 type InnerQueryFunction = (arg?: unknown) => {
   body?: Record<string, unknown>,
   method: string,
   params?: Record<string, string>,
   url: string,
+};
+
+export type Builder = {
+  mutation: BuilderQueryFunction,
+  query: BuilderQueryFunction,
 };
 
 const buildMutationEndpoint = ({
@@ -45,7 +58,7 @@ const buildMutationEndpoint = ({
   endpointName,
   resourceName,
   scope,
-}: { endpointName: string } & ResourceEndpointProperties) => {
+}: BuildEndpointProps) => {
   const {
     member,
     method,
@@ -85,7 +98,7 @@ const buildQueryEndpoint = ({
   endpointName,
   resourceName,
   scope,
-}: { endpointName: string } & ResourceEndpointProperties) => {
+}: BuildEndpointProps) => {
   const {
     member,
     method,
@@ -124,7 +137,7 @@ const buildEndpoint = ({
   endpointName,
   resourceName,
   scope,
-}: { endpointName: string } & ResourceEndpointProperties) => {
+}: BuildEndpointProps) => {
   const { method } = endpoint;
   const builder = method.toLowerCase() === 'get' ?
     buildQueryEndpoint :
@@ -141,14 +154,14 @@ const buildEndpoint = ({
 };
 
 export const injectEndpoint = ({
-  action,
   baseUrl,
   endpoint,
   resourceName,
   singularName,
   scope,
-}: ResourceEndpointProperties): Record<string, UseQuery | UseMutation> => {
+}: InjectEndpointProps): Record<string, UseQuery | UseMutation> => {
   const {
+    action,
     member,
     method,
   } = endpoint;

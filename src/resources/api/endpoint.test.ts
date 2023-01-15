@@ -11,15 +11,14 @@ describe('Resource API', () => {
     });
 
     describe('with a collection mutation', () => {
-      const action = 'create';
       const endpoint = {
+        action: 'create',
         member: false,
         method: 'post',
       };
 
       it('should generate the resource query', () => {
         const endpoints = injectEndpoint({
-          action,
           endpoint,
           resourceName,
         });
@@ -40,7 +39,6 @@ describe('Resource API', () => {
       describe('with an empty object', () => {
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -64,7 +62,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -89,7 +86,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -115,7 +111,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint: { ...endpoint, url },
             resourceName,
           });
@@ -136,15 +131,14 @@ describe('Resource API', () => {
     });
 
     describe('with a collection query', () => {
-      const action = 'published';
       const endpoint = {
+        action: 'published',
         member: false,
         method: 'get',
       };
 
       it('should generate the resource query', () => {
         const endpoints = injectEndpoint({
-          action,
           endpoint,
           resourceName,
         });
@@ -165,7 +159,6 @@ describe('Resource API', () => {
       describe('with an empty object', () => {
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -189,7 +182,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -215,7 +207,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint: { ...endpoint, url },
             resourceName,
           });
@@ -236,15 +227,14 @@ describe('Resource API', () => {
     });
 
     describe('with a member mutation', () => {
-      const action = 'publish';
       const endpoint = {
+        action: 'publish',
         member: true,
         method: 'put',
       };
 
       it('should generate the resource query', () => {
         const endpoints = injectEndpoint({
-          action,
           endpoint,
           resourceName,
         });
@@ -269,7 +259,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -295,7 +284,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -321,7 +309,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint: { ...endpoint, url },
             resourceName,
           });
@@ -342,15 +329,14 @@ describe('Resource API', () => {
     });
 
     describe('with a member query', () => {
-      const action = 'show';
       const endpoint = {
+        action: 'show',
         member: true,
         method: 'get',
       };
 
       it('should generate the resource query', () => {
         const endpoints = injectEndpoint({
-          action,
           endpoint,
           resourceName,
         });
@@ -375,7 +361,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint,
             resourceName,
           });
@@ -402,7 +387,6 @@ describe('Resource API', () => {
 
         it('should generate the resource query', () => {
           const endpoints = injectEndpoint({
-            action,
             endpoint: { ...endpoint, url },
             resourceName,
           });

@@ -1,8 +1,8 @@
 import { generateResourcesApi } from './index';
 import type {
-  ResourceApiParams,
-  ResourceEndpointDefinition,
-} from './types';
+  ResourceApiEndpointConfiguration,
+  ResourceConfiguration,
+} from '../types';
 
 jest.mock('@api');
 
@@ -17,7 +17,9 @@ describe('Resource API', () => {
     }: {
       expectedUrl: string,
       extraEndpoints?: string[],
-      options?: ResourceApiParams,
+      options?: {
+        endpoints?: ResourceApiEndpointConfiguration,
+      } & ResourceConfiguration,
       index?: 'skip' | boolean,
       wildcards?: Record<string, string>,
     }): void => {
@@ -117,7 +119,7 @@ describe('Resource API', () => {
     });
 
     describe('with endpoints: { index: false }', () => {
-      const endpoints: Record<string, false | ResourceEndpointDefinition> = {
+      const endpoints: ResourceApiEndpointConfiguration = {
         index: false,
       };
 
@@ -129,7 +131,7 @@ describe('Resource API', () => {
     });
 
     describe('with endpoints: { index: value }', () => {
-      const endpoints: Record<string, false | ResourceEndpointDefinition> = {
+      const endpoints: ResourceApiEndpointConfiguration = {
         index: {
           method: 'GET',
           member: false,
