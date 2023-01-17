@@ -2,8 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+.theme-chiaroscuro {
+  --color-bg: #fafafa; /* zinc-100 */
+  --color-bg-dark: #18181b; /* zinc-900 */
+  --color-bg-accent: #e4e4e7; /* zinc-200 */
+  --color-bg-accent-dark: #27272a; /* zinc-800 */
+
+  --color-text: var(--color-bg-dark-accent);
+  --color-text-dark: var(--color-bg-accent);
+  --color-text-accent: var(--color-bg-dark);
+  --color-text-accent-dark: var(--color-bg);
+
+  /* ACCENT COLORS */
+
+  --color-danger: #dc2626; /* red-600 */
+  --color-danger-dark: var(--color-danger);
+  --color-danger-accent: #b91c1c; /* red-700 */
+  --color-danger-accent-dark: #ef4444; /* red-500 */
+  --color-danger-bg: #fee2e2; /* red-100 */
+  --color-danger-bg-dark: #3f0808; /* red-950 ish */
+
+  --color-info: #22d3ee; /* cyan-400 */
+  --color-info-dark: #06b6d4; /* cyan-500 */
+  --color-info-accent: #06b6d4; /* cyan-500 */
+  --color-info-accent-dark: #22d3ee; /* cyan-400 */
+  --color-info-bg: #ecfeff; /* cyan-50 */
+  --color-info-bg-dark: #0b2731; /* cyan-950 ish */
+
+  --color-muted: #a1a1aa; /* zinc-400 */
+  --color-muted-dark: #52525b; /* zinc-600 */
+  --color-muted-accent: #71717a; /* zinc-500 */
+  --color-muted-accent-dark: #71717a; /* zinc-500 */
+  --color-muted-bg: #f4f4f5; /* zinc-100 */
+  --color-muted-bg-dark: #27272a; /* zinc-800 */
+
+  --color-primary: #0284c7; /* sky-600 */
+  --color-primary-dark: var(--color-primary);
+  --color-primary-accent: #0369a1; /* sky-700 */
+  --color-primary-accent-dark: #0ea5e9; /* sky-500 */
+  --color-primary-bg: #e0f2fe; /* sky-100 */
+  --color-primary-bg-dark: #062537; /* sky-950 ish */
+
+  --color-success: #10b981; /* emerald-500 */
+  --color-success-dark: #059669; /* emerald-600 */
+  --color-success-accent: #059669; /* emerald-600 */
+  --color-success-accent-dark: #10b981; /* emerald-500 */
+  --color-success-bg: #ecfdf5; /* emerald-50 */
+  --color-success-bg-dark: #03271d; /* emerald-950 ish */
+
+  --color-warning: #f59e0b; /* amber-500 */
+  --color-warning-dark: var(--color-warning);
+  --color-warning-accent: #d97706; /* amber-600 */
+  --color-warning-accent-dark: #fbbf24; /* amber-400 */
+  --color-warning-bg: #fffbeb; /* amber-50 */
+  --color-warning-bg-dark: #1e0d03; /* amber-975 ish */
+}
+
 @layer base {
   .theme-default-styles.theme-chiaroscuro {
+    /* LEGACY COLORS */
+
     --bg-color: #fafafa; /* zinc-100 */
     --bg-color-dark: #18181b; /* zinc-900 */
     --bg-color-accent: #e4e4e7; /* zinc-200 */

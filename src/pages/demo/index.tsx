@@ -1,9 +1,17 @@
 import * as React from 'react';
 
+import {
+  faBicycle,
+  faPaperPlane,
+  faTruckMonster,
+} from '@fortawesome/free-solid-svg-icons';
+
 import type {
   Response,
   ResponseStatus,
 } from '@api';
+import { Button } from '@components/button';
+import type { Button as ButtonProps } from '@components/button/types';
 import { DataList } from '@components/data-list';
 import {
   Form,
@@ -11,6 +19,7 @@ import {
   FormField,
   FormRow,
 } from '@components/form';
+import { Heading } from '@components/heading';
 import { Page } from '@components/page';
 import type { Breadcrumb } from '@components/page';
 import { CoreNavigation } from '@core/navigation';
@@ -31,6 +40,23 @@ const breadcrumbs: Breadcrumb[] = [
   {
     label: 'Demo',
     url: '/demo',
+  },
+];
+
+const buttons: ButtonProps[] = [
+  {
+    label: 'Show',
+    type: 'info',
+  },
+  {
+    label: 'Update',
+    type: 'primary',
+    outline: true,
+  },
+  {
+    label: 'Destroy',
+    type: 'danger',
+    outline: true,
   },
 ];
 
@@ -81,7 +107,7 @@ export const DemoPage = (): JSX.Element => (
 
     <p>This is separator text.</p>
 
-    <h3>Heading 4</h3>
+    <h3>Heading 3</h3>
 
     <p>This is separator text.</p>
 
@@ -136,9 +162,43 @@ export const DemoPage = (): JSX.Element => (
 
     <h2>Forms</h2>
 
-    <br />
+    <p>These are sample buttons:</p>
 
-    <p>This is a full-width form.</p>
+    <p>
+      <Button>Default</Button>
+      <Button type="primary">Primary</Button>
+      <Button type="info">Info</Button>
+      <Button type="success">Success</Button>
+      <Button type="warning">Warning</Button>
+      <Button type="danger">Danger</Button>
+      <Button type="muted">Muted</Button>
+    </p>
+
+    <p>These are outline buttons:</p>
+
+    <p>
+      <Button outline>Default</Button>
+      <Button type="primary" outline>Primary</Button>
+      <Button type="info" outline>Info</Button>
+      <Button type="success" outline>Success</Button>
+      <Button type="warning" outline>Warning</Button>
+      <Button type="danger" outline>Danger</Button>
+      <Button type="muted" outline>Muted</Button>
+    </p>
+
+    <p>Buttons come in a range of sizes:</p>
+
+    <p>
+      <Button outline size="lg" icon={faTruckMonster} label="Large" />
+      <Button outline size="md" icon={faBicycle} label="Medium" />
+      <Button outline size="sm" icon={faPaperPlane} label="Small" />
+    </p>
+
+    <Heading buttons={buttons} size={3}>
+      Heading With Buttons
+    </Heading>
+
+    <p>Headings can have attached buttons as well.</p>
 
     <Form
       initialValues={{ generation: '1', version: 'red' }}
