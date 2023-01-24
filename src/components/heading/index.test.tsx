@@ -3,7 +3,7 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { Heading } from './index';
-import { Button } from '@components/button/types';
+import { ButtonProps as Button } from '@components/button';
 import { render } from '@test-helpers/rendering';
 
 describe('<Heading />', () => {

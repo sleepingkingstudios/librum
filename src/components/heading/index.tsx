@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Button } from '@components/button';
-import type { Button as ButtonProps } from '@components/button/types';
+import type { ButtonProps } from '@components/button';
 
 type HeadingProps = {
   buttons?: ButtonProps[],

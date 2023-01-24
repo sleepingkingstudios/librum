@@ -21,7 +21,9 @@ const renderNavigationItem = (
 
   const { url } = item;
 
-  return (<li key={label}>{ `${label} @ ${url}` }</li>);
+  return (
+    <li aria-label="navigation-item" key={label}>{ `${label} @ ${url}` }</li>
+  );
 };
 
 export const PageNavigation = ({

@@ -1,5 +1,9 @@
 import { generateResourcesApi } from './index';
 import type {
+  UseMutation,
+  UseQuery,
+} from '@api';
+import type {
   ResourceApiEndpointConfiguration,
   ResourceConfiguration,
 } from '../types';
@@ -46,7 +50,10 @@ describe('Resource API', () => {
           };
 
           expect('useIndexResources' in api).toBe(true);
-          expect(api.useIndexResources({ wildcards })).toEqual(expected);
+
+          const useIndexResources = api.useIndexResources as UseQuery;
+
+          expect(useIndexResources({ wildcards })).toEqual(expected);
         });
       }
     }
@@ -91,7 +98,10 @@ describe('Resource API', () => {
         };
 
         expect('usePublishResource' in api).toBe(true);
-        expect(api.usePublishResource({ wildcards })).toEqual(expected);
+
+        const usePublishResource = api.usePublishResource as UseMutation;
+
+        expect(usePublishResource({ wildcards })).toEqual(expected);
       });
 
       it('should generate the published resources API', () => {
@@ -103,7 +113,10 @@ describe('Resource API', () => {
         };
 
         expect('usePublishedResources' in api).toBe(true);
-        expect(api.usePublishedResources()).toEqual(expected);
+
+        const usePublishedResources = api.usePublishedResources as UseMutation;
+
+        expect(usePublishedResources()).toEqual(expected);
       });
     });
 
@@ -155,7 +168,10 @@ describe('Resource API', () => {
         };
 
         expect('useIndexResources' in api).toBe(true);
-        expect(api.useIndexResources({ wildcards })).toEqual(expected);
+
+        const useIndexResources = api.useIndexResources as UseQuery;
+
+        expect(useIndexResources({ wildcards })).toEqual(expected);
       });
     });
 

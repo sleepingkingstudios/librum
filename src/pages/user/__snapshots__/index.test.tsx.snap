@@ -8,13 +8,17 @@ exports[`<UserPage> when the user has failed to load should match the snapshot 1
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>
@@ -111,10 +115,14 @@ exports[`<UserPage> when the user has failed to load should match the snapshot 1
     <ul
       aria-label="breadcrumbs"
     >
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Home @ /
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Current User @ /user
       </li>
     </ul>
@@ -130,13 +138,17 @@ exports[`<UserPage> when the user has successfully loaded should match the snaps
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>
@@ -221,10 +233,14 @@ exports[`<UserPage> when the user has successfully loaded should match the snaps
     <ul
       aria-label="breadcrumbs"
     >
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Home @ /
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Current User @ /user
       </li>
     </ul>
@@ -240,13 +256,17 @@ exports[`<UserPage> when the user has successfully loaded when the user clicks t
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>
@@ -389,10 +409,14 @@ exports[`<UserPage> when the user has successfully loaded when the user clicks t
     <ul
       aria-label="breadcrumbs"
     >
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Home @ /
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Current User @ /user
       </li>
     </ul>
@@ -408,13 +432,17 @@ exports[`<UserPage> when the user is loading should match the snapshot 1`] = `
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>
@@ -519,10 +547,14 @@ exports[`<UserPage> when the user is loading should match the snapshot 1`] = `
     <ul
       aria-label="breadcrumbs"
     >
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Home @ /
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Current User @ /user
       </li>
     </ul>

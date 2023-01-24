@@ -54,7 +54,9 @@ export type Response<Data = Record<string, unknown>> = {
 export type ResponseStatus =
   'unknown' | 'uninitialized' | 'loading' | 'errored' | 'failure' | 'success';
 
-export type UseMutation = () => readonly [
+export type UseMutation = (
+  arg?: unknown,
+) => readonly [
   UseMutationTrigger,
   UseMutationResult,
 ];

@@ -4,17 +4,24 @@ import type {
   Breadcrumb,
   NavigationProps,
 } from './index';
+import { isElement } from '@utils/react-utils';
 import { PageBreadcrumbs } from './breadcrumbs/mocks';
 import { PageNavigation } from './navigation/mocks';
 
 const renderBreadcrumbs = ({
   breadcrumbs,
 }: {
-  breadcrumbs: Breadcrumb[],
+  breadcrumbs?: JSX.Element | Breadcrumb[],
 }): JSX.Element => {
-  if (!breadcrumbs || breadcrumbs.length === 0) { return null; }
+  if (!breadcrumbs) { return null; }
 
-  return (<PageBreadcrumbs breadcrumbs={breadcrumbs} />);
+  if (isElement(breadcrumbs)) { return breadcrumbs; }
+
+  const configured = breadcrumbs as Breadcrumb[];
+
+  if (configured.length === 0) { return null; }
+
+  return (<PageBreadcrumbs breadcrumbs={configured} />);
 };
 
 const renderNavigation = ({
@@ -54,7 +61,7 @@ export const Page = ({
   subtitle,
   title,
 }: {
-  breadcrumbs?: Breadcrumb[],
+  breadcrumbs?: JSX.Element | Breadcrumb[],
   children: React.ReactNode,
   navigation?: JSX.Element | NavigationProps,
   subtitle?: string,

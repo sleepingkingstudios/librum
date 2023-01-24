@@ -1,0 +1,600 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResourcePage /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with breadcrumbs: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Lending Library @ /lending-library
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /lending-library/rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with contents: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Contents for rareBooks
+    </span>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with contents: component with afterContents: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Contents for rareBooks
+    </span>
+    <span>
+      After rareBooks
+    </span>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with contents: component with beforeContents: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Before rareBooks
+    </span>
+    <span>
+      Contents for rareBooks
+    </span>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with contents: element should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Custom Contents
+    </span>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with contents: element with afterContents: element should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Custom Contents
+    </span>
+    <span>
+      After Contents
+    </span>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with contents: element with beforeContents: element should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Before Contents
+    </span>
+    <span>
+      Custom Contents
+    </span>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { breadcrumbs: element } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Custom Breadcrumbs
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published Rare Books (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { buttons: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <div
+      class="flex flex-col sm:flex-row"
+    >
+      <h1>
+        Published Rare Books
+      </h1>
+      <ul
+        class="justify-end flex flex-col grow sm:flex-row btn-list"
+      >
+        <button
+          class="btn btn-primary"
+          type="button"
+        >
+          Rock
+        </button>
+        <button
+          class="btn btn-success"
+          type="button"
+        >
+          Paper
+        </button>
+        <button
+          class="btn btn-danger"
+          type="button"
+        >
+          Scissors
+        </button>
+      </ul>
+    </div>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { heading: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Publications
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { navigation: element } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span>
+      Custom Navigation
+    </span>
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { navigation: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { title: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span
+      aria-label="title"
+    >
+      Rare Books
+    </span>
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with page: { title: value } with page: { subtitle: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span
+      aria-label="title"
+    >
+      Rare Books: the Publishing
+    </span>
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePage /> with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Lending Library @ /lending-library
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Rare Books @ /lending-library/rare-books
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Published (active)
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

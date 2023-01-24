@@ -8,22 +8,32 @@ exports[`<CoreNavigation /> should match the snapshot 1`] = `
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Home @ /
       </li>
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Publishers @ /publishers
       </li>
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Game Systems @ /game_systems
       </li>
       <li>
         Sources
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Books @ /sources/books
           </li>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Websites @ /sources/websites
           </li>
         </ul>
@@ -31,7 +41,9 @@ exports[`<CoreNavigation /> should match the snapshot 1`] = `
       <li>
         Admin
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Users @ /admin/users
           </li>
         </ul>

@@ -11,7 +11,7 @@ import type {
   ResponseStatus,
 } from '@api';
 import { Button } from '@components/button';
-import type { Button as ButtonProps } from '@components/button/types';
+import type { ButtonProps } from '@components/button';
 import { DataList } from '@components/data-list';
 import {
   Form,

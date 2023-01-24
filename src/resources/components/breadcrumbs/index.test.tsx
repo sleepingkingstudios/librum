@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import '@testing-library/jest-dom';
 
-import { ResourcesBreadcrumbs } from './index';
+import { ResourceBreadcrumbs } from './index';
 import type { Breadcrumb } from '@components/page';
 import { render } from '@test-helpers/rendering';
 
@@ -11,7 +11,7 @@ jest.mock(
   () => require('@components/page/breadcrumbs/mocks'),
 );
 
-describe('<ResourcesBreadcrumbs />', () => {
+describe('<ResourceBreadcrumbs />', () => {
   const resourceName = 'rareBooks';
 
   describe('with member: false', () => {
@@ -19,9 +19,11 @@ describe('<ResourcesBreadcrumbs />', () => {
     const member = false;
 
     it('should generate the breadcrumbs', () => {
-      const page = { action, member };
+      const page = {};
       const { queryAllByRole } = render(
-        <ResourcesBreadcrumbs
+        <ResourceBreadcrumbs
+          action={action}
+          member={member}
           page={page}
           resourceName={resourceName}
         />,
@@ -42,10 +44,12 @@ describe('<ResourcesBreadcrumbs />', () => {
       const breadcrumbs: Breadcrumb[] = [];
 
       it('should generate the breadcrumbs', () => {
-        const page = { action, member };
+        const page = {};
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
             breadcrumbs={breadcrumbs}
+            member={member}
             page={page}
             resourceName={resourceName}
           />,
@@ -63,10 +67,12 @@ describe('<ResourcesBreadcrumbs />', () => {
 
       describe('with page: { breadcrumbs: empty array }', () => {
         it('should generate the breadcrumbs', () => {
-          const page = { action, breadcrumbs: [] as Breadcrumb[], member };
+          const page = { breadcrumbs: [] as Breadcrumb[] };
           const { queryAllByRole } = render(
-            <ResourcesBreadcrumbs
+            <ResourceBreadcrumbs
+              action={action}
               breadcrumbs={breadcrumbs}
+              member={member}
               page={page}
               resourceName={resourceName}
             />,
@@ -80,20 +86,20 @@ describe('<ResourcesBreadcrumbs />', () => {
 
       describe('with page: { breadcrumbs: value }', () => {
         const page = {
-          action,
           breadcrumbs: [
             {
               active: true,
               label: 'Published Books'
             },
           ],
-          member,
         };
 
         it('should generate the breadcrumbs', () => {
           const { queryAllByRole } = render(
-            <ResourcesBreadcrumbs
+            <ResourceBreadcrumbs
+              action={action}
               breadcrumbs={breadcrumbs}
+              member={member}
               page={page}
               resourceName={resourceName}
             />,
@@ -113,10 +119,12 @@ describe('<ResourcesBreadcrumbs />', () => {
         const scope = 'lendingLibrary';
 
         it('should generate the breadcrumbs', () => {
-          const page = { action, member };
+          const page = {};
           const { queryAllByRole } = render(
-            <ResourcesBreadcrumbs
+            <ResourceBreadcrumbs
+              action={action}
               breadcrumbs={breadcrumbs}
+              member={member}
               page={page}
               resourceName={resourceName}
               scope={scope}
@@ -147,10 +155,12 @@ describe('<ResourcesBreadcrumbs />', () => {
       ];
 
       it('should generate the breadcrumbs', () => {
-        const page = { action, member };
+        const page = {};
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
             breadcrumbs={breadcrumbs}
+            member={member}
             page={page}
             resourceName={resourceName}
           />,
@@ -170,10 +180,12 @@ describe('<ResourcesBreadcrumbs />', () => {
 
       describe('with page: { breadcrumbs: empty array }', () => {
         it('should generate the breadcrumbs', () => {
-          const page = { action, breadcrumbs: [] as Breadcrumb[], member };
+          const page = { breadcrumbs: [] as Breadcrumb[] };
           const { queryAllByRole } = render(
-            <ResourcesBreadcrumbs
+            <ResourceBreadcrumbs
+              action={action}
               breadcrumbs={breadcrumbs}
+              member={member}
               page={page}
               resourceName={resourceName}
             />,
@@ -192,20 +204,20 @@ describe('<ResourcesBreadcrumbs />', () => {
 
       describe('with page: { breadcrumbs: value }', () => {
         const page = {
-          action,
           breadcrumbs: [
             {
               active: true,
               label: 'Published Books'
             },
           ],
-          member,
         };
 
         it('should generate the breadcrumbs', () => {
           const { queryAllByRole } = render(
-            <ResourcesBreadcrumbs
+            <ResourceBreadcrumbs
+              action={action}
               breadcrumbs={breadcrumbs}
+              member={member}
               page={page}
               resourceName={resourceName}
             />,
@@ -227,10 +239,12 @@ describe('<ResourcesBreadcrumbs />', () => {
         const scope = 'lendingLibrary';
 
         it('should generate the breadcrumbs', () => {
-          const page = { action, member };
+          const page = {};
           const { queryAllByRole } = render(
-            <ResourcesBreadcrumbs
+            <ResourceBreadcrumbs
+              action={action}
               breadcrumbs={breadcrumbs}
+              member={member}
               page={page}
               resourceName={resourceName}
               scope={scope}
@@ -253,9 +267,11 @@ describe('<ResourcesBreadcrumbs />', () => {
 
     describe('with page: { breadcrumbs: empty array }', () => {
       it('should generate the breadcrumbs', () => {
-        const page = { action, breadcrumbs: [] as Breadcrumb[], member };
+        const page = { breadcrumbs: [] as Breadcrumb[] };
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
+            member={member}
             page={page}
             resourceName={resourceName}
           />,
@@ -273,19 +289,19 @@ describe('<ResourcesBreadcrumbs />', () => {
 
     describe('with page: { breadcrumbs: value }', () => {
       const page = {
-        action,
         breadcrumbs: [
           {
             active: true,
             label: 'Published Books'
           },
         ],
-        member,
       };
 
       it('should generate the breadcrumbs', () => {
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
+            member={member}
             page={page}
             resourceName={resourceName}
           />,
@@ -306,9 +322,11 @@ describe('<ResourcesBreadcrumbs />', () => {
       const scope = 'lendingLibrary';
 
       it('should generate the breadcrumbs', () => {
-        const page = { action, member };
+        const page = {};
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
+            member={member}
             page={page}
             resourceName={resourceName}
             scope={scope}
@@ -341,10 +359,12 @@ describe('<ResourcesBreadcrumbs />', () => {
       ];
 
       it('should generate the breadcrumbs', () => {
-        const page = { action, member };
+        const page = {};
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
             breadcrumbs={breadcrumbs}
+            member={member}
             page={page}
             resourceName={resourceName}
           />,
@@ -380,10 +400,12 @@ describe('<ResourcesBreadcrumbs />', () => {
       const wildcards = { namespace: 'lending-library' };
 
       it('should generate the breadcrumbs', () => {
-        const page = { action, member };
+        const page = {};
         const { queryAllByRole } = render(
-          <ResourcesBreadcrumbs
+          <ResourceBreadcrumbs
+            action={action}
             breadcrumbs={breadcrumbs}
+            member={member}
             page={page}
             resourceName={resourceName}
             wildcards={wildcards}

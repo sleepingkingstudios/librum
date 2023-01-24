@@ -8,13 +8,17 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>
@@ -615,13 +619,19 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
     <ul
       aria-label="breadcrumbs"
     >
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Home @ /
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Admin
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Demo @ /demo
       </li>
     </ul>

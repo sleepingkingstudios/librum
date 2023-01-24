@@ -5,6 +5,8 @@ import type {
 } from '@api';
 import type { AlertDirective } from '@api/effects/display-alerts';
 
+export type ResourceApiHooks = Record<string, UseMutation | UseQuery>;
+
 export type ResourceMutationParams = {
   body?: Record<string, unknown>,
   params?: Record<string, string>,

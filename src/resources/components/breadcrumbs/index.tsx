@@ -9,14 +9,16 @@ import { PageBreadcrumbs } from '@components/page/breadcrumbs';
 import { titleCase } from '@utils/text';
 
 const generatePageBreadcrumbs = ({
+  action,
+  member,
   page,
   resourceBreadcrumbs,
   resourceName,
 }: {
+  action: string,
+  member: boolean,
   page: {
-    action: string,
     breadcrumbs?: Breadcrumb[],
-    member: boolean
   },
   resourceBreadcrumbs: Breadcrumb[],
   resourceName: string,
@@ -25,7 +27,6 @@ const generatePageBreadcrumbs = ({
     return [...resourceBreadcrumbs, ...page.breadcrumbs];
   }
 
-  const { action, member } = page;
   const resourceUrl = joinUrl(
     lastUrl(resourceBreadcrumbs),
     kebabCase(resourceName),
@@ -101,19 +102,19 @@ const lastUrl = (breadcrumbs: Breadcrumb[]): string => {
   );
 };
 
-export const ResourcesBreadcrumbs = ({
+export const ResourceBreadcrumbs = ({
+  action,
   breadcrumbs,
+  member,
   page,
   resourceName,
   scope,
   wildcards,
 }: {
+  action: string,
   breadcrumbs?: Breadcrumb[],
-  page: {
-    action: string,
-    breadcrumbs?: Breadcrumb[],
-    member: boolean
-  },
+  member: boolean,
+  page: { breadcrumbs?: Breadcrumb[] },
   resourceName: string,
   scope?: string,
   wildcards?: Record<string, string>,
@@ -121,7 +122,13 @@ export const ResourcesBreadcrumbs = ({
   const resourceBreadcrumbs: Breadcrumb[] =
     generateResourceBreadcrumbs({ breadcrumbs, scope });
   const pageBreadcrumbs: Breadcrumb[] =
-    generatePageBreadcrumbs({ page, resourceBreadcrumbs, resourceName });
+    generatePageBreadcrumbs({
+      action,
+      member,
+      page,
+      resourceBreadcrumbs,
+      resourceName,
+    });
   const params = useParams();
 
   const appliedBreadcrumbs: Breadcrumb[] = pageBreadcrumbs.map(

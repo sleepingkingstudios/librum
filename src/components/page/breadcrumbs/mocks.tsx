@@ -16,7 +16,7 @@ export const PageBreadcrumbs = ({
   <ul aria-label="breadcrumbs">
     {
       breadcrumbs.map((breadcrumb: Breadcrumb) => (
-        <li key={breadcrumb.label}>
+        <li aria-label="breadcrumb" key={breadcrumb.label}>
           { formatBreadcrumb(breadcrumb) }
         </li>
       ))

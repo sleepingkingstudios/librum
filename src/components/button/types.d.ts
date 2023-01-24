@@ -14,7 +14,7 @@ type ButtonContents = {
   label: string,
 };
 
-type ButtonProps = {
+type ButtonOptions = {
   className?: string,
   children?: React.ReactNode,
   disabled?: boolean,
@@ -29,13 +29,13 @@ type ButtonSize = ("sm" | "md" | "lg");
 
 type ButtonType = ("button" | "reset" | "submit");
 
-export type LinkButton = {
+export type LinkButtonProps = {
   url: string,
-} & ButtonProps;
+} & ButtonOptions;
 
-export type PlainButton = {
+export type PlainButtonProps = {
   htmlType?: ButtonType,
   onClick?: () => void,
-} & ButtonProps;
+} & ButtonOptions;
 
-export type Button = LinkButton | PlainButton;
+export type ButtonProps = LinkButtonProps | PlainButtonProps;

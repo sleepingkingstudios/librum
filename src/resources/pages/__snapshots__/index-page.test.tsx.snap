@@ -124,13 +124,19 @@ exports[`<ResourceIndexPage /> with breadcrumbs: value should match the snapshot
     <ul
       aria-label="breadcrumbs"
     >
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Home
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Library
       </li>
-      <li>
+      <li
+        aria-label="breadcrumb"
+      >
         Rare Books
       </li>
     </ul>
@@ -146,13 +152,17 @@ exports[`<ResourceIndexPage /> with navigation: component should match the snaps
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>
@@ -182,13 +192,17 @@ exports[`<ResourceIndexPage /> with navigation: value should match the snapshot 
     <ul
       aria-label="navigation"
     >
-      <li>
+      <li
+        aria-label="navigation-item"
+      >
         Nav Item @ /nav-item
       </li>
       <li>
         Dropdown
         <ul>
-          <li>
+          <li
+            aria-label="navigation-item"
+          >
             Dropdown Item @ /dropdown-item
           </li>
         </ul>

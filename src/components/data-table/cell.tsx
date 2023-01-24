@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { kebabCase } from 'lodash';
 
-import { joinClassNames } from '@utils/react-utils';
+import {
+  isComponent,
+  joinClassNames,
+} from '@utils/react-utils';
 import type {
   ColumnValueFunction,
   DataTableColumn,
@@ -38,10 +41,6 @@ const defaultFor = ({
 
   return ' ';
 };
-
-const isComponent = (fn: unknown): boolean => (
-  String(fn).includes('React.createElement')
-);
 
 const isEmpty = ({ value }: { value: unknown }): boolean => {
   if (value === null) { return true; }

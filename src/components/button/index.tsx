@@ -7,10 +7,12 @@ import { Link } from 'react-router-dom';
 import { joinClassNames } from '@utils/react-utils';
 
 import type {
-  Button as ButtonProps,
-  LinkButton as LinkButtonProps,
-  PlainButton as PlainButtonProps,
+  ButtonProps,
+  LinkButtonProps,
+  PlainButtonProps,
 } from './types';
+
+export type { ButtonProps } from './types';
 
 const generateClassName = ({
   className,

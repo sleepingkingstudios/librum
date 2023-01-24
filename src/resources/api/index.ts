@@ -1,12 +1,9 @@
 import type {
-  UseMutation,
-  UseQuery,
-} from '@api';
-import type {
   ResourceApiEndpointConfiguration,
   ResourceConfiguration,
 } from '../types';
 import { injectEndpoint } from './endpoint';
+import type { ResourceApiHooks } from './types';
 
 export { useResourceQuery } from './hooks/use-resource-query';
 
@@ -28,7 +25,7 @@ export const generateResourcesApi = ({
   resourceName,
   singularName,
   scope,
-}: GenerateResourcesApiProps): Record<string, UseMutation | UseQuery> => {
+}: GenerateResourcesApiProps): ResourceApiHooks => {
   const configured: ResourceApiEndpointConfiguration = {
     ...defaultEndpoints,
     ...(endpoints || {}),
