@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResourceIndexPage /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

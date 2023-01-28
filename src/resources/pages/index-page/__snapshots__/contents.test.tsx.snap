@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResourceIndexPageContents /> should match the snapshot 1`] = `[Function]`;
+
+exports[`<ResourceIndexPageContents /> when the response is failing should match the snapshot 1`] = `[Function]`;
+
+exports[`<ResourceIndexPageContents /> when the response is loading should match the snapshot 1`] = `[Function]`;
+
+exports[`<ResourceIndexPageContents /> when the response is passing should match the snapshot 1`] = `[Function]`;

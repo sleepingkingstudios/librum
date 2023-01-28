@@ -15,7 +15,10 @@ import {
 import { titleCase } from '@utils/text';
 import { ResourceBreadcrumbs } from '../breadcrumbs';
 
-export type { ResourcePageProps } from './types';
+export type {
+  ResourcePageOptions,
+  ResourcePageProps,
+} from './types';
 
 const renderBreadcrumbs = ({
   action,

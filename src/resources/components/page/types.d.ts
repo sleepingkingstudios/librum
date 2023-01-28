@@ -5,8 +5,8 @@ import type {
   Breadcrumb,
   NavigationProps,
 } from '@components/page';
-import type { ResourceApiHooks } from '../../api/types';
-import type { ResourceConfiguration } from '../../types';
+import type { ResourceApiHooks } from '@resources/api/types';
+import type { ResourceConfiguration } from '@resources/types';
 
 type PageContents = {
   afterContents?: JSX.Element | React.ComponentType,

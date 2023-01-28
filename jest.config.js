@@ -92,7 +92,7 @@ module.exports = {
     '^@pages$': '<rootDir>/src/pages',
     '^@pages/(.*)$': '<rootDir>/src/pages/$1',
     '^@resources$': '<rootDir>/src/resources',
-    '^@resources/(.*)$': '<rootDir>/src/resources',
+    '^@resources/(.*)$': '<rootDir>/src/resources/$1',
     '^@session$': '<rootDir>/src/session',
     '^@session/(.*)$': '<rootDir>/src/session/$1',
     '^@store$': '<rootDir>/src/store',
