@@ -1,8 +1,8 @@
 import * as React from 'react';
 
+import { ResourcePage } from '@resources/components/page';
+import type { ResourcePageProps } from '@resources/components/page';
 import { titleCase } from '@utils/text';
-import { ResourcePage } from '../../components/page';
-import type { ResourcePageProps } from '../../components/page';
 import { ResourceIndexPageContents } from './contents';
 
 const generatePageDefaults = ({
@@ -38,7 +38,6 @@ export const ResourceIndexPage = ({
       Table={Table}
       action={action}
       apiHooks={apiHooks}
-      member={false}
       page={pageWithDefaults}
       resourceName={resourceName}
     />

@@ -14,9 +14,9 @@ import {
   successResponse,
 } from '@api/test-helpers';
 import type { DataTableData } from '@components/data-table';
-import { render } from '@test-helpers/rendering';
 import { useResourceQuery as mockUseResourceQuery } from '@resources/api/hooks/mocks';
 import type { ResourcePageOptions } from '@resources/components/page';
+import { render } from '@test-helpers/rendering';
 
 jest.mock('@resources/api/hooks', () => require('@resources/api/hooks/mocks'));
 
@@ -35,10 +35,20 @@ const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
 describe('<ResourceIndexPageContents />', () => {
   const action = 'index';
   const member = false;
-  const page: ResourcePageOptions = {};
   const resourceName = 'rareBooks';
   const useIndexResources = jest.fn();
   const apiHooks = { useIndexResources };
+  const renderContents = ({ page }: { page: ResourcePageOptions }) => render(
+    <ResourceIndexPageContents
+      Table={MockTable}
+      action={action}
+      apiHooks={apiHooks}
+      page={page}
+      resourceName={resourceName}
+    />,
+    { store: true },
+  );
+  const page: ResourcePageOptions = { member };
 
   beforeEach(() => {
     mockUseResourceQuery.mockClear();
@@ -47,17 +57,7 @@ describe('<ResourceIndexPageContents />', () => {
   });
 
   it('should configure the request', () => {
-    render(
-      <ResourceIndexPageContents
-        Table={MockTable}
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />,
-      { store: true },
-    );
+    renderContents({ page });
     const expected = {
       action,
       member,
@@ -69,33 +69,13 @@ describe('<ResourceIndexPageContents />', () => {
   });
 
   it('should perform the query', () => {
-    render(
-      <ResourceIndexPageContents
-        Table={MockTable}
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />,
-      { store: true },
-    );
+    renderContents({ page });
 
     expect(useRequest).toHaveBeenCalled();
   });
 
   it('should display the empty table', () => {
-    const { getByText } = render(
-      <ResourceIndexPageContents
-        Table={MockTable}
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />,
-      { store: true },
-    );
+    const { getByText } = renderContents({ page });
 
     const table = getByText('There are 0 books!');
 
@@ -103,17 +83,7 @@ describe('<ResourceIndexPageContents />', () => {
   });
 
   it('should match the snapshot', () => {
-    const { asFragment } = render(
-      <ResourceIndexPageContents
-        Table={MockTable}
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />,
-      { store: true },
-    );
+    const { asFragment } = renderContents({ page });
 
     expect(asFragment).toMatchSnapshot();
   });
@@ -124,17 +94,7 @@ describe('<ResourceIndexPageContents />', () => {
     });
 
     it('should display the loading message', () => {
-      const { getByText } = render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      const { getByText } = renderContents({ page });
 
       const message = getByText('Loading Rare Books...');
 
@@ -142,17 +102,7 @@ describe('<ResourceIndexPageContents />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      const { asFragment } = renderContents({ page });
 
       expect(asFragment).toMatchSnapshot();
     });
@@ -164,17 +114,7 @@ describe('<ResourceIndexPageContents />', () => {
     });
 
     it('should display the empty table', () => {
-      const { getByText } = render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      const { getByText } = renderContents({ page });
 
       const table = getByText('There are 0 books!');
 
@@ -182,17 +122,7 @@ describe('<ResourceIndexPageContents />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      const { asFragment } = renderContents({ page });
 
       expect(asFragment).toMatchSnapshot();
     });
@@ -223,17 +153,7 @@ describe('<ResourceIndexPageContents />', () => {
     });
 
     it('should display the table', () => {
-      const { getByText } = render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      const { getByText } = renderContents({ page });
 
       const table = getByText('There are 3 books!');
 
@@ -241,17 +161,7 @@ describe('<ResourceIndexPageContents />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      const { asFragment } = renderContents({ page });
 
       expect(asFragment).toMatchSnapshot();
     });
@@ -268,20 +178,10 @@ describe('<ResourceIndexPageContents />', () => {
         status: 'success',
       },
     ];
-    const page: ResourcePageOptions = { alerts };
+    const page: ResourcePageOptions = { alerts, member };
 
     it('should configure the request', () => {
-      render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      renderContents({ page });
       const expected = {
         action,
         alerts,
@@ -294,25 +194,15 @@ describe('<ResourceIndexPageContents />', () => {
     });
   });
 
-  describe('with effects: value', () => {
+  describe('with page: { effects: value }', () => {
     const effects: Effect[] = [
       jest.fn(),
       jest.fn(),
     ];
-    const page: ResourcePageOptions = { effects };
+    const page: ResourcePageOptions = { effects, member };
 
     it('should configure the request', () => {
-      render(
-        <ResourceIndexPageContents
-          Table={MockTable}
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { store: true },
-      );
+      renderContents({ page });
       const expected = {
         action,
         effects,

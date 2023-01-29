@@ -18,6 +18,7 @@ type PageOptions = {
   breadcrumbs?: JSX.Element | Breadcrumb[],
   buttons?: Button[],
   heading?: string | JSX.Element,
+  member?: boolean,
   navigation?: JSX.Element | NavigationProps,
   subtitle?: string,
   title?: string,
@@ -33,6 +34,5 @@ export type ResourcePageOptions = PageContents & PageOptions & RequestOptions;
 export type ResourcePageProps = {
   action: string,
   apiHooks: ResourceApiHooks,
-  member: boolean,
   page: ResourcePageOptions,
 } & ResourceConfiguration;

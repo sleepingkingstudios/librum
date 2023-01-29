@@ -10,15 +10,14 @@ import { titleCase } from '@utils/text';
 
 const generatePageBreadcrumbs = ({
   action,
-  member,
   page,
   resourceBreadcrumbs,
   resourceName,
 }: {
   action: string,
-  member: boolean,
   page: {
     breadcrumbs?: Breadcrumb[],
+    member?: boolean,
   },
   resourceBreadcrumbs: Breadcrumb[],
   resourceName: string,
@@ -38,7 +37,7 @@ const generatePageBreadcrumbs = ({
     url: resourceUrl,
   });
 
-  if (member) {
+  if (page.member) {
     // @TODO
   } else {
     breadcrumbs.push({
@@ -105,7 +104,6 @@ const lastUrl = (breadcrumbs: Breadcrumb[]): string => {
 export const ResourceBreadcrumbs = ({
   action,
   breadcrumbs,
-  member,
   page,
   resourceName,
   scope,
@@ -113,8 +111,10 @@ export const ResourceBreadcrumbs = ({
 }: {
   action: string,
   breadcrumbs?: Breadcrumb[],
-  member: boolean,
-  page: { breadcrumbs?: Breadcrumb[] },
+  page: {
+    breadcrumbs?: Breadcrumb[],
+    member?: boolean,
+  },
   resourceName: string,
   scope?: string,
   wildcards?: Record<string, string>,
@@ -124,7 +124,6 @@ export const ResourceBreadcrumbs = ({
   const pageBreadcrumbs: Breadcrumb[] =
     generatePageBreadcrumbs({
       action,
-      member,
       page,
       resourceBreadcrumbs,
       resourceName,

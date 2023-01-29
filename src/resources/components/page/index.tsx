@@ -23,14 +23,12 @@ export type {
 const renderBreadcrumbs = ({
   action,
   breadcrumbs,
-  member,
   page,
   resourceName,
   scope,
 }: {
   action: string,
   breadcrumbs?: Breadcrumb[],
-  member: boolean,
   page: ResourcePageOptions,
   resourceName: string,
   scope?: string,
@@ -45,8 +43,7 @@ const renderBreadcrumbs = ({
     <ResourceBreadcrumbs
       action={action}
       breadcrumbs={breadcrumbs}
-      member={member}
-      page={{ breadcrumbs: pageBreadcrumbs }}
+      page={{ breadcrumbs: pageBreadcrumbs, member: page.member }}
       resourceName={resourceName}
       scope={scope}
     />
@@ -115,14 +112,12 @@ export const ResourcePage = ({
   const {
     action,
     breadcrumbs,
-    member,
     resourceName,
     scope,
   } = config;
   const renderedBreadcrumbs = renderBreadcrumbs({
     action,
     breadcrumbs,
-    member,
     page,
     resourceName,
     scope,

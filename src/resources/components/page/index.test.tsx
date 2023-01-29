@@ -17,18 +17,27 @@ describe('<ResourcePage />', () => {
   const apiHooks: ResourceApiHooks = {};
   const member = false;
   const resourceName = 'rareBooks';
+  const renderPage = ({
+    page,
+    ...options
+  }: {
+    breadcrumbs?: Breadcrumb[],
+    contents?: JSX.Element | React.ComponentType,
+    page: ResourcePageOptions,
+    scope?: string,
+  }) => render(
+    <ResourcePage
+      action={action}
+      apiHooks={apiHooks}
+      page={page}
+      resourceName={resourceName}
+      {...options}
+    />
+  );
+  const page: ResourcePageOptions = { member };
 
   it('should display the breadcrumbs', () => {
-    const page: ResourcePageOptions = {};
-    const { getAllByRole } = render(
-      <ResourcePage
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />
-    );
+    const { getAllByRole } = renderPage({ page });
     const expected = [
       'Home @ /',
       'Rare Books @ /rare-books',
@@ -42,16 +51,7 @@ describe('<ResourcePage />', () => {
   });
 
   it('should display the heading', () => {
-    const page: ResourcePageOptions = {};
-    const { getByRole } = render(
-      <ResourcePage
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />
-    );
+    const { getByRole } = renderPage({ page });
 
     const heading = getByRole('heading');
 
@@ -60,22 +60,12 @@ describe('<ResourcePage />', () => {
   });
 
   it('should match the snapshot', () => {
-    const page: ResourcePageOptions = {};
-    const { asFragment } = render(
-      <ResourcePage
-        action={action}
-        apiHooks={apiHooks}
-        member={member}
-        page={page}
-        resourceName={resourceName}
-      />,
-    );
+    const { asFragment } = renderPage({ page });
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   describe('with breadcrumbs: value', () => {
-    const page: ResourcePageOptions = {};
     const breadcrumbs: Breadcrumb[] = [
       {
         label: 'Lending Library',
@@ -84,16 +74,7 @@ describe('<ResourcePage />', () => {
     ];
 
     it('should display the breadcrumbs', () => {
-      const { getAllByRole } = render(
-        <ResourcePage
-          action={action}
-          breadcrumbs={breadcrumbs}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getAllByRole } = renderPage({ breadcrumbs, page });
       const expected = [
         'Lending Library @ /lending-library',
         'Rare Books @ /lending-library/rare-books',
@@ -107,16 +88,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          breadcrumbs={breadcrumbs}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ breadcrumbs, page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -130,18 +102,10 @@ describe('<ResourcePage />', () => {
     }): JSX.Element => {
       return (<span>Contents for { resourceName }</span>);
     };
+    const page: ResourcePageOptions = { contents: Contents, member };
 
     it('should display the contents', () => {
-      const page: ResourcePageOptions = { contents: Contents };
-      const { getByText } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getByText } = renderPage({ page });
 
       const rendered = getByText('Contents for rareBooks');
 
@@ -149,16 +113,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const page: ResourcePageOptions = { contents: Contents };
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -174,33 +129,18 @@ describe('<ResourcePage />', () => {
       const page: ResourcePageOptions = {
         afterContents: AfterContents,
         contents: Contents,
+        member,
       };
 
       it('should display the contents', () => {
-        const { getByText } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />
-        );
+        const { getByText } = renderPage({ page });
 
         expect(getByText('Contents for rareBooks')).toBeVisible();
         expect(getByText('After rareBooks')).toBeVisible();
       });
 
       it('should match the snapshot', () => {
-        const { asFragment } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-        );
+        const { asFragment } = renderPage({ page });
 
         expect(asFragment()).toMatchSnapshot();
       });
@@ -217,33 +157,18 @@ describe('<ResourcePage />', () => {
       const page: ResourcePageOptions = {
         beforeContents: BeforeContents,
         contents: Contents,
+        member,
       };
 
       it('should display the contents', () => {
-        const { getByText } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />
-        );
+        const { getByText } = renderPage({ page });
 
         expect(getByText('Before rareBooks')).toBeVisible();
         expect(getByText('Contents for rareBooks')).toBeVisible();
       });
 
       it('should match the snapshot', () => {
-        const { asFragment } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-        );
+        const { asFragment } = renderPage({ page });
 
         expect(asFragment()).toMatchSnapshot();
       });
@@ -252,18 +177,10 @@ describe('<ResourcePage />', () => {
 
   describe('with contents: element', () => {
     const contents = (<span>Custom Contents</span>);
+    const page: ResourcePageOptions = { contents, member };
 
     it('should display the contents', () => {
-      const page: ResourcePageOptions = { contents };
-      const { getByText } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getByText } = renderPage({ page });
 
       const rendered = getByText('Custom Contents');
 
@@ -272,48 +189,24 @@ describe('<ResourcePage />', () => {
 
     it('should match the snapshot', () => {
       const page: ResourcePageOptions = { contents };
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
 
     describe('with afterContents: element', () => {
       const afterContents = (<span>After Contents</span>);
-      const page: ResourcePageOptions = { afterContents, contents };
+      const page: ResourcePageOptions = { afterContents, contents, member };
 
       it('should display the contents', () => {
-        const { getByText } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />
-        );
+        const { getByText } = renderPage({ page });
 
         expect(getByText('After Contents')).toBeVisible();
         expect(getByText('Custom Contents')).toBeVisible();
       });
 
       it('should match the snapshot', () => {
-        const { asFragment } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-        );
+        const { asFragment } = renderPage({ page });
 
         expect(asFragment()).toMatchSnapshot();
       });
@@ -321,33 +214,17 @@ describe('<ResourcePage />', () => {
 
     describe('with beforeContents: element', () => {
       const beforeContents = (<span>Before Contents</span>);
-      const page: ResourcePageOptions = { beforeContents, contents };
+      const page: ResourcePageOptions = { beforeContents, contents, member };
 
       it('should display the contents', () => {
-        const { getByText } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />
-        );
+        const { getByText } = renderPage({ page });
 
         expect(getByText('Before Contents')).toBeVisible();
         expect(getByText('Custom Contents')).toBeVisible();
       });
 
       it('should match the snapshot', () => {
-        const { asFragment } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-        );
+        const { asFragment } = renderPage({ page });
 
         expect(asFragment()).toMatchSnapshot();
       });
@@ -356,18 +233,10 @@ describe('<ResourcePage />', () => {
 
   describe('with page: { breadcrumbs: element }', () => {
     const breadcrumbs = (<span>Custom Breadcrumbs</span>);
-    const page: ResourcePageOptions = { breadcrumbs };
+    const page: ResourcePageOptions = { breadcrumbs, member };
 
     it('should display the custom breadcrumbs', () => {
-      const { getByText } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getByText } = renderPage({ page });
 
       const rendered = getByText('Custom Breadcrumbs');
 
@@ -375,15 +244,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -396,18 +257,10 @@ describe('<ResourcePage />', () => {
         active: true,
       },
     ];
-    const page: ResourcePageOptions = { breadcrumbs };
+    const page: ResourcePageOptions = { breadcrumbs, member };
 
     it('should display the breadcrumbs', () => {
-      const { getAllByRole } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getAllByRole } = renderPage({ page });
       const expected = [
         'Home @ /',
         'Published Rare Books (active)',
@@ -420,15 +273,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -449,18 +294,10 @@ describe('<ResourcePage />', () => {
         type: 'danger',
       },
     ];
-    const page: ResourcePageOptions = { buttons };
+    const page: ResourcePageOptions = { buttons, member };
 
     it('should display the buttons', () => {
-      const { getAllByRole } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getAllByRole } = renderPage({ page });
       const expected = ['Rock', 'Paper', 'Scissors'];
 
       const rendered = getAllByRole('button');
@@ -470,33 +307,17 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
   });
 
   describe('with page: { heading: value }', () => {
-    const page: ResourcePageOptions = { heading: 'Rare Publications' };
+    const page: ResourcePageOptions = { heading: 'Rare Publications', member };
 
     it('should display the heading', () => {
-      const { getByRole } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getByRole } = renderPage({ page });
 
       const heading = getByRole('heading');
 
@@ -505,15 +326,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -521,18 +334,10 @@ describe('<ResourcePage />', () => {
 
   describe('with page: { navigation: element }', () => {
     const navigation = (<span>Custom Navigation</span>);
-    const page: ResourcePageOptions = { navigation };
+    const page: ResourcePageOptions = { member, navigation };
 
     it('should display the custom navigation', () => {
-      const { getByText } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getByText } = renderPage({ page });
 
       const rendered = getByText('Custom Navigation');
 
@@ -540,15 +345,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -570,18 +367,10 @@ describe('<ResourcePage />', () => {
         ],
       },
     ];
-    const page = { navigation };
+    const page = { member, navigation };
 
     it('should display the navigation', () => {
-      const { getAllByRole } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getAllByRole } = renderPage({ page });
       const expected = [
         'Nav Item @ /nav-item',
         'Dropdown Item @ /dropdown-item',
@@ -594,15 +383,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -610,18 +391,10 @@ describe('<ResourcePage />', () => {
 
   describe('with page: { title: value }', () => {
     const title = 'Rare Books';
+    const page = { member, title };
 
     it('should display the title', () => {
-      const page = { title };
-      const { getByLabelText } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />
-      );
+      const { getByLabelText } = renderPage({ page });
 
       const rendered = getByLabelText('title');
 
@@ -630,34 +403,17 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const page = { title };
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-      );
+      const { asFragment } = renderPage({ page });
 
       expect(asFragment()).toMatchSnapshot();
     });
 
     describe('with page: { subtitle: value }', () => {
       const subtitle = 'the Publishing';
-      const page = { subtitle, title };
+      const page = { member, subtitle, title };
 
       it('should display the title and subtitle', () => {
-        const { getByLabelText } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />
-        );
+        const { getByLabelText } = renderPage({ page });
 
         const rendered = getByLabelText('title');
 
@@ -666,15 +422,7 @@ describe('<ResourcePage />', () => {
       });
 
       it('should match the snapshot', () => {
-        const { asFragment } = render(
-          <ResourcePage
-            action={action}
-            apiHooks={apiHooks}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-        );
+        const { asFragment } = renderPage({ page });
 
         expect(asFragment()).toMatchSnapshot();
       });
@@ -682,20 +430,10 @@ describe('<ResourcePage />', () => {
   });
 
   describe('with scope: value', () => {
-    const page: ResourcePageOptions = {};
     const scope = 'lendingLibrary';
 
     it('should display the breadcrumbs', () => {
-      const { getAllByRole } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-          scope={scope}
-        />
-      );
+      const { getAllByRole } = renderPage({ page, scope });
       const expected = [
         'Home @ /',
         'Lending Library @ /lending-library',
@@ -710,16 +448,7 @@ describe('<ResourcePage />', () => {
     });
 
     it('should match the snapshot', () => {
-      const { asFragment } = render(
-        <ResourcePage
-          action={action}
-          apiHooks={apiHooks}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-          scope={scope}
-        />,
-      );
+      const { asFragment } = renderPage({ page, scope });
 
       expect(asFragment()).toMatchSnapshot();
     });

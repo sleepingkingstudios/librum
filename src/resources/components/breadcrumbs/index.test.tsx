@@ -11,24 +11,38 @@ jest.mock(
   () => require('@components/page/breadcrumbs/mocks'),
 );
 
+type PageOptions = {
+  breadcrumbs?: Breadcrumb[],
+  member?: boolean,
+};
+
 describe('<ResourceBreadcrumbs />', () => {
   const resourceName = 'rareBooks';
 
   describe('with member: false', () => {
     const action = 'published';
     const member = false;
+    const renderBreadcrumbs = ({
+      page,
+      ...options
+    }: {
+      breadcrumbs?: Breadcrumb[],
+      page: PageOptions,
+      scope?: string,
+      wildcards?: Record<string, string>,
+    }) => render(
+      <ResourceBreadcrumbs
+        action={action}
+        page={page}
+        resourceName={resourceName}
+        {...options}
+      />,
+      { router: true  },
+    );
+    const page = { member };
 
     it('should generate the breadcrumbs', () => {
-      const page = {};
-      const { queryAllByRole } = render(
-        <ResourceBreadcrumbs
-          action={action}
-          member={member}
-          page={page}
-          resourceName={resourceName}
-        />,
-        { router: true  },
-      );
+      const { queryAllByRole } = renderBreadcrumbs({ page });
       const results = queryAllByRole('listitem');
       const expected = [
         'Home @ /',
@@ -44,17 +58,7 @@ describe('<ResourceBreadcrumbs />', () => {
       const breadcrumbs: Breadcrumb[] = [];
 
       it('should generate the breadcrumbs', () => {
-        const page = {};
-        const { queryAllByRole } = render(
-          <ResourceBreadcrumbs
-            action={action}
-            breadcrumbs={breadcrumbs}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-          { router: true  },
-        );
+        const { queryAllByRole } = renderBreadcrumbs({ breadcrumbs, page });
         const results = queryAllByRole('listitem');
         const expected = [
           'Rare Books @ /rare-books',
@@ -67,17 +71,8 @@ describe('<ResourceBreadcrumbs />', () => {
 
       describe('with page: { breadcrumbs: empty array }', () => {
         it('should generate the breadcrumbs', () => {
-          const page = { breadcrumbs: [] as Breadcrumb[] };
-          const { queryAllByRole } = render(
-            <ResourceBreadcrumbs
-              action={action}
-              breadcrumbs={breadcrumbs}
-              member={member}
-              page={page}
-              resourceName={resourceName}
-            />,
-            { router: true  },
-          );
+          const page = { breadcrumbs: [] as Breadcrumb[], member };
+          const { queryAllByRole } = renderBreadcrumbs({ breadcrumbs, page });
           const results = queryAllByRole('listitem');
 
           expect(results).toHaveLength(0);
@@ -92,19 +87,11 @@ describe('<ResourceBreadcrumbs />', () => {
               label: 'Published Books'
             },
           ],
+          member,
         };
 
         it('should generate the breadcrumbs', () => {
-          const { queryAllByRole } = render(
-            <ResourceBreadcrumbs
-              action={action}
-              breadcrumbs={breadcrumbs}
-              member={member}
-              page={page}
-              resourceName={resourceName}
-            />,
-            { router: true  },
-          );
+          const { queryAllByRole } = renderBreadcrumbs({ breadcrumbs, page });
           const results = queryAllByRole('listitem');
           const expected = [
             'Published Books (active)',
@@ -119,18 +106,8 @@ describe('<ResourceBreadcrumbs />', () => {
         const scope = 'lendingLibrary';
 
         it('should generate the breadcrumbs', () => {
-          const page = {};
-          const { queryAllByRole } = render(
-            <ResourceBreadcrumbs
-              action={action}
-              breadcrumbs={breadcrumbs}
-              member={member}
-              page={page}
-              resourceName={resourceName}
-              scope={scope}
-            />,
-            { router: true  },
-          );
+          const { queryAllByRole } =
+            renderBreadcrumbs({ breadcrumbs, page, scope });
           const results = queryAllByRole('listitem');
           const expected = [
             'Rare Books @ /rare-books',
@@ -155,17 +132,7 @@ describe('<ResourceBreadcrumbs />', () => {
       ];
 
       it('should generate the breadcrumbs', () => {
-        const page = {};
-        const { queryAllByRole } = render(
-          <ResourceBreadcrumbs
-            action={action}
-            breadcrumbs={breadcrumbs}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-          { router: true  },
-        );
+        const { queryAllByRole } = renderBreadcrumbs({ breadcrumbs, page });
         const results = queryAllByRole('listitem');
         const expected = [
           'Custom',
@@ -180,17 +147,8 @@ describe('<ResourceBreadcrumbs />', () => {
 
       describe('with page: { breadcrumbs: empty array }', () => {
         it('should generate the breadcrumbs', () => {
-          const page = { breadcrumbs: [] as Breadcrumb[] };
-          const { queryAllByRole } = render(
-            <ResourceBreadcrumbs
-              action={action}
-              breadcrumbs={breadcrumbs}
-              member={member}
-              page={page}
-              resourceName={resourceName}
-            />,
-            { router: true  },
-          );
+          const page = { breadcrumbs: [] as Breadcrumb[], member };
+          const { queryAllByRole } = renderBreadcrumbs({ breadcrumbs, page });
           const results = queryAllByRole('listitem');
           const expected = [
             'Custom',
@@ -210,19 +168,11 @@ describe('<ResourceBreadcrumbs />', () => {
               label: 'Published Books'
             },
           ],
+          member,
         };
 
         it('should generate the breadcrumbs', () => {
-          const { queryAllByRole } = render(
-            <ResourceBreadcrumbs
-              action={action}
-              breadcrumbs={breadcrumbs}
-              member={member}
-              page={page}
-              resourceName={resourceName}
-            />,
-            { router: true  },
-          );
+          const { queryAllByRole } = renderBreadcrumbs({ breadcrumbs, page });
           const results = queryAllByRole('listitem');
           const expected = [
             'Custom',
@@ -239,18 +189,8 @@ describe('<ResourceBreadcrumbs />', () => {
         const scope = 'lendingLibrary';
 
         it('should generate the breadcrumbs', () => {
-          const page = {};
-          const { queryAllByRole } = render(
-            <ResourceBreadcrumbs
-              action={action}
-              breadcrumbs={breadcrumbs}
-              member={member}
-              page={page}
-              resourceName={resourceName}
-              scope={scope}
-            />,
-            { router: true  },
-          );
+          const { queryAllByRole } =
+            renderBreadcrumbs({ breadcrumbs, page, scope });
           const results = queryAllByRole('listitem');
           const expected = [
             'Custom',
@@ -267,16 +207,8 @@ describe('<ResourceBreadcrumbs />', () => {
 
     describe('with page: { breadcrumbs: empty array }', () => {
       it('should generate the breadcrumbs', () => {
-        const page = { breadcrumbs: [] as Breadcrumb[] };
-        const { queryAllByRole } = render(
-          <ResourceBreadcrumbs
-            action={action}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-          { router: true  },
-        );
+        const page = { breadcrumbs: [] as Breadcrumb[], member };
+        const { queryAllByRole } = renderBreadcrumbs({ page });
         const results = queryAllByRole('listitem');
         const expected = [
           'Home @ /',
@@ -295,18 +227,11 @@ describe('<ResourceBreadcrumbs />', () => {
             label: 'Published Books'
           },
         ],
+        member,
       };
 
       it('should generate the breadcrumbs', () => {
-        const { queryAllByRole } = render(
-          <ResourceBreadcrumbs
-            action={action}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-          />,
-          { router: true  },
-        );
+        const { queryAllByRole } = renderBreadcrumbs({ page });
         const results = queryAllByRole('listitem');
         const expected = [
           'Home @ /',
@@ -322,17 +247,7 @@ describe('<ResourceBreadcrumbs />', () => {
       const scope = 'lendingLibrary';
 
       it('should generate the breadcrumbs', () => {
-        const page = {};
-        const { queryAllByRole } = render(
-          <ResourceBreadcrumbs
-            action={action}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-            scope={scope}
-          />,
-          { router: true  },
-        );
+        const { queryAllByRole } = renderBreadcrumbs({ page, scope });
         const results = queryAllByRole('listitem');
         const expected = [
           'Home @ /',
@@ -359,12 +274,10 @@ describe('<ResourceBreadcrumbs />', () => {
       ];
 
       it('should generate the breadcrumbs', () => {
-        const page = {};
         const { queryAllByRole } = render(
           <ResourceBreadcrumbs
             action={action}
             breadcrumbs={breadcrumbs}
-            member={member}
             page={page}
             resourceName={resourceName}
           />,
@@ -400,18 +313,8 @@ describe('<ResourceBreadcrumbs />', () => {
       const wildcards = { namespace: 'lending-library' };
 
       it('should generate the breadcrumbs', () => {
-        const page = {};
-        const { queryAllByRole } = render(
-          <ResourceBreadcrumbs
-            action={action}
-            breadcrumbs={breadcrumbs}
-            member={member}
-            page={page}
-            resourceName={resourceName}
-            wildcards={wildcards}
-          />,
-          { router: true },
-        );
+        const { queryAllByRole } =
+          renderBreadcrumbs({ breadcrumbs, page, wildcards });
         const results = queryAllByRole('listitem');
         const expected = [
           'Home @ /',

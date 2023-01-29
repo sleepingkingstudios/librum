@@ -54,7 +54,7 @@ const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
 describe('<ResourceIndexPage />', () => {
   const action = 'index';
   const member = false;
-  const page: ResourcePageOptions = {};
+  const page: ResourcePageOptions = { member };
   const resourceName = 'rareBooks';
   const useIndexResources = jest.fn();
   const apiHooks = { useIndexResources };
@@ -64,7 +64,6 @@ describe('<ResourceIndexPage />', () => {
       Table={MockTable}
       action={action}
       apiHooks={apiHooks}
-      member={member}
       page={page}
       resourceName={resourceName}
     />,

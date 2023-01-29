@@ -3,8 +3,8 @@ import type {
   UseQuery,
 } from '@api';
 import type { Breadcrumb } from '@components/page';
+import type { ResourcePageOptions } from '@resources/components/page';
 import type { DataTableType } from './data-table/types';
-import type { ResourcePageProps } from './pages';
 
 export type {
   ResourceMutationParams,
@@ -37,7 +37,7 @@ export type ResourceConfiguration = {
 };
 
 export type ResourcePagesConfiguration =
-  Record<string, false | ResourcePageProps>;
+  Record<string, false | ResourcePageOptions | React.ComponentType>;
 
 export type ResourceProps = {
   endpoints?: ResourceApiEndpointConfiguration,
