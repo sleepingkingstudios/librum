@@ -1,0 +1,502 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Resource generateResourcePages() should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with extra pages: Pages should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with extra pages: Pages should match the snapshot 2`] = `
+<DocumentFragment>
+  <span>
+    Custom Page for rareBooks
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with extra pages: values should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with extra pages: values should match the snapshot 2`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Contents for rareBooks
+    </span>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/rare-books"
+        >
+          Rare Books
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Published
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with navigation: element should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span>
+      Custom Navigation
+    </span>
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with navigation: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with pages: { index: Page } should match the snapshot 1`] = `
+<DocumentFragment>
+  <span>
+    Custom Page for rareBooks
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with pages: { index: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span
+      aria-label="title"
+    >
+      Rare Tomes
+    </span>
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with title: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span
+      aria-label="title"
+    >
+      Rare Books
+    </span>
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with title: value with pages: { index: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span
+      aria-label="title"
+    >
+      Rare Tomes
+    </span>
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resource generateResourcePages() with title: value with subtitle: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <span
+      aria-label="title"
+    >
+      Rare Books: the Publishing
+    </span>
+    <h1>
+      Rare Books
+    </h1>
+    <div>
+      <h1>
+        Content for rareBooks
+      </h1>
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Home
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

@@ -3,53 +3,12 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { ResourceIndexPage } from './index';
-import type { DataTableData } from '@components/data-table';
 import type { ResourcePageOptions } from '@resources/components/page';
-import type { DataTableType } from '@resources/components/table';
 import { render } from '@test-helpers/rendering';
+import { MockTable } from './mocks';
 
 jest.mock('@components/page', () => require('@components/page/mocks'));
-jest.mock('./contents', () => ({
-  ResourceIndexPageContents: ({
-    Table,
-    resourceName,
-  }: {
-    Table: DataTableType,
-    resourceName: string,
-  }): JSX.Element => {
-    const data: DataTableData = {
-      rareBooks: [
-        {
-          title: 'On War',
-        },
-        {
-          title: 'The Art of War',
-        },
-        {
-          title: 'The Prince',
-        },
-      ],
-    };
-
-    return (
-      <div>
-        <h1>Content for { resourceName }</h1>
-
-        <Table data={data} name={resourceName} />
-      </div>
-    );
-  },
-}));
-
-const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
-  const books = 'rareBooks' in data ? data.rareBooks : [];
-
-  return (
-    <span className="mock-data-table">
-      { `There are ${books.length} books!` }
-    </span>
-  );
-};
+jest.mock('./contents', () => require('@resources/pages/index-page/mocks'));
 
 describe('<ResourceIndexPage />', () => {
   const action = 'index';

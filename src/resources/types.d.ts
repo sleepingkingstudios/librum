@@ -2,7 +2,10 @@ import type {
   UseMutation,
   UseQuery,
 } from '@api';
-import type { Breadcrumb } from '@components/page';
+import type {
+  Breadcrumb,
+  NavigationProps,
+} from '@components/page';
 import type { ResourcePageOptions } from '@resources/components/page';
 import type { DataTableType } from './data-table/types';
 
@@ -31,9 +34,12 @@ export type ResourceConfiguration = {
   Table?: DataTableType,
   baseUrl?: string,
   breadcrumbs?: Breadcrumb[],
+  navigation?: JSX.Element | NavigationProps,
   resourceName: string,
   scope?: string,
   singularName?: string,
+  subtitle?: string,
+  title?: string,
 };
 
 export type ResourcePagesConfiguration =

@@ -25,8 +25,9 @@ export const ResourceIndexPage = ({
   action,
   apiHooks,
   page,
-  resourceName,
+  ...config
 }: ResourcePageProps): JSX.Element => {
+  const { resourceName } = config;
   const pageWithDefaults = {
     ...generatePageDefaults({ resourceName }),
     ...page,
@@ -39,7 +40,7 @@ export const ResourceIndexPage = ({
       action={action}
       apiHooks={apiHooks}
       page={pageWithDefaults}
-      resourceName={resourceName}
+      {...config}
     />
   );
 };
