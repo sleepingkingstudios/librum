@@ -190,7 +190,7 @@ describe('Resource generateResourcePages()', () => {
     const CustomPage = ({ resourceName }: { resourceName: string }) => (
       <span>Custom Page for { resourceName }</span>
     );
-    const pages = { index: CustomPage };
+    const pages = { index: { Page: CustomPage } };
     const options = { pages, resourceName };
     const generated = generateResourcePages({
       Table,
@@ -257,7 +257,9 @@ describe('Resource generateResourcePages()', () => {
       <span>Custom Page for { resourceName }</span>
     );
     const published: ResourcePageOptions = {};
-    const pages: ResourcePagesConfiguration = { published: CustomPage };
+    const pages: ResourcePagesConfiguration = {
+      published: { Page: CustomPage },
+    };
     const options = { pages, resourceName };
     const generated = generateResourcePages({
       Table,

@@ -36,16 +36,37 @@ export type ResourceConfiguration = {
   breadcrumbs?: Breadcrumb[],
   navigation?: JSX.Element | NavigationProps,
   resourceName: string,
+  route?: string,
   scope?: string,
   singularName?: string,
   subtitle?: string,
   title?: string,
 };
 
-export type ResourcePagesConfiguration =
-  Record<string, false | ResourcePageOptions | React.ComponentType>;
+export type ResourcePageComponent = React.ComponentType<ResourcePageProps>;
+
+export type ResourcePageRouteOptions = {
+  member?: boolean,
+  route?: string,
+};
+
+export type ResourcePageWithRoute = {
+  Page: React.ComponentType,
+} & ResourcePageRouteOptions;
+
+export type ResourcePagesConfiguration = Record<
+  string,
+  false |
+    (ResourcePageOptions & ResourcePageRouteOptions) |
+    ResourcePageWithRoute
+>;
 
 export type ResourceProps = {
   endpoints?: ResourceApiEndpointConfiguration,
+  pages?: ResourcePagesConfiguration,
+} & ResourceConfiguration;
+
+export type ResourceRoutesProps = {
+  Pages: Record<string, ResourcePageComponent>,
   pages?: ResourcePagesConfiguration,
 } & ResourceConfiguration;

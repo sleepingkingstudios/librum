@@ -10,7 +10,7 @@ import {
   NotFoundPage,
   UserPage,
 } from '../pages';
-import { shouldRenderContent } from '@test-helpers/routing';
+import { shouldRenderAuthenticatedRoute } from '@test-helpers/routing';
 
 jest.mock('../pages');
 
@@ -27,22 +27,22 @@ mockNotFoundPage.mockImplementation(() => (<div id="page">Not Found Page</div>))
 mockUserPage.mockImplementation(() => (<div id="page">User Page</div>));
 
 describe('<ApplicationRoutes>', () => {
-  shouldRenderContent(
+  shouldRenderAuthenticatedRoute(
     ApplicationRoutes,
     { content: 'Home Page', at: '/' },
   );
 
-  shouldRenderContent(
+  shouldRenderAuthenticatedRoute(
     ApplicationRoutes,
     { content: 'Demo Page', at: '/demo' },
   );
 
-  shouldRenderContent(
+  shouldRenderAuthenticatedRoute(
     ApplicationRoutes,
     { content: 'Not Found Page', at: '/invalid' },
   );
 
-  shouldRenderContent(
+  shouldRenderAuthenticatedRoute(
     ApplicationRoutes,
     {
       content: 'Not Found Page',
@@ -50,7 +50,7 @@ describe('<ApplicationRoutes>', () => {
     },
   );
 
-  shouldRenderContent(
+  shouldRenderAuthenticatedRoute(
     ApplicationRoutes,
     { content: 'User Page', at: '/user' },
   );

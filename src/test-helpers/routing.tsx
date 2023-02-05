@@ -8,10 +8,30 @@ import type { User } from '@session';
 import { actions } from '@session/reducer';
 
 // eslint-disable-next-line jest/no-export
-export const shouldRenderContent = (
+export const shouldNotRenderRoute = (
   Routes: () => JSX.Element,
-  { at, content }: { at: string, content: string }
-) => {
+  { at }: { at: string },
+): void => {
+  describe(`with path "${at}"`, () => {
+    it('should not match the route', () => {
+      const { queryByText } = render(
+        <Routes />,
+        {
+          initialEntries: [at],
+          router: true,
+        },
+      );
+
+      expect(queryByText(/./)).toBeNull();
+    });
+  });
+};
+
+// eslint-disable-next-line jest/no-export
+export const shouldRenderAuthenticatedRoute = (
+  Routes: () => JSX.Element,
+  { at, content }: { at: string, content: string },
+): void => {
   describe(`with path "${at}"`, () => {
     it('should render the login page', () => {
       const { getByText } = render(
@@ -29,18 +49,19 @@ export const shouldRenderContent = (
     });
 
     describe('with an authenticated session', () => {
+      const user: User = {
+        email: 'alan.bradley@example.com',
+        id: '00000000-0000-0000-0000-000000000000',
+        role: 'user',
+        slug: 'alan-bradley',
+        username: 'Alan Bradley',
+      };
+      const token = '12345';
+      const { create } = actions;
+      const action = create({ token, user });
+
       it(`should render the ${content.toLowerCase()}`, () => {
         const { dispatch, store } = createStore();
-        const user: User = {
-          email: 'alan.bradley@example.com',
-          id: '00000000-0000-0000-0000-000000000000',
-          role: 'user',
-          slug: 'alan-bradley',
-          username: 'Alan Bradley',
-        };
-        const token = '12345';
-        const { create } = actions;
-        const action = create({ token, user });
 
         dispatch(action);
 
@@ -57,6 +78,28 @@ export const shouldRenderContent = (
 
         expect(text).toBeVisible();
       });
+    });
+  });
+};
+
+// eslint-disable-next-line jest/no-export
+export const shouldRenderRoute = (
+  Routes: () => JSX.Element,
+  { at, content }: { at: string, content: string },
+): void => {
+  describe(`with path "${at}"`, () => {
+    it(`should render the ${content.toLowerCase()}`, () => {
+      const { getByText } = render(
+        <Routes />,
+        {
+          initialEntries: [at],
+          router: true,
+        },
+      );
+
+      const text = getByText(content);
+
+      expect(text).toBeVisible();
     });
   });
 };

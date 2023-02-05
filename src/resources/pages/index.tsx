@@ -3,15 +3,13 @@ import { pick } from 'lodash';
 
 import type { ResourceApiHooks } from '@resources/api/types';
 import { ResourcePage } from '@resources/components/page';
-import type {
-  ResourcePageOptions,
-  ResourcePageProps,
-} from '@resources/components/page';
+import type { ResourcePageOptions } from '@resources/components/page';
 import { isComponent } from '@utils/react-utils';
 import { upperCamelCase } from '@utils/text';
 import { ResourceIndexPage } from './index-page';
 import type {
   ResourceConfiguration,
+  ResourcePageComponent,
   ResourcePagesConfiguration,
 } from '../types';
 
@@ -43,8 +41,8 @@ const generatePage = ({
   const resourceDefaults: ResourcePageOptions =
     pick(config, ['navigation', 'subtitle', 'title']);
 
-  if (isComponent(maybePage)) {
-    const ConfiguredPage = maybePage as React.ComponentType<ResourcePageProps>;
+  if ('Page' in maybePage) {
+    const ConfiguredPage = maybePage.Page as ResourcePageComponent;
     const Page = (): JSX.Element => (
       <ConfiguredPage {...config} page={resourceDefaults} />
     );
@@ -58,7 +56,7 @@ const generatePage = ({
   };
 
   if (isComponent(defaultPage)) {
-    const DefaultPage = defaultPage as React.ComponentType<ResourcePageProps>;
+    const DefaultPage = defaultPage as ResourcePageComponent;
     const Page = (): JSX.Element => (<DefaultPage {...config} page={page} />);
 
     return Page;
