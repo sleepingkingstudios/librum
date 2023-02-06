@@ -1,62 +1,28 @@
 import * as React from 'react';
 
 import { PageAlerts } from './alerts';
-import type { Breadcrumbs } from './breadcrumbs';
+import type { Breadcrumb } from './breadcrumbs';
 import { PageFooter } from './footer';
 import { PageHeader } from './header';
 import type { NavigationProps } from './navigation';
 import { useTheme } from '@themes';
 import { joinClassNames } from '@utils/react-utils';
 
-export type { Breadcrumbs } from './breadcrumbs';
+export type {
+  Breadcrumb,
+} from './breadcrumbs';
+export type { NavigationProps } from './navigation';
 
 interface PageProps {
   title?: string;
   subtitle?: string;
-  breadcrumbs?: Breadcrumbs;
+  breadcrumbs?: Breadcrumb[] | JSX.Element;
   children: React.ReactNode,
-  navigation?: NavigationProps;
+  navigation?: NavigationProps | JSX.Element;
 }
 
 const defaultClassName =
   "flex flex-col max-w-screen-lg min-h-screen mx-auto p-3";
-
-const defaultNavigation = [
-  {
-    label: 'Home',
-    url: '/',
-  },
-  {
-    label: 'Publishers',
-    url: '/publishers',
-  },
-  {
-    label: 'Game Systems',
-    url: '/game_systems',
-  },
-  {
-    label: 'Sources',
-    items: [
-      {
-        label: 'Books',
-        url: '/sources/books',
-      },
-      {
-        label: 'Websites',
-        url: '/sources/websites',
-      },
-    ],
-  },
-  {
-    label: 'Admin',
-    items: [
-      {
-        label: 'Users',
-        url: '/admin/users',
-      },
-    ],
-  },
-];
 
 export const Page = ({
   title,
@@ -75,7 +41,7 @@ export const Page = ({
       <PageHeader
         title={title}
         subtitle={subtitle}
-        navigation={navigation || defaultNavigation}
+        navigation={navigation}
       />
 
       <main className="grow">

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import {
+  MemoryRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 import {
   RenderOptions,
   RenderResult,
@@ -19,23 +23,39 @@ import type { Theme } from '@themes';
 
 interface customRenderOptions extends RenderOptions {
   initialEntries?: Array<string>;
-  router?: true;
+  router?: true | withRouterOptions;
   store?: (storeType | true);
   theme?: (Theme | true);
 }
 
 interface withRouterOptions {
   initialEntries?: Array<string>;
+  path?: string;
 }
 
 export const withRouter = (
   component: React.ReactElement,
-  { initialEntries = ['/'] }: withRouterOptions,
-): React.ReactElement => (
-  <MemoryRouter initialEntries={initialEntries}>
-    { component }
-  </MemoryRouter>
-);
+  {
+    initialEntries = ['/'],
+    path,
+  }: withRouterOptions,
+): React.ReactElement => {
+  let wrapped = component;
+
+  if (path) {
+    wrapped = (
+      <Routes>
+        <Route path={path} element={wrapped} />
+      </Routes>
+    );
+  }
+
+  return (
+    <MemoryRouter initialEntries={initialEntries}>
+      { wrapped }
+    </MemoryRouter>
+  );
+};
 
 export const withStore = (
   component: React.ReactElement,
@@ -86,7 +106,17 @@ const customRender = (
   if (!options) { return render(wrapped); }
 
   if ('router' in options && options.router) {
-    wrapped = withRouter(wrapped, { initialEntries: options.initialEntries });
+    if (options.router === true) {
+      wrapped = withRouter(wrapped, { initialEntries: options.initialEntries });
+    } else {
+      wrapped = withRouter(
+        wrapped,
+        {
+          initialEntries: options.initialEntries,
+          ...options.router,
+        },
+      );
+    }
   }
 
   if ('store' in options) {

@@ -7,25 +7,12 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { Alert } from './index';
-import { useAlerts } from '@alerts';
-import type {
-  Alert as IAlert,
-} from '@alerts';
+import { useAlerts as mockUseAlerts } from '@alerts/mocks';
+import type { Alert as IAlert } from '@alerts';
 
-jest.mock('@alerts');
+jest.mock('@alerts', () => require('@alerts/mocks'));
 
-const mockUseAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
-
-const dismissAlert = jest.fn();
-
-mockUseAlerts.mockImplementation(
-  () => ({
-    alerts: [] as IAlert[],
-    dismissAlert,
-    dismissAllAlerts: jest.fn(),
-    displayAlert: jest.fn(),
-  })
-);
+const { dismissAlert } = mockUseAlerts();
 
 describe('<Alert />', () => {
   const alert: IAlert = {

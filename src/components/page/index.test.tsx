@@ -6,16 +6,15 @@ import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { Page } from './index';
-import type {
-  Breadcrumb,
-  Breadcrumbs,
-} from './breadcrumbs';
+import { PageBreadcrumbs } from './breadcrumbs';
+import type { Breadcrumb } from './breadcrumbs';
 import { AlertsProvider } from '@alerts';
 import type { Alert } from '@alerts';
 import { actions } from '@session';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
+import { PageNavigation } from './navigation';
 
 describe('<Page>', () => {
   it('should render the header', () => {
@@ -79,8 +78,60 @@ describe('<Page>', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  describe('with breadcrumbs: component', () => {
+    const breadcrumbs: Breadcrumb[] = [
+      {
+        label: 'Breadcrumb One',
+        url: '/',
+      },
+      {
+        label: 'Breadcrumb Two'
+      },
+      {
+        label: 'Breadcrumb Three',
+        url: '/example',
+      },
+    ];
+    const Breadcrumbs = () => (<PageBreadcrumbs breadcrumbs={breadcrumbs} />);
+
+    it('should render the footer', () => {
+      const footerText = 'What lies beyond the furthest reaches of the sky?';
+
+      const { getByText } = render(
+        <Page breadcrumbs={<Breadcrumbs />}>Page Content Here...</Page>,
+        {
+          router: true,
+          store: true,
+        }
+      );
+
+      const footer = getByText(footerText);
+
+      expect(footer).toBeVisible();
+
+      breadcrumbs.forEach((breadcrumb: Breadcrumb) => {
+        const { label } = breadcrumb;
+
+        expect(getByText(label)).toBeVisible();
+      });
+    });
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <Page breadcrumbs={<Breadcrumbs />}>Page Content Here...</Page>,
+        {
+          router: true,
+          store: true,
+          theme: true,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
   describe('with breadcrumbs: value', () => {
-    const breadcrumbs: Breadcrumbs = [
+    const breadcrumbs: Breadcrumb[] = [
       {
         label: 'Breadcrumb One',
         url: '/',
@@ -119,6 +170,55 @@ describe('<Page>', () => {
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <Page breadcrumbs={breadcrumbs}>Page Content Here...</Page>,
+        {
+          router: true,
+          store: true,
+          theme: true,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with navigation: component', () => {
+    const navigation = [
+      {
+        label: 'Home',
+        url: '/',
+      },
+      {
+        label: 'Launch Sites',
+        url: '/launch-sites',
+      },
+      {
+        label: 'Rockets',
+        items: [
+          {
+            label: 'Engines',
+            url: '/rockets/engines',
+          },
+          {
+            label: 'Fuel Tanks',
+            url: '/rockets/fuel-tanks',
+          },
+        ],
+      },
+      {
+        label: 'Administration',
+        items: [
+          {
+            label: 'Strategies',
+            url: '/administration/strategies',
+          },
+        ],
+      },
+    ];
+    const Navigation = () => (<PageNavigation navigation={navigation} />);
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <Page navigation={<Navigation />}>Page Content Here...</Page>,
         {
           router: true,
           store: true,

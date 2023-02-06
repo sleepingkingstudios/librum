@@ -68,7 +68,7 @@ export const extractData = (result: Result): Record<string, unknown> | undefined
   if (isError) {
     const body: ApiFailure | undefined = extractApiFailure(result);
 
-    if (typeof body === 'undefined') { return; }
+    if (typeof body === 'undefined' || body === null) { return; }
 
     const { data } = body;
 
@@ -78,7 +78,7 @@ export const extractData = (result: Result): Record<string, unknown> | undefined
   if (isSuccess) {
     const body: ApiSuccess | undefined = extractApiSuccess(result);
 
-    if (typeof body === 'undefined') { return; }
+    if (typeof body === 'undefined' || body === null) { return; }
 
     const { data } = body;
 
@@ -95,7 +95,7 @@ export const extractError = (result: Result): ApiError | undefined => {
 
   const body: ApiFailure | undefined = extractApiFailure(result);
 
-  if (typeof body === 'undefined') { return; }
+  if (typeof body === 'undefined' || body === null) { return; }
 
   const { error } = body;
 

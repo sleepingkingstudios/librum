@@ -3,8 +3,7 @@ import { renderHook } from '@testing-library/react';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 
 import { useRequest } from './request';
-import { useAlerts } from '@alerts';
-import type { Alert } from '@alerts';
+import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import {
   defaultResult,
   defaultResponse,
@@ -15,38 +14,26 @@ import {
 } from '@api/test-helpers';
 import { useCreateSessionMutation } from '@session/api';
 import { actions as sessionActions } from '@session/reducer';
-import { useStoreDispatch } from '@store/hooks';
+import { useStoreDispatch as mockUseStoreDispatch } from '@store/hooks';
 
-jest.mock('@alerts');
+jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@session/api');
 jest.mock('@store/hooks');
 
-const dismissAlert = jest.fn();
-const displayAlert = jest.fn();
-const alerts = {
-  alerts: [] as Alert[],
-  dismissAlert,
-  dismissAllAlerts: jest.fn(),
-  displayAlert,
-};
-const mockAlerts = useAlerts as jest.MockedFunction<typeof useAlerts>;
-const dispatch = jest.fn();
-const mockDispatch = useStoreDispatch as jest.MockedFunction<
-  typeof useStoreDispatch
->;
+const alerts = mockUseAlerts();
+const { dismissAlert, displayAlert } = alerts;
+const dispatch = mockUseStoreDispatch();
 const trigger = jest.fn();
 const mockMutation = useCreateSessionMutation as jest.MockedFunction<
   typeof useCreateSessionMutation
 >;
 
-mockAlerts.mockImplementation(() => alerts);
-mockDispatch.mockImplementation(() => dispatch);
 mockMutation.mockImplementation(() => [trigger, defaultResult]);
 
 beforeEach(() => {
   dismissAlert.mockClear();
   displayAlert.mockClear();
-  dispatch.mockClear();
+  (dispatch as jest.MockedFunction<typeof dispatch>).mockClear();
   mockMutation.mockClear();
   trigger.mockClear();
 });

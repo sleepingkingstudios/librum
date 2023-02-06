@@ -2,9 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   Routes,
-  Route
-} from "react-router-dom";
+  Route,
+} from 'react-router-dom';
 
+import { routes as publishersRoutes } from '@core/publishers';
 import {
   DemoPage,
   HomePage,
@@ -34,6 +35,7 @@ export const ApplicationRoutes = (): JSX.Element => {
         <Route path="demo" element={<DemoPage />} />
         <Route path="user" element={<UserPage />} />
         <Route path="*" element={<NotFoundPage />} />
+        { publishersRoutes() }
       </Route>
     </Routes>
   );

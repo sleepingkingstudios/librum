@@ -3,8 +3,27 @@
 exports[`<HomePage> should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
     <div>
       <p>
         At twilight's end, the shadows cross'd

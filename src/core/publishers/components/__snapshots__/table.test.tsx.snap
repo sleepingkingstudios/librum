@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PublishersTable /> when there are many rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <figure
+    class="data-table data-table-collapse data-table-core-publishers"
+  >
+    <table>
+      <thead
+        class="data-table-header"
+      >
+        <tr>
+          <th
+            class="data-table-header-name"
+          >
+            Name
+          </th>
+          <th
+            class="data-table-header-website"
+          >
+            Website
+          </th>
+          <th
+            class="data-table-header-actions"
+          >
+             
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            class="data-table-cell-name"
+            data-label="Name"
+          >
+            Crystal Sphere Publications
+          </td>
+          <td
+            class="data-table-cell-website"
+            data-label="Website"
+          >
+            www.example.com/crystal-sphere-publications
+          </td>
+          <td
+            class="data-table-cell-actions"
+            data-label="Actions"
+          >
+             
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="data-table-cell-name"
+            data-label="Name"
+          >
+            Flumph Free Press
+          </td>
+          <td
+            class="data-table-cell-website"
+            data-label="Website"
+          >
+            www.example.com/flumph-free-press
+          </td>
+          <td
+            class="data-table-cell-actions"
+            data-label="Actions"
+          >
+             
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="data-table-cell-name"
+            data-label="Name"
+          >
+            Spelljammer Monthly
+          </td>
+          <td
+            class="data-table-cell-website"
+            data-label="Website"
+          >
+            www.example.com/spelljammer-monthly
+          </td>
+          <td
+            class="data-table-cell-actions"
+            data-label="Actions"
+          >
+             
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+</DocumentFragment>
+`;
+
+exports[`<PublishersTable /> when there is no matching data should match the snapshot 1`] = `
+<DocumentFragment>
+  <figure
+    class="data-table data-table-collapse data-table-core-publishers"
+  >
+    <table>
+      <thead
+        class="data-table-header"
+      >
+        <tr>
+          <th
+            class="data-table-header-name"
+          >
+            Name
+          </th>
+          <th
+            class="data-table-header-website"
+          >
+            Website
+          </th>
+          <th
+            class="data-table-header-actions"
+          >
+             
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            class="data-table-empty"
+            colspan="3"
+          >
+            There are no matching publishers.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+</DocumentFragment>
+`;

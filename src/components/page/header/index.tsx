@@ -7,11 +7,11 @@ import { PageUser } from '../user';
 interface IPageHeaderProps {
   title?: string;
   subtitle?: string;
-  navigation?: NavigationProps;
+  navigation?: NavigationProps | JSX.Element;
 }
 
 interface IRenderNavigation {
-  navigation?: NavigationProps;
+  navigation?: NavigationProps | JSX.Element;
 }
 
 const defaultClassName = "mb-3 text-center sm:text-left";
@@ -30,6 +30,8 @@ const PageHeaderSubtitle = ({ subtitle }: { subtitle?: string; }): JSX.Element |
 
 const renderNavigation = ({ navigation }: IRenderNavigation): JSX.Element => {
   if (navigation === null || navigation === undefined) { return null; }
+
+  if (!('length' in navigation)) { return navigation; }
 
   if (navigation.length === 0) { return null; }
 
@@ -59,5 +61,5 @@ export const PageHeader = ({
 
       <PageUser />
     </header>
-  )
-}
+  );
+};

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataTableHeader /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <thead
+      class="data-table-header"
+    >
+      <tr>
+        <th
+          class="data-table-header-mission-name"
+        >
+          Mission Name
+        </th>
+        <th
+          class="data-table-header-mission-objective"
+        >
+          Objective
+        </th>
+        <th
+          class="data-table-header-delta-v text-right"
+        >
+          Delta V
+        </th>
+        <th
+          class="data-table-header-launch-date text-center"
+        >
+          Launch Date
+        </th>
+        <th
+          class="data-table-header-actions"
+        >
+           
+        </th>
+      </tr>
+    </thead>
+  </table>
+</DocumentFragment>
+`;

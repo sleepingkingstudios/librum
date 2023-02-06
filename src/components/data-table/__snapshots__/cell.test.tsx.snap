@@ -1,0 +1,429 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataTableCell /> with a basic column should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a basic column when the data does not have a matching property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+           
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a basic column when the data has a null property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+           
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a basic column when the data has an empty property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+           
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a basic column when the data has an undefined property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+           
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with align: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name text-center"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: component when the data does not have a matching property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          <span
+            class="data-table-cell-default"
+          >
+            Hephaestus ?
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: component when the data has a null property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          <span
+            class="data-table-cell-default"
+          >
+            Hephaestus ?
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: component when the data has an empty property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          <span
+            class="data-table-cell-default"
+          >
+            Hephaestus ?
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: component when the data has an undefined property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          <span
+            class="data-table-cell-default"
+          >
+            Hephaestus ?
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: function should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: function when the data does not have a matching property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus ?
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: function when the data has a null property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus ?
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: function when the data has an empty property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus ?
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: function when the data has an undefined property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus ?
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: string should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: string when the data does not have a matching property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          N/A
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: string when the data has a null property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          N/A
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: string when the data has an empty property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          N/A
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with default: string when the data has an undefined property should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          N/A
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with numeric: true should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          data-label="Delta V"
+        >
+          1,000 km/s
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with value: component should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          <span
+            class="data-table-cell-mission-name"
+          >
+            Hephaestus VI
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableCell /> with a column with value: function should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;

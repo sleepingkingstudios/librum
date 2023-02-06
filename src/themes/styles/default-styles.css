@@ -2,14 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color: #fff;
+  --bg-color-accent: #eee;
+
+  --link-color: #00e;
+  --link-color-hover: #00f;
+
+  --text-color: #111;
+  --text-color-strong: #000;
+}
+
 @layer base {
   .theme-default-styles {
+    @apply bg-[color:var(--bg-color)] text-[color:var(--text-color)];
+
     h1, h2, h3, h4, h5, h6 {
       @apply font-serif;
+      @apply text-[color:var(--text-color-strong)];
     }
 
     a {
-      @apply hover:underline;
+      @apply text-[color:var(--link-color)];
+      @apply hover:underline hover:text-[color:var(--link-color-hover)];
+    }
+
+    td, th {
+      @apply align-top leading-none pb-2 pt-1 px-3;
+    }
+
+    th {
+      text-align: left;
     }
   }
 }
@@ -36,6 +59,10 @@
           @apply inline-block w-full lg:w-5/6;
         }
       }
+    }
+
+    .data-table {
+      @apply max-w-full overflow-x-scroll;
     }
 
     .form-button {
@@ -89,6 +116,38 @@
 
 @layer utilities {
   .theme-default-styles {
+    .data-table.data-table-collapse {
+      table {
+        @apply block sm:table;
+      }
+
+      tbody {
+        @apply block sm:table-row-group;
+      }
+
+      th, td {
+        @apply block px-0 sm:px-3 sm:table-cell;
+      }
+
+      th[data-label]:before, td[data-label]:before {
+        content: attr(data-label) ": ";
+
+        @apply block font-semibold mb-1 sm:hidden sm:invisible;
+      }
+
+      thead {;
+        @apply hidden invisible sm:table-header-group sm:visible;
+      }
+
+      th:empty, td:empty {;
+        @apply hidden invisible sm:table-cell sm:visible;
+      }
+
+      tr {
+        @apply block sm:table-row;
+      }
+    }
+
     .hr-fancy {
       border-top-style: solid;
       border-top-width: 2px;

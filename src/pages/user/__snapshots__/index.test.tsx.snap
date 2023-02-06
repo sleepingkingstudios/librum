@@ -3,8 +3,27 @@
 exports[`<UserPage> when the user has failed to load should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
     <h1>
       Current User
     </h1>
@@ -93,6 +112,20 @@ exports[`<UserPage> when the user has failed to load should match the snapshot 1
         Change Password
       </a>
     </div>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Current User @ /user
+      </li>
+    </ul>
   </div>
 </DocumentFragment>
 `;
@@ -100,8 +133,27 @@ exports[`<UserPage> when the user has failed to load should match the snapshot 1
 exports[`<UserPage> when the user has successfully loaded should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
     <h1>
       Current User
     </h1>
@@ -178,6 +230,20 @@ exports[`<UserPage> when the user has successfully loaded should match the snaps
         Change Password
       </a>
     </div>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Current User @ /user
+      </li>
+    </ul>
   </div>
 </DocumentFragment>
 `;
@@ -185,8 +251,27 @@ exports[`<UserPage> when the user has successfully loaded should match the snaps
 exports[`<UserPage> when the user has successfully loaded when the user clicks the Change Password link should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
     <h1>
       Current User
     </h1>
@@ -321,6 +406,20 @@ exports[`<UserPage> when the user has successfully loaded when the user clicks t
         </div>
       </form>
     </div>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Current User @ /user
+      </li>
+    </ul>
   </div>
 </DocumentFragment>
 `;
@@ -328,8 +427,27 @@ exports[`<UserPage> when the user has successfully loaded when the user clicks t
 exports[`<UserPage> when the user is loading should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    id="page"
+    class="mock-page"
   >
+    <ul
+      aria-label="navigation"
+    >
+      <li
+        aria-label="navigation-item"
+      >
+        Nav Item @ /nav-item
+      </li>
+      <li>
+        Dropdown
+        <ul>
+          <li
+            aria-label="navigation-item"
+          >
+            Dropdown Item @ /dropdown-item
+          </li>
+        </ul>
+      </li>
+    </ul>
     <h1>
       Current User
     </h1>
@@ -426,6 +544,20 @@ exports[`<UserPage> when the user is loading should match the snapshot 1`] = `
       </h2>
       Loading...
     </div>
+    <ul
+      aria-label="breadcrumbs"
+    >
+      <li
+        aria-label="breadcrumb"
+      >
+        Home @ /
+      </li>
+      <li
+        aria-label="breadcrumb"
+      >
+        Current User @ /user
+      </li>
+    </ul>
   </div>
 </DocumentFragment>
 `;

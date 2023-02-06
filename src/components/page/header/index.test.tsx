@@ -8,6 +8,7 @@ import { actions } from '@session';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { createStore } from '@test-helpers/store';
+import { PageNavigation } from '../navigation';
 
 describe('<PageHeader>', () => {
   it('should display the default title', () => {
@@ -37,6 +38,54 @@ describe('<PageHeader>', () => {
     );
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  describe('with navigation: component', () => {
+    const navigation = [
+      {
+        label: 'Home',
+        url: '/',
+      },
+      {
+        label: 'Launch Sites',
+        url: '/launch-sites',
+      },
+      {
+        label: 'Rockets',
+        items: [
+          {
+            label: 'Engines',
+            url: '/rockets/engines',
+          },
+          {
+            label: 'Fuel Tanks',
+            url: '/rockets/fuel-tanks',
+          },
+        ],
+      },
+      {
+        label: 'Administration',
+        items: [
+          {
+            label: 'Strategies',
+            url: '/administration/strategies',
+          },
+        ],
+      },
+    ];
+    const Navigation = () => (<PageNavigation navigation={navigation} />);
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <PageHeader navigation={<Navigation />} />,
+        {
+          router: true,
+          store: true,
+        },
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
   });
 
   describe('with navigation: value', () => {

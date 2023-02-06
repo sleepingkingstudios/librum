@@ -5,7 +5,8 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { DataList } from '@components/data-list';
 import { LoadingOverlay } from '@components/loading-overlay';
 import { Page } from '@components/page';
-import type { Breadcrumbs } from '@components/page';
+import type { Breadcrumb } from '@components/page';
+import { CoreNavigation } from '@core/navigation';
 import { useGetUserRequest } from './request';
 import { UserUpdatePassword } from './update-password';
 
@@ -15,7 +16,7 @@ type EmptyUser = {
   username: null;
 }
 
-const breadcrumbs: Breadcrumbs = [
+const breadcrumbs: Breadcrumb[] = [
   {
     label: 'Home',
     url: '/',
@@ -69,7 +70,7 @@ export const UserPage = (): JSX.Element => {
   };
 
   return (
-    <Page breadcrumbs={breadcrumbs}>
+    <Page breadcrumbs={breadcrumbs} navigation={<CoreNavigation />}>
       <h1>Current User</h1>
 
       <div className="relative">

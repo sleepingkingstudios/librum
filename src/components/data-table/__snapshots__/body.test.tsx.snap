@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataTableBody /> when there are many rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Chronos IX
+        </td>
+        <td
+          class="data-table-cell-mission-objective"
+          data-label="Objective"
+        >
+          Titan
+        </td>
+        <td
+          class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          data-label="Delta V"
+        >
+          1,000 km/s
+        </td>
+        <td
+          class="data-table-cell-launch-date text-center"
+          data-label="Launch Date"
+        >
+          2050
+        </td>
+        <td
+          class="data-table-cell-actions"
+          data-label="Actions"
+        >
+          <span
+            class="data-table-actions"
+          >
+            Launch
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Chiron X
+        </td>
+        <td
+          class="data-table-cell-mission-objective"
+          data-label="Objective"
+        >
+          Alpha Centauri A
+        </td>
+        <td
+          class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          data-label="Delta V"
+        >
+          10,000 km/s
+        </td>
+        <td
+          class="data-table-cell-launch-date text-center"
+          data-label="Launch Date"
+        >
+          2150
+        </td>
+        <td
+          class="data-table-cell-actions"
+          data-label="Actions"
+        >
+          <span
+            class="data-table-actions"
+          >
+            Launch
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Perseus XI
+        </td>
+        <td
+          class="data-table-cell-mission-objective"
+          data-label="Objective"
+        >
+          Andromeda
+        </td>
+        <td
+          class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          data-label="Delta V"
+        >
+          100,000 km/s
+        </td>
+        <td
+          class="data-table-cell-launch-date text-center"
+          data-label="Launch Date"
+        >
+          3050
+        </td>
+        <td
+          class="data-table-cell-actions"
+          data-label="Actions"
+        >
+          <span
+            class="data-table-actions"
+          >
+            Launch
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableBody /> when there are no rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-empty"
+          colspan="5"
+        >
+          There are no matching space missions.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableBody /> when there is one row should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-cell-mission-name"
+          data-label="Mission Name"
+        >
+          Hephaestus VI
+        </td>
+        <td
+          class="data-table-cell-mission-objective"
+          data-label="Objective"
+        >
+          40 Eridani A
+        </td>
+        <td
+          class="data-table-cell-delta-v text-right lining-nums tabular-nums"
+          data-label="Delta V"
+        >
+          1,000 km/s
+        </td>
+        <td
+          class="data-table-cell-launch-date text-center"
+          data-label="Launch Date"
+        >
+          TBD
+        </td>
+        <td
+          class="data-table-cell-actions"
+          data-label="Actions"
+        >
+          <span
+            class="data-table-actions"
+          >
+            Launch
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableBody /> with emptyMessage: component when there are no rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-empty"
+          colspan="5"
+        >
+          <span
+            class="data-table-empty-message"
+          >
+            You are not going to space today.
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
+
+exports[`<DataTableBody /> with emptyMessage: string when there are no rows should match the snapshot 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          class="data-table-empty"
+          colspan="5"
+        >
+          You are not going to space today.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
