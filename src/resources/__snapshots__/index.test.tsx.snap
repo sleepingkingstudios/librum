@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Resources generateResource() should generate the index route 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div
+      class="min-h-[10rem] relative resources-table"
+    >
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with extra pages should generate the index route 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div
+      class="min-h-[10rem] relative resources-table"
+    >
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with extra pages should generate the publish route 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Publish Rare Books
+    </h1>
+    <span>
+      Publish Page
+    </span>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/rare-books"
+        >
+          Rare Books
+        </a>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with extra pages should generate the published route 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <span>
+      Published Page
+    </span>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/rare-books"
+        >
+          Rare Books
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Published
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with scope: value should generate the index route 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Rare Books
+    </h1>
+    <div
+      class="min-h-[10rem] relative resources-table"
+    >
+      <span
+        class="mock-data-table"
+      >
+        There are 3 books!
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/lending-library"
+        >
+          Lending Library
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
