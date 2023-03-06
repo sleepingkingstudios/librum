@@ -8,6 +8,7 @@ import {
 } from '@api/test-helpers';
 import { useGetUserQuery } from '@user/api';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store/hooks');
 jest.mock('@user/api');

@@ -10,6 +10,7 @@ import { Alert } from './index';
 import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import type { Alert as IAlert } from '@alerts';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 
 const { dismissAlert } = mockUseAlerts();

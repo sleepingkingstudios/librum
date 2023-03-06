@@ -13,9 +13,11 @@ import type {
   ResourceProps,
 } from '../types';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
 jest.mock(
   '@resources/pages/index-page/contents',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   () => require('@resources/pages/index-page/mocks'),
 );
 

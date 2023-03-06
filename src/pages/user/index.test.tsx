@@ -14,7 +14,9 @@ import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { useGetUserRequest } from './request';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@core/navigation', () => require('@core/navigation/mocks'));
 jest.mock('./request');
 

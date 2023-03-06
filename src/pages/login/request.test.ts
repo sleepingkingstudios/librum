@@ -16,6 +16,7 @@ import { useCreateSessionMutation } from '@session/api';
 import { actions as sessionActions } from '@session/reducer';
 import { useStoreDispatch as mockUseStoreDispatch } from '@store/hooks';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@session/api');
 jest.mock('@store/hooks');

@@ -8,6 +8,7 @@ import { render } from '@test-helpers/rendering';
 
 jest.mock(
   '@components/page/breadcrumbs',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   () => require('@components/page/breadcrumbs/mocks'),
 );
 

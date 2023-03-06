@@ -118,7 +118,8 @@ export type UseQueryResult = {
   isLoading: boolean,
   isSuccess: boolean,
   isUninitialized: boolean,
-  refetch: () => void,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  refetch: () => any,
 };
 
 export type UseWrappedQueryRequest<

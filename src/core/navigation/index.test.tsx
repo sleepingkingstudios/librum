@@ -6,9 +6,11 @@ import { CoreNavigation } from './index';
 import { Page } from '@components/page';
 import { render } from '@test-helpers/rendering';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
 jest.mock(
   '@components/page/navigation',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   () => require('@components/page/navigation/mocks'),
 );
 
