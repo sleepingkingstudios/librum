@@ -40,9 +40,12 @@ describe('api baseQuery()', () => {
     addEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
     onabort: jest.fn(),
+    reason: 'just cause',
     removeEventListener: jest.fn(),
+    throwIfAborted: jest.fn(),
   };
   const api: BaseQueryApi = {
+    abort: jest.fn(),
     dispatch: jest.fn(),
     endpoint: 'http://www.example.com',
     extra: null,

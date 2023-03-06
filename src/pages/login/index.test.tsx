@@ -13,6 +13,7 @@ import {
 } from '@api/test-helpers';
 import { useRequest } from './request';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
 jest.mock('./request');
 

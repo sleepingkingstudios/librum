@@ -19,6 +19,7 @@ import {
 import { useUpdateUserPasswordMutation } from '@user/password/api';
 import { useStoreDispatch } from '@store/hooks';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store/hooks');
 jest.mock('@user/password/api');

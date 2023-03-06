@@ -7,7 +7,9 @@ import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 import { MockTable } from './mocks';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('./contents', () => require('@resources/pages/index-page/mocks'));
 
 describe('<ResourceIndexPage />', () => {

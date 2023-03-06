@@ -18,6 +18,7 @@ import { useResourceQuery as mockUseResourceQuery } from '@resources/api/hooks/m
 import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@resources/api/hooks', () => require('@resources/api/hooks/mocks'));
 
 const useRequest = mockUseResourceQuery() as jest.MockedFunction<() => Response>;

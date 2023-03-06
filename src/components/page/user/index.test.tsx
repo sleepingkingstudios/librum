@@ -17,6 +17,7 @@ import type {
 } from '@session';
 import { createStore } from '@test-helpers/store';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 
 const { displayAlert } = mockUseAlerts();

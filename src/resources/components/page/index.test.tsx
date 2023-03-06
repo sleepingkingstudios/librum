@@ -9,7 +9,9 @@ import { render } from '@test-helpers/rendering';
 import type { ResourceApiHooks } from '../../api/types';
 import type { ResourcePageOptions } from './types';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page/breadcrumbs', () => require('@components/page/breadcrumbs/mocks'));
 
 describe('<ResourcePage />', () => {

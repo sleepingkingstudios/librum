@@ -20,6 +20,7 @@ import type {
   UseMutation,
 } from '../types';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store/hooks');
 
