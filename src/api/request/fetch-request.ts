@@ -6,11 +6,13 @@ import {
   withError,
   withStatus,
 } from './utils';
+import { applyWildcards } from '../utils';
 import type {
   FetchOptions,
   PerformRequest,
   RequestOptions,
   RequestParams,
+  RequestWildcards,
   Response,
   ResponseData,
 } from './types';
@@ -19,6 +21,7 @@ type DefaultsWithOptions = {
   contentType?: string,
   fetchOptions: FetchOptions,
   params?: RequestParams,
+  wildcards?: RequestWildcards,
 };
 
 const applyDefaults = ({
@@ -26,7 +29,13 @@ const applyDefaults = ({
   headers = {},
   ...options
 }: RequestOptions): DefaultsWithOptions => {
-  const { authorization, body, params, ...rest } = options;
+  const {
+    authorization,
+    body,
+    params,
+    wildcards,
+    ...rest
+  } = options;
   const formattedBody = formatBody({ body });
   const fetchOptions: FetchOptions = {
     ...rest,
@@ -41,6 +50,7 @@ const applyDefaults = ({
     contentType,
     fetchOptions,
     params,
+    wildcards,
   };
 };
 
@@ -77,12 +87,16 @@ export const fetchRequest: PerformRequest = (url, options = {}) => {
     contentType,
     fetchOptions,
     params,
+    wildcards,
   } = applyDefaults(options);
 
   let ok: boolean;
 
   try {
-    return fetch(`${url}${formatParams(params)}`, fetchOptions)
+    const fetchUrl =
+      `${applyWildcards({ url, wildcards })}${formatParams(params)}`;
+
+    return fetch(fetchUrl, fetchOptions)
       .then((res) => {
         ok = res.ok;
 

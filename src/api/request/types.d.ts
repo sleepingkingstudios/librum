@@ -20,9 +20,12 @@ export type RequestOptions = {
   headers?: Record<string, string>,
   method?: HttpMethod,
   params?: RequestParams,
+  wildcards?: RequestWildcards,
 };
 
 export type RequestParams = Record<string, string>;
+
+export type RequestWildcards = Record<string, string>;
 
 export type Response<Data = ResponseData, Error = ResponseData> = {
   data?: Data,

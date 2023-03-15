@@ -257,6 +257,22 @@ describe('API fetchRequest()', () => {
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, defaultOptions);
       });
     });
+
+    describe('with wildcards: value', () => {
+      const url = 'api/:namespace/resource/:id';
+      const wildcards = {
+        id: 'on-war',
+        namespace: 'lending-library',
+      };
+
+      it('should call fetch', async () => {
+        const expectedUrl = 'api/lending-library/resource/on-war';
+
+        await fetchRequest(url, { wildcards, ...options });
+
+        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, defaultOptions);
+      });
+    });
   };
 
   beforeEach(() => {
