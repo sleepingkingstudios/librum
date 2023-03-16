@@ -2,7 +2,6 @@ export type FetchOptions = {
   body?: string,
   headers?: Record<string, string>,
   method?: HttpMethod,
-  params?: RequestParams,
 };
 
 export type HttpMethod =
@@ -10,6 +9,13 @@ export type HttpMethod =
 
 export type PerformRequest = (url: string, options?: RequestOptions) =>
   Promise<Response>;
+
+export type Refetch = (options?: RefetchOptions) => void;
+
+export type RefetchOptions = FetchOptions & {
+  params?: RequestParams,
+  wildcards?: RequestWildcards,
+};
 
 export type RequestBody = Record<string, unknown> | string;
 

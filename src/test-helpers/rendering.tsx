@@ -97,11 +97,14 @@ export const withTheme = (
 
 const customRender = (
   component: React.ReactElement,
-  options?: customRenderOptions
+  options?: customRenderOptions,
+  strictMode = true,
 ): RenderResult => {
-  let wrapped: React.ReactElement = (
-    <React.StrictMode>{ component }</React.StrictMode>
-  );
+  let wrapped: React.ReactElement = component;
+
+  if (strictMode) {
+    wrapped = (<React.StrictMode>{ wrapped }</React.StrictMode>);
+  }
 
   if (!options) { return render(wrapped); }
 
