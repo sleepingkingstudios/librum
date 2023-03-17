@@ -7,6 +7,11 @@ export type FetchOptions = {
 export type HttpMethod =
   'get' | 'post' | 'put' | 'patch' | 'delete' | 'head';
 
+export type Middleware =
+  (fn: PerformRequest, options: MiddlewareOptions) => PerformRequest;
+
+export type MiddlewareOptions = Record<string, unknown>;
+
 export type PerformRequest = (url: string, options?: RequestOptions) =>
   Promise<Response>;
 

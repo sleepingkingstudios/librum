@@ -4,36 +4,47 @@ import '@testing-library/jest-dom';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { useRequest } from './hooks';
+import { useRequest } from './use-request';
 import { render } from '@test-helpers/rendering';
-import { fetchRequest } from './fetch-request';
+import { fetchRequest } from '../fetch-request';
 import type {
+  Middleware,
+  MiddlewareOptions,
   PerformRequest,
   RefetchOptions,
   RequestOptions,
   Response,
-} from './types';
+} from '../types';
 import {
   withData,
   withStatus,
-} from './utils';
+} from '../utils';
 
-jest.mock('./fetch-request');
+jest.mock('../fetch-request');
 
 const mockRequest = fetchRequest as jest.MockedFunction<PerformRequest>;
 
 const RequestWrapper = ({
   handleResponse,
+  config = {},
+  middleware = [],
   options = {},
   request = {},
   url,
 }: {
+  config?: MiddlewareOptions,
   handleResponse: (response: Response) => void,
+  middleware?: Middleware[],
   options?: RequestOptions,
   request?: RefetchOptions,
   url: string,
 }): JSX.Element => {
-  const [response, performRequest] = useRequest({ options, url });
+  const [response, performRequest] = useRequest({
+    config,
+    middleware,
+    options,
+    url,
+  });
   const onClick = () => performRequest(request);
 
   handleResponse(response);
@@ -55,14 +66,20 @@ describe('API request hooks', () => {
       );
     };
     const renderHook = ({
+      config = {},
+      middleware = [],
       options = {},
       request = {},
     }: {
+      config?: MiddlewareOptions,
+      middleware?: Middleware[],
       options?: RequestOptions,
       request?: RefetchOptions,
     }) => render(
       <RequestWrapper
         handleResponse={handleResponse}
+        config={config}
+        middleware={middleware}
         options={options}
         request={request}
         url={url}
@@ -251,12 +268,69 @@ describe('API request hooks', () => {
       });
     });
 
+    describe('with query middleware', () => {
+      const authorizationMiddleware: Middleware = (fn, config) => {
+        const getState = config.getState as (key: string) => string;
+        const authorization = getState('authorization');
+
+        return (url, options) => {
+          const headers = {
+            ...(options.headers || {}),
+            Authorization: authorization,
+          };
+
+          return fn(url, { ...options, headers });
+        };
+      };
+      const getState = (key: string): string => {
+        if (key === 'authorization') { return 'Bearer 12345'; }
+
+        return null;
+      };
+      const config: MiddlewareOptions = { getState };
+      const middleware: Middleware[] = [authorizationMiddleware];
+      const response = withStatus({ status: 'success' });
+      const expectedOptions = {
+        headers: { Authorization: getState('authorization') }
+      };
+
+      beforeEach(() => { mockResponse(response); });
+
+      it('should perform the request', async () => {
+        const { getByRole } = renderHook({ config, middleware });
+        const button = getByRole('button');
+
+        await userEvent.click(button);
+
+        expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
+      });
+
+      describe('when the query is called with options', () => {
+        const request = {
+          body: JSON.stringify({ ok: true }),
+          params: { order: 'asc' },
+        };
+        const expectedOptions = {
+          headers: { Authorization: getState('authorization') },
+          ...request,
+        };
+
+        it('should perform the request', async () => {
+          const { getByRole } = renderHook({ config, middleware, request });
+          const button = getByRole('button');
+
+          await userEvent.click(button);
+
+          expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
+        });
+      });
+    });
+
     describe('with query options', () => {
       const options = {
         headers: { 'X-Custom-Header': 'value' },
         params: { order: 'desc' },
       };
-
       const response = withStatus({ status: 'success' });
 
       beforeEach(() => { mockResponse(response); });
@@ -275,13 +349,10 @@ describe('API request hooks', () => {
           body: JSON.stringify({ ok: true }),
           params: { order: 'asc' },
         };
-        const expected = {
+        const expectedOptions = {
           ...options,
           ...request,
         };
-        const response = withStatus({ status: 'success' });
-
-        beforeEach(() => { mockResponse(response); });
 
         it('should perform the request', async () => {
           const { getByRole } = renderHook({ options, request });
@@ -289,7 +360,7 @@ describe('API request hooks', () => {
 
           await userEvent.click(button);
 
-          expect(mockRequest).toHaveBeenCalledWith(url, expected);
+          expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
         });
       });
     });

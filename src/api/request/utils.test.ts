@@ -1,4 +1,5 @@
 import {
+  applyMiddleware,
   emptyResponse,
   formatBody,
   formatParams,
@@ -8,12 +9,291 @@ import {
   withStatus,
 } from './utils';
 import type {
+  Middleware,
+  PerformRequest,
   RequestParams,
   Response,
   ResponseData,
 } from './types';
 
 describe('API response utils', () => {
+  describe('applyMiddleware()', () => {
+    const successResponse = withData({
+      data: { ok: true },
+      response: withStatus({ status: 'success' }),
+    });
+    const performRequest: jest.MockedFunction<PerformRequest> = jest.fn(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      (url) => new Promise(resolve => resolve(successResponse))
+    );
+    const authorizationMiddleware: Middleware = (fn, config) => {
+      const getState = config.getState as (key: string) => string;
+      const authorization = getState('authorization');
+
+      return (url, options) => {
+        const headers = {
+          ...(options.headers || {}),
+          Authorization: authorization,
+        };
+
+        return fn(url, { ...options, headers });
+      };
+    };
+    const cacheMiddleware: Middleware = (fn, config) => {
+      const getState = config.getState as (key: string) => string;
+
+      return (url, options) => {
+        const { wildcards } = options;
+        const { id } = wildcards;
+        const cached = getState(id);
+
+        if (cached) {
+          const response = withStatus({
+            response: withData({
+              data: {
+                data: JSON.parse(cached) as Record<string, unknown>,
+                ok: true,
+              },
+            }),
+            status: 'success',
+          });
+
+          return new Promise(resolve => resolve(response));
+        }
+
+        return fn(url, options);
+      };
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const ignoreFailureMiddleware: Middleware = (fn, config) => {
+      return (url, options) => {
+        return fn(url, options)
+          .then((response) => {
+            const { status } = response;
+
+            if (status === 'success') { return response; }
+
+            return withStatus({ status: 'success' });
+          });
+      };
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const requireAuthorizationMiddleware: Middleware = (fn, config) => {
+      return (url, options) => {
+        const { headers } = options;
+
+        if (!('Authorization' in headers)) {
+          const response = withStatus({ status: 'failure' });
+
+          return new Promise(resolve => resolve(response));
+        }
+
+        return fn(url, options);
+      };
+    };
+    const url = 'www.example.com';
+    const options = { wildcards: { id: 'on-war' } };
+    const getState = (key: string): string => {
+      if (key === 'authorization') { return 'Bearer 12345'; }
+
+      if (key === 'on-war') {
+        return JSON.stringify({ id: 'on-war', author: 'Clausewitz' });
+      }
+
+      return null;
+    };
+
+    it('should be a function', () => {
+      expect(typeof applyMiddleware).toBe('function');
+    });
+
+    describe('with an empty middleware array', () => {
+      const middleware: Middleware[] = [];
+      const applied = applyMiddleware({ middleware, performRequest });
+
+      it('should be a function', () => {
+        expect(typeof applied).toBe('function');
+      });
+
+      it('should perform the request', async () => {
+        await applied(url, options);
+
+        expect(performRequest).toHaveBeenCalledWith(url, options);
+      });
+
+      it('should return a response', async () => {
+        const received = await applied(url, options);
+
+        expect(received).toEqual(successResponse);
+      });
+    });
+
+    describe('with middleware that modifies the request', () => {
+      const config = { getState };
+      const middleware: Middleware[] = [authorizationMiddleware];
+      const applied = applyMiddleware({
+        config,
+        middleware,
+        performRequest,
+      });
+
+      it('should return a function', () => {
+        expect(typeof applied).toBe('function');
+      });
+
+      it('should perform the request', async () => {
+        const expected = {
+          ...options,
+          headers: {
+            Authorization: getState('authorization'),
+          },
+        };
+
+        await applied(url, options);
+
+        expect(performRequest).toHaveBeenCalledWith(url, expected);
+      });
+
+      it('should return a response', async () => {
+        const received = await applied(url, options);
+
+        expect(received).toEqual(successResponse);
+      });
+    });
+
+    describe('with middleware that modifies the response', () => {
+      const middleware: Middleware[] = [ignoreFailureMiddleware];
+      const applied = applyMiddleware({ middleware, performRequest });
+
+      it('should return a function', () => {
+        expect(typeof applied).toBe('function');
+      });
+
+      it('should perform the request', async () => {
+        await applied(url, options);
+
+        expect(performRequest).toHaveBeenCalledWith(url, options);
+      });
+
+      describe('with a failing response', () => {
+        const failureResponse = withStatus({ status: 'failure' });
+        const expectedResponse = withStatus({ status: 'success' });
+
+        beforeEach(() => {
+          performRequest.mockImplementationOnce(
+            () => (new Promise(resolve => resolve(failureResponse))),
+          );
+        });
+
+        it('should return the modified response', async () => {
+          const received = await applied(url, options);
+
+          expect(received).toEqual(expectedResponse);
+        });
+      });
+
+      describe('with a successful response', () => {
+        it('should return a response', async () => {
+          const received = await applied(url, options);
+
+          expect(received).toEqual(successResponse);
+        });
+      });
+    });
+
+    describe('with middleware that preempts the request', () => {
+      const config = { getState };
+      const middleware: Middleware[] = [cacheMiddleware];
+      const applied = applyMiddleware({
+        config,
+        middleware,
+        performRequest,
+      });
+
+      it('should return a function', () => {
+        expect(typeof applied).toBe('function');
+      });
+
+      describe('with non-matching options', () => {
+        const options = { wildcards: { id: 'the-art-of-war' } };
+
+        it('should perform the request', async () => {
+          await applied(url, options);
+
+          expect(performRequest).toHaveBeenCalledWith(url, options);
+        });
+
+        it('should return a response', async () => {
+          const received = await applied(url, options);
+
+          expect(received).toEqual(successResponse);
+        });
+      });
+
+      describe('with matching options', () => {
+        const data = {
+          ok: true,
+          data: {
+            id: 'on-war',
+            author: 'Clausewitz',
+          },
+        };
+        const cachedResponse = withData({
+          data,
+          response: withStatus({ status: 'success' }),
+        });
+
+        it('should not perform the request', async () => {
+          await applied(url, options);
+
+          expect(performRequest).not.toHaveBeenCalled();
+        });
+
+        it('should return a cached response', async () => {
+          const received = await applied(url, options);
+
+          expect(received).toEqual(cachedResponse);
+        });
+      });
+    });
+
+    describe('with multiple middleware functions', () => {
+      const config = { getState };
+      const middleware = [
+        authorizationMiddleware,
+        requireAuthorizationMiddleware,
+      ];
+      const applied = applyMiddleware({
+        config,
+        middleware,
+        performRequest,
+      });
+
+      it('should return a function', () => {
+        expect(typeof applied).toBe('function');
+      });
+
+      it('should perform the request', async () => {
+        const expected = {
+          ...options,
+          headers: {
+            Authorization: getState('authorization'),
+          },
+        };
+
+        await applied(url, options);
+
+        expect(performRequest).toHaveBeenCalledWith(url, expected);
+      });
+
+      it('should return a response', async () => {
+        const received = await applied(url, options);
+
+        expect(received).toEqual(successResponse);
+      });
+    });
+  });
+
   describe('emptyResponse()', () => {
     describe('hasData', () => {
       it('should be false', () => {

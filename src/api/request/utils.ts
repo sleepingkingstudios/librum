@@ -1,10 +1,27 @@
 import type {
+  Middleware,
+  PerformRequest,
   RequestBody,
   RequestParams,
   Response,
   ResponseData,
   ResponseStatus,
 } from './types';
+
+export const applyMiddleware = ({
+  config = {},
+  middleware,
+  performRequest,
+}: {
+  config?: Record<string, unknown>,
+  middleware: Middleware[],
+  performRequest: PerformRequest
+}): PerformRequest => middleware.reverse().reduce(
+  (fn: PerformRequest, middleware: Middleware): PerformRequest => (
+    middleware(fn, config)
+  ),
+  performRequest,
+);
 
 export const emptyResponse: Response = {
   hasData: false,
