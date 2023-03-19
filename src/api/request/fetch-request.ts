@@ -30,7 +30,6 @@ const applyDefaults = ({
   ...options
 }: RequestOptions): DefaultsWithOptions => {
   const {
-    authorization,
     body,
     params,
     wildcards,
@@ -41,7 +40,7 @@ const applyDefaults = ({
     ...rest,
     ...(formattedBody ? { body: formattedBody } : {}),
     headers: {
-      ...defaultHeaders({ authorization, contentType }),
+      ...defaultHeaders({ contentType }),
       ...headers,
     },
   };
@@ -55,17 +54,11 @@ const applyDefaults = ({
 };
 
 const defaultHeaders = ({
-  authorization,
   contentType,
 }: {
-  authorization?: string,
   contentType: string,
 }): Record<string, string> => {
   const headers: Record<string, string> = {}
-
-  if (typeof authorization === 'string' && authorization.length > 0) {
-    headers['Authorization'] = authorization;
-  }
 
   if (contentType.toLowerCase() === 'json') {
     headers['Content-Type'] = 'application/json';

@@ -119,24 +119,6 @@ describe('API fetchRequest()', () => {
       });
     });
 
-    describe('with authorization: value', () => {
-      const authorization = 'Bearer 12345';
-      const expectedHeaders = {
-        ...defaultHeaders,
-        Authorization: authorization,
-      };
-      const expectedOptions = {
-        ...defaultOptions,
-        headers: expectedHeaders,
-      };
-
-      it('should call fetch', async () => {
-        await fetchRequest(url, { authorization, ...options });
-
-        expect(global.fetch).toHaveBeenCalledWith(url, expectedOptions);
-      });
-    });
-
     if (body) {
       describe('with body: object', () => {
         const body = { user: { name: 'Alan Bradley' } };
@@ -225,25 +207,6 @@ describe('API fetchRequest()', () => {
         await fetchRequest(url, { headers, ...options });
 
         expect(global.fetch).toHaveBeenCalledWith(url, expectedOptions);
-      });
-
-      describe('with authorization: value', () => {
-        const authorization = 'Bearer 12345';
-        const expectedHeaders = {
-          ...defaultHeaders,
-          ...headers,
-          Authorization: authorization,
-        };
-        const expectedOptions = {
-          ...defaultOptions,
-          headers: expectedHeaders,
-        };
-
-        it('should call fetch', async () => {
-          await fetchRequest(url, { authorization, headers, ...options });
-
-          expect(global.fetch).toHaveBeenCalledWith(url, expectedOptions);
-        });
       });
     });
 

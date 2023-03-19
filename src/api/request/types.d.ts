@@ -1,6 +1,6 @@
 export type FetchOptions = {
   body?: string,
-  headers?: Record<string, string>,
+  headers?: RequestHeaders,
   method?: HttpMethod,
 };
 
@@ -17,18 +17,21 @@ export type PerformRequest = (url: string, options?: RequestOptions) =>
 
 export type Refetch = (options?: RefetchOptions) => void;
 
-export type RefetchOptions = FetchOptions & {
+export type RefetchOptions = {
+  body?: RequestBody,
+  headers?: RequestHeaders,
   params?: RequestParams,
   wildcards?: RequestWildcards,
 };
 
 export type RequestBody = Record<string, unknown> | string;
 
+export type RequestHeaders = Record<string, string>;
+
 export type RequestOptions = {
-  authorization?: string,
   body?: RequestBody,
   contentType?: string,
-  headers?: Record<string, string>,
+  headers?: RequestHeaders,
   method?: HttpMethod,
   params?: RequestParams,
   wildcards?: RequestWildcards,
@@ -56,3 +59,16 @@ export type ResponseData = Record<string, unknown> | string;
 
 export type ResponseStatus =
   'uninitialized' | 'loading' | 'errored' | 'failure' | 'success';
+
+export type UseQuery = (options: UseQueryOptions) => [Response, Refetch];
+
+export type UseQueryOptions = UseRequestOptions & RefetchOptions;
+
+export type UseRequest = (options: UseRequestOptions) => [Response, Refetch];
+
+export type UseRequestOptions = {
+  config?: MiddlewareOptions,
+  method?: HttpMethod,
+  middleware?: Middleware[],
+  url: string,
+};
