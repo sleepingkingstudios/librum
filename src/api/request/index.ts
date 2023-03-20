@@ -3,7 +3,11 @@ export {
   useQuery,
   useRequest,
 } from './hooks';
+export {
+  apiDataMiddleware,
+} from './middleware';
 export type {
+  ApiError,
   FetchOptions,
   HttpMethod,
   Middleware,

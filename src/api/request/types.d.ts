@@ -1,3 +1,5 @@
+export type ApiError = { type: string, message: string, data: DataObject };
+
 export type FetchOptions = {
   body?: string,
   headers?: RequestHeaders,
