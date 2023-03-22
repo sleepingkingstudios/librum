@@ -5,6 +5,7 @@ export {
 } from './hooks';
 export {
   apiDataMiddleware,
+  authenticationMiddleware,
 } from './middleware';
 export type {
   ApiError,

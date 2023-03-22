@@ -108,7 +108,7 @@ describe('API request middleware', () => {
         status: 'failure',
       });
       const expected = withStatus({
-        response: withError({ error: formatted }),
+        response: withError({ error: formatted, errorType: formatted.type }),
         status: 'failure',
       });
 
@@ -312,7 +312,7 @@ describe('API request middleware', () => {
         status: 'failure',
       });
       const expected = withStatus({
-        response: withError({ error: formatted }),
+        response: withError({ error: formatted, errorType: formatted.type }),
         status: 'failure',
       });
 
@@ -360,7 +360,7 @@ describe('API request middleware', () => {
         status: 'failure',
       });
       const expected = withStatus({
-        response: withError({ error: formatted }),
+        response: withError({ error: formatted, errorType: formatted.type }),
         status: 'failure',
       });
 
@@ -391,7 +391,10 @@ describe('API request middleware', () => {
       const expected = withStatus({
         response: withData({
           data: formattedData,
-          response: withError({ error: formattedError }),
+          response: withError({
+            error: formattedError,
+            errorType: formattedError.type,
+          }),
         }),
         status: 'failure',
       });

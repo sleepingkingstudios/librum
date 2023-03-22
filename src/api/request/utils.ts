@@ -16,7 +16,7 @@ export const applyMiddleware = ({
   config?: Record<string, unknown>,
   middleware: Middleware[],
   performRequest: PerformRequest
-}): PerformRequest => middleware.reverse().reduce(
+}): PerformRequest => middleware.reduce(
   (fn: PerformRequest, middleware: Middleware): PerformRequest => (
     middleware(fn, config)
   ),
@@ -31,6 +31,7 @@ export const emptyResponse: Response = {
   isLoading: false,
   isSuccess: false,
   isUninitialized: false,
+  meta: {},
   status: 'unknown',
 };
 
@@ -91,12 +92,15 @@ export const withData = <Data = ResponseData>({
 
 export const withError = <Error = ResponseData>({
   error,
+  errorType,
   response = emptyResponse,
 }: {
   error: Error,
+  errorType?: string,
   response?: Response,
 }): Response<ResponseData, Error> => ({
   ...response,
+  ...(errorType ? { errorType } : {}),
   error,
   hasError: true,
 });

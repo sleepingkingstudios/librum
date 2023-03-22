@@ -54,6 +54,7 @@ export type Response<Data = ResponseData, Error = ResponseData> = {
   isLoading: boolean,
   isSuccess: boolean,
   isUninitialized: boolean,
+  meta: Record<string, unknown>,
   status: ResponseStatus | 'unknown',
 };
 

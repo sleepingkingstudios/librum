@@ -260,8 +260,8 @@ describe('API response utils', () => {
     describe('with multiple middleware functions', () => {
       const config = { getState };
       const middleware = [
-        authorizationMiddleware,
         requireAuthorizationMiddleware,
+        authorizationMiddleware,
       ];
       const applied = applyMiddleware({
         config,
@@ -348,6 +348,14 @@ describe('API response utils', () => {
         const { isUninitialized } = emptyResponse;
 
         expect(isUninitialized).toBe(false);
+      });
+    });
+
+    describe('meta', () => {
+      it('should be false', () => {
+        const { meta } = emptyResponse;
+
+        expect(meta).toEqual({});
       });
     });
 
@@ -600,6 +608,21 @@ describe('API response utils', () => {
       });
     });
 
+    describe('with errorType: a string', () => {
+      const error: ResponseData = { message: 'something went wrong' };
+      const errorType = 'test.errorType';
+      const expected: Response = {
+        ...emptyResponse,
+        error,
+        errorType,
+        hasError: true,
+      };
+
+      it('should return a response with the error', () => {
+        expect(withError({ error, errorType })).toEqual(expected);
+      });
+    });
+
     describe('with a response', () => {
       const response: Response = {
         ...emptyResponse,
@@ -630,6 +653,21 @@ describe('API response utils', () => {
 
         it('should return a response with the error', () => {
           expect(withError({ error, response })).toEqual(expected);
+        });
+      });
+
+      describe('with errorType: a string', () => {
+        const error: ResponseData = { message: 'something went wrong' };
+        const errorType = 'test.errorType';
+        const expected: Response = {
+          ...response,
+          error,
+          errorType,
+          hasError: true,
+        };
+
+        it('should return a response with the error', () => {
+          expect(withError({ error, errorType, response })).toEqual(expected);
         });
       });
     });

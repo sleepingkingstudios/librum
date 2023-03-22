@@ -76,12 +76,14 @@ export const convertResponseToCamelCase = (original: Response): Response => {
   if (apiError) {
     response = withError({
       error: apiError,
+      errorType: apiError.type,
       response,
     });
   } else {
     response = {
       ...response,
       error: undefined,
+      errorType: undefined,
       hasError: false,
     };
   }
@@ -187,18 +189,11 @@ export const extractError =
     return error;
   };
 
-// @TODO
-// - Converts request body (if object) to snake_case
-// - Converts requset params (if object) to snake_case
-// - Extracts and sets response data, or clears hasData
-// - Extracts and sets response error, or clears hasError
 export const apiDataMiddleware: Middleware =
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (fn: PerformRequest, config: MiddlewareOptions): PerformRequest => {
-    return (url: string, options: RequestOptions = {}): Promise<Response> => {
-      return fn(url, convertOptionsToSnakeCase(options))
-        .then((response: Response) => {
-          return convertResponseToCamelCase(response);
-        });
-    };
-  };
+  (fn: PerformRequest, config: MiddlewareOptions): PerformRequest => (
+    (url: string, options: RequestOptions = {}): Promise<Response> => (
+      fn(url, convertOptionsToSnakeCase(options))
+        .then((response: Response) => convertResponseToCamelCase(response))
+    )
+  );
