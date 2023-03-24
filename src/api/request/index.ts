@@ -4,13 +4,18 @@ export {
   useRequest,
 } from './hooks';
 export {
+  alertsMiddleware,
   apiDataMiddleware,
   authenticationMiddleware,
 } from './middleware';
 export type {
+  AlertDirective,
   ApiError,
   FetchOptions,
   HttpMethod,
+  MatchFunction,
+  Matcher,
+  MatcherProps,
   Middleware,
   MiddlewareOptions,
   PerformRequest,

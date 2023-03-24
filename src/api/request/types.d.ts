@@ -1,3 +1,19 @@
+import type { DisplayAlertProps } from '@alerts';
+
+export type AlertDirective = {
+  dismiss: string,
+  errorType: string,
+} | {
+  dismiss: string,
+  status: ResponseStatus,
+} | {
+  display: DisplayAlertProps,
+  errorType: string,
+} | {
+  display: DisplayAlertProps,
+  status: ResponseStatus,
+};
+
 export type ApiError = { type: string, message: string, data: DataObject };
 
 export type FetchOptions = {
@@ -8,6 +24,19 @@ export type FetchOptions = {
 
 export type HttpMethod =
   'get' | 'post' | 'put' | 'patch' | 'delete' | 'head';
+
+export type MatchFunction =
+  (response: Response, options: MiddlewareOptions) => void;
+
+export type Matcher = {
+  on: (match: MatcherProps, fn: MatchFunction) => Matcher;
+};
+
+export type MatcherProps = {
+  errorType: string;
+} | {
+  status: ResponseStatus;
+};
 
 export type Middleware =
   (fn: PerformRequest, options: MiddlewareOptions) => PerformRequest;
