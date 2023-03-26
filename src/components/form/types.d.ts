@@ -2,6 +2,9 @@ import type {
   FormikHelpers,
   FormikValues,
 } from 'formik';
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+
+import type { Animations } from '@components/types';
 
 export type FailureResponse = {
   error: Record<string, unknown>,
@@ -15,6 +18,17 @@ export type FormError = {
 };
 
 export type FormErrors = Record<string, FormError[]>;
+
+export type FormProps = {
+  children: React.ReactNode,
+  className?: string,
+  initialValues?: FormikValues,
+  isLoading?: boolean,
+  loadingAnimation?: Animations,
+  loadingIcon?: IconDefinition,
+  loadingMessage?: string,
+  onSubmit: OnSubmit,
+};
 
 export type FormStatus = {
   ok: boolean,
