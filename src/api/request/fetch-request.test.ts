@@ -85,7 +85,7 @@ describe('API fetchRequest()', () => {
     const options = method ? { method } : {};
     const defaultOptions = {
       headers: defaultHeaders,
-      ...(method ? { method } : {}),
+      method: method ? method.toUpperCase() : 'GET',
     };
 
     it('should call fetch', async () => {

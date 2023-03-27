@@ -9,6 +9,7 @@ import {
 import { applyWildcards } from '../utils';
 import type {
   FetchOptions,
+  HttpMethod,
   PerformRequest,
   RequestOptions,
   RequestParams,
@@ -31,6 +32,7 @@ const applyDefaults = ({
 }: RequestOptions): DefaultsWithOptions => {
   const {
     body,
+    method,
     params,
     wildcards,
     ...rest
@@ -43,6 +45,7 @@ const applyDefaults = ({
       ...defaultHeaders({ contentType }),
       ...headers,
     },
+    method: (method || 'get').toUpperCase() as HttpMethod,
   };
 
   return {

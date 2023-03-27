@@ -1,4 +1,7 @@
+import * as React from 'react';
+
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import {
   act,
   renderHook,
@@ -6,6 +9,7 @@ import {
 } from '@testing-library/react';
 
 import { useRequest } from './use-request';
+import { render } from '@test-helpers/rendering';
 import { fetchRequest } from '../fetch-request';
 import type {
   HttpMethod,
@@ -22,12 +26,15 @@ import {
 
 jest.mock('../fetch-request');
 
-type RenderHookOptions = {
+type RenderWrapperOptions = {
   config?: MiddlewareOptions,
   method?: HttpMethod,
   middleware?: Middleware[],
   request?: RefetchOptions,
 };
+
+type ResponseWrapperProps =
+  RenderWrapperOptions & { handleResponse: (response: Response) => void };
 
 const mockRequest = fetchRequest as jest.MockedFunction<PerformRequest>;
 
@@ -40,27 +47,32 @@ describe('API request hooks', () => {
         () => new Promise(resolve => resolve(response))
       );
     };
-    const renderResponse = (initialOptions: RenderHookOptions) => (
-      renderHook(
-        ({
-          config = {},
-          method,
-          middleware = [],
-          request = {},
-        }: RenderHookOptions) => {
-          const [response, refetch] = useRequest({
-            config,
-            method,
-            middleware,
-            url,
-            ...request,
-          });
+    const ResponseWrapper = ({
+      config,
+      handleResponse,
+      method,
+      middleware,
+      request,
+    }: ResponseWrapperProps): JSX.Element => {
+      const [response, refetch] =
+        useRequest({ config, method, middleware, url });
+      const onClick = () => {
+        refetch(request).catch(() => { null });
+      };
 
-          handleResponse(response);
+      handleResponse(response);
 
-          return refetch;
-        },
-        { initialProps: initialOptions },
+      return (
+        <div>
+          <button onClick={onClick}>Perform Request</button>
+        </div>
+      );
+    };
+    const renderWrapper = (options: RenderWrapperOptions) => (
+      render(
+        <ResponseWrapper handleResponse={handleResponse} {...options} />,
+        {},
+        false,
       )
     );
     const uninitializedResponse = withStatus({ status: 'uninitialized' });
@@ -75,14 +87,23 @@ describe('API request hooks', () => {
       expect(typeof useRequest).toBe('function');
     });
 
+    it('should return the request function', () => {
+      const { result } = renderHook(() => useRequest({ url }));
+      const [initialResponse, refetch] = result.current;
+
+      expect(initialResponse).toEqual(uninitializedResponse);
+
+      expect(typeof refetch).toBe('function');
+    });
+
     it('should not perform the request', () => {
-      renderResponse({});
+      renderWrapper({});
 
       expect(mockRequest).not.toHaveBeenCalled();
     });
 
     it('should set the uninitialized response', () => {
-      renderResponse({});
+      renderWrapper({});
 
       expect(handleResponse.mock.calls).toHaveLength(1);
       expect(handleResponse.mock.calls[0]).toEqual([uninitializedResponse]);
@@ -94,20 +115,21 @@ describe('API request hooks', () => {
       beforeEach(() => { mockResponse(loadingResponse); });
 
       it('should not perform the request', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(() => { expect(mockRequest).toHaveBeenCalled(); });
+        expect(mockRequest).toHaveBeenCalled();
 
         // Hack to ensure the request has finished.
         await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(3));
 
         mockRequest.mockClear();
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(() => { expect(mockRequest).not.toHaveBeenCalled(); });
+        expect(mockRequest).not.toHaveBeenCalled();
       });
     });
 
@@ -117,23 +139,38 @@ describe('API request hooks', () => {
 
       beforeEach(() => { mockResponse(failureResponse); });
 
+      it('should return the request function', async () => {
+        const { result } = renderHook(() => useRequest({ url }));
+        const [initialResponse, refetch] = result.current;
+
+        expect(initialResponse).toEqual(uninitializedResponse);
+
+        expect(typeof refetch).toBe('function');
+
+        const response = await act(() => refetch({}));
+
+        expect(mockRequest).toHaveBeenCalledWith(url, {});
+
+        expect(response).toEqual(failureResponse);
+      });
+
       it('should perform the request', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(
-          () => { expect(mockRequest).toHaveBeenCalledWith(url, {}); },
-        );
+        expect(mockRequest).toHaveBeenCalledWith(url, {});
       });
 
       it('should set the loading and failure responses', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
-        await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(1));
+        expect(handleResponse.mock.calls).toHaveLength(1);
         expect(handleResponse.mock.calls[0]).toEqual([uninitializedResponse]);
 
-        act(() => result.current());
+        await userEvent.click(button);
 
         await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(3));
         expect(handleResponse.mock.calls[1]).toEqual([loadingResponse]);
@@ -147,23 +184,38 @@ describe('API request hooks', () => {
 
       beforeEach(() => { mockResponse(successResponse); });
 
+      it('should return the request function', async () => {
+        const { result } = renderHook(() => useRequest({ url }));
+        const [initialResponse, refetch] = result.current;
+
+        expect(initialResponse).toEqual(uninitializedResponse);
+
+        expect(typeof refetch).toBe('function');
+
+        const response = await act(() => refetch({}));
+
+        expect(mockRequest).toHaveBeenCalledWith(url, {});
+
+        expect(response).toEqual(successResponse);
+      });
+
       it('should perform the request', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(
-          () => { expect(mockRequest).toHaveBeenCalledWith(url, {}); },
-        );
+        expect(mockRequest).toHaveBeenCalledWith(url, {});
       });
 
       it('should set the loading and success responses', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
-        await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(1));
+        expect(handleResponse.mock.calls).toHaveLength(1);
         expect(handleResponse.mock.calls[0]).toEqual([uninitializedResponse]);
 
-        act(() => result.current());
+        await userEvent.click(button);
 
         await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(3));
         expect(handleResponse.mock.calls[1]).toEqual([loadingResponse]);
@@ -199,28 +251,30 @@ describe('API request hooks', () => {
       beforeEach(() => { mockResponse(failureResponse); });
 
       it('should perform the request twice', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(() => { expect(mockRequest).toHaveBeenCalled(); });
+        expect(mockRequest).toHaveBeenCalledWith(url, {});
 
         await waitFor(requestComplete);
 
         mockResponse(successResponse);
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(() => expect(mockRequest.mock.calls).toHaveLength(2));
+        expect(mockRequest.mock.calls).toHaveLength(2);
       });
 
       it('should set the retrying and success responses', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({});
+        const button = getByRole('button');
 
         expect(handleResponse.mock.calls).toHaveLength(1);
         expect(handleResponse.mock.calls[0]).toEqual([uninitializedResponse]);
 
-        act(() => result.current());
+        await userEvent.click(button);
 
         await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(3));
         expect(handleResponse.mock.calls[1]).toEqual([loadingResponse]);
@@ -228,7 +282,7 @@ describe('API request hooks', () => {
 
         mockResponse(successResponse);
 
-        act(() => result.current());
+        await userEvent.click(button);
 
         await waitFor(() => expect(handleResponse.mock.calls).toHaveLength(5));
         expect(handleResponse.mock.calls[3]).toEqual([retryingResponse]);
@@ -246,13 +300,12 @@ describe('API request hooks', () => {
       beforeEach(() => { mockResponse(response); });
 
       it('should perform the request', async () => {
-        const { result } = renderResponse({});
+        const { getByRole } = renderWrapper({ request });
+        const button = getByRole('button');
 
-        act(() => result.current(request));
+        await userEvent.click(button);
 
-        await waitFor(
-          () => { expect(mockRequest).toHaveBeenCalledWith(url, request); },
-        );
+        expect(mockRequest).toHaveBeenCalledWith(url, request);
       });
     });
 
@@ -263,13 +316,12 @@ describe('API request hooks', () => {
       beforeEach(() => { mockResponse(response); });
 
       it('should perform the request', async () => {
-        const { result } = renderResponse({ method });
+        const { getByRole } = renderWrapper({ method });
+        const button = getByRole('button');
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(
-          () => { expect(mockRequest).toHaveBeenCalledWith(url, { method }); },
-        );
+        expect(mockRequest).toHaveBeenCalledWith(url, { method });
       });
     });
 
@@ -302,15 +354,12 @@ describe('API request hooks', () => {
       beforeEach(() => { mockResponse(response); });
 
       it('should perform the request', async () => {
-        const { result } = renderResponse({ config, middleware });
+        const { getByRole } = renderWrapper({ config, middleware });
+        const button = getByRole('button');
 
-        act(() => result.current());
+        await userEvent.click(button);
 
-        await waitFor(
-          () => {
-            expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
-          },
-        );
+        expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
       });
 
       describe('when the query is called with options', () => {
@@ -324,15 +373,12 @@ describe('API request hooks', () => {
         };
 
         it('should perform the request', async () => {
-          const { result } = renderResponse({ config, middleware });
+          const { getByRole } = renderWrapper({ config, middleware, request });
+          const button = getByRole('button');
 
-          act(() => result.current(request));
+          await userEvent.click(button);
 
-          await waitFor(
-            () => {
-              expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
-            },
-          );
+          expect(mockRequest).toHaveBeenCalledWith(url, expectedOptions);
         });
       });
     });

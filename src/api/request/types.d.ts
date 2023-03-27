@@ -23,7 +23,8 @@ export type FetchOptions = {
 };
 
 export type HttpMethod =
-  'get' | 'post' | 'put' | 'patch' | 'delete' | 'head';
+  'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' |
+  'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
 
 export type MatchFunction =
   (response: Response, options: MiddlewareOptions) => void;
@@ -46,7 +47,7 @@ export type MiddlewareOptions = Record<string, unknown>;
 export type PerformRequest = (url: string, options?: RequestOptions) =>
   Promise<Response>;
 
-export type Refetch = (options?: RefetchOptions) => void;
+export type Refetch = (options?: RefetchOptions) => Promise<Response>;
 
 export type RefetchOptions = {
   body?: RequestBody,
