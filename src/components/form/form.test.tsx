@@ -8,7 +8,10 @@ import { Form } from './form';
 import type { Animations } from '@components/types';
 import { render } from '@test-helpers/rendering';
 import { FormField } from './field';
-import type { OnSubmit } from './types';
+import type {
+  FormStatus,
+  OnSubmit,
+} from './types';
 
 describe('<Form />', () => {
   const onSubmit: jest.MockedFunction<OnSubmit> = jest.fn();
@@ -37,7 +40,7 @@ describe('<Form />', () => {
     });
   });
 
-  describe('with className: true', () => {
+  describe('with className: value', () => {
     const className = 'custom-form';
 
     it('should match the snapshot', () => {
@@ -162,6 +165,36 @@ describe('<Form />', () => {
             expect.any(Object),
           );
         });
+      });
+    });
+
+    describe('with initial status', () => {
+      const initialStatus: FormStatus = {
+        ok: false,
+        errors: {
+          launchSite: [{
+            data: {},
+            message: "can't be blank",
+            path: ['launchSite'],
+            type: 'test.errorType',
+          }],
+        },
+      };
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <Form
+            initialStatus={initialStatus}
+            initialValues={{}}
+            onSubmit={onSubmit}
+          >
+            <Fields />
+
+            <button type="submit">Submit</button>
+          </Form>
+        );
+
+        expect(asFragment()).toMatchSnapshot();
       });
     });
 

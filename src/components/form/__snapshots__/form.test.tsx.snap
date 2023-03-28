@@ -15,7 +15,7 @@ exports[`<Form /> should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Form /> with className: true should match the snapshot 1`] = `
+exports[`<Form /> with className: value should match the snapshot 1`] = `
 <DocumentFragment>
   <form
     action="#"
@@ -54,6 +54,66 @@ exports[`<Form /> with form fields should match the snapshot 1`] = `
           type="text"
           value=""
         />
+      </div>
+    </label>
+    <label>
+      Mission Name
+      <div
+        class="form-field"
+      >
+        <label
+          class="form-label"
+          for="mission_name"
+        >
+          Mission Name
+        </label>
+        <input
+          class="form-input"
+          id="mission_name"
+          name="mission.name"
+          type="text"
+          value=""
+        />
+      </div>
+    </label>
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`<Form /> with form fields with initial status should match the snapshot 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+    class="relative"
+  >
+    <label>
+      Launch Site
+      <div
+        class="form-field"
+      >
+        <label
+          class="form-label"
+          for="launch_site"
+        >
+          Launch Site
+        </label>
+        <input
+          class="form-input"
+          id="launch_site"
+          name="launchSite"
+          type="text"
+          value=""
+        />
+        <span
+          class="form-field-errors"
+        >
+          can't be blank
+        </span>
       </div>
     </label>
     <label>

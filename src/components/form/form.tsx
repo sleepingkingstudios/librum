@@ -36,6 +36,7 @@ export const Form = (
   {
     children,
     className = null,
+    initialStatus,
     initialValues,
     isLoading = false,
     loadingAnimation,
@@ -50,7 +51,11 @@ export const Form = (
   );
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialStatus={initialStatus}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+    >
       <FormWrapper className={joinedClassName}>
         {
           renderLoadingOverlay({

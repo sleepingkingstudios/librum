@@ -22,7 +22,8 @@ export type FormErrors = Record<string, FormError[]>;
 export type FormProps = {
   children: React.ReactNode,
   className?: string,
-  initialValues?: FormikValues,
+  initialStatus?: FormStatus,
+  initialValues: FormikValues,
   isLoading?: boolean,
   loadingAnimation?: Animations,
   loadingIcon?: IconDefinition,
