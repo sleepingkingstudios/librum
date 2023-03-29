@@ -93,6 +93,13 @@ export type ResponseData = Record<string, unknown> | string;
 export type ResponseStatus =
   'uninitialized' | 'loading' | 'errored' | 'failure' | 'success';
 
+export type UseApiRequest =
+  (options: UseApiRequestOptions) => [Response, Refetch];
+
+export type UseApiRequestOptions = UseRequestOptions & {
+  alerts?: AlertDirective[],
+};
+
 export type UseQuery = (options: UseQueryOptions) => [Response, Refetch];
 
 export type UseQueryOptions = UseRequestOptions & RefetchOptions;

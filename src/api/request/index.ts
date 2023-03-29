@@ -1,4 +1,5 @@
 export {
+  useApiRequest,
   useDeepMemo,
   useQuery,
   useRequest,
@@ -29,6 +30,8 @@ export type {
   Response,
   ResponseData,
   ResponseStatus,
+  UseApiRequest,
+  UseApiRequestOptions,
   UseQuery,
   UseQueryOptions,
   UseRequest,
