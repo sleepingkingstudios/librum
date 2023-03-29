@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { renderHook } from '@testing-library/react';
 
-import { useApiRequest } from './use-api-request';
+import { useApiQuery } from './use-api-query';
 import { useAlerts as mockUseAlerts } from '@alerts/mocks';
 import { selector as selectSession } from '@session';
 import type { Session } from '@session';
@@ -19,22 +19,22 @@ import type {
   HttpMethod,
   Middleware,
   MiddlewareOptions,
-  UseApiRequestOptions,
-  UseRequest,
-  UseRequestOptions,
+  UseApiQueryOptions,
+  UseQuery,
+  UseQueryOptions,
 } from '../types';
-import { useRequest } from './use-request';
+import { useQuery } from './use-query';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@store');
 jest.mock('../middleware');
-jest.mock('./use-request');
+jest.mock('./use-query');
 
 const mockAlertsMiddleware =
   alertsMiddleware as jest.MockedFunction<typeof alertsMiddleware>;
 const mockUseDispatch = useDispatch as jest.MockedFunction<typeof useDispatch>;
-const mockUseRequest = useRequest as jest.MockedFunction<UseRequest>;
+const mockUseQuery = useQuery as jest.MockedFunction<UseQuery>;
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;
 
 describe('API request hooks', () => {
@@ -50,9 +50,9 @@ describe('API request hooks', () => {
     mockUseSelector.mockImplementation(() => defaultSession);
   });
 
-  describe('useApiRequest()', () => {
+  describe('useApiQuery()', () => {
     const url = 'www.example.com';
-    const defaultOptions: UseApiRequestOptions = { url };
+    const defaultOptions: UseApiQueryOptions = { url };
     const expectedConfig: MiddlewareOptions = {
       alerts: mockUseAlerts(),
       dispatch,
@@ -62,31 +62,31 @@ describe('API request hooks', () => {
       apiDataMiddleware,
       authenticationMiddleware,
     ];
-    const expectedOptions: UseRequestOptions = {
+    const expectedOptions: UseQueryOptions = {
       config: expectedConfig,
       middleware: expectedMiddleware,
       url,
     };
 
     beforeEach(() => {
-      mockUseRequest.mockClear();
+      mockUseQuery.mockClear();
     });
 
     it('should be a function', () => {
-      expect(typeof useApiRequest).toBe('function');
+      expect(typeof useApiQuery).toBe('function');
     });
 
     it('should select the current session', () => {
-      renderHook(() => useApiRequest(defaultOptions));
+      renderHook(() => useApiQuery(defaultOptions));
 
       expect(mockUseSelector).toHaveBeenCalledWith(selectSession);
     });
 
-    it('should call useRequest with the default middleware', () => {
-      renderHook(() => useApiRequest(defaultOptions));
+    it('should call useQuery with the default middleware', () => {
+      renderHook(() => useApiQuery(defaultOptions));
 
-      expect(mockUseRequest).toHaveBeenCalled();
-      expect(mockUseRequest.mock.calls[0]).toEqual([expectedOptions]);
+      expect(mockUseQuery).toHaveBeenCalled();
+      expect(mockUseQuery.mock.calls[0]).toEqual([expectedOptions]);
     });
 
     describe('when the session is authenticated', () => {
@@ -96,7 +96,7 @@ describe('API request hooks', () => {
         dispatch,
         session,
       };
-      const expectedOptions: UseRequestOptions = {
+      const expectedOptions: UseQueryOptions = {
         config: expectedConfig,
         middleware: expectedMiddleware,
         url,
@@ -107,10 +107,10 @@ describe('API request hooks', () => {
       });
 
       it('should call useRequest with the default middleware', () => {
-        renderHook(() => useApiRequest(defaultOptions));
+        renderHook(() => useApiQuery(defaultOptions));
 
-        expect(mockUseRequest).toHaveBeenCalled();
-        expect(mockUseRequest.mock.calls[0]).toEqual([expectedOptions]);
+        expect(mockUseQuery).toHaveBeenCalled();
+        expect(mockUseQuery.mock.calls[0]).toEqual([expectedOptions]);
       });
     });
 
@@ -129,7 +129,7 @@ describe('API request hooks', () => {
           status: 'failure',
         },
       ];
-      const options: UseApiRequestOptions = {
+      const options: UseApiQueryOptions = {
         ...defaultOptions,
         alerts: directives,
       };
@@ -138,23 +138,23 @@ describe('API request hooks', () => {
         authenticationMiddleware,
         displayAlerts,
       ];
-      const expectedOptions: UseRequestOptions = {
+      const expectedOptions: UseQueryOptions = {
         config: expectedConfig,
         middleware: expectedMiddleware,
         url,
       };
 
       it('should build the alerts middleware', () => {
-        renderHook(() => useApiRequest(options));
+        renderHook(() => useApiQuery(options));
 
         expect(mockAlertsMiddleware).toHaveBeenCalledWith(directives);
       });
 
-      it('should call useRequest with the alerts middleware', () => {
-        renderHook(() => useApiRequest(options));
+      it('should call useQuery with the alerts middleware', () => {
+        renderHook(() => useApiQuery(options));
 
-        expect(mockUseRequest).toHaveBeenCalled();
-        expect(mockUseRequest.mock.calls[0]).toEqual([expectedOptions]);
+        expect(mockUseQuery).toHaveBeenCalled();
+        expect(mockUseQuery.mock.calls[0]).toEqual([expectedOptions]);
       });
     });
 
@@ -177,36 +177,55 @@ describe('API request hooks', () => {
         authenticationMiddleware,
         ...middleware,
       ];
-      const expectedOptions: UseRequestOptions = {
+      const expectedOptions: UseQueryOptions = {
         config: expectedConfig,
         middleware: expectedMiddleware,
         url,
       };
 
-      it('should call useRequest with the configured middleware', () => {
-        renderHook(() => useApiRequest(options));
+      it('should call useQuery with the configured middleware', () => {
+        renderHook(() => useApiQuery(options));
 
-        expect(mockUseRequest).toHaveBeenCalled();
-        expect(mockUseRequest.mock.calls[0]).toEqual([expectedOptions]);
+        expect(mockUseQuery).toHaveBeenCalled();
+        expect(mockUseQuery.mock.calls[0]).toEqual([expectedOptions]);
       });
     });
 
     describe('with request options', () => {
-      const options: UseApiRequestOptions = {
+      const options: UseApiQueryOptions = {
         method: 'post' as HttpMethod,
         url,
       };
-      const expectedOptions: UseRequestOptions = {
+      const expectedOptions: UseQueryOptions = {
         ...options,
         config: expectedConfig,
         middleware: expectedMiddleware,
       };
 
-      it('should call useRequest with the default middleware', () => {
-        renderHook(() => useApiRequest(options));
+      it('should call useQuery with the default middleware', () => {
+        renderHook(() => useApiQuery(options));
 
-        expect(mockUseRequest).toHaveBeenCalled();
-        expect(mockUseRequest.mock.calls[0]).toEqual([expectedOptions]);
+        expect(mockUseQuery).toHaveBeenCalled();
+        expect(mockUseQuery.mock.calls[0]).toEqual([expectedOptions]);
+      });
+    });
+
+    describe('with request params', () => {
+      const options: UseApiQueryOptions = {
+        params: { order: 'asc' },
+        url,
+      };
+      const expectedOptions: UseQueryOptions = {
+        ...options,
+        config: expectedConfig,
+        middleware: expectedMiddleware,
+      };
+
+      it('should call useQuery with the default middleware', () => {
+        renderHook(() => useApiQuery(options));
+
+        expect(mockUseQuery).toHaveBeenCalled();
+        expect(mockUseQuery.mock.calls[0]).toEqual([expectedOptions]);
       });
     });
   });
