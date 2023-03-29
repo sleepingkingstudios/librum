@@ -6,10 +6,6 @@ import {
   faTruckMonster,
 } from '@fortawesome/free-solid-svg-icons';
 
-import type {
-  Response,
-  ResponseStatus,
-} from '@api';
 import { Button } from '@components/button';
 import type { ButtonProps } from '@components/button';
 import { DataList } from '@components/data-list';
@@ -68,17 +64,6 @@ const listData: ExampleObject = {
 const listDefaultValue = (
   <em>(unknown)</em>
 );
-
-const defaultResponse: Response = {
-  hasData: false,
-  hasError: false,
-  isUninitialized: false,
-  isLoading: false,
-  isErrored: false,
-  isFailure: false,
-  isSuccess: false,
-  status: 'unknown' as ResponseStatus,
-};
 
 export const DemoPage = (): JSX.Element => (
   <Page breadcrumbs={breadcrumbs} navigation={<CoreNavigation />}>
@@ -202,8 +187,7 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{ generation: '1', version: 'red' }}
-      request={(): null => null}
-      response={defaultResponse}
+      onSubmit={(): null => null}
     >
       <FormField name="version" />
 
@@ -218,8 +202,7 @@ export const DemoPage = (): JSX.Element => (
 
     <Form
       initialValues={{}}
-      request={(): null => null}
-      response={defaultResponse}
+      onSubmit={(): null => null}
     >
       <FormRow cols={6}>
         <FormField name="strength" />

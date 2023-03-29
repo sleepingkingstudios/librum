@@ -4,19 +4,18 @@ import { faRadiation } from '@fortawesome/free-solid-svg-icons';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
-import { Form } from './index';
+import { LegacyApiForm as Form } from './index';
 import type { UseMutationTrigger } from '@api';
 import {
   defaultResponse,
   loadingResponse,
 } from '@api/test-helpers';
 import { render } from '@test-helpers/rendering';
-import { FormField } from './field';
-import {
-  getServerErrors,
-  handleSubmit,
-} from './utils';
+import { FormField } from '../field';
+import { getServerErrors } from '../utils';
+import { handleSubmit } from './utils';
 
+jest.mock('../utils');
 jest.mock('./utils');
 
 const mockGetServerErrors = getServerErrors as jest.MockedFunction<typeof getServerErrors>;

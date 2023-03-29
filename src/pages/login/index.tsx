@@ -2,7 +2,7 @@ import * as React from 'react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  Form,
+  LegacyApiForm as Form,
   FormField,
   FormRow,
   FormSubmitButton,

@@ -29,21 +29,27 @@ export const useRequest: UseRequest = ({
     performRequest: fetchRequest,
   });
 
-  const refetch: Refetch = (request?: RefetchOptions): void => {
+  const refetch: Refetch = (request?: RefetchOptions): Promise<Response> => {
     const { status } = response;
 
-    if (status === 'loading') { return; }
+    if (status === 'loading') {
+      return new Promise(resolve => resolve(response));
+    }
 
     setResponse(withStatus({ response, status: 'loading' }));
 
-    wrappedRequest(
+    return wrappedRequest(
       url,
       {
         method,
         ...request,
       }
     )
-      .then(response => setResponse(response))
+      .then((response) => {
+        setResponse(response);
+
+        return response;
+      })
       .catch(error => { throw error; });
   };
 

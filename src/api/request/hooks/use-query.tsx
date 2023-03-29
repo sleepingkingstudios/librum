@@ -15,7 +15,7 @@ export const useQuery: UseQuery = ({
   config = {},
   headers,
   middleware = [],
-  method,
+  method = 'get',
   params,
   url,
   wildcards,
@@ -36,7 +36,7 @@ export const useQuery: UseQuery = ({
   });
 
   React.useEffect(
-    () => { memoizedRefetch(memoizedOptions) },
+    () => { memoizedRefetch(memoizedOptions).catch(() => null) },
     [memoizedRefetch, memoizedOptions],
   );
 

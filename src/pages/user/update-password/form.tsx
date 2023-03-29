@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {
-  Form,
+  LegacyApiForm as Form,
   FormField,
   FormRow,
   FormSubmitButton,
