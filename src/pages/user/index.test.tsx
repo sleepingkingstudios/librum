@@ -4,15 +4,14 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import { UserPage } from './index';
-import type { Response } from '@api';
+import type { Response } from '@api/request';
 import {
-  failureResponse,
-  loadingResponse,
-  successResponse,
-} from '@api/test-helpers';
+  withData,
+  withStatus,
+} from '@api/request/utils';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
-import { useGetUserRequest } from './request';
+import { useGetUserQuery } from './request';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
@@ -20,13 +19,18 @@ jest.mock('@components/page', () => require('@components/page/mocks'));
 jest.mock('@core/navigation', () => require('@core/navigation/mocks'));
 jest.mock('./request');
 
-const mockUseRequest = useGetUserRequest as jest.MockedFunction<typeof useGetUserRequest>;
+const mockUseQuery =
+  useGetUserQuery as jest.MockedFunction<typeof useGetUserQuery>;
 
 describe('<UserPage>', () => {
-  describe('when the user is loading', () => {
-    const response = loadingResponse as Response<{ user: User }>;
+  const refetch = jest.fn();
 
-    beforeEach(() => { mockUseRequest.mockImplementation(() => response); });
+  describe('when the user is loading', () => {
+    const response: Response = withStatus({ status: 'loading' });
+
+    beforeEach(() => {
+      mockUseQuery.mockImplementation(() => [response, refetch]);
+    });
 
     it('should display the loading overlay', () => {
       const { getByText } = render(
@@ -50,9 +54,11 @@ describe('<UserPage>', () => {
   });
 
   describe('when the user has failed to load', () => {
-    const response = failureResponse as Response<{ user: User }>;
+    const response: Response = withStatus({ status: 'failure' });
 
-    beforeEach(() => { mockUseRequest.mockImplementation(() => response); });
+    beforeEach(() => {
+      mockUseQuery.mockImplementation(() => [response, refetch]);
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(
@@ -72,12 +78,14 @@ describe('<UserPage>', () => {
       slug: 'alan-bradley',
       username: 'Alan Bradley',
     };
-    const response = {
-      ...successResponse,
+    const response: Response = withData({
       data: { user },
-    } as Response<{ user: User }>;
+      response: withStatus({ status: 'success' }),
+    });
 
-    beforeEach(() => { mockUseRequest.mockImplementation(() => response); });
+    beforeEach(() => {
+      mockUseQuery.mockImplementation(() => [response, refetch]);
+    });
 
     it('should render the user information', () => {
       const expectedLabels = [

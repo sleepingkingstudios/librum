@@ -1,26 +1,25 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import type { DisplayAlertProps } from '@alerts';
-import type { Effect } from '@api';
-import { displayAlerts } from '@api/effects';
-import { useQueryRequest } from '@api/hooks';
-import type { User } from '@session';
-import { useGetUserQuery } from '@user/api';
+import { useApiQuery } from '@api/request';
+import type { AlertDirective } from '@api/request';
 
-const failureAlert: DisplayAlertProps = {
-  context: 'pages:user:request',
-  icon: faUser,
-  message: 'Unable to load current user.',
-  type: 'failure',
-};
+const alerts: AlertDirective[] = [
+  {
+    status: 'failure',
+    display: {
+      context: 'pages:user:request',
+      icon: faUser,
+      message: 'Unable to load current user.',
+      type: 'failure',
+    },
+  },
+  {
+    status: 'success',
+    dismiss: 'pages:user:request',
+  },
+];
 
-export const useGetUserRequest = () => {
-  const effects: Effect[] = [
-    displayAlerts([{ status: 'failure', display: failureAlert }]),
-  ];
-
-  return useQueryRequest<{ user: User }>({
-    effects,
-    useQuery: useGetUserQuery,
-  });
-};
+export const useGetUserQuery = () => useApiQuery({
+  alerts,
+  url: 'api/authentication/user',
+});
