@@ -1,70 +1,114 @@
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 
+import { useAlerts } from '@alerts';
+import {
+  alertsMiddleware,
+  apiDataMiddleware,
+  useRequest as useApiRequest,
+} from '@api/request';
 import type {
-  Effect,
-  EffectOptions,
+  AlertDirective,
+  Middleware,
+  MiddlewareOptions,
+  PerformRequest,
+  RequestOptions,
   Response,
-  UseMutationRequest,
-} from '@api';
-import { displayAlerts } from '@api/effects';
-import { useMutationRequest } from '@api/hooks';
+  ResponseData,
+} from '@api/request';
 import type {
   Session,
   User,
 } from '@session';
-import { useCreateSessionMutation } from '@session/api';
 import { actions as sessionActions } from '@session/reducer';
-import { setStoredSession } from '@session/utils';
-import type { Action } from '@store';
+import {
+  clearStoredSession,
+  setStoredSession,
+} from '@session/utils';
+import type {
+  Action,
+  Dispatch,
+} from '@store';
+import { useStoreDispatch } from '@store/hooks';
 
-const createSession: Effect = (
-  response: Response<{ token: string, user: User }>,
-  options: EffectOptions,
-): void => {
-  const { data, isSuccess } = response;
+const buildSession = (data: ResponseData): Session => {
+  if (data === null || data === undefined) { return { authenticated: false }; }
 
-  if (!isSuccess) { return; }
+  if (typeof data === 'string') { return { authenticated: false }; }
 
-  const { create } = sessionActions;
-  const { dispatch } = options;
-  const { token, user } = data;
-  const action: Action<Session> = create({ token, user });
+  if (!('token' in data && 'user' in data)) { return { authenticated: false }; }
 
-  dispatch(action);
+  const token = data.token as string;
+  const user = data.user as User;
 
-  const session: Session = {
+  return {
     authenticated: true,
     token,
     user,
   };
-
-  setStoredSession(session);
 };
-
-const effects: Effect[] = [
-  createSession,
-  displayAlerts([
-    {
-      dismiss: 'authentication:session',
-      status: 'success',
+const loginAlerts: AlertDirective[] = [
+  {
+    dismiss: 'authentication:session',
+    status: 'success',
+  },
+  {
+    display:  {
+      context: 'authentication:session',
+      icon: faUserSlash,
+      message: 'User not found with the provided username and password.',
+      type: 'failure',
     },
-    {
-      display:  {
-        context: 'authentication:session',
-        icon: faUserSlash,
-        message: 'User not found with the provided username and password.',
-        type: 'failure',
-      },
-      status: 'failure',
-    }
-  ]),
+    status: 'failure',
+  }
 ];
 
-export const useRequest: UseMutationRequest = () => {
-  const [trigger, response] = useMutationRequest({
-    effects,
-    useMutation: useCreateSessionMutation,
-  });
+export const createSessionMiddleware: Middleware =
+  (fn: PerformRequest, config: MiddlewareOptions): PerformRequest => {
+    const dispatch = config.dispatch as Dispatch;
+    const { create, destroy } = sessionActions;
 
-  return [trigger, response];
+    return async (url: string, options?: RequestOptions): Promise<Response> => {
+      const response = await fn(url, options);
+      const { data, isSuccess } = response;
+
+      if (!isSuccess) { return response; }
+
+      const session: Session = buildSession(data);
+      const { authenticated, token, user } = session;
+
+      if (authenticated) {
+        const action: Action<Session> = create({ token, user });
+
+        dispatch(action);
+
+        setStoredSession(session);
+      } else {
+        const action: Action<Session> = destroy();
+
+        dispatch(action);
+
+        clearStoredSession();
+      }
+
+      return response;
+    };
+  };
+
+export const useLoginRequest = () => {
+  const alerts = useAlerts();
+  const dispatch = useStoreDispatch();
+
+  return useApiRequest({
+    config: {
+      alerts,
+      dispatch,
+    },
+    method: 'post',
+    middleware: [
+      apiDataMiddleware,
+      alertsMiddleware(loginAlerts),
+      createSessionMiddleware,
+    ],
+    url: 'api/authentication/session',
+  });
 };

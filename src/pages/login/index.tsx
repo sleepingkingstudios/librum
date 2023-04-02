@@ -2,28 +2,28 @@ import * as React from 'react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  LegacyApiForm as Form,
+  ApiForm,
   FormField,
   FormRow,
   FormSubmitButton,
 } from '@components/form';
 import { Page } from '@components/page';
-import { useRequest } from './request';
+import { useLoginRequest } from './request';
 
 export const LoginPage = (): JSX.Element => {
-  const [request, response] = useRequest();
+  const [response, refetch] = useLoginRequest();
 
   return (
     <Page navigation={[]}>
       <h1>Log In</h1>
 
-      <Form
+      <ApiForm
         className="w-full lg:w-1/2"
         initialValues={{ username: '', password: '' }}
         loadingAnimation="bounce"
         loadingIcon={faUser}
         loadingMessage="Logging In..."
-        request={request}
+        refetch={refetch}
         response={response}
       >
         <FormRow>
@@ -35,7 +35,7 @@ export const LoginPage = (): JSX.Element => {
         <FormRow cols={2}>
           <FormSubmitButton>Log In</FormSubmitButton>
         </FormRow>
-      </Form>
+      </ApiForm>
     </Page>
   );
 };
