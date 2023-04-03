@@ -2,19 +2,21 @@ import * as React from 'react';
 import { capitalize } from 'lodash';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+import type { ResponseData } from '@api/request';
 import { DataList } from '@components/data-list';
 import { LoadingOverlay } from '@components/loading-overlay';
 import { Page } from '@components/page';
 import type { Breadcrumb } from '@components/page';
 import { CoreNavigation } from '@core/navigation';
-import { useGetUserRequest } from './request';
+import type { User } from '@session';
+import { useGetUserQuery } from './request';
 import { UserUpdatePassword } from './update-password';
 
 type EmptyUser = {
   email: null;
   role: null;
   username: null;
-}
+};
 
 const breadcrumbs: Breadcrumb[] = [
   {
@@ -26,15 +28,20 @@ const breadcrumbs: Breadcrumb[] = [
     url: '/user',
   },
 ];
-
 const defaultValue: JSX.Element = (
   <span className="text-muted">(none)</span>
 );
-
 const emptyUser: EmptyUser = {
   email: null,
   role: null,
   username: null,
+};
+const extractUser = (data: ResponseData): EmptyUser | User => {
+  if (data === null || data === undefined) { return emptyUser; }
+
+  if (typeof data === 'string') { return emptyUser; }
+
+  return data.user as User;
 };
 
 const renderLoadingOverlay = (
@@ -58,11 +65,9 @@ const renderSecurity = (
 };
 
 export const UserPage = (): JSX.Element => {
-  const {
-    data,
-    isLoading,
-  } = useGetUserRequest();
-  const user = data ? data.user : emptyUser;
+  const [response] = useGetUserQuery();
+  const { data, isLoading } = response;
+  const user = extractUser(data);
   const formatted = {
     name: user.username,
     email: user.email,

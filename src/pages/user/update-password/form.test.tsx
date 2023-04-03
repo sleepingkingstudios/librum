@@ -5,23 +5,28 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { UserUpdatePasswordForm } from './form';
-import {
-  defaultResponse,
-  loadingResponse,
-  failureResponse,
-  successResponse,
-} from '@api/test-helpers';
-import { useRequest } from './request';
+import type { Refetch } from '@api/request';
+import { withStatus } from '@api/request/utils';
+import { useUpdateUserPasswordRequest } from './request';
 
 jest.mock('./request');
 
-const mockRequest = useRequest as jest.MockedFunction<typeof useRequest>;
-const request = jest.fn();
-
-mockRequest.mockImplementation(() => [request, defaultResponse]);
+const mockUseRequest =
+  useUpdateUserPasswordRequest as jest.MockedFunction<typeof useUpdateUserPasswordRequest>;
 
 describe('<UserUpdatePasswordForm />', () => {
   const closeForm = jest.fn();
+  const response = withStatus({ status: 'uninitialized' });
+  const performRequest: jest.MockedFunction<Refetch> = jest.fn(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (options) => new Promise(resolve => resolve(response))
+  );
+
+  beforeEach(() => {
+    mockUseRequest.mockClear();
+
+    mockUseRequest.mockImplementation(() => [response, performRequest]);
+  });
 
   it('should render the form', () => {
     const { getByRole } = render(
@@ -45,28 +50,37 @@ describe('<UserUpdatePasswordForm />', () => {
       const { getByLabelText, getByRole } = render(
         <UserUpdatePasswordForm closeForm={closeForm} />,
       );
-      const expectedParams = {
-        oldPassword: 'tronlives',
-        newPassword: 'ifightfortheusers',
-        confirmPassword: 'ifightfortheusers',
+      const expected = {
+        body: {
+          oldPassword: 'tronlives',
+          newPassword: 'ifightfortheusers',
+          confirmPassword: 'ifightfortheusers',
+        },
       };
 
       await userEvent.type(getByLabelText('Old Password'), 'tronlives');
 
       await userEvent.type(getByLabelText('New Password'), 'ifightfortheusers');
 
-      await userEvent.type(getByLabelText('Confirm Password'), 'ifightfortheusers');
+      await userEvent.type(
+        getByLabelText('Confirm Password'),
+        'ifightfortheusers',
+      );
 
       await userEvent.click(getByRole('button', { name: 'Update Password'}));
 
-      expect(request).toHaveBeenCalledWith(expectedParams);
+      expect(performRequest).toHaveBeenCalledWith(expected);
     });
   });
 
   describe('when the request is loading', () => {
+    const loadingResponse = withStatus({ status: 'loading' });
+
     beforeEach(() => {
-      mockRequest.mockImplementation(() => [request, loadingResponse]);
-    })
+      mockUseRequest.mockImplementation(
+        () => [loadingResponse, performRequest],
+      );
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(
@@ -78,9 +92,13 @@ describe('<UserUpdatePasswordForm />', () => {
   });
 
   describe('when the request returns a failure response', () => {
+    const failureResponse = withStatus({ status: 'failure' });
+
     beforeEach(() => {
-      mockRequest.mockImplementation(() => [request, failureResponse]);
-    })
+      mockUseRequest.mockImplementation(
+        () => [failureResponse, performRequest],
+      );
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(
@@ -92,9 +110,13 @@ describe('<UserUpdatePasswordForm />', () => {
   });
 
   describe('when the request returns a success response', () => {
+    const successResponse = withStatus({ status: 'success' });
+
     beforeEach(() => {
-      mockRequest.mockImplementation(() => [request, successResponse]);
-    })
+      mockUseRequest.mockImplementation(
+        () => [successResponse, performRequest],
+      );
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(

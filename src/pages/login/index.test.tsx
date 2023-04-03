@@ -5,24 +5,30 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { LoginPage } from './index';
-import {
-  defaultResponse,
-  loadingResponse,
-  failureResponse,
-  successResponse,
-} from '@api/test-helpers';
-import { useRequest } from './request';
+import type {
+  Refetch,
+  Response,
+} from '@api/request';
+import { withStatus } from '@api/request/utils';
+import { useLoginRequest } from './request';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
 jest.mock('./request');
 
-const mockRequest = useRequest as jest.MockedFunction<typeof useRequest>;
-const request = jest.fn();
-
-mockRequest.mockImplementation(() => [request, defaultResponse]);
+const mockUseLoginRequest =
+  useLoginRequest as jest.MockedFunction<typeof useLoginRequest>;
 
 describe('<LoginPage>', () => {
+  const refetch: jest.MockedFunction<Refetch> = jest.fn();
+  const response: Response = withStatus({ status: 'uninitialized' });
+
+  beforeEach(() => {
+    mockUseLoginRequest
+      .mockClear()
+      .mockImplementation(() => [response, refetch]);
+  });
+
   it('should render the form', () => {
     const { getByRole } = render(<LoginPage />);
     const submit = getByRole('button', { name: 'Log In' });
@@ -37,11 +43,19 @@ describe('<LoginPage>', () => {
   });
 
   describe('when the user clicks the "Log In" button', () => {
+    beforeEach(() => {
+      refetch.mockImplementation(
+        () => new Promise(resolve => resolve(response))
+      );
+    })
+
     it('should submit the form', async () => {
       const { getByLabelText, getByRole } = render(<LoginPage />);
-      const expectedParams = {
-        username: 'Alan Bradley',
-        password: 'tronlives',
+      const expected = {
+        body: {
+          username: 'Alan Bradley',
+          password: 'tronlives',
+        }
       };
 
       await userEvent.type(getByLabelText('Username'), 'Alan Bradley');
@@ -50,14 +64,16 @@ describe('<LoginPage>', () => {
 
       await userEvent.click(getByRole('button', { name: 'Log In'}));
 
-      expect(request).toHaveBeenCalledWith(expectedParams);
+      expect(refetch).toHaveBeenCalledWith(expected);
     });
   });
 
   describe('when the request is loading', () => {
+    const loadingResponse: Response = withStatus({ status: 'loading' });
+
     beforeEach(() => {
-      mockRequest.mockImplementation(() => [request, loadingResponse]);
-    })
+      mockUseLoginRequest.mockImplementation(() => [loadingResponse, refetch]);
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(<LoginPage />);
@@ -67,9 +83,11 @@ describe('<LoginPage>', () => {
   });
 
   describe('when the request returns a failure response', () => {
+    const failureResponse: Response = withStatus({ status: 'failure' });
+
     beforeEach(() => {
-      mockRequest.mockImplementation(() => [request, failureResponse]);
-    })
+      mockUseLoginRequest.mockImplementation(() => [failureResponse, refetch]);
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(<LoginPage />);
@@ -79,9 +97,11 @@ describe('<LoginPage>', () => {
   });
 
   describe('when the request returns a successful response', () => {
+    const successResponse: Response = withStatus({ status: 'success' });
+
     beforeEach(() => {
-      mockRequest.mockImplementation(() => [request, successResponse]);
-    })
+      mockUseLoginRequest.mockImplementation(() => [successResponse, refetch]);
+    });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(<LoginPage />);

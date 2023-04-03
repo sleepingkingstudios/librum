@@ -3,74 +3,71 @@ import {
   faUserSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
-import type {
-  Effect,
-  EffectOptions,
-  Response,
-  UseMutationRequest,
-} from '@api';
-import { displayAlerts } from '@api/effects';
 import { invalidPasswordError } from '@api/errors';
-import { useMutationRequest } from '@api/hooks';
-import { useUpdateUserPasswordMutation } from '@user/password/api';
+import { useApiRequest } from '@api/request';
+import type {
+  AlertDirective,
+  Middleware,
+  MiddlewareOptions,
+  PerformRequest,
+  RequestOptions,
+  Response,
+} from '@api/request';
 
-type Options = { closeForm: () => void };
+type CloseForm = () => void;
 
-const closeFormOnSuccess: Effect = (
-  response: Response,
-  options: EffectOptions<Options>
-) => {
-  const { isSuccess } = response;
-  const { closeForm } = options;
-
-  if (!isSuccess) { return; }
-
-  closeForm();
-};
-
-const effects: Effect[] = [
-  closeFormOnSuccess,
-  displayAlerts([
-    {
-      errorType: invalidPasswordError,
-      display: {
-        context: 'pages:user:updatePassword:alerts',
-        icon: faUserSlash,
-        message: 'Password does not match current password.',
-        type: 'failure',
-      },
+const alerts: AlertDirective[] = [
+  {
+    errorType: invalidPasswordError,
+    display: {
+      context: 'pages:user:updatePassword:alerts',
+      icon: faUserSlash,
+      message: 'Password does not match current password.',
+      type: 'failure',
     },
-    {
-      status: 'failure',
-      display: {
-        context: 'pages:user:updatePassword:alerts',
-        icon: faUserSlash,
-        message: 'Unable to update password.',
-        type: 'failure',
-      },
+  },
+  {
+    status: 'failure',
+    display: {
+      context: 'pages:user:updatePassword:alerts',
+      icon: faUserSlash,
+      message: 'Unable to update password.',
+      type: 'failure',
     },
-    {
-      status: 'success',
-      display: {
-        context: 'pages:user:updatePassword:alerts',
-        icon: faUserLock,
-        message: 'Successfully updated password.',
-        type: 'success',
-      },
+  },
+  {
+    status: 'success',
+    display: {
+      context: 'pages:user:updatePassword:alerts',
+      icon: faUserLock,
+      message: 'Successfully updated password.',
+      type: 'success',
     },
-  ]),
+  },
 ];
 
-export const useRequest: UseMutationRequest = ({
-  options,
-}: {
-  options: Options,
-}) => {
-  const [trigger, response] = useMutationRequest({
-    effects,
-    options,
-    useMutation: useUpdateUserPasswordMutation,
-  });
+export const closeFormMiddleware: Middleware =
+  (fn: PerformRequest, config: MiddlewareOptions) => {
+    const closeForm = config.closeForm as CloseForm;
 
-  return [trigger, response];
-};
+    return async (url: string, options?: RequestOptions): Promise<Response> => {
+      const response: Response = await fn(url, options);
+      const { isSuccess } = response;
+
+      if (isSuccess) { closeForm(); }
+
+      return response;
+    };
+  };
+
+export const useUpdateUserPasswordRequest = ({
+  config,
+}: {
+  config: MiddlewareOptions,
+}) => useApiRequest({
+  alerts,
+  config,
+  method: 'patch',
+  middleware: [closeFormMiddleware],
+  url: 'api/authentication/user/password',
+});

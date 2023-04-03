@@ -1,36 +1,49 @@
 import { renderHook } from '@testing-library/react';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { useGetUserRequest } from './request';
-import { useAlerts as mockUseAlerts } from '@alerts/mocks';
-import {
-  failureResult,
-  loadingResult,
-} from '@api/test-helpers';
-import { useGetUserQuery } from '@user/api';
+import { useGetUserQuery } from './request';
+import { useApiQuery } from '@api/request';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('@alerts', () => require('@alerts/mocks'));
-jest.mock('@store/hooks');
-jest.mock('@user/api');
+jest.mock('@api/request');
 
-const alerts = mockUseAlerts();
-const { displayAlert } = alerts;
-const mockUseGetUserQuery = useGetUserQuery as jest.MockedFunction<typeof useGetUserQuery>;
+const mockUseApiQuery =
+  useApiQuery as jest.MockedFunction<typeof useApiQuery>;
 
-describe('UserPage request', () => {
-  beforeEach(() => { displayAlert.mockClear(); });
+describe('<UserPage /> request', () => {
+  describe('useGetUserQuery()', () => {
+    const url = 'api/authentication/user';
+    const alerts = [
+      {
+        status: 'failure',
+        display: {
+          context: 'pages:user:request',
+          icon: faUser,
+          message: 'Unable to load current user.',
+          type: 'failure',
+        },
+      },
+      {
+        status: 'success',
+        dismiss: 'pages:user:request',
+      },
+    ];
+    const expected = {
+      alerts,
+      url,
+    };
 
-  describe('with a failing response', () => {
-    it('should display an alert', () => {
-      mockUseGetUserQuery.mockImplementation(() => loadingResult);
+    beforeEach(() => {
+      mockUseApiQuery.mockClear();
+    });
 
-      const { rerender } = renderHook(() => useGetUserRequest());
+    it('should be a function', () => {
+      expect(typeof useGetUserQuery).toBe('function');
+    });
 
-      mockUseGetUserQuery.mockImplementation(() => failureResult);
+    it('should configure the request', () => {
+      renderHook(() => useGetUserQuery());
 
-      rerender();
-
-      expect(displayAlert).toHaveBeenCalled();
+      expect(mockUseApiQuery).toHaveBeenCalledWith(expected);
     });
   });
 });

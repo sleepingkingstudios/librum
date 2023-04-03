@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {
-  LegacyApiForm as Form,
+  ApiForm,
   FormField,
   FormRow,
   FormSubmitButton,
 } from '@components/form';
-import { useRequest } from './request';
+import { useUpdateUserPasswordRequest } from './request';
 
 type UserUpdatePasswordFormProps = {
   closeForm: () => void,
@@ -15,14 +15,14 @@ type UserUpdatePasswordFormProps = {
 export const UserUpdatePasswordForm = (
   { closeForm }: UserUpdatePasswordFormProps
 ): JSX.Element => {
-  const options = { closeForm };
-  const [request, response] = useRequest({ options });
+  const config = { closeForm };
+  const [response, refetch] = useUpdateUserPasswordRequest({ config });
 
   return (
-    <Form
+    <ApiForm
       className="w-full lg:w-1/2"
       initialValues={{ oldPassword: '', newPassword: '', confirmPassword: '' }}
-      request={request}
+      refetch={refetch}
       response={response}
     >
       <FormRow>
@@ -38,6 +38,6 @@ export const UserUpdatePasswordForm = (
 
         <FormSubmitButton className="button-info">Update Password</FormSubmitButton>
       </FormRow>
-    </Form>
+    </ApiForm>
   );
 };

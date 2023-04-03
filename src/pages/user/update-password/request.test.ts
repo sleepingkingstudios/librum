@@ -5,146 +5,172 @@ import {
   faUserSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { useRequest } from './request';
-import { useAlerts as mockUseAlerts } from '@alerts/mocks';
-import { invalidPasswordError } from '@api/errors';
 import {
-  defaultResult,
-  defaultResponse,
-  failureResult,
-  failureResponse,
-  successResult,
-  successResponse,
-} from '@api/test-helpers';
-import { useUpdateUserPasswordMutation } from '@user/password/api';
-import { useStoreDispatch } from '@store/hooks';
+  closeFormMiddleware,
+  useUpdateUserPasswordRequest,
+} from './request';
+import { invalidPasswordError } from '@api/errors';
+import { useApiRequest } from '@api/request';
+import type { PerformRequest } from '@api/request';
+import { withStatus } from '@api/request/utils';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('@alerts', () => require('@alerts/mocks'));
-jest.mock('@store/hooks');
-jest.mock('@user/password/api');
+jest.mock('@api/request');
 
-const alerts = mockUseAlerts();
-const { displayAlert } = alerts;
-const mockDispatch = useStoreDispatch as jest.MockedFunction<
-  typeof useStoreDispatch
->;
-const trigger = jest.fn();
-const mockMutation = useUpdateUserPasswordMutation as jest.MockedFunction<
-  typeof useUpdateUserPasswordMutation
->;
+const mockUseApiRequest =
+  useApiRequest as jest.MockedFunction<typeof useApiRequest>;
 
-mockDispatch.mockImplementation(() => jest.fn());
-mockMutation.mockImplementation(() => [trigger, defaultResult]);
-
-beforeEach(() => {
-  displayAlert.mockClear();
-  mockMutation.mockClear();
-  trigger.mockClear();
-});
-
-describe('<UserUpdatePasswordForm />', () => {
-  describe('useRequest()', () => {
+describe('<UserUpdatePassword /> request', () => {
+  describe('closeFormMiddleware()', () => {
+    const response = withStatus({ status: 'uninitialized' });
+    const performRequest: jest.MockedFunction<PerformRequest> = jest.fn(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      (url, options) => new Promise(resolve => resolve(response))
+    );
     const closeForm = jest.fn();
-    const options = { closeForm };
+    const config = { closeForm };
+    const applied = closeFormMiddleware(performRequest, config);
+    const url = 'www.example.com';
+    const options = { params: { sort: 'ascending' } };
 
-    beforeEach(() => { closeForm.mockClear(); });
+    beforeEach(() => {
+      closeForm.mockClear();
 
-    it('should call the mutation', () => {
-      renderHook(() => useRequest({ options }));
-
-      expect(mockMutation).toHaveBeenCalled();
+      performRequest.mockClear();
     });
 
-    it('should return the trigger and response', () => {
-      const { result } = renderHook(() => useRequest({ options }));
-
-      expect(result.current).toEqual([trigger, defaultResponse]);
+    it('should be a function', () => {
+      expect(typeof closeFormMiddleware).toBe('function');
     });
 
-    describe('when the mutation returns a failure response', () => {
-      beforeEach(() => {
-        mockMutation.mockImplementation(() => [trigger, failureResult])
-      });
-
-      it('should return the trigger and response', () => {
-        const { result } = renderHook(() => useRequest({ options }));
-
-        expect(result.current).toEqual([trigger, failureResponse]);
-      });
-
-      it('should display an alert', () => {
-        renderHook(() => useRequest({ options }));
-
-        expect(displayAlert).toHaveBeenCalledWith({
-          context: 'pages:user:updatePassword:alerts',
-          icon: faUserSlash,
-          message: 'Unable to update password.',
-          type: 'failure',
-        });
-      });
+    it('should return a function', () => {
+      expect(typeof applied).toBe('function');
     });
 
-    describe('when the mutation returns an invalid password response', () => {
-      const error = {
-        data: {},
-        message: 'password does not match encrypted value',
-        type: invalidPasswordError,
-      };
-      const errorResult = {
-        ...failureResult,
-        error: {
-          data: {
-            ok: false,
-            error,
-          },
-          status: 400,
-        },
-      }
+    it('should perform the request', async () => {
+      await applied(url, options);
+
+      expect(performRequest).toHaveBeenCalledWith(url, options);
+    });
+
+    it('should return the response', async () => {
+      expect(await applied(url, options)).toEqual(response);
+    });
+
+    it('should not close the form', async () => {
+      await applied(url, options);
+
+      expect(closeForm).not.toHaveBeenCalled();
+    });
+
+    describe('when the response is loading', () => {
+      const loadingResponse = withStatus({ status: 'loading' });
 
       beforeEach(() => {
-        mockMutation.mockImplementation(() => [trigger, errorResult])
+        performRequest.mockImplementationOnce(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          (url, options) => new Promise(resolve => resolve(loadingResponse))
+        );
       });
 
-      it('should display an alert', () => {
-        renderHook(() => useRequest({ options }));
+      it('should not close the form', async () => {
+        await applied(url, options);
 
-        expect(displayAlert).toHaveBeenCalledWith({
+        expect(closeForm).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when the response is failing', () => {
+      const loadingResponse = withStatus({ status: 'failure' });
+
+      beforeEach(() => {
+        performRequest.mockImplementationOnce(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          (url, options) => new Promise(resolve => resolve(loadingResponse))
+        );
+      });
+
+      it('should not close the form', async () => {
+        await applied(url, options);
+
+        expect(closeForm).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when the response is successful', () => {
+      const loadingResponse = withStatus({ status: 'success' });
+
+      beforeEach(() => {
+        performRequest.mockImplementationOnce(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          (url, options) => new Promise(resolve => resolve(loadingResponse))
+        );
+      });
+
+      it('should close the form', async () => {
+        await applied(url, options);
+
+        expect(closeForm).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('useUpdateUserPasswordRequest()', () => {
+    const closeForm = jest.fn();
+    const config = { closeForm };
+    const url = 'api/authentication/user/password';
+    const method = 'patch';
+    const alerts = [
+      {
+        errorType: invalidPasswordError,
+        display: {
           context: 'pages:user:updatePassword:alerts',
           icon: faUserSlash,
           message: 'Password does not match current password.',
           type: 'failure',
-        });
-      });
-    });
-
-    describe('when the mutation returns a success response', () => {
-      beforeEach(() => {
-        mockMutation.mockImplementation(() => [trigger, successResult])
-      });
-
-      it('should return the trigger and response', () => {
-        const { result } = renderHook(() => useRequest({ options }));
-
-        expect(result.current).toEqual([trigger, successResponse]);
-      });
-
-      it('should close the form', () => {
-        renderHook(() => useRequest({ options }));
-
-        expect(closeForm).toHaveBeenCalled();
-      });
-
-      it('should display an alert', () => {
-        renderHook(() => useRequest({ options }));
-
-        expect(displayAlert).toHaveBeenCalledWith({
+        },
+      },
+      {
+        status: 'failure',
+        display: {
+          context: 'pages:user:updatePassword:alerts',
+          icon: faUserSlash,
+          message: 'Unable to update password.',
+          type: 'failure',
+        },
+      },
+      {
+        status: 'success',
+        display: {
           context: 'pages:user:updatePassword:alerts',
           icon: faUserLock,
           message: 'Successfully updated password.',
           type: 'success',
-        });
-      });
+        },
+      },
+    ];
+    const middleware = [closeFormMiddleware];
+    const expected = {
+      alerts,
+      config,
+      middleware,
+      method,
+      url,
+    };
+
+    beforeEach(() => {
+      mockUseApiRequest.mockClear();
+    });
+
+    it('should be a function', () => {
+      expect(typeof useUpdateUserPasswordRequest).toBe('function');
+    });
+
+    it('should configure the request', () => {
+      renderHook(
+        () => useUpdateUserPasswordRequest({ config })
+      );
+
+      expect(mockUseApiRequest).toHaveBeenCalledWith(expected);
     });
   });
 });
