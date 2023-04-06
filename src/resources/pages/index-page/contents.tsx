@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import type { UseQuery } from '@api';
-import { useResourceQuery } from '@resources/api/hooks';
+import { useResourceQuery } from '@resources/api/legacy-hooks';
 import type { ResourcePageProps } from '@resources/components/page';
 import { ResourcesTable } from '@resources/components/table';
 

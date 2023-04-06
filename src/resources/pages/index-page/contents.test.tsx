@@ -14,12 +14,17 @@ import {
   successResponse,
 } from '@api/test-helpers';
 import type { DataTableData } from '@components/data-table';
-import { useResourceQuery as mockUseResourceQuery } from '@resources/api/hooks/mocks';
+import {
+  useResourceQuery as mockUseResourceQuery,
+} from '@resources/api/legacy-hooks/mocks';
 import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('@resources/api/hooks', () => require('@resources/api/hooks/mocks'));
+jest.mock(
+  '@resources/api/legacy-hooks',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  () => require('@resources/api/legacy-hooks/mocks'),
+);
 
 const useRequest = mockUseResourceQuery() as jest.MockedFunction<() => Response>;
 
