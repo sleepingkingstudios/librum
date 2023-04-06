@@ -14,8 +14,8 @@ import {
 } from '@api/request';
 import type { PerformRequest } from '@api/request';
 import {
-  withData,
-  withStatus,
+  withData as responseWithData,
+  withStatus as responseWithStatus,
 } from '@api/request/utils';
 import type {
   Session,
@@ -38,7 +38,7 @@ const mockUseStoreDispatch =
 
 describe('<LoginPage /> request', () => {
   describe('createSessionMiddleware()', () => {
-    const response = withStatus({ status: 'uninitialized' });
+    const response = responseWithStatus({ status: 'uninitialized' });
     const performRequest: jest.MockedFunction<PerformRequest> = jest.fn(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       (url, options) => new Promise(resolve => resolve(response))
@@ -84,7 +84,7 @@ describe('<LoginPage /> request', () => {
     });
 
     describe('when the response is loading', () => {
-      const loadingResponse = withStatus({ status: 'loading' });
+      const loadingResponse = responseWithStatus({ status: 'loading' });
 
       beforeEach(() => {
         performRequest.mockImplementationOnce(
@@ -107,7 +107,7 @@ describe('<LoginPage /> request', () => {
     });
 
     describe('when the response is failing', () => {
-      const failureResponse = withStatus({ status: 'failure' });
+      const failureResponse = responseWithStatus({ status: 'failure' });
 
       beforeEach(() => {
         performRequest.mockImplementationOnce(
@@ -143,12 +143,11 @@ describe('<LoginPage /> request', () => {
         token,
         user,
       };
-      const successResponse = withData({
+      const successResponse = responseWithData({
         data: {
           token,
           user,
         },
-        response: withStatus({ status: 'success' }),
       });
 
       beforeEach(() => {

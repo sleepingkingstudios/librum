@@ -12,7 +12,7 @@ import {
 import { invalidPasswordError } from '@api/errors';
 import { useApiRequest } from '@api/request';
 import type { PerformRequest } from '@api/request';
-import { withStatus } from '@api/request/utils';
+import { withStatus as responseWithStatus } from '@api/request/utils';
 
 jest.mock('@api/request');
 
@@ -21,7 +21,7 @@ const mockUseApiRequest =
 
 describe('<UserUpdatePassword /> request', () => {
   describe('closeFormMiddleware()', () => {
-    const response = withStatus({ status: 'uninitialized' });
+    const response = responseWithStatus({ status: 'uninitialized' });
     const performRequest: jest.MockedFunction<PerformRequest> = jest.fn(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       (url, options) => new Promise(resolve => resolve(response))
@@ -63,7 +63,7 @@ describe('<UserUpdatePassword /> request', () => {
     });
 
     describe('when the response is loading', () => {
-      const loadingResponse = withStatus({ status: 'loading' });
+      const loadingResponse = responseWithStatus({ status: 'loading' });
 
       beforeEach(() => {
         performRequest.mockImplementationOnce(
@@ -80,7 +80,7 @@ describe('<UserUpdatePassword /> request', () => {
     });
 
     describe('when the response is failing', () => {
-      const loadingResponse = withStatus({ status: 'failure' });
+      const loadingResponse = responseWithStatus({ status: 'failure' });
 
       beforeEach(() => {
         performRequest.mockImplementationOnce(
@@ -97,7 +97,7 @@ describe('<UserUpdatePassword /> request', () => {
     });
 
     describe('when the response is successful', () => {
-      const loadingResponse = withStatus({ status: 'success' });
+      const loadingResponse = responseWithStatus({ status: 'success' });
 
       beforeEach(() => {
         performRequest.mockImplementationOnce(

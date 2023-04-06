@@ -11,9 +11,9 @@ import type {
   Response,
 } from '@api/request';
 import {
-  withError,
-  withStatus,
-} from '@api/request/utils';
+  responseWithError,
+  responseWithStatus,
+} from '@api/request';
 import type { Animations } from '@components/types';
 import { render } from '@test-helpers/rendering';
 import { FormField } from '../field';
@@ -23,7 +23,7 @@ import type {
 } from '../types';
 
 describe('<ApiForm />', () => {
-  const response: Response = withStatus({ status: 'success' });
+  const response: Response = responseWithStatus({ status: 'success' });
   const refetch: jest.MockedFunction<Refetch> = jest.fn(
     () => new Promise(resolve => resolve(response))
   );
@@ -43,7 +43,7 @@ describe('<ApiForm />', () => {
   });
 
   describe('when the response is loading', () => {
-    const response: Response = withStatus({ status: 'loading' });
+    const response: Response = responseWithStatus({ status: 'loading' });
 
     it('should match the snapshot', () => {
       const { asFragment } = render(
@@ -184,10 +184,9 @@ describe('<ApiForm />', () => {
           message: 'invalid request parameters',
           type: invalidParametersError,
         };
-        const failureResponse = withError({
+        const failureResponse = responseWithError({
           error,
           errorType: error.type,
-          response: withStatus({ status: 'failure' }),
         });
 
         beforeEach(() => {

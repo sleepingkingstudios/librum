@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { UserUpdatePasswordForm } from './form';
+import { responseWithStatus } from '@api/request';
 import type { Refetch } from '@api/request';
-import { withStatus } from '@api/request/utils';
 import { useUpdateUserPasswordRequest } from './request';
 
 jest.mock('./request');
@@ -16,7 +16,7 @@ const mockUseRequest =
 
 describe('<UserUpdatePasswordForm />', () => {
   const closeForm = jest.fn();
-  const response = withStatus({ status: 'uninitialized' });
+  const response = responseWithStatus({ status: 'uninitialized' });
   const performRequest: jest.MockedFunction<Refetch> = jest.fn(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (options) => new Promise(resolve => resolve(response))
@@ -74,7 +74,7 @@ describe('<UserUpdatePasswordForm />', () => {
   });
 
   describe('when the request is loading', () => {
-    const loadingResponse = withStatus({ status: 'loading' });
+    const loadingResponse = responseWithStatus({ status: 'loading' });
 
     beforeEach(() => {
       mockUseRequest.mockImplementation(
@@ -92,7 +92,7 @@ describe('<UserUpdatePasswordForm />', () => {
   });
 
   describe('when the request returns a failure response', () => {
-    const failureResponse = withStatus({ status: 'failure' });
+    const failureResponse = responseWithStatus({ status: 'failure' });
 
     beforeEach(() => {
       mockUseRequest.mockImplementation(
@@ -110,7 +110,7 @@ describe('<UserUpdatePasswordForm />', () => {
   });
 
   describe('when the request returns a success response', () => {
-    const successResponse = withStatus({ status: 'success' });
+    const successResponse = responseWithStatus({ status: 'success' });
 
     beforeEach(() => {
       mockUseRequest.mockImplementation(

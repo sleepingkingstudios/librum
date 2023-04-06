@@ -80,7 +80,7 @@ export const mapData = <Data = ResponseData>(data: Data): Data => {
 
 export const withData = <Data = ResponseData>({
   data,
-  response = emptyResponse,
+  response = withStatus({ status: 'success' }),
 }: {
   data: Data,
   response?: Response,
@@ -93,7 +93,7 @@ export const withData = <Data = ResponseData>({
 export const withError = <Error = ResponseData>({
   error,
   errorType,
-  response = emptyResponse,
+  response = withStatus({ status: 'failure' }),
 }: {
   error: Error,
   errorType?: string,

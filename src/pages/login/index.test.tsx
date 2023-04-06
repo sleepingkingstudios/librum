@@ -9,7 +9,7 @@ import type {
   Refetch,
   Response,
 } from '@api/request';
-import { withStatus } from '@api/request/utils';
+import { responseWithStatus } from '@api/request';
 import { useLoginRequest } from './request';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -21,7 +21,7 @@ const mockUseLoginRequest =
 
 describe('<LoginPage>', () => {
   const refetch: jest.MockedFunction<Refetch> = jest.fn();
-  const response: Response = withStatus({ status: 'uninitialized' });
+  const response: Response = responseWithStatus({ status: 'uninitialized' });
 
   beforeEach(() => {
     mockUseLoginRequest
@@ -69,7 +69,7 @@ describe('<LoginPage>', () => {
   });
 
   describe('when the request is loading', () => {
-    const loadingResponse: Response = withStatus({ status: 'loading' });
+    const loadingResponse: Response = responseWithStatus({ status: 'loading' });
 
     beforeEach(() => {
       mockUseLoginRequest.mockImplementation(() => [loadingResponse, refetch]);
@@ -83,7 +83,7 @@ describe('<LoginPage>', () => {
   });
 
   describe('when the request returns a failure response', () => {
-    const failureResponse: Response = withStatus({ status: 'failure' });
+    const failureResponse: Response = responseWithStatus({ status: 'failure' });
 
     beforeEach(() => {
       mockUseLoginRequest.mockImplementation(() => [failureResponse, refetch]);
@@ -97,7 +97,7 @@ describe('<LoginPage>', () => {
   });
 
   describe('when the request returns a successful response', () => {
-    const successResponse: Response = withStatus({ status: 'success' });
+    const successResponse: Response = responseWithStatus({ status: 'success' });
 
     beforeEach(() => {
       mockUseLoginRequest.mockImplementation(() => [successResponse, refetch]);

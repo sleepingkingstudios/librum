@@ -512,6 +512,12 @@ describe('API response utils', () => {
   });
 
   describe('withData()', () => {
+    const successResponse: Response = {
+      ...emptyResponse,
+      isSuccess: true,
+      status: 'success',
+    };
+
     it('should be a function', () => {
       expect(typeof withData).toBe('function');
     });
@@ -519,7 +525,7 @@ describe('API response utils', () => {
     describe('with data: an object', () => {
       const data: ResponseData = { greetings: 'programs' };
       const expected: Response = {
-        ...emptyResponse,
+        ...successResponse,
         data,
         hasData: true,
       };
@@ -532,7 +538,7 @@ describe('API response utils', () => {
     describe('with data: a string', () => {
       const data: ResponseData = 'Greetings, programs!';
       const expected: Response = {
-        ...emptyResponse,
+        ...successResponse,
         data,
         hasData: true,
       };
@@ -545,8 +551,8 @@ describe('API response utils', () => {
     describe('with a response', () => {
       const response: Response = {
         ...emptyResponse,
-        isSuccess: true,
-        status: 'success',
+        isLoading: true,
+        status: 'loading',
       };
 
       describe('with data: an object', () => {
@@ -578,6 +584,12 @@ describe('API response utils', () => {
   });
 
   describe('withError()', () => {
+    const failureResponse: Response = {
+      ...emptyResponse,
+      isFailure: true,
+      status: 'failure',
+    };
+
     it('should be a function', () => {
       expect(typeof withError).toBe('function');
     });
@@ -585,7 +597,7 @@ describe('API response utils', () => {
     describe('with error: an object', () => {
       const error: ResponseData = { message: 'something went wrong' };
       const expected: Response = {
-        ...emptyResponse,
+        ...failureResponse,
         error,
         hasError: true,
       };
@@ -598,7 +610,7 @@ describe('API response utils', () => {
     describe('with error: a string', () => {
       const error: ResponseData = 'something went wrong';
       const expected: Response = {
-        ...emptyResponse,
+        ...failureResponse,
         error,
         hasError: true,
       };
@@ -612,7 +624,7 @@ describe('API response utils', () => {
       const error: ResponseData = { message: 'something went wrong' };
       const errorType = 'test.errorType';
       const expected: Response = {
-        ...emptyResponse,
+        ...failureResponse,
         error,
         errorType,
         hasError: true,
@@ -626,8 +638,8 @@ describe('API response utils', () => {
     describe('with a response', () => {
       const response: Response = {
         ...emptyResponse,
-        isSuccess: true,
-        status: 'success',
+        isLoading: true,
+        status: 'loading',
       };
 
       describe('with error: an object', () => {
