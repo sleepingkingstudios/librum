@@ -2,15 +2,15 @@ import {
   handleSubmit,
   mapStatus,
 } from './utils';
-import { invalidParametersError } from '@api/errors';
-import type {
-  Refetch,
-  Response,
-} from '@api/request';
 import {
   responseWithError,
   responseWithStatus,
-} from '@api/request';
+} from '@api';
+import type {
+  Refetch,
+  Response,
+} from '@api';
+import { invalidParametersError } from '@api/errors';
 import type {
   FormErrors,
   FormStatus,

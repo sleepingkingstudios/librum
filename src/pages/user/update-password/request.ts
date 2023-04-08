@@ -3,8 +3,7 @@ import {
   faUserSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { invalidPasswordError } from '@api/errors';
-import { useApiRequest } from '@api/request';
+import { useApiRequest } from '@api';
 import type {
   AlertDirective,
   Middleware,
@@ -12,7 +11,8 @@ import type {
   PerformRequest,
   RequestOptions,
   Response,
-} from '@api/request';
+} from '@api';
+import { invalidPasswordError } from '@api/errors';
 
 type CloseForm = () => void;
 

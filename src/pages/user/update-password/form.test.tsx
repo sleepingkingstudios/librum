@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { UserUpdatePasswordForm } from './form';
-import { responseWithStatus } from '@api/request';
-import type { Refetch } from '@api/request';
+import { responseWithStatus } from '@api';
+import type { Refetch } from '@api';
 import { useUpdateUserPasswordRequest } from './request';
 
 jest.mock('./request');

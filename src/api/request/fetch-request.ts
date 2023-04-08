@@ -1,12 +1,3 @@
-import {
-  formatBody,
-  formatParams,
-  mapData,
-  withData,
-  withError,
-  withStatus,
-} from './utils';
-import { applyWildcards } from '../utils';
 import type {
   FetchOptions,
   HttpMethod,
@@ -16,7 +7,16 @@ import type {
   RequestWildcards,
   Response,
   ResponseData,
-} from './types';
+} from '../types';
+import {
+  applyWildcards,
+  formatBody,
+  formatParams,
+  mapData,
+  withData,
+  withError,
+  withStatus,
+} from '../utils';
 
 type DefaultsWithOptions = {
   contentType?: string,

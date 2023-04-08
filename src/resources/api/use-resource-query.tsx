@@ -1,9 +1,9 @@
-import { useApiQuery } from '@api/request';
+import { useApiQuery } from '@api';
 import type {
   AlertDirective,
   RefetchOptions,
   UseRequestConfig,
-} from '@api/request';
+} from '@api';
 import {
   generateAlerts,
   generateUrl,

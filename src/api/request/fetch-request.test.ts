@@ -1,11 +1,11 @@
 import { fetchRequest } from './fetch-request';
-import type { HttpMethod } from './types';
+import type { HttpMethod } from '../types';
 import {
   formatParams,
   withData,
   withError,
   withStatus,
-} from './utils';
+} from '../utils';
 
 type MockResponseOptions = {
   json?: Record<string, unknown> | Promise<Record<string, unknown>>,

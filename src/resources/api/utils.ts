@@ -5,7 +5,7 @@ import {
 } from 'lodash';
 
 import type { DisplayAlertProps } from '@alerts';
-import type { AlertDirective } from '@api/request';
+import type { AlertDirective } from '@api';
 import {
   pastTense,
   singularize,

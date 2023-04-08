@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 
-import type { AlertDirective } from '@api/request';
+import type { AlertDirective } from '@api';
 import {
   generateAlerts,
   useResourceQuery,

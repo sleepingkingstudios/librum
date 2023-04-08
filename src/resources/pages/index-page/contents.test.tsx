@@ -4,17 +4,17 @@ import '@testing-library/jest-dom';
 
 import { ResourceIndexPageContents } from './contents';
 import type { DisplayAlertProps } from '@alerts';
-import { useApiQuery } from '@api/request';
-import type { AlertDirective } from '@api/request';
+import { useApiQuery } from '@api';
+import type { AlertDirective } from '@api';
 import {
   withData as responseWithData,
   withStatus as responseWithStatus,
-} from '@api/request/utils';
+} from '@api/utils';
 import type { DataTableData } from '@components/data-table';
 import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 
-jest.mock('@api/request');
+jest.mock('@api');
 
 const mockUseApiQuery =
   useApiQuery as jest.MockedFunction<typeof useApiQuery>;
