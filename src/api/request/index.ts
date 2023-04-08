@@ -38,6 +38,7 @@ export type {
   UseQuery,
   UseQueryOptions,
   UseRequest,
+  UseRequestConfig,
   UseRequestOptions,
 } from './types';
 export {
