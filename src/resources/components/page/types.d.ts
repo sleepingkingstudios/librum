@@ -3,7 +3,6 @@ import type {
   Breadcrumb,
   NavigationProps,
 } from '@components/page';
-import type { ResourceApiHooks } from '@resources/api/types';
 import type { ResourceConfiguration } from '@resources/types';
 
 type PageContents = {
@@ -26,6 +25,5 @@ export type ResourcePageOptions = PageContents & PageOptions;
 
 export type ResourcePageProps = {
   action: string,
-  apiHooks: ResourceApiHooks,
   page: ResourcePageOptions,
 } & ResourceConfiguration;

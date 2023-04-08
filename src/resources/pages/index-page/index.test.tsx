@@ -17,14 +17,11 @@ describe('<ResourceIndexPage />', () => {
   const member = false;
   const page: ResourcePageOptions = { member };
   const resourceName = 'rareBooks';
-  const useIndexResources = jest.fn();
-  const apiHooks = { useIndexResources };
 
   const renderIndexPage = () => render(
     <ResourceIndexPage
       Table={MockTable}
       action={action}
-      apiHooks={apiHooks}
       page={page}
       resourceName={resourceName}
     />,

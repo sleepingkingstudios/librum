@@ -33,13 +33,10 @@ describe('<ResourceIndexPageContents />', () => {
   const action = 'index';
   const member = false;
   const resourceName = 'rareBooks';
-  const useIndexResources = jest.fn();
-  const apiHooks = { useIndexResources };
   const renderContents = ({ page }: { page: ResourcePageOptions }) => render(
     <ResourceIndexPageContents
       Table={MockTable}
       action={action}
-      apiHooks={apiHooks}
       page={page}
       resourceName={resourceName}
     />,
@@ -183,7 +180,6 @@ describe('<ResourceIndexPageContents />', () => {
       const { asFragment } = render(
         <ResourceIndexPageContents
           action={action}
-          apiHooks={apiHooks}
           page={page}
           resourceName={resourceName}
         />,

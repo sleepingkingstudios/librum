@@ -23,7 +23,6 @@ const generatePageDefaults = ({
 export const ResourceIndexPage = ({
   Table,
   action,
-  apiHooks,
   page,
   ...config
 }: ResourcePageProps): JSX.Element => {
@@ -38,7 +37,6 @@ export const ResourceIndexPage = ({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       Table={Table}
       action={action}
-      apiHooks={apiHooks}
       page={pageWithDefaults}
       {...config}
     />

@@ -4,15 +4,10 @@ import '@testing-library/jest-dom';
 import { Routes } from 'react-router-dom';
 
 import { generateResource } from './index';
-import type { UseQuery } from '@api';
 import { responseWithData } from '@api/request';
-import { successResult } from '@api/test-helpers';
 import type { DataTableData } from '@components/data-table';
 import { render } from '@test-helpers/rendering';
-import {
-  generateResourcesApi,
-  useResourceQuery,
-} from './api';
+import { useResourceQuery } from './api';
 import type { ResourceProps } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -49,19 +44,7 @@ describe('Resources generateResource()', () => {
     });
 
     it('should generate the index route', () => {
-      const { apiHooks, routes } = generateResource(resource);
-      const useIndexResources =
-        apiHooks.useIndexResources as jest.MockedFunction<UseQuery>;
-      const result = {
-        ...successResult,
-        data: {
-          ok: true,
-          data: indexData,
-        },
-      };
-
-      useIndexResources.mockImplementation(() => result);
-
+      const { routes } = generateResource(resource);
       const { asFragment, getByText } = render(
         <Routes>{ routes() }</Routes>,
         {
@@ -95,12 +78,6 @@ describe('Resources generateResource()', () => {
 
   it('should be a function', () => {
     expect(typeof generateResource).toBe('function');
-  });
-
-  it('should generate the API hooks', () => {
-    generateResource(resource);
-
-    expect(generateResourcesApi).toHaveBeenCalledWith(resource);
   });
 
   it('should generate the resource Pages', () => {
@@ -147,12 +124,6 @@ describe('Resources generateResource()', () => {
       pages,
       resourceName,
     };
-
-    it('should generate the API hooks', () => {
-      generateResource(resource);
-
-      expect(generateResourcesApi).toHaveBeenCalledWith(resource);
-    });
 
     it('should generate the resource Pages', () => {
       const { Pages } = generateResource(resource);

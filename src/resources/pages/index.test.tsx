@@ -3,7 +3,6 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { generateResourcePages } from './index';
-import type { ResourceApiHooks } from '@resources/api/types';
 import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 import { isElement } from '@utils/react-utils';
@@ -22,7 +21,6 @@ jest.mock(
 );
 
 describe('Resource generateResourcePages()', () => {
-  const apiHooks: ResourceApiHooks = {};
   const resourceName = 'rareBooks';
 
   const shouldConfigureThePage = ({
@@ -125,7 +123,6 @@ describe('Resource generateResourcePages()', () => {
   }): void => {
     const generated = generateResourcePages({
       Table,
-      apiHooks,
       resourceName,
       ...options,
     });
@@ -196,7 +193,6 @@ describe('Resource generateResourcePages()', () => {
     const options = { pages, resourceName };
     const generated = generateResourcePages({
       Table,
-      apiHooks,
       resourceName,
       ...options,
     });
@@ -265,7 +261,6 @@ describe('Resource generateResourcePages()', () => {
     const options = { pages, resourceName };
     const generated = generateResourcePages({
       Table,
-      apiHooks,
       resourceName,
       ...options,
     });
@@ -305,7 +300,6 @@ describe('Resource generateResourcePages()', () => {
     const options = { pages, resourceName };
     const generated = generateResourcePages({
       Table,
-      apiHooks,
       resourceName,
       ...options,
     });
