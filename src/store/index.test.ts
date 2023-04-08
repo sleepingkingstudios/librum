@@ -1,5 +1,4 @@
 import { store } from './index';
-import { initialState as api } from '@api';
 import { initialState as session } from '@session';
 
 describe('store', () => {
@@ -8,10 +7,7 @@ describe('store', () => {
     const { getState } = store;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const state = getState();
-    const expected = {
-      api,
-      session,
-    };
+    const expected = { session };
 
     it('should initialize the state', () => {
       expect(state).toEqual(expected);

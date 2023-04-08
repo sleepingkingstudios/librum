@@ -1,8 +1,6 @@
 import type { Middleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query/react';
 
-import { api } from '@api';
 import { reducer as session } from '@session';
 
 export {
@@ -18,17 +16,12 @@ type getDefaultMiddlewareType = () => Middleware[];
 
 const middleware = (
   getDefaultMiddleware: getDefaultMiddlewareType,
-) => getDefaultMiddleware().concat(api.middleware);
-export const reducer = {
-  api: api.reducer,
-  session,
-};
+) => getDefaultMiddleware();
+export const reducer = { session };
 export const store = configureStore({
   middleware,
   reducer,
 });
-
-setupListeners(store.dispatch);
 
 export type Dispatch = typeof store.dispatch;
 
