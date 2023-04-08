@@ -4,11 +4,11 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import { UserPage } from './index';
-import type { Response } from '@api/request';
 import {
-  withData,
-  withStatus,
-} from '@api/request/utils';
+  responseWithData,
+  responseWithStatus,
+} from '@api/request';
+import type { Response } from '@api/request';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { useGetUserQuery } from './request';
@@ -26,7 +26,7 @@ describe('<UserPage>', () => {
   const refetch = jest.fn();
 
   describe('when the user is loading', () => {
-    const response: Response = withStatus({ status: 'loading' });
+    const response: Response = responseWithStatus({ status: 'loading' });
 
     beforeEach(() => {
       mockUseQuery.mockImplementation(() => [response, refetch]);
@@ -54,7 +54,7 @@ describe('<UserPage>', () => {
   });
 
   describe('when the user has failed to load', () => {
-    const response: Response = withStatus({ status: 'failure' });
+    const response: Response = responseWithStatus({ status: 'failure' });
 
     beforeEach(() => {
       mockUseQuery.mockImplementation(() => [response, refetch]);
@@ -78,9 +78,8 @@ describe('<UserPage>', () => {
       slug: 'alan-bradley',
       username: 'Alan Bradley',
     };
-    const response: Response = withData({
+    const response: Response = responseWithData({
       data: { user },
-      response: withStatus({ status: 'success' }),
     });
 
     beforeEach(() => {

@@ -234,13 +234,5 @@
       @apply text-zinc-900 hover:text-black;
       @apply dark:text-zinc-100 dark:hover:text-white;
     }
-
-    .text-danger {
-      @apply text-red-600;
-    }
-
-    .text-muted {
-      @apply text-zinc-500;
-    }
   }
 }

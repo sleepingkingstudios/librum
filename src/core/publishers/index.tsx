@@ -8,7 +8,7 @@ const navigation = (<CoreNavigation />);
 
 export const { resource, routes } = generateResource({
   Table: PublishersTable,
-  baseUrl: 'publishers',
+  baseUrl: 'api/publishers',
   breadcrumbs: [{
     label: 'Home',
     url: '/',

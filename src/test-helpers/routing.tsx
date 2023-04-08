@@ -13,6 +13,13 @@ export const shouldNotRenderRoute = (
   { at }: { at: string },
 ): void => {
   describe(`with path "${at}"`, () => {
+    beforeEach(() => {
+      // Silence React Router warning about empty leaf node.
+      jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => null);
+    });
+
     it('should not match the route', () => {
       const { queryByText } = render(
         <Routes />,

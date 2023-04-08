@@ -112,9 +112,12 @@ export type UseQueryOptions = UseRequestOptions & RefetchOptions;
 
 export type UseRequest = (options: UseRequestOptions) => [Response, Refetch];
 
-export type UseRequestOptions = {
+export type UseRequestConfig = {
   config?: MiddlewareOptions,
   method?: HttpMethod,
   middleware?: Middleware[],
+};
+
+export type UseRequestOptions = UseRequestConfig & {
   url: string,
 };

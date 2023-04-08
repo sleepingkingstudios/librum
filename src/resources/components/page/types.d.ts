@@ -1,11 +1,8 @@
-import type { Effect } from '@api';
-import type { AlertDirective } from '@api/effects/display-alerts';
 import type { Button } from '@components/button/types';
 import type {
   Breadcrumb,
   NavigationProps,
 } from '@components/page';
-import type { ResourceApiHooks } from '@resources/api/types';
 import type { ResourceConfiguration } from '@resources/types';
 
 type PageContents = {
@@ -24,15 +21,9 @@ type PageOptions = {
   title?: string,
 } & Record<string, unknown>;
 
-type RequestOptions = {
-  alerts?: false | AlertDirective[],
-  effects?: Effect[],
-};
-
-export type ResourcePageOptions = PageContents & PageOptions & RequestOptions;
+export type ResourcePageOptions = PageContents & PageOptions;
 
 export type ResourcePageProps = {
   action: string,
-  apiHooks: ResourceApiHooks,
   page: ResourcePageOptions,
 } & ResourceConfiguration;

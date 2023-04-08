@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { pick } from 'lodash';
 
-import type { ResourceApiHooks } from '@resources/api/types';
 import { ResourcePage } from '@resources/components/page';
 import type { ResourcePageOptions } from '@resources/components/page';
 import { isComponent } from '@utils/react-utils';
@@ -15,13 +14,11 @@ import type {
 
 type GeneratePage = {
   action: string,
-  apiHooks: ResourceApiHooks,
   defaultPage: React.ComponentType,
   maybePage: PageConfiguration,
 } & ResourceConfiguration;
 
 type GenerateResourcePages = {
-  apiHooks: ResourceApiHooks,
   pages?: ResourcePagesConfiguration,
 } & ResourceConfiguration;
 

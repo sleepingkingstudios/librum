@@ -108,6 +108,20 @@ export const DemoPage = (): JSX.Element => (
 
     <p>This is separator text.</p>
 
+    <h3>
+      <span className="text-danger mr-1">Headings</span>
+
+      <span className="text-info mx-1">Can</span>
+
+      <span className="text-muted mx-1">Also</span>
+
+      <span className="text-primary mx-1">Have</span>
+
+      <span className="text-success mx-1">Colorful</span>
+
+      <span className="text-warning mx-1">Text</span>
+    </h3>
+
     <hr className="hr-muted m-5" />
 
     <h3>Typography</h3>
@@ -120,9 +134,19 @@ export const DemoPage = (): JSX.Element => (
 
     <h4>Text Colors</h4>
 
+    <p>This paragraph contains plain text.</p>
+
     <p>This paragraph contains <span className="text-danger">danger text</span>.</p>
 
+    <p>This paragraph contains <span className="text-info">info text</span>.</p>
+
     <p>This paragraph contains <span className="text-muted">muted text</span>.</p>
+
+    <p>This paragraph contains <span className="text-primary">primary text</span>.</p>
+
+    <p>This paragraph contains <span className="text-success">success text</span>.</p>
+
+    <p>This paragraph contains <span className="text-warning">warning text</span>.</p>
 
     <h4>Links</h4>
 

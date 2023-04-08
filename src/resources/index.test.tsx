@@ -4,17 +4,18 @@ import '@testing-library/jest-dom';
 import { Routes } from 'react-router-dom';
 
 import { generateResource } from './index';
-import type { UseQuery } from '@api';
-import { successResult } from '@api/test-helpers';
+import { responseWithData } from '@api/request';
 import type { DataTableData } from '@components/data-table';
 import { render } from '@test-helpers/rendering';
-import { generateResourcesApi } from './api';
+import { useResourceQuery } from './api';
 import type { ResourceProps } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('./api', () => require('./api/mocks'));
+jest.mock('./api');
+
+const mockUseResourceQuery =
+  useResourceQuery as jest.MockedFunction<typeof useResourceQuery>;
 
 const Table = ({ data }: { data: DataTableData }): JSX.Element => {
   const books = 'rareBooks' in data ? data.rareBooks : [];
@@ -34,20 +35,15 @@ describe('Resources generateResource()', () => {
     at?: string,
     resource: ResourceProps,
   }): void => {
+    const refetch = jest.fn();
+    const response = responseWithData({ data: indexData });
+
+    beforeEach(() => {
+      mockUseResourceQuery.mockImplementation(() => [response, refetch]);
+    });
+
     it('should generate the index route', () => {
-      const { apiHooks, routes } = generateResource(resource);
-      const useIndexResources =
-        apiHooks.useIndexResources as jest.MockedFunction<UseQuery>;
-      const result = {
-        ...successResult,
-        data: {
-          ok: true,
-          data: indexData,
-        },
-      };
-
-      useIndexResources.mockImplementation(() => result);
-
+      const { routes } = generateResource(resource);
       const { asFragment, getByText } = render(
         <Routes>{ routes() }</Routes>,
         {
@@ -81,12 +77,6 @@ describe('Resources generateResource()', () => {
 
   it('should be a function', () => {
     expect(typeof generateResource).toBe('function');
-  });
-
-  it('should generate the API hooks', () => {
-    generateResource(resource);
-
-    expect(generateResourcesApi).toHaveBeenCalledWith(resource);
   });
 
   it('should generate the resource Pages', () => {
@@ -133,12 +123,6 @@ describe('Resources generateResource()', () => {
       pages,
       resourceName,
     };
-
-    it('should generate the API hooks', () => {
-      generateResource(resource);
-
-      expect(generateResourcesApi).toHaveBeenCalledWith(resource);
-    });
 
     it('should generate the resource Pages', () => {
       const { Pages } = generateResource(resource);

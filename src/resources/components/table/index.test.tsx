@@ -3,12 +3,11 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { ResourcesTable } from './index';
+
 import {
-  defaultResponse,
-  failureResponse,
-  loadingResponse,
-  successResponse,
-} from '@api/test-helpers';
+  responseWithData,
+  responseWithStatus,
+} from '@api/request';
 import { DataTable } from '@components/data-table';
 import type {
   DataTableColumn,
@@ -26,34 +25,59 @@ const EmployeesTable = ({ data }: { data: DataTableData }): JSX.Element => (
 
 describe('<ResourcesTable />', () => {
   const resourceName = 'currentEmployees';
-  const useRequest = jest.fn(() => defaultResponse);
+  const response = responseWithStatus({ status: 'uninitialized' });
   const expectedHeaders = ['Name', 'Role'];
 
-  beforeEach(() => { useRequest.mockClear(); });
-
-  it('should perform the request', () => {
-    render(
+  it('should display the table headings', () => {
+    const { getAllByRole } = render(
       <ResourcesTable
         Table={EmployeesTable}
         resourceName={resourceName}
-        useRequest={useRequest}
+        response={response}
+      />
+    );
+    const headers = getAllByRole('columnheader');
+
+    expect(headers).toHaveLength(2);
+    expect(headers.map(header => header.textContent))
+      .toEqual(expectedHeaders);
+  });
+
+  it('should display the empty message', () => {
+    const { getByRole } = render(
+      <ResourcesTable
+        Table={EmployeesTable}
+        resourceName={resourceName}
+        response={response}
+      />
+    );
+    const cell = getByRole('cell');
+
+    expect(cell).toBeVisible();
+    expect(cell.textContent).toBe('There are no matching current employees.');
+  });
+
+  it('should match the snapshot', () => {
+    const { asFragment } = render(
+      <ResourcesTable
+        Table={EmployeesTable}
+        resourceName={resourceName}
+        response={response}
       />
     );
 
-    expect(useRequest).toHaveBeenCalled();
+    expect(asFragment()).toMatchSnapshot();
   });
 
   describe('when the request is loading', () => {
-    beforeEach(() => {
-      useRequest.mockImplementation(() => loadingResponse);
-    });
+    const loadingResponse = responseWithStatus({ status: 'loading' });
 
     it('should display the loading message', () => {
       const { getByText } = render(
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={loadingResponse}
         />
       );
       const loader = getByText('Loading Current Employees...');
@@ -66,7 +90,7 @@ describe('<ResourcesTable />', () => {
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={loadingResponse}
         />
       );
 
@@ -75,16 +99,14 @@ describe('<ResourcesTable />', () => {
   });
 
   describe('when the request is failing', () => {
-    beforeEach(() => {
-      useRequest.mockImplementation(() => failureResponse);
-    });
+    const failureResponse = responseWithStatus({ status: 'failure' });
 
     it('should display the table headings', () => {
       const { getAllByRole } = render(
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={failureResponse}
         />
       );
       const headers = getAllByRole('columnheader');
@@ -99,7 +121,7 @@ describe('<ResourcesTable />', () => {
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={failureResponse}
         />
       );
       const cell = getByRole('cell');
@@ -113,7 +135,7 @@ describe('<ResourcesTable />', () => {
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={failureResponse}
         />
       );
 
@@ -136,11 +158,9 @@ describe('<ResourcesTable />', () => {
         role: 'user',
       },
     ];
-    const responseWithData = {
-      ...successResponse,
+    const successResponse = responseWithData({
       data: { currentEmployees },
-      hasData: true,
-    };
+    });
     const expectedBody = [
       'Alan Bradley',
       'user',
@@ -150,16 +170,12 @@ describe('<ResourcesTable />', () => {
       'user',
     ];
 
-    beforeEach(() => {
-      useRequest.mockImplementation(() => responseWithData);
-    });
-
     it('should display the table headings', () => {
       const { getAllByRole } = render(
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={successResponse}
         />
       );
       const headers = getAllByRole('columnheader');
@@ -174,7 +190,7 @@ describe('<ResourcesTable />', () => {
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={successResponse}
         />
       );
       const cells = getAllByRole('cell');
@@ -188,7 +204,7 @@ describe('<ResourcesTable />', () => {
         <ResourcesTable
           Table={EmployeesTable}
           resourceName={resourceName}
-          useRequest={useRequest}
+          response={successResponse}
         />
       );
 
@@ -202,9 +218,7 @@ describe('<ResourcesTable />', () => {
     );
 
     describe('when the request is loading', () => {
-      beforeEach(() => {
-        useRequest.mockImplementation(() => loadingResponse);
-      });
+      const loadingResponse = responseWithStatus({ status: 'loading' });
 
       it('should display the loading message', () => {
         const { getByText } = render(
@@ -212,7 +226,7 @@ describe('<ResourcesTable />', () => {
             Table={EmployeesTable}
             loader={<CustomLoader />}
             resourceName={resourceName}
-            useRequest={useRequest}
+            response={loadingResponse}
           />
         );
         const loader = getByText('Loading, loading, loading...');
@@ -226,7 +240,7 @@ describe('<ResourcesTable />', () => {
             Table={EmployeesTable}
             loader={<CustomLoader />}
             resourceName={resourceName}
-            useRequest={useRequest}
+            response={loadingResponse}
           />
         );
 

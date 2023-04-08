@@ -8,9 +8,9 @@ import type {
   Response,
 } from '@api/request';
 import {
-  withError,
-  withStatus,
-} from '@api/request/utils';
+  responseWithError,
+  responseWithStatus,
+} from '@api/request';
 import type {
   FormErrors,
   FormStatus,
@@ -20,7 +20,9 @@ import type {
 describe('<ApiForm /> utils', () => {
   describe('handleSubmit()', () => {
     const refetch: jest.MockedFunction<Refetch> = jest.fn(
-      () => new Promise(resolve => resolve(withStatus({ status: 'success' })))
+      () => new Promise(resolve => resolve(
+        responseWithStatus({ status: 'success' })
+      )),
     );
     const setStatus = jest.fn();
     const options = { setStatus };
@@ -48,7 +50,7 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('when the request returns a failure response', () => {
-      const response: Response = withStatus({ status: 'failure' });
+      const response: Response = responseWithStatus({ status: 'failure' });
 
       beforeEach(() => {
         refetch.mockImplementationOnce(
@@ -77,10 +79,9 @@ describe('<ApiForm /> utils', () => {
         message: 'invalid request parameters',
         type: invalidParametersError,
       };
-      const response = withError({
+      const response = responseWithError({
         error,
         errorType: error.type,
-        response: withStatus({ status: 'failure' }),
       });
       const expected: FormStatus = {
         ok: false,
@@ -115,7 +116,7 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('with an uninitialized response', () => {
-      const response = withStatus({ status: 'uninitialized' });
+      const response = responseWithStatus({ status: 'uninitialized' });
 
       it('should return a basic status', () => {
         expect(mapStatus(response)).toEqual({ ok: true });
@@ -123,7 +124,7 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('with a loading response', () => {
-      const response = withStatus({ status: 'loading' });
+      const response = responseWithStatus({ status: 'loading' });
 
       it('should return a basic status', () => {
         expect(mapStatus(response)).toEqual({ ok: true });
@@ -131,7 +132,7 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('with a success response', () => {
-      const response = withStatus({ status: 'success' });
+      const response = responseWithStatus({ status: 'success' });
 
       it('should return a basic status', () => {
         expect(mapStatus(response)).toEqual({ ok: true });
@@ -139,7 +140,7 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('with a failing response', () => {
-      const response = withStatus({ status: 'failure' });
+      const response = responseWithStatus({ status: 'failure' });
 
       it('should return a basic status', () => {
         expect(mapStatus(response)).toEqual({ ok: false });
@@ -147,9 +148,8 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('with a failing response with a string error', () => {
-      const response = withError({
+      const response = responseWithError({
         error: 'Something went wrong',
-        response: withStatus({ status: 'failure' }),
       });
 
       it('should return a basic status', () => {
@@ -158,14 +158,13 @@ describe('<ApiForm /> utils', () => {
     });
 
     describe('with a failing response with an API error', () => {
-      const response = withError({
+      const response = responseWithError({
         error: {
           data: {},
           message: 'Something went wrong',
           type: 'test.errorType',
         },
         errorType: 'test.errorType',
-        response: withStatus({ status: 'failure' }),
       });
 
       it('should return a basic status', () => {
@@ -187,10 +186,9 @@ describe('<ApiForm /> utils', () => {
         message: 'invalid request parameters',
         type: invalidParametersError,
       };
-      const response = withError({
+      const response = responseWithError({
         error,
         errorType: error.type,
-        response: withStatus({ status: 'failure' }),
       });
       const expected: FormStatus = {
         ok: false,

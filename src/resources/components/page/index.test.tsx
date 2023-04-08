@@ -6,7 +6,6 @@ import { ResourcePage } from './index';
 import { ButtonProps as Button } from '@components/button';
 import type { Breadcrumb } from '@components/page';
 import { render } from '@test-helpers/rendering';
-import type { ResourceApiHooks } from '../../api/types';
 import type { ResourcePageOptions } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -16,7 +15,6 @@ jest.mock('@components/page/breadcrumbs', () => require('@components/page/breadc
 
 describe('<ResourcePage />', () => {
   const action = 'published';
-  const apiHooks: ResourceApiHooks = {};
   const member = false;
   const resourceName = 'rareBooks';
   const renderPage = ({
@@ -30,7 +28,6 @@ describe('<ResourcePage />', () => {
   }) => render(
     <ResourcePage
       action={action}
-      apiHooks={apiHooks}
       page={page}
       resourceName={resourceName}
       {...options}

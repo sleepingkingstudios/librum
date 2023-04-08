@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ResourcesTable /> should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="min-h-[10rem] relative resources-table"
+  >
+    <figure
+      class="data-table data-table-current-employees"
+    >
+      <table>
+        <thead
+          class="data-table-header"
+        >
+          <tr>
+            <th
+              class="data-table-header-name"
+            >
+              Name
+            </th>
+            <th
+              class="data-table-header-role"
+            >
+              Role
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td
+              class="data-table-empty"
+              colspan="2"
+            >
+              There are no matching current employees.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`<ResourcesTable /> when the request is failing should match the snapshot 1`] = `
 <DocumentFragment>
   <div

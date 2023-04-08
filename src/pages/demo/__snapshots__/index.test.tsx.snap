@@ -81,6 +81,38 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
     <p>
       This is separator text.
     </p>
+    <h3>
+      <span
+        class="text-danger mr-1"
+      >
+        Headings
+      </span>
+      <span
+        class="text-info mx-1"
+      >
+        Can
+      </span>
+      <span
+        class="text-muted mx-1"
+      >
+        Also
+      </span>
+      <span
+        class="text-primary mx-1"
+      >
+        Have
+      </span>
+      <span
+        class="text-success mx-1"
+      >
+        Colorful
+      </span>
+      <span
+        class="text-warning mx-1"
+      >
+        Text
+      </span>
+    </h3>
     <hr
       class="hr-muted m-5"
     />
@@ -100,6 +132,9 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
       Text Colors
     </h4>
     <p>
+      This paragraph contains plain text.
+    </p>
+    <p>
       This paragraph contains 
       <span
         class="text-danger"
@@ -111,9 +146,45 @@ exports[`<DemoPage /> should match the snapshot 1`] = `
     <p>
       This paragraph contains 
       <span
+        class="text-info"
+      >
+        info text
+      </span>
+      .
+    </p>
+    <p>
+      This paragraph contains 
+      <span
         class="text-muted"
       >
         muted text
+      </span>
+      .
+    </p>
+    <p>
+      This paragraph contains 
+      <span
+        class="text-primary"
+      >
+        primary text
+      </span>
+      .
+    </p>
+    <p>
+      This paragraph contains 
+      <span
+        class="text-success"
+      >
+        success text
+      </span>
+      .
+    </p>
+    <p>
+      This paragraph contains 
+      <span
+        class="text-warning"
+      >
+        warning text
       </span>
       .
     </p>

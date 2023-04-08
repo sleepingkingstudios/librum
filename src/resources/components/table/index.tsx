@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import type { Response } from '@api/types';
+import type { Response } from '@api/request';
 import type { DataTableData } from '@components/data-table/types';
 import { LoadingOverlay } from '@components/loading-overlay';
-import type { UseResourceQuery } from '@resources/api/types';
 import { titleCase } from '@utils/text';
 
 type DataTableProps = {
@@ -14,8 +13,8 @@ type DataTableProps = {
 type ResourcesTableProps = {
   Table: DataTableType,
   loader?: JSX.Element,
+  response: Response,
   resourceName: string,
-  useRequest: UseResourceQuery,
 };
 
 export type DataTableType = (props: DataTableProps) => JSX.Element;
@@ -66,14 +65,10 @@ const renderLoader = ({
 export const ResourcesTable = ({
   Table,
   loader,
+  response,
   resourceName,
-  useRequest,
-}: ResourcesTableProps): JSX.Element => {
-  const response = useRequest();
-
-  return (
-    <div className="min-h-[10rem] relative resources-table">
-      { renderContent({ Table, loader, resourceName, response }) }
-    </div>
-  );
-};
+}: ResourcesTableProps): JSX.Element => (
+  <div className="min-h-[10rem] relative resources-table">
+    { renderContent({ Table, loader, resourceName, response }) }
+  </div>
+);

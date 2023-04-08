@@ -38,5 +38,11 @@ export type {
   UseQuery,
   UseQueryOptions,
   UseRequest,
+  UseRequestConfig,
   UseRequestOptions,
 } from './types';
+export {
+  withData as responseWithData,
+  withError as responseWithError,
+  withStatus as responseWithStatus,
+} from './utils';
