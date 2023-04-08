@@ -12,8 +12,7 @@ import type { ResourceProps } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('./api', () => require('./api/mocks'));
+jest.mock('./api');
 
 const mockUseResourceQuery =
   useResourceQuery as jest.MockedFunction<typeof useResourceQuery>;
