@@ -30,6 +30,10 @@ describe('Resources API hooks', () => {
         display: failureAlert,
         status: 'failure',
       },
+      {
+        dismiss: failureAlert.context,
+        status: 'success',
+      },
     ];
     const options = {
       action,
@@ -158,6 +162,10 @@ describe('Resources API hooks', () => {
         {
           display: failureAlert,
           status: 'failure',
+        },
+        {
+          dismiss: failureAlert.context,
+          status: 'success',
         },
       ];
       const options = {

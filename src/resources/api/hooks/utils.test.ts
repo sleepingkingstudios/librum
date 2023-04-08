@@ -128,6 +128,10 @@ describe('Resources API hooks utils', () => {
             display: failureAlert,
             status: 'failure',
           },
+          {
+            dismiss: failureAlert.context,
+            status: 'success',
+          },
         ];
 
         expect(generateAlerts({
@@ -172,6 +176,10 @@ describe('Resources API hooks utils', () => {
             {
               display: failureAlert,
               status: 'failure',
+            },
+            {
+              dismiss: failureAlert.context,
+              status: 'success',
             },
           ];
 
@@ -339,6 +347,10 @@ describe('Resources API hooks utils', () => {
             display: failureAlert,
             status: 'failure',
           },
+          {
+            dismiss: failureAlert.context,
+            status: 'success',
+          },
         ];
 
         expect(generateAlerts({
@@ -384,6 +396,10 @@ describe('Resources API hooks utils', () => {
               display: failureAlert,
               status: 'failure',
             },
+            {
+              dismiss: failureAlert.context,
+              status: 'success',
+            },
           ];
 
           expect(generateAlerts({
@@ -413,6 +429,10 @@ describe('Resources API hooks utils', () => {
             {
               display: failureAlert,
               status: 'failure',
+            },
+            {
+              dismiss: failureAlert.context,
+              status: 'success',
             },
           ];
 

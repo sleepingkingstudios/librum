@@ -5,7 +5,11 @@ import type {
 import { injectEndpoint } from './endpoint';
 import type { ResourceApiHooks } from './types';
 
-export { useResourceQuery } from './hooks';
+export {
+  generateAlerts,
+  generateUrl,
+  useResourceQuery,
+} from './hooks';
 
 export type { UseResourceQueryOptions } from './hooks';
 

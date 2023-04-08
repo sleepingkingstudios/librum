@@ -3,30 +3,21 @@ import * as React from 'react';
 import '@testing-library/jest-dom';
 
 import { ResourceIndexPageContents } from './contents';
-import type {
-  Effect,
-  Response,
-} from '@api';
-import type { AlertDirective } from '@api/effects/display-alerts';
+import type { DisplayAlertProps } from '@alerts';
+import { useApiQuery } from '@api/request';
+import type { AlertDirective } from '@api/request';
 import {
-  failureResponse,
-  loadingResponse,
-  successResponse,
-} from '@api/test-helpers';
+  withData as responseWithData,
+  withStatus as responseWithStatus,
+} from '@api/request/utils';
 import type { DataTableData } from '@components/data-table';
-import {
-  useResourceQuery as mockUseResourceQuery,
-} from '@resources/api/legacy-hooks/mocks';
 import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 
-jest.mock(
-  '@resources/api/legacy-hooks',
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  () => require('@resources/api/legacy-hooks/mocks'),
-);
+jest.mock('@api/request');
 
-const useRequest = mockUseResourceQuery() as jest.MockedFunction<() => Response>;
+const mockUseApiQuery =
+  useApiQuery as jest.MockedFunction<typeof useApiQuery>;
 
 const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
   const books = 'rareBooks' in data ? data.rareBooks : [];
@@ -55,29 +46,43 @@ describe('<ResourceIndexPageContents />', () => {
     { store: true },
   );
   const page: ResourcePageOptions = { member };
+  const url = 'api/rare_books';
+  const failureAlert: DisplayAlertProps = {
+    context: 'resources:rareBooks:request',
+    message: 'Unable to find rare books',
+    type: 'failure',
+  };
+  const alerts: AlertDirective[] = [
+    {
+      display: failureAlert,
+      status: 'errored',
+    },
+    {
+      display: failureAlert,
+      status: 'failure',
+    },
+    {
+      dismiss: failureAlert.context,
+      status: 'success',
+    },
+  ];
+  const refetch = jest.fn();
+  const response = responseWithStatus({ status: 'uninitialized' });
 
   beforeEach(() => {
-    mockUseResourceQuery.mockClear();
-
-    useRequest.mockClear();
+    mockUseApiQuery
+      .mockClear()
+      .mockImplementation(() => [response, refetch])
   });
 
   it('should configure the request', () => {
     renderContents({ page });
     const expected = {
-      action,
-      member,
-      resourceName,
-      useQuery: useIndexResources,
+      alerts,
+      url,
     };
 
-    expect(mockUseResourceQuery).toHaveBeenCalledWith(expected);
-  });
-
-  it('should perform the query', () => {
-    renderContents({ page });
-
-    expect(useRequest).toHaveBeenCalled();
+    expect(mockUseApiQuery).toHaveBeenCalledWith(expected);
   });
 
   it('should display the empty table', () => {
@@ -91,12 +96,14 @@ describe('<ResourceIndexPageContents />', () => {
   it('should match the snapshot', () => {
     const { asFragment } = renderContents({ page });
 
-    expect(asFragment).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 
   describe('when the response is loading', () => {
+    const loadingResponse = responseWithStatus({ status: 'loading' });
+
     beforeEach(() => {
-      useRequest.mockImplementation(() => loadingResponse);
+      mockUseApiQuery.mockImplementation(() => [loadingResponse, refetch]);
     });
 
     it('should display the loading message', () => {
@@ -110,13 +117,15 @@ describe('<ResourceIndexPageContents />', () => {
     it('should match the snapshot', () => {
       const { asFragment } = renderContents({ page });
 
-      expect(asFragment).toMatchSnapshot();
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 
   describe('when the response is failing', () => {
+    const failureResponse = responseWithStatus({ status: 'failure' });
+
     beforeEach(() => {
-      useRequest.mockImplementation(() => failureResponse);
+      mockUseApiQuery.mockImplementation(() => [failureResponse, refetch]);
     });
 
     it('should display the empty table', () => {
@@ -130,7 +139,7 @@ describe('<ResourceIndexPageContents />', () => {
     it('should match the snapshot', () => {
       const { asFragment } = renderContents({ page });
 
-      expect(asFragment).toMatchSnapshot();
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 
@@ -148,14 +157,10 @@ describe('<ResourceIndexPageContents />', () => {
         },
       ],
     };
-    const response = {
-      ...successResponse,
-      data,
-      hasData: true,
-    };
+    const successResponse = responseWithData({ data });
 
     beforeEach(() => {
-      useRequest.mockImplementation(() => response);
+      mockUseApiQuery.mockImplementation(() => [successResponse, refetch]);
     });
 
     it('should display the table', () => {
@@ -169,55 +174,23 @@ describe('<ResourceIndexPageContents />', () => {
     it('should match the snapshot', () => {
       const { asFragment } = renderContents({ page });
 
-      expect(asFragment).toMatchSnapshot();
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 
-  describe('with page: { alerts: value }', () => {
-    const alerts: AlertDirective[] = [
-      {
-        display: { message: 'Something went wrong' },
-        status: 'failure',
-      },
-      {
-        display: { message: 'All is well' },
-        status: 'success',
-      },
-    ];
-    const page: ResourcePageOptions = { alerts, member };
+  describe('with Table: undefined', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <ResourceIndexPageContents
+          action={action}
+          apiHooks={apiHooks}
+          page={page}
+          resourceName={resourceName}
+        />,
+        { store: true },
+      );
 
-    it('should configure the request', () => {
-      renderContents({ page });
-      const expected = {
-        action,
-        alerts,
-        member,
-        resourceName,
-        useQuery: useIndexResources,
-      };
-
-      expect(mockUseResourceQuery).toHaveBeenCalledWith(expected);
-    });
-  });
-
-  describe('with page: { effects: value }', () => {
-    const effects: Effect[] = [
-      jest.fn(),
-      jest.fn(),
-    ];
-    const page: ResourcePageOptions = { effects, member };
-
-    it('should configure the request', () => {
-      renderContents({ page });
-      const expected = {
-        action,
-        effects,
-        member,
-        resourceName,
-        useQuery: useIndexResources,
-      };
-
-      expect(mockUseResourceQuery).toHaveBeenCalledWith(expected);
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 });

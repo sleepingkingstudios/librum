@@ -88,6 +88,10 @@ export const generateAlerts = ({
         display: failureAlert,
         status: 'failure',
       },
+      {
+        dismiss: context,
+        status: 'success',
+      },
     ];
   }
 
@@ -147,4 +151,4 @@ export const generateUrl = ({
   generated = `${generated}/${action}`;
 
   return generated;
-}
+};
