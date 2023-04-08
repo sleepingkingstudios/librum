@@ -2,9 +2,9 @@ import { renderHook } from '@testing-library/react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { useGetUserQuery } from './request';
-import { useApiQuery } from '@api/request';
+import { useApiQuery } from '@api';
 
-jest.mock('@api/request');
+jest.mock('@api');
 
 const mockUseApiQuery =
   useApiQuery as jest.MockedFunction<typeof useApiQuery>;

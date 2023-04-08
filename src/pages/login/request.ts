@@ -5,7 +5,7 @@ import {
   alertsMiddleware,
   apiDataMiddleware,
   useRequest as useApiRequest,
-} from '@api/request';
+} from '@api';
 import type {
   AlertDirective,
   Middleware,
@@ -14,7 +14,7 @@ import type {
   RequestOptions,
   Response,
   ResponseData,
-} from '@api/request';
+} from '@api';
 import type {
   Session,
   User,

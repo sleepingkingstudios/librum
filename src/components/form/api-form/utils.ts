@@ -1,12 +1,12 @@
 import type { FormikValues } from 'formik';
 
-import { invalidParametersError } from '@api/errors';
 import type {
   Refetch,
   RefetchOptions,
   RequestBody,
   Response,
-} from '@api/request';
+} from '@api';
+import { invalidParametersError } from '@api/errors';
 import type {
   FormStatus,
   InvalidParametersError,

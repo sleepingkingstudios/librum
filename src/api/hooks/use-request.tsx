@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { fetchRequest } from '../fetch-request';
+import { fetchRequest } from '../request';
 import type {
   PerformRequest,
   Refetch,

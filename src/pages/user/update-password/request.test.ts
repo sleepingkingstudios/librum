@@ -9,12 +9,12 @@ import {
   closeFormMiddleware,
   useUpdateUserPasswordRequest,
 } from './request';
+import { useApiRequest } from '@api';
+import type { PerformRequest } from '@api';
 import { invalidPasswordError } from '@api/errors';
-import { useApiRequest } from '@api/request';
-import type { PerformRequest } from '@api/request';
-import { withStatus as responseWithStatus } from '@api/request/utils';
+import { withStatus as responseWithStatus } from '@api/utils';
 
-jest.mock('@api/request');
+jest.mock('@api');
 
 const mockUseApiRequest =
   useApiRequest as jest.MockedFunction<typeof useApiRequest>;

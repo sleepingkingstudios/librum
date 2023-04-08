@@ -5,11 +5,11 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@test-helpers/rendering';
 
 import { LoginPage } from './index';
+import { responseWithStatus } from '@api';
 import type {
   Refetch,
   Response,
-} from '@api/request';
-import { responseWithStatus } from '@api/request';
+} from '@api';
 import { useLoginRequest } from './request';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return

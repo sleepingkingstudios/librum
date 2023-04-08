@@ -11,12 +11,12 @@ import {
   alertsMiddleware,
   apiDataMiddleware,
   useRequest,
-} from '@api/request';
-import type { PerformRequest } from '@api/request';
+} from '@api';
+import type { PerformRequest } from '@api';
 import {
   withData as responseWithData,
   withStatus as responseWithStatus,
-} from '@api/request/utils';
+} from '@api/utils';
 import type {
   Session,
   User,
@@ -26,7 +26,7 @@ import { useStoreDispatch } from '@store/hooks';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@alerts', () => require('@alerts/mocks'));
-jest.mock('@api/request');
+jest.mock('@api');
 jest.mock('@store/hooks');
 
 const mockAlertsMiddleware =

@@ -5,7 +5,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import type {
   Refetch,
   Response,
-} from '@api/request';
+} from '@api';
 import type { Animations } from '@components/types';
 import { Form } from '../form';
 import type {

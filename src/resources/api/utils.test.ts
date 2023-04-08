@@ -3,7 +3,7 @@ import {
   generateUrl,
 } from './utils';
 import type { DisplayAlertProps } from '@alerts';
-import type { AlertDirective } from '@api/request';
+import type { AlertDirective } from '@api';
 
 describe('Resources API hooks utils', () => {
   describe('generateAlerts()', () => {

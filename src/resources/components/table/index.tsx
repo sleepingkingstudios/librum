@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { Response } from '@api/request';
+import type { Response } from '@api';
 import type { DataTableData } from '@components/data-table/types';
 import { LoadingOverlay } from '@components/loading-overlay';
 import { titleCase } from '@utils/text';

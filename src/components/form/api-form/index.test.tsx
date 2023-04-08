@@ -5,15 +5,15 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
 import { ApiForm } from './index';
-import { invalidParametersError } from '@api/errors';
-import type {
-  Refetch,
-  Response,
-} from '@api/request';
 import {
   responseWithError,
   responseWithStatus,
-} from '@api/request';
+} from '@api';
+import type {
+  Refetch,
+  Response,
+} from '@api';
+import { invalidParametersError } from '@api/errors';
 import type { Animations } from '@components/types';
 import { render } from '@test-helpers/rendering';
 import { FormField } from '../field';

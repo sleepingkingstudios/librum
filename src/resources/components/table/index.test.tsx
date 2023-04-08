@@ -7,7 +7,7 @@ import { ResourcesTable } from './index';
 import {
   responseWithData,
   responseWithStatus,
-} from '@api/request';
+} from '@api';
 import { DataTable } from '@components/data-table';
 import type {
   DataTableColumn,

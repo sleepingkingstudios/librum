@@ -1,7 +1,7 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { useApiQuery } from '@api/request';
-import type { AlertDirective } from '@api/request';
+import { useApiQuery } from '@api';
+import type { AlertDirective } from '@api';
 
 const alerts: AlertDirective[] = [
   {

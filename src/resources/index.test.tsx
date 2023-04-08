@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { Routes } from 'react-router-dom';
 
 import { generateResource } from './index';
-import { responseWithData } from '@api/request';
+import { responseWithData } from '@api';
 import type { DataTableData } from '@components/data-table';
 import { render } from '@test-helpers/rendering';
 import { useResourceQuery } from './api';

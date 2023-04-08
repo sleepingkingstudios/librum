@@ -3,10 +3,10 @@ import { renderHook } from '@testing-library/react';
 
 import { useResourceQuery } from './use-resource-query';
 import type { DisplayAlertProps } from '@alerts';
-import { useApiQuery } from '@api/request';
-import type { AlertDirective } from '@api/request';
+import { useApiQuery } from '@api';
+import type { AlertDirective } from '@api';
 
-jest.mock('@api/request');
+jest.mock('@api');
 
 const mockUseApiQuery =
   useApiQuery as jest.MockedFunction<typeof useApiQuery>;

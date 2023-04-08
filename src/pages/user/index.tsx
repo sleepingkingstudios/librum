@@ -2,7 +2,7 @@ import * as React from 'react';
 import { capitalize } from 'lodash';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import type { ResponseData } from '@api/request';
+import type { ResponseData } from '@api';
 import { DataList } from '@components/data-list';
 import { LoadingOverlay } from '@components/loading-overlay';
 import { Page } from '@components/page';

@@ -1,16 +1,15 @@
 export {
-  alertsMiddleware,
-  apiDataMiddleware,
-  authenticationMiddleware,
-  responseWithData,
-  responseWithError,
-  responseWithStatus,
   useApiQuery,
   useApiRequest,
   useDeepMemo,
   useQuery,
   useRequest,
-} from './request';
+} from './hooks';
+export {
+  alertsMiddleware,
+  apiDataMiddleware,
+  authenticationMiddleware,
+} from './middleware';
 export type {
   AlertDirective,
   ApiError,
@@ -41,4 +40,9 @@ export type {
   UseRequest,
   UseRequestConfig,
   UseRequestOptions,
-} from './request';
+} from './types';
+export {
+  withData as responseWithData,
+  withError as responseWithError,
+  withStatus as responseWithStatus,
+} from './utils';

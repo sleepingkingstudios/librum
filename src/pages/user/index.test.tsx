@@ -7,8 +7,8 @@ import { UserPage } from './index';
 import {
   responseWithData,
   responseWithStatus,
-} from '@api/request';
-import type { Response } from '@api/request';
+} from '@api';
+import type { Response } from '@api';
 import type { User } from '@session';
 import { render } from '@test-helpers/rendering';
 import { useGetUserQuery } from './request';

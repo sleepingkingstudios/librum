@@ -10,7 +10,7 @@ import {
 
 import { useRequest } from './use-request';
 import { render } from '@test-helpers/rendering';
-import { fetchRequest } from '../fetch-request';
+import { fetchRequest } from '../request';
 import type {
   HttpMethod,
   Middleware,
@@ -24,7 +24,7 @@ import {
   withStatus,
 } from '../utils';
 
-jest.mock('../fetch-request');
+jest.mock('../request');
 
 type RenderWrapperOptions = {
   config?: MiddlewareOptions,
