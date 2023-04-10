@@ -4,7 +4,7 @@ require 'rails_helper'
 
 require 'support/contracts/controller_contracts'
 
-RSpec.describe Api::Sources::BooksController, type: :controller do
+RSpec.describe Api::Core::Sources::WebsitesController do
   include Spec::Support::Contracts::ControllerContracts
 
   describe '.resource' do
@@ -19,7 +19,7 @@ RSpec.describe Api::Sources::BooksController, type: :controller do
         edition
         official
         playtest
-        publication_date
+        base_url
       ]
     end
 
@@ -29,7 +29,7 @@ RSpec.describe Api::Sources::BooksController, type: :controller do
 
     it { expect(resource.permitted_attributes).to be == permitted_attributes }
 
-    it { expect(resource.resource_class).to be == Sources::Book }
+    it { expect(resource.resource_class).to be == Sources::Website }
 
     it { expect(resource.skip_authentication).to be false }
   end
@@ -38,8 +38,8 @@ RSpec.describe Api::Sources::BooksController, type: :controller do
     include_contract 'should use the default serializers'
 
     include_contract 'should serialize',
-      Sources::Book,
-      using: Serializers::Json::Sources::BookSerializer
+      Sources::Website,
+      using: Serializers::Json::Sources::WebsiteSerializer
   end
 
   include_contract 'should define action',

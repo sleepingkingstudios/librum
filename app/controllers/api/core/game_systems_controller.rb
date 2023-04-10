@@ -2,7 +2,7 @@
 
 require 'cuprum/rails/actions/index'
 
-module Api
+module Api::Core
   # API controller for managing GameSystem entities.
   class GameSystemsController < ApiController
     def self.resource
