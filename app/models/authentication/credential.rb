@@ -14,7 +14,7 @@ class Authentication::Credential < ApplicationRecord
   validates :active,
     inclusion: {
       in:      [true, false],
-      message: "can't be blank"
+      message: I18n.t('errors.messages.blank')
     }
   validates :expires_at,
     presence: true

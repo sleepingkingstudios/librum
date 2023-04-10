@@ -102,7 +102,7 @@ module Spec::Support::Contracts::Models
               associations.map(&:save!)
             end
 
-            it { expect(association_value).to contain_exactly(*associations) }
+            it { expect(association_value).to match_array(associations) }
           end
         end
       end

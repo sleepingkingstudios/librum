@@ -42,7 +42,7 @@ Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 
 Layout/LineLength:
-  IgnoredPatterns:
+  AllowedPatterns:
     - '\A\s*#'
   Max: 80
 
@@ -65,6 +65,9 @@ Metrics/ModuleLength:
   Exclude:
     - spec/**/*_contract*.rb
 
+RSpec/BeNil:
+  Enabled: false
+
 RSpec/ExampleWording:
   Enabled: false
 
@@ -83,6 +86,9 @@ RSpec/NamedSubject:
 
 RSpec/NestedGroups:
   Max: 5
+
+RSpec/Rails/InferredSpecType:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false

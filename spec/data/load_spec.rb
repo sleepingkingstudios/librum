@@ -129,10 +129,10 @@ RSpec.describe Data::Load do
       :repository,
       -> { an_instance_of(Cuprum::Rails::Repository) }
 
-    it { expect(command.repository.keys).to contain_exactly(*expected_keys) }
+    it { expect(command.repository.keys).to match_array(expected_keys) }
 
     wrap_context 'when initialized with many record classes' do
-      it { expect(command.repository.keys).to contain_exactly(*expected_keys) }
+      it { expect(command.repository.keys).to match_array(expected_keys) }
     end
   end
 end

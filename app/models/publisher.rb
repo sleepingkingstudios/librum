@@ -12,7 +12,7 @@ class Publisher < ApplicationRecord
     uniqueness: true
   validates :slug,
     format:     {
-      message: 'must be in kebab-case',
+      message: I18n.t('errors.messages.kebab_case'),
       with:    /\A[a-z0-9]+(-[a-z0-9]+)*\z/
     },
     presence:   true,

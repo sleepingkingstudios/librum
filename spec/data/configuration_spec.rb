@@ -81,7 +81,7 @@ RSpec.describe Data::Configuration do
     it { expect(described_class.repository).to be_a Cuprum::Rails::Repository }
 
     it 'should define the collections' do
-      expect(described_class.repository.keys).to contain_exactly(*expected_keys)
+      expect(described_class.repository.keys).to match_array(expected_keys)
     end
 
     describe 'with many record classes' do
@@ -100,7 +100,7 @@ RSpec.describe Data::Configuration do
 
       it 'should define the collections' do
         expect(described_class.repository(*record_classes).keys)
-          .to contain_exactly(*expected_keys)
+          .to match_array(expected_keys)
       end
     end
   end
