@@ -23,7 +23,7 @@ class Authentication::User < ApplicationRecord
     presence:   true,
     format:     {
       with:    /.@./,
-      message: 'must be an email address',
+      message: I18n.t('errors.messages.email_address'),
       unless:  -> { email.blank? }
     },
     uniqueness: true
@@ -35,7 +35,7 @@ class Authentication::User < ApplicationRecord
     }
   validates :slug,
     format:     {
-      message: 'must be in kebab-case',
+      message: I18n.t('errors.messages.kebab_case'),
       with:    /\A[a-z0-9]+(-[a-z0-9]+)*\z/
     },
     presence:   true,

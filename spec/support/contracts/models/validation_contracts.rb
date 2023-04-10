@@ -188,7 +188,7 @@ module Spec::Support::Contracts::Models
             attributes_list =
               scope_attributes
               .map { |attr, value| "#{attr}: #{value.inspect}" }
-              .yield_self { |list| tools.array_tools.humanize_list(list) }
+              .then { |list| tools.array_tools.humanize_list(list) }
 
             context "with #{attributes_list}" do
               let(:injected_attributes) do

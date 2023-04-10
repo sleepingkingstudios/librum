@@ -10,8 +10,8 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
   let(:repository) do
     repository = Cuprum::Rails::Repository.new
 
-    repository.find_or_create(record_class: ::Authentication::Credential)
-    repository.find_or_create(record_class: ::Authentication::User)
+    repository.find_or_create(record_class: Authentication::Credential)
+    repository.find_or_create(record_class: Authentication::User)
 
     repository
   end

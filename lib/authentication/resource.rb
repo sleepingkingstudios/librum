@@ -21,7 +21,7 @@ module Authentication
         when String, Symbol
           Set.new([skip_authentication.to_s])
         else
-          !!skip_authentication # rubocop:disable Style/DoubleNegation
+          !!skip_authentication
         end
     end
 

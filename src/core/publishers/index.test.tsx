@@ -8,7 +8,6 @@ describe('Publishers', () => {
   describe('resource', () => {
     const expected = {
       Table: PublishersTable,
-      baseUrl: 'api/publishers',
       breadcrumbs: [{
         label: 'Home',
         url: '/',

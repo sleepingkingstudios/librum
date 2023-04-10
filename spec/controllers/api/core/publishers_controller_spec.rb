@@ -4,23 +4,23 @@ require 'rails_helper'
 
 require 'support/contracts/controller_contracts'
 
-RSpec.describe Api::GameSystemsController do
+RSpec.describe Api::Core::PublishersController, type: :controller do
   include Spec::Support::Contracts::ControllerContracts
 
   describe '.resource' do
     subject(:resource) { described_class.resource }
 
     let(:permitted_attributes) do
-      %w[publisher_id name slug edition]
+      %w[name slug website]
     end
 
     it { expect(resource).to be_a Authentication::Resource }
 
-    it { expect(resource.default_order).to be == %w[name edition] }
+    it { expect(resource.default_order).to be :name }
 
     it { expect(resource.permitted_attributes).to be == permitted_attributes }
 
-    it { expect(resource.resource_class).to be == GameSystem }
+    it { expect(resource.resource_class).to be == Publisher }
 
     it { expect(resource.skip_authentication).to be false }
   end
@@ -29,18 +29,18 @@ RSpec.describe Api::GameSystemsController do
     include_contract 'should use the default serializers'
 
     include_contract 'should serialize',
-      GameSystem,
-      using: Serializers::Json::GameSystemSerializer
+      Publisher,
+      using: Serializers::Json::PublisherSerializer
   end
 
   include_contract 'should define action',
     :create,
-    Actions::Api::GameSystems::Create,
+    Actions::Api::Publishers::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::GameSystems::Destroy,
+    Actions::Api::Publishers::Destroy,
     member: true
 
   include_contract 'should define action',
@@ -50,11 +50,11 @@ RSpec.describe Api::GameSystemsController do
 
   include_contract 'should define action',
     :show,
-    Actions::Api::GameSystems::Show,
+    Actions::Api::Publishers::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::GameSystems::Update,
+    Actions::Api::Publishers::Update,
     member: true
 end

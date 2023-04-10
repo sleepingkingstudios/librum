@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# An identifier used to authenticate a user using a password.
 class Authentication::PasswordCredential < Authentication::Credential
   ### Attributes
   data_property :encrypted_password

@@ -5,7 +5,7 @@ require 'cuprum'
 module Models::Attributes
   # Generates a URL-friendly slug using the configured attribute names.
   class GenerateSlug < Cuprum::Command
-    EXCLUDED_CHARACTERS_PATTERN = /[^a-z0-9\-]/
+    EXCLUDED_CHARACTERS_PATTERN = /[^a-z0-9-]/
     private_constant :EXCLUDED_CHARACTERS_PATTERN
 
     # @param attribute_names [String, Symbol, Array<String, Symbol>] The name
@@ -62,7 +62,7 @@ module Models::Attributes
     def slugify_value(value)
       value
         .strip
-        .yield_self { |str| tools.string_tools.underscore(str) }
+        .then { |str| tools.string_tools.underscore(str) }
         .split(/[\s\-_]+/)
         .join('-')
         .gsub(EXCLUDED_CHARACTERS_PATTERN, '')

@@ -11,7 +11,7 @@ class Reference < ApplicationRecord
   validates :name, presence: true
   validates :slug,
     format:     {
-      message: 'must be in kebab-case',
+      message: I18n.t('errors.messages.kebab_case'),
       with:    /\A[a-z0-9]+(-[a-z0-9]+)*\z/
     },
     presence:   true,
@@ -21,6 +21,6 @@ class Reference < ApplicationRecord
   validates :stub,
     inclusion: {
       in:      [true, false],
-      message: "can't be blank"
+      message: I18n.t('errors.messages.blank')
     }
 end
