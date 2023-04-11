@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'cuprum/rails/actions/index'
-
 module Api::Admin::Authentication
   # API controller for managing Authentication::User entities.
   class UsersController < ApiController
@@ -29,12 +27,12 @@ module Api::Admin::Authentication
     action :create,
       Actions::Api::Admin::Authentication::Users::Create
     action :destroy,
-      Actions::Api::Admin::Authentication::Users::Destroy,
+      Actions::Api::Destroy,
       member: true
     action :index,
-      Cuprum::Rails::Actions::Index
+      Actions::Api::Index
     action :show,
-      Actions::Api::Admin::Authentication::Users::Show,
+      Actions::Api::Show,
       member: true
     action :update,
       Actions::Api::Admin::Authentication::Users::Update,

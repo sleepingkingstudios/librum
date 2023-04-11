@@ -4,10 +4,7 @@ require 'cuprum/rails/actions/update'
 
 module Actions::Api::Admin::Authentication::Users
   # Show action for the Authentication::User API.
-  class Update < Cuprum::Rails::Actions::Update
-    prepend Actions::Api::FindBySlug
-    prepend Actions::Api::GenerateSlug
-
+  class Update < Actions::Api::Update
     def slug_attributes
       :username
     end

@@ -2,8 +2,8 @@
 
 require 'cuprum/rails/actions/update'
 
-module Actions::Api::Sources
-  # Update action for Source APIs.
+module Actions::Api
+  # Show action for generic API controllers.
   class Update < Cuprum::Rails::Actions::Update
     prepend Actions::Api::FindBySlug
     prepend Actions::Api::GenerateSlug

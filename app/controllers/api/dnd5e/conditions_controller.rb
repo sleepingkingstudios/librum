@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'cuprum/rails/actions/index'
-
 module Api::Dnd5e
   # API controller for managing Dnd5e::Condition entities.
   class ConditionsController < ApiController
@@ -27,10 +25,10 @@ module Api::Dnd5e
       )
     end
 
-    action :create,  Actions::Api::References::Create
-    action :destroy, Actions::Api::References::Destroy, member: true
-    action :index,   Cuprum::Rails::Actions::Index
-    action :show,    Actions::Api::References::Show,    member: true
-    action :update,  Actions::Api::References::Update,  member: true
+    action :create,  Actions::Api::Create
+    action :destroy, Actions::Api::Destroy, member: true
+    action :index,   Actions::Api::Index
+    action :show,    Actions::Api::Show,    member: true
+    action :update,  Actions::Api::Update,  member: true
   end
 end

@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/rspec/actions/show_contracts'
 
-RSpec.describe Actions::Api::Sources::Show do
+RSpec.describe Actions::Api::Show do
   include Cuprum::Rails::RSpec::Actions::ShowContracts
 
   subject(:action) do
@@ -15,26 +15,21 @@ RSpec.describe Actions::Api::Sources::Show do
   let(:repository) { Cuprum::Rails::Repository.new }
   let(:resource) do
     Cuprum::Rails::Resource.new(
-      collection:     repository.find_or_create(
-        collection_name: 'books',
-        record_class:    Sources::Book
-      ),
-      resource_class: Sources::Book
+      collection:     repository.find_or_create(record_class: Publisher),
+      resource_class: Publisher
     )
   end
-  let(:source) do
-    FactoryBot.create(:book, :with_game_system, :with_publisher)
-  end
+  let(:publisher) { FactoryBot.create(:publisher) }
 
   include_contract 'show action contract',
-    existing_entity:   -> { source },
+    existing_entity:   -> { publisher },
     primary_key_value: -> { SecureRandom.uuid } \
   do
     describe 'with id: a slug' do
-      let(:params) { { 'id' => source.slug } }
+      let(:params) { { 'id' => publisher.slug } }
 
       include_contract 'should find the entity',
-        existing_entity: -> { source },
+        existing_entity: -> { publisher },
         params:          -> { params }
     end
   end

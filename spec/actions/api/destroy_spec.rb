@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 require 'cuprum/rails/repository'
-require 'cuprum/rails/rspec/actions/show_contracts'
+require 'cuprum/rails/rspec/actions/destroy_contracts'
 
-RSpec.describe Actions::Api::Publishers::Show do
-  include Cuprum::Rails::RSpec::Actions::ShowContracts
+RSpec.describe Actions::Api::Destroy do
+  include Cuprum::Rails::RSpec::Actions::DestroyContracts
 
   subject(:action) do
     described_class.new(repository: repository, resource: resource)
@@ -21,14 +21,16 @@ RSpec.describe Actions::Api::Publishers::Show do
   end
   let(:publisher) { FactoryBot.create(:publisher) }
 
-  include_contract 'show action contract',
+  before(:example) { publisher.save }
+
+  include_contract 'destroy action contract',
     existing_entity:   -> { publisher },
     primary_key_value: -> { SecureRandom.uuid } \
   do
     describe 'with id: a slug' do
       let(:params) { { 'id' => publisher.slug } }
 
-      include_contract 'should find the entity',
+      include_contract 'should destroy the entity',
         existing_entity: -> { publisher },
         params:          -> { params }
     end

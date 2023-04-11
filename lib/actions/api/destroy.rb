@@ -2,8 +2,8 @@
 
 require 'cuprum/rails/actions/destroy'
 
-module Actions::Api::GameSystems
-  # Destroy action for the GameSystem API.
+module Actions::Api
+  # Destroy action for generic API controllers.
   class Destroy < Cuprum::Rails::Actions::Destroy
     prepend Actions::Api::FindBySlug
   end

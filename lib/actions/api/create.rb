@@ -2,8 +2,8 @@
 
 require 'cuprum/rails/actions/create'
 
-module Actions::Api::GameSystems
-  # Create action for the GameSystem API.
+module Actions::Api
+  # Create action for generic API controllers.
   class Create < Cuprum::Rails::Actions::Create
     prepend Actions::Api::GenerateSlug
   end

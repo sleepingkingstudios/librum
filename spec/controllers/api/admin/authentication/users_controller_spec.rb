@@ -40,17 +40,17 @@ RSpec.describe Api::Admin::Authentication::UsersController do
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::Admin::Authentication::Users::Destroy,
+    Actions::Api::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Cuprum::Rails::Actions::Index,
+    Actions::Api::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::Admin::Authentication::Users::Show,
+    Actions::Api::Show,
     member: true
 
   include_contract 'should define action',

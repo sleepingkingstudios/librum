@@ -5,7 +5,7 @@ require 'rails_helper'
 require 'cuprum/rails/repository'
 require 'cuprum/rails/rspec/actions/create_contracts'
 
-RSpec.describe Actions::Api::GameSettings::Create do
+RSpec.describe Actions::Api::Create do
   include Cuprum::Rails::RSpec::Actions::CreateContracts
 
   subject(:action) do
@@ -15,33 +15,26 @@ RSpec.describe Actions::Api::GameSettings::Create do
   let(:repository) { Cuprum::Rails::Repository.new }
   let(:resource) do
     Cuprum::Rails::Resource.new(
-      collection:           repository.find_or_create(
-        record_class: GameSetting
-      ),
+      collection:           repository.find_or_create(record_class: Publisher),
       permitted_attributes: %i[
         name
-        publisher_id
         slug
+        website
       ],
-      resource_class:       GameSetting
+      resource_class:       Publisher
     )
   end
   let(:invalid_attributes) do
     { 'name' => '' }
   end
-  let(:publisher) { FactoryBot.create(:publisher) }
   let(:valid_attributes) do
     {
-      'name'         => 'Example Game Setting',
-      'publisher_id' => publisher.id
+      'name'    => 'Example Publisher',
+      'website' => 'www.example.com'
     }
   end
   let(:expected_attributes) do
-    { 'slug' => 'example-game-setting' }
-  end
-
-  before(:example) do
-    publisher.save!
+    { 'slug' => 'example-publisher' }
   end
 
   include_contract 'create action contract',

@@ -43,26 +43,26 @@ RSpec.describe Api::Dnd5e::ConditionsController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::References::Create,
+    Actions::Api::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::References::Destroy,
+    Actions::Api::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Cuprum::Rails::Actions::Index,
+    Actions::Api::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::References::Show,
+    Actions::Api::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::References::Update,
+    Actions::Api::Update,
     member: true
 end
