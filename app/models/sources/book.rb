@@ -3,7 +3,7 @@
 require 'sleeping_king_studios/tools/toolbox/constant_map'
 
 # A discrete published work, either physical or electronic.
-class Sources::Book < Source
+class Sources::Book < Sources::Publication
   Categories = SleepingKingStudios::Tools::Toolbox::ConstantMap.new(
     # An adventure or collection of adventures. Examples: The Sunless Citadel,
     # Tales from the Yawning Portal.

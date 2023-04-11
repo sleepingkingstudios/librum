@@ -10,8 +10,6 @@ FactoryBot.define do
 
     name { "Source #{source_index}" }
     slug { "source-#{source_index}" }
-    official { true }
-    playtest { false }
 
     trait :with_game_setting do
       # :nocov:

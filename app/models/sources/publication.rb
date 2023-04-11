@@ -1,43 +1,18 @@
 # frozen_string_literal: true
 
-# An abstract source for game materials.
-class Source < ApplicationRecord
-  extend Models::DataProperties
+# An abstract source for published game materials.
+class Sources::Publication < Source
+  ### Attributes
+  data_property :legacy,   predicate: true
+  data_property :official, predicate: true
+  data_property :playtest, predicate: true
+
+  ### Associations
+  belongs_to :game_setting, optional: true
+  belongs_to :game_system
+  belongs_to :publisher
 
   ### Validations
-  validates :name,
-    presence:   true,
-    uniqueness: {
-      scope: %i[game_system_id publisher_id]
-    }
-  validates :slug,
-    format:     {
-      message: I18n.t('errors.messages.kebab_case'),
-      with:    /\A[a-z0-9]+(-[a-z0-9]+)*\z/
-    },
-    presence:   true,
-    uniqueness: { scope: :game_system_id }
-  validates :type, presence: true
-
-  # @return [false] true if the source is homebrew, otherwise false.
-  def homebrew?
-    false
-  end
-
-  # @return [false] true if the source is legacy content, otherwise false.
-  def legacy?
-    false
-  end
-
-  # @return [false] true if the source is official content, otherwise false.
-  def official?
-    false
-  end
-
-  # @return [false] true if the source is playtest content, otherwise false.
-  def playtest?
-    false
-  end
 end
 
 # == Schema Information

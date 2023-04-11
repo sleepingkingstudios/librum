@@ -70,7 +70,7 @@ RSpec.describe Sources::Book, type: :model do
     end
   end
 
-  include_contract 'should be a source',
+  include_contract 'should be a publication',
     type: 'Sources::Book'
 
   include_contract 'should define data property', :category

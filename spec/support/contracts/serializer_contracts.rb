@@ -115,6 +115,7 @@ module Spec::Support::Contracts
           :name,
           :slug,
           *attr_names,
+          homebrew: -> { configured_object.homebrew? },
           legacy:   -> { configured_object.legacy? },
           official: -> { configured_object.official? },
           playtest: -> { configured_object.playtest? },
