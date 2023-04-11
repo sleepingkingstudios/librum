@@ -35,26 +35,26 @@ RSpec.describe Api::Core::PublishersController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Publishers::Create,
+    Actions::Api::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::Publishers::Destroy,
+    Actions::Api::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Cuprum::Rails::Actions::Index,
+    Actions::Api::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::Publishers::Show,
+    Actions::Api::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::Publishers::Update,
+    Actions::Api::Update,
     member: true
 end

@@ -44,26 +44,26 @@ RSpec.describe Api::Core::Sources::BooksController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Sources::Create,
+    Actions::Api::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::Sources::Destroy,
+    Actions::Api::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Cuprum::Rails::Actions::Index,
+    Actions::Api::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::Sources::Show,
+    Actions::Api::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::Sources::Update,
+    Actions::Api::Update,
     member: true
 end

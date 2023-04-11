@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'cuprum/rails/actions/index'
-
 module Api::Core
   # API controller for managing GameSystem entities.
   class GameSystemsController < ApiController
@@ -24,10 +22,10 @@ module Api::Core
       )
     end
 
-    action :create,  Actions::Api::GameSystems::Create
-    action :destroy, Actions::Api::GameSystems::Destroy, member: true
-    action :index,   Cuprum::Rails::Actions::Index
-    action :show,    Actions::Api::GameSystems::Show,    member: true
-    action :update,  Actions::Api::GameSystems::Update,  member: true
+    action :create,  Actions::Api::Create
+    action :destroy, Actions::Api::Destroy, member: true
+    action :index,   Actions::Api::Index
+    action :show,    Actions::Api::Show,    member: true
+    action :update,  Actions::Api::Update,  member: true
   end
 end

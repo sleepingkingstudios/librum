@@ -35,26 +35,26 @@ RSpec.describe Api::Core::GameSystemsController do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::GameSystems::Create,
+    Actions::Api::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::GameSystems::Destroy,
+    Actions::Api::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Cuprum::Rails::Actions::Index,
+    Actions::Api::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::GameSystems::Show,
+    Actions::Api::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::GameSystems::Update,
+    Actions::Api::Update,
     member: true
 end
