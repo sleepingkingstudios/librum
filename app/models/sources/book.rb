@@ -5,7 +5,19 @@ require 'sleeping_king_studios/tools/toolbox/constant_map'
 # A discrete published work, either physical or electronic.
 class Sources::Book < Source
   Categories = SleepingKingStudios::Tools::Toolbox::ConstantMap.new(
+    # An adventure or collection of adventures. Examples: The Sunless Citadel,
+    # Tales from the Yawning Portal.
     ADVENTURE:  'adventure',
+    # A collection of monsters or, rarely, character options. Examples: the
+    # Monster Manual, Monsters of the Multiverse.
+    BESTIARY:   'bestiary',
+    # A generic fallback option, typically not player-focused. Examples: the
+    # Dungeon Master's Guide.
+    REFERENCE:  'reference',
+    # A reference for a game setting. Examples: the Sword Coast Adventurer's
+    # Guide.
+    SETTING:    'setting',
+    # A book focused on character options. Examples: the Player's Handbook.
     SOURCEBOOK: 'sourcebook'
   ).freeze
 
@@ -20,6 +32,11 @@ class Sources::Book < Source
       in:        Categories.values
     },
     presence:  true
+  validates :game_setting,
+    presence: {
+      if:      ->(book) { book.category == Categories::SETTING },
+      message: I18n.t('errors.messages.required')
+    }
 end
 
 # == Schema Information

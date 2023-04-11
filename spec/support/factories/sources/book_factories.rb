@@ -16,6 +16,20 @@ FactoryBot.define do
       category { Sources::Book::Categories::ADVENTURE }
     end
 
+    trait :bestiary do
+      category { Sources::Book::Categories::BESTIARY }
+    end
+
+    trait :reference do
+      category { Sources::Book::Categories::REFERENCE }
+    end
+
+    trait :setting do
+      with_game_setting
+
+      category { Sources::Book::Categories::SETTING }
+    end
+
     trait :sourcebook do
       category { Sources::Book::Categories::SOURCEBOOK }
     end

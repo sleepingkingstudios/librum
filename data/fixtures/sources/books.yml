@@ -2,7 +2,7 @@
 - name:             Marble Madness
   game_system:      marbles
   publisher:        crystal-sphere-publications
-  category:         sourcebook
+  category:         reference
   legacy:           true
   official:         true
   playtest:         false
@@ -23,3 +23,20 @@
   official:         false
   playtest:         false
   publication_date: '1983-05-25'
+- name:             Fantastic Flumphs And Where To Find Them
+  game_system:      nothing-to-lose-but-your-tentacles-2e
+  publisher:        flumph-free-press
+  category:         bestiary
+  legacy:           false
+  official:         true
+  playtest:         false
+  publication_date: '1982-07-09'
+- name:             'Flumph: The Tentacling'
+  game_setting:     flumph-the-tentacling
+  game_system:      nothing-to-lose-but-your-tentacles-2e
+  publisher:        flumph-free-press
+  category:         setting
+  legacy:           false
+  official:         true
+  playtest:         false
+  publication_date: '2010-12-17'

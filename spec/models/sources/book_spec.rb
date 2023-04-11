@@ -26,6 +26,9 @@ RSpec.describe Sources::Book, type: :model do
     let(:expected_categories) do
       {
         ADVENTURE:  'adventure',
+        BESTIARY:   'bestiary',
+        REFERENCE:  'reference',
+        SETTING:    'setting',
         SOURCEBOOK: 'sourcebook'
       }
     end
@@ -39,6 +42,24 @@ RSpec.describe Sources::Book, type: :model do
     describe '::ADVENTURE' do
       it 'should store the value' do
         expect(described_class::Categories::ADVENTURE).to be == 'adventure'
+      end
+    end
+
+    describe '::BESTIARY' do
+      it 'should store the value' do
+        expect(described_class::Categories::BESTIARY).to be == 'bestiary'
+      end
+    end
+
+    describe '::REFERENCE' do
+      it 'should store the value' do
+        expect(described_class::Categories::REFERENCE).to be == 'reference'
+      end
+    end
+
+    describe '::SETTING' do
+      it 'should store the value' do
+        expect(described_class::Categories::SETTING).to be == 'setting'
       end
     end
 
@@ -61,9 +82,44 @@ RSpec.describe Sources::Book, type: :model do
   end
 
   describe '#valid?' do
+    context 'when the book has category: ::SETTING' do
+      let(:attributes) do
+        data = super()[:data].merge(
+          category: described_class::Categories::SETTING
+        )
+
+        super().merge(data: data)
+      end
+
+      include_contract 'should validate the presence of',
+        :game_setting,
+        message: 'must exist'
+
+      context 'when the source has a game setting' do
+        let(:game_setting) do
+          FactoryBot.create(:game_setting, publisher: publisher)
+        end
+        let(:game_system) do
+          FactoryBot.create(:game_system, publisher: publisher)
+        end
+        let(:publisher) { FactoryBot.create(:publisher) }
+        let(:attributes) do
+          super().merge(
+            game_setting: game_setting,
+            game_system:  game_system,
+            publisher:    publisher
+          )
+        end
+
+        it { expect(book.valid?).to be true }
+      end
+    end
+
     context 'when the source has a game system and a publisher' do
-      let(:game_system) { FactoryBot.create(:game_system, :with_publisher) }
-      let(:publisher)   { FactoryBot.create(:publisher) }
+      let(:game_system) do
+        FactoryBot.create(:game_system, publisher: publisher)
+      end
+      let(:publisher) { FactoryBot.create(:publisher) }
       let(:attributes) do
         super().merge(game_system: game_system, publisher: publisher)
       end
