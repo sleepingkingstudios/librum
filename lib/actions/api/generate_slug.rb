@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Actions::Api
-  # Middleware for generating a slug for an entity.
+  # Helper for generating a slug for an entity.
   module GenerateSlug
     private
 
