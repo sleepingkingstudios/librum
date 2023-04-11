@@ -13,6 +13,14 @@ FactoryBot.define do
     official { true }
     playtest { false }
 
+    trait :with_game_setting do
+      # :nocov:
+      game_setting do
+        create(:game_setting, publisher: (publisher || create(:publisher)))
+      end
+      # :nocov:
+    end
+
     trait :with_game_system do
       # :nocov:
       game_system do

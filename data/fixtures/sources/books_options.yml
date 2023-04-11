@@ -1,4 +1,9 @@
 ---
+game_setting:
+  middleware:
+    Cuprum::Collections::Loader::Middleware::FindAssociation:
+      find_by: slug
+      optional: true
 game_system:
   middleware:
     Cuprum::Collections::Loader::Middleware::FindAssociation:
