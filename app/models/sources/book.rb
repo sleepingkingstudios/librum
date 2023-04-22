@@ -53,6 +53,7 @@ end
 #  game_setting_id :uuid
 #  game_system_id  :uuid
 #  publisher_id    :uuid
+#  user_id         :uuid
 #
 # Indexes
 #
@@ -61,4 +62,5 @@ end
 #  index_sources_on_name_and_game_system_id_and_publisher_id  (name,game_system_id,publisher_id) UNIQUE
 #  index_sources_on_publisher_id                              (publisher_id)
 #  index_sources_on_slug_and_game_system_id                   (slug,game_system_id) UNIQUE
+#  index_sources_on_user_id                                   (user_id)
 #

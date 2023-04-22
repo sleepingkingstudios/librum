@@ -40,6 +40,9 @@ module Spec::Support::Contracts::Models
         include_contract 'should define attribute',
           :publisher_id,
           value: nil
+        include_contract 'should define attribute',
+          :user_id,
+          value: nil
 
         include_contract 'should define data properties'
 

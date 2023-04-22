@@ -1,12 +1,39 @@
 # frozen_string_literal: true
 
-# An online source for game references.
-class Sources::Website < Sources::Publication
-  ### Attributes
-  data_property :base_url
+# A representation of a user's body of custom work.
+class Sources::Homebrew < Source
+  ### Associations
+  belongs_to :user, class_name: 'Authentication::User'
 
   ### Validations
-  validates :base_url, presence: true
+  validates :game_setting_id, absence: true
+  validates :game_system_id,  absence: true
+  validates :publisher_id,    absence: true
+  validate :validate_name_matches_user
+  validate :validate_slug_matches_user
+
+  # @return [true] true if the source is homebrew, otherwise false.
+  def homebrew?
+    true
+  end
+
+  private
+
+  def validate_name_matches_user
+    return unless user
+    return if name == user.username
+
+    errors.add 'name',
+      I18n.t('librum.errors.models.sources.homebrew.invalid_name')
+  end
+
+  def validate_slug_matches_user
+    return unless user
+    return if slug == user.slug
+
+    errors.add 'slug',
+      I18n.t('librum.errors.models.sources.homebrew.invalid_slug')
+  end
 end
 
 # == Schema Information
