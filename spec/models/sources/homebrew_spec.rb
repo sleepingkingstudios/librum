@@ -9,6 +9,17 @@ RSpec.describe Sources::Homebrew do
 
   subject(:source) { described_class.new(attributes) }
 
+  shared_context 'when the source has a user' do
+    let(:user) { FactoryBot.build(:authentication_user) }
+    let(:attributes) do
+      super().merge(
+        name: "User: #{user.username}",
+        slug: "user-#{user.slug}",
+        user: user
+      )
+    end
+  end
+
   let(:attributes) do
     {
       name: 'Example Source',
@@ -28,17 +39,28 @@ RSpec.describe Sources::Homebrew do
     it { expect(source.homebrew?).to be true }
   end
 
-  describe '#valid?' do
-    context 'when the source has a user' do
-      let(:user) { FactoryBot.build(:authentication_user) }
-      let(:attributes) do
-        super().merge(
-          name: user.username,
-          slug: user.slug,
-          user: user
-        )
-      end
+  describe '#metadata' do
+    let(:expected) do
+      {
+        'homebrew' => true,
+        'legacy'   => false,
+        'official' => false,
+        'playtest' => false,
+        'username' => nil
+      }
+    end
 
+    it { expect(source.metadata).to be == expected }
+
+    wrap_context 'when the source has a user' do
+      let(:expected) { super().merge('username' => user.username) }
+
+      it { expect(source.metadata).to be == expected }
+    end
+  end
+
+  describe '#valid?' do
+    wrap_context 'when the source has a user' do
       before(:example) { user.save! }
 
       it { expect(source).to be_valid }

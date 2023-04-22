@@ -14,6 +14,9 @@ class Authentication::User < ApplicationRecord
   ).freeze
 
   ## Associations
+  has_one :homebrew_source,
+    class_name: 'Sources::Homebrew',
+    dependent:  :destroy
   has_many :credentials,
     class_name: 'Authentication::Credential',
     dependent:  :destroy

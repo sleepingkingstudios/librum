@@ -24,5 +24,13 @@ FactoryBot.define do
     trait :superadmin do
       role { Authentication::User::Roles::SUPERADMIN }
     end
+
+    trait :with_homebrew do
+      after(:create) do |user|
+        # :nocov:
+        create(:homebrew_source, user: user)
+        # :nocov:
+      end
+    end
   end
 end

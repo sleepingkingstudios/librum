@@ -17,11 +17,22 @@ class Sources::Homebrew < Source
     true
   end
 
+  # (see Source#metadata)
+  def metadata
+    {
+      'homebrew' => homebrew?,
+      'legacy'   => legacy?,
+      'official' => official?,
+      'playtest' => playtest?,
+      'username' => user&.username
+    }
+  end
+
   private
 
   def validate_name_matches_user
     return unless user
-    return if name == user.username
+    return if name == "User: #{user.username}"
 
     errors.add 'name',
       I18n.t('librum.errors.models.sources.homebrew.invalid_name')
@@ -29,7 +40,7 @@ class Sources::Homebrew < Source
 
   def validate_slug_matches_user
     return unless user
-    return if slug == user.slug
+    return if slug == "user-#{user.slug}"
 
     errors.add 'slug',
       I18n.t('librum.errors.models.sources.homebrew.invalid_slug')
