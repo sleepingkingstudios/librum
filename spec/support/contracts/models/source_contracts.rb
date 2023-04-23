@@ -54,6 +54,21 @@ module Spec::Support::Contracts::Models
           include_examples 'should define predicate', :legacy?
         end
 
+        describe '#metadata' do
+          let(:expected) do
+            {
+              'homebrew' => subject.homebrew?,
+              'legacy'   => subject.legacy?,
+              'official' => subject.official?,
+              'playtest' => subject.playtest?
+            }
+          end
+
+          include_examples 'should define reader',
+            :metadata,
+            -> { be >= expected }
+        end
+
         describe '#official?' do
           include_examples 'should define predicate', :official?
         end
@@ -129,6 +144,50 @@ module Spec::Support::Contracts::Models
 
         describe '#homebrew?' do
           it { expect(subject.homebrew?).to be false }
+        end
+
+        describe '#metadata' do
+          let(:expected) do
+            {
+              'homebrew' => false,
+              'legacy'   => subject.legacy?,
+              'official' => subject.official?,
+              'playtest' => subject.playtest?
+            }
+          end
+
+          context 'when the source is a legacy source' do
+            let(:attributes) do
+              attributes = super()
+              data       = attributes.fetch(:data, {}).merge(legacy: true)
+
+              attributes.merge(data: data)
+            end
+
+            it { expect(subject.metadata).to be == expected }
+          end
+
+          context 'when the source is an official source' do
+            let(:attributes) do
+              attributes = super()
+              data       = attributes.fetch(:data, {}).merge(official: true)
+
+              attributes.merge(data: data)
+            end
+
+            it { expect(subject.metadata).to be == expected }
+          end
+
+          context 'when the source is a playtest source' do
+            let(:attributes) do
+              attributes = super()
+              data       = attributes.fetch(:data, {}).merge(playtest: true)
+
+              attributes.merge(data: data)
+            end
+
+            it { expect(subject.metadata).to be == expected }
+          end
         end
 
         describe '#valid?' do

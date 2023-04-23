@@ -29,6 +29,17 @@ class Source < ApplicationRecord
     false
   end
 
+  # @return [Hash{String=>Object}] source metadata used to cache source data on
+  #   references.
+  def metadata
+    {
+      'homebrew' => homebrew?,
+      'legacy'   => legacy?,
+      'official' => official?,
+      'playtest' => playtest?
+    }
+  end
+
   # @return [false] true if the source is official content, otherwise false.
   def official?
     false

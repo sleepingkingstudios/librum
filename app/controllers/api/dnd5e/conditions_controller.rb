@@ -25,10 +25,12 @@ module Api::Dnd5e
       )
     end
 
-    action :create,  Actions::Api::Create
-    action :destroy, Actions::Api::Destroy, member: true
+    # rubocop:disable Layout/ExtraSpacing
+    action :create,  Actions::Api::References::Create
+    action :destroy, Actions::Api::Destroy,             member: true
     action :index,   Actions::Api::Index
-    action :show,    Actions::Api::Show,    member: true
-    action :update,  Actions::Api::Update,  member: true
+    action :show,    Actions::Api::Show,                member: true
+    action :update,  Actions::Api::References::Update,  member: true
+    # rubocop:enable Layout/ExtraSpacing
   end
 end

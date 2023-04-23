@@ -43,7 +43,7 @@ RSpec.describe Api::Dnd5e::ConditionsController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Create,
+    Actions::Api::References::Create,
     member: false
 
   include_contract 'should define action',
@@ -63,6 +63,6 @@ RSpec.describe Api::Dnd5e::ConditionsController, type: :controller do
 
   include_contract 'should define action',
     :update,
-    Actions::Api::Update,
+    Actions::Api::References::Update,
     member: true
 end
