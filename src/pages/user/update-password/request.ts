@@ -69,5 +69,5 @@ export const useUpdateUserPasswordRequest = ({
   config,
   method: 'patch',
   middleware: [closeFormMiddleware],
-  url: 'api/authentication/user/password',
+  url: '/api/authentication/user/password',
 });

@@ -229,7 +229,7 @@ describe('<LoginPage /> request', () => {
       expect(mockUseRequest.mock.calls).toHaveLength(1);
 
       const options = mockUseRequest.mock.calls[0][0];
-      expect(options.url).toBe('api/authentication/session');
+      expect(options.url).toBe('/api/authentication/session');
       expect(options.method).toBe('post');
       expect(options.config.alerts).toEqual(alertsContext);
       expect(options.config.dispatch).toEqual(dispatch);

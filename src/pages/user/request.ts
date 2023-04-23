@@ -21,5 +21,5 @@ const alerts: AlertDirective[] = [
 
 export const useGetUserQuery = () => useApiQuery({
   alerts,
-  url: 'api/authentication/user',
+  url: '/api/authentication/user',
 });

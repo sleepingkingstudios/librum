@@ -134,21 +134,17 @@ export const generateUrl = ({
 }): string => {
   let generated;
 
-  if (typeof url === 'string' && url[0] === '/') {
-    return url.slice(1);
-  }
+  if (typeof url === 'string' && url[0] === '/') { return url; }
 
   generated = generateBaseUrl({ baseUrl, resourceName, scope });
 
   if (typeof url === 'string') {
-    if (url.length === 0) { return generated; }
+    if (url.length === 0) { return `/${generated}`; }
 
-    return `${generated}/${url}`;
+    return `/${generated}/${url}`;
   }
 
   if (member) { generated = `${generated}/:id`; }
 
-  generated = `${generated}/${action}`;
-
-  return generated;
+  return `/${generated}/${action}`;
 };

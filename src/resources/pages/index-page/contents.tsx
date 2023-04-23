@@ -8,7 +8,6 @@ import {
   generateAlerts,
   useResourceQuery,
 } from '@resources/api';
-import {  } from '@resources/api';
 import type { ResourcePageProps } from '@resources/components/page';
 import { ResourcesTable } from '@resources/components/table';
 

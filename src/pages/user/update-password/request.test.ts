@@ -117,7 +117,7 @@ describe('<UserUpdatePassword /> request', () => {
   describe('useUpdateUserPasswordRequest()', () => {
     const closeForm = jest.fn();
     const config = { closeForm };
-    const url = 'api/authentication/user/password';
+    const url = '/api/authentication/user/password';
     const method = 'patch';
     const alerts = [
       {

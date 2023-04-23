@@ -11,7 +11,7 @@ const mockUseApiQuery =
 
 describe('<UserPage /> request', () => {
   describe('useGetUserQuery()', () => {
-    const url = 'api/authentication/user';
+    const url = '/api/authentication/user';
     const alerts = [
       {
         status: 'failure',

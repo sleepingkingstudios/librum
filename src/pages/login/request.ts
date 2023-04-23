@@ -109,6 +109,6 @@ export const useLoginRequest = () => {
       alertsMiddleware(loginAlerts),
       createSessionMiddleware,
     ],
-    url: 'api/authentication/session',
+    url: '/api/authentication/session',
   });
 };

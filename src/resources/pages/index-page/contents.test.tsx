@@ -43,7 +43,7 @@ describe('<ResourceIndexPageContents />', () => {
     { store: true },
   );
   const page: ResourcePageOptions = { member };
-  const url = 'api/rare_books';
+  const url = '/api/rare_books';
   const failureAlert: DisplayAlertProps = {
     context: 'resources:rareBooks:request',
     message: 'Unable to find rare books',
