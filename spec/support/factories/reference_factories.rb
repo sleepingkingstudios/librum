@@ -13,6 +13,8 @@ FactoryBot.define do
 
     trait :with_source do
       source { create(:book, :with_game_system, :with_publisher) }
+
+      source_metadata { source.metadata }
     end
   end
 

@@ -60,6 +60,52 @@ module Spec::Support::Contracts::Models
       end
     end
 
+    module ShouldHaveOneContract
+      extend RSpec::SleepingKingStudios::Contract
+
+      contract do |association_name, **options|
+        include Spec::Support::Contracts::Models
+
+        association_name = association_name.intern
+        factory_name     = options.fetch(:factory_name, association_name)
+        model_name       =
+          described_class.name.split('::').last.underscore.tr('_', ' ')
+        display_name     = association_name.to_s.tr('_', ' ')
+        inverse_name     = options.fetch(:inverse_name, model_name).intern
+
+        describe "##{association_name}" do
+          include_examples 'should define property', association_name
+
+          context "when the #{model_name} has a #{display_name}" do
+            let(:association) do
+              # :nocov:
+              case options[:association]
+              when Proc
+                instance_exec(&options[:association])
+              when nil
+                FactoryBot.build(factory_name, inverse_name => subject)
+              else
+                options[:association]
+              end
+              # :nocov:
+            end
+            let(:attributes) do
+              super().merge({ association_name => association })
+            end
+            let(:association_value) { subject.send(association_name) }
+
+            before(:example) do
+              subject.save!
+
+              association.save!
+            end
+
+            it { expect(association_value).to be == association }
+          end
+        end
+      end
+    end
+
     module ShouldHaveManyContract
       extend RSpec::SleepingKingStudios::Contract
 

@@ -11,8 +11,9 @@ module Serializers::Json
       :name,
       :slug
 
-    attribute(:legacy,   &:present?)
-    attribute(:official, &:present?)
-    attribute(:playtest, &:present?)
+    property(:homebrew, scope: :homebrew?, &:present?)
+    property(:legacy,   scope: :legacy?,   &:present?)
+    property(:official, scope: :official?, &:present?)
+    property(:playtest, scope: :playtest?, &:present?)
   end
 end

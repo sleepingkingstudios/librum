@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
-# An online source for game references.
-class Sources::Website < Sources::Publication
+# An abstract source for published game materials.
+class Sources::Publication < Source
   ### Attributes
-  data_property :base_url
+  data_property :legacy,   predicate: true
+  data_property :official, predicate: true
+  data_property :playtest, predicate: true
+
+  ### Associations
+  belongs_to :game_setting, optional: true
+  belongs_to :game_system
+  belongs_to :publisher
 
   ### Validations
-  validates :base_url, presence: true
+  validates :user_id, absence: true
 end
 
 # == Schema Information

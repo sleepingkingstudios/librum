@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_235147) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_22_134431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -110,11 +110,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_235147) do
     t.uuid "game_system_id"
     t.uuid "publisher_id"
     t.uuid "game_setting_id"
+    t.uuid "user_id"
     t.index ["game_setting_id"], name: "index_sources_on_game_setting_id"
     t.index ["game_system_id"], name: "index_sources_on_game_system_id"
     t.index ["name", "game_system_id", "publisher_id"], name: "index_sources_on_name_and_game_system_id_and_publisher_id", unique: true
     t.index ["publisher_id"], name: "index_sources_on_publisher_id"
     t.index ["slug", "game_system_id"], name: "index_sources_on_slug_and_game_system_id", unique: true
+    t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
 end

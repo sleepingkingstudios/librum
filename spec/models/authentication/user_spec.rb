@@ -73,6 +73,9 @@ RSpec.describe Authentication::User, type: :model do
     default: ''
 
   ## Associations
+  include_contract 'should have one',
+    :homebrew_source,
+    factory_name: :homebrew
   include_contract 'should have many',
     :credentials,
     factory_name: :generic_credential

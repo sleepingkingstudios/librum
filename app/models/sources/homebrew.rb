@@ -1,53 +1,49 @@
 # frozen_string_literal: true
 
-# An abstract source for game materials.
-class Source < ApplicationRecord
-  extend Models::DataProperties
+# A representation of a user's body of custom work.
+class Sources::Homebrew < Source
+  ### Associations
+  belongs_to :user, class_name: 'Authentication::User'
 
   ### Validations
-  validates :name,
-    presence:   true,
-    uniqueness: {
-      scope: %i[game_system_id publisher_id]
-    }
-  validates :slug,
-    format:     {
-      message: I18n.t('errors.messages.kebab_case'),
-      with:    /\A[a-z0-9]+(-[a-z0-9]+)*\z/
-    },
-    presence:   true,
-    uniqueness: { scope: :game_system_id }
-  validates :type, presence: true
+  validates :game_setting_id, absence: true
+  validates :game_system_id,  absence: true
+  validates :publisher_id,    absence: true
+  validate :validate_name_matches_user
+  validate :validate_slug_matches_user
 
-  # @return [false] true if the source is homebrew, otherwise false.
+  # @return [true] true if the source is homebrew, otherwise false.
   def homebrew?
-    false
+    true
   end
 
-  # @return [false] true if the source is legacy content, otherwise false.
-  def legacy?
-    false
-  end
-
-  # @return [Hash{String=>Object}] source metadata used to cache source data on
-  #   references.
+  # (see Source#metadata)
   def metadata
     {
       'homebrew' => homebrew?,
       'legacy'   => legacy?,
       'official' => official?,
-      'playtest' => playtest?
+      'playtest' => playtest?,
+      'username' => user&.username
     }
   end
 
-  # @return [false] true if the source is official content, otherwise false.
-  def official?
-    false
+  private
+
+  def validate_name_matches_user
+    return unless user
+    return if name == "User: #{user.username}"
+
+    errors.add 'name',
+      I18n.t('librum.errors.models.sources.homebrew.invalid_name')
   end
 
-  # @return [false] true if the source is playtest content, otherwise false.
-  def playtest?
-    false
+  def validate_slug_matches_user
+    return unless user
+    return if slug == "user-#{user.slug}"
+
+    errors.add 'slug',
+      I18n.t('librum.errors.models.sources.homebrew.invalid_slug')
   end
 end
 

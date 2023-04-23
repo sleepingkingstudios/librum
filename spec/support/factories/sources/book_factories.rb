@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :book, class: 'Sources::Book', parent: :source do
+  factory :book, class: 'Sources::Book', parent: :publication do
     transient do
       sequence(:book_index) { |index| index }
     end

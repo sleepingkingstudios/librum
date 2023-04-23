@@ -21,7 +21,7 @@ RSpec.describe Sources::Website do
     }
   end
 
-  include_contract 'should be a source',
+  include_contract 'should be a publication',
     type: 'Sources::Website'
 
   include_contract 'should define data property', :base_url
