@@ -1,3 +1,4 @@
+import type { Response } from '@api';
 import type { Button } from '@components/button/types';
 import type {
   Breadcrumb,
@@ -26,4 +27,5 @@ export type ResourcePageOptions = PageContents & PageOptions;
 export type ResourcePageProps = {
   action: string,
   page: ResourcePageOptions,
+  response?: Response,
 } & ResourceConfiguration;

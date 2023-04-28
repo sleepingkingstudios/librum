@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import type { DataTableData } from '@components/data-table';
-import type { DataTableType } from '@resources/components/table';
+import type { ConfiguredDataTable } from '@resources/types';
 
 export const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
   const books = 'rareBooks' in data ? data.rareBooks : [];
@@ -17,7 +17,7 @@ export const ResourceIndexPageContents = ({
   Table,
   resourceName,
 }: {
-  Table: DataTableType,
+  Table: ConfiguredDataTable,
   resourceName: string,
 }): JSX.Element => {
   const data: DataTableData = {

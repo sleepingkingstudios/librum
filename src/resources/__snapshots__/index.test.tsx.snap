@@ -94,7 +94,7 @@ exports[`Resources generateResource() with extra pages should generate the publi
     class="mock-page"
   >
     <h1>
-      Publish Rare Books
+      Loading Rare Book
     </h1>
     <span>
       Publish Page
@@ -121,6 +121,24 @@ exports[`Resources generateResource() with extra pages should generate the publi
         >
           Rare Books
         </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Loading
+        </span>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Publish
+        </span>
       </li>
     </ul>
   </div>
