@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import { responseWithData } from '@api';
 import type { DataTableData } from '@components/data-table';
-import type { ConfiguredDataTable } from '@resources/types';
+import { ResourcePage } from '@resources/components/page';
+import type { ResourcePageProps } from '@resources/components/page';
 
 export const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
   const books = 'rareBooks' in data ? data.rareBooks : [];
@@ -13,13 +15,11 @@ export const MockTable = ({ data }: { data: DataTableData }): JSX.Element => {
   );
 };
 
-export const ResourceIndexPageContents = ({
+export const ResourceIndexPage = ({
   Table,
+  page,
   resourceName,
-}: {
-  Table: ConfiguredDataTable,
-  resourceName: string,
-}): JSX.Element => {
+}: ResourcePageProps): JSX.Element => {
   const data: DataTableData = {
     rareBooks: [
       {
@@ -33,12 +33,25 @@ export const ResourceIndexPageContents = ({
       },
     ],
   };
-
-  return (
+  const response = responseWithData({ data });
+  const contents = (
     <div>
-      <h1>Content for { resourceName }</h1>
+      <h1>Content for {resourceName}</h1>
 
       <Table data={data} name={resourceName} />
     </div>
+  );
+  const pageWithDefaults = {
+    ...page,
+    contents,
+  };
+
+  return (
+    <ResourcePage
+      action={''}
+      page={pageWithDefaults}
+      resourceName={resourceName}
+      response={response}
+    />
   );
 };

@@ -1,44 +1,64 @@
 import * as React from 'react';
 
-import { ResourcePage } from '@resources/components/page';
-import type { ResourcePageProps } from '@resources/components/page';
-import { titleCase } from '@utils/text';
-import { ResourceIndexPageContents } from './contents';
+import type { AlertDirective } from '@api';
+import {
+  generateAlerts,
+  useResourceQuery,
+} from '@resources/api';
 
-const generatePageDefaults = ({
-  resourceName,
-}: {
-  resourceName: string,
-}) => ({
-  breadcrumbs: [
-    {
-      active: true,
-      label: titleCase(resourceName),
-    },
-  ],
-  contents: ResourceIndexPageContents,
-  heading: titleCase(resourceName),
-});
+import { ResourcePage } from '@resources/components/page';
+import {
+  ResourceMissingComponent,
+} from '@resources/components/missing-component';
+import type { ResourcePageProps } from '@resources/components/page';
+import { ResourcesTable } from '@resources/components/table';
+
+const MissingTable = (): JSX.Element => (
+  <ResourceMissingComponent name="Table" />
+);
 
 export const ResourceIndexPage = ({
-  Table,
-  action,
+  Table = MissingTable,
   page,
   ...config
 }: ResourcePageProps): JSX.Element => {
-  const { resourceName } = config;
+  const {
+    baseUrl,
+    resourceName,
+    scope,
+  } = config;
+  const alerts: AlertDirective[] = generateAlerts({
+    action: 'find',
+    member: false,
+    query: true,
+    resourceName,
+    scope,
+  });
+  const [response] = useResourceQuery({
+    action: 'index',
+    alerts,
+    baseUrl,
+    member: false,
+    resourceName,
+    scope,
+    url: '',
+  });
+  const contents = <ResourcesTable
+    Table={Table}
+    resourceName={resourceName}
+    response={response}
+  />;
   const pageWithDefaults = {
-    ...generatePageDefaults({ resourceName }),
+    contents,
     ...page,
   };
 
   return (
     <ResourcePage
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      Table={Table}
-      action={action}
-      page={pageWithDefaults}
       {...config}
+      page={pageWithDefaults}
+      response={response}
+      action={''}
     />
   );
 };

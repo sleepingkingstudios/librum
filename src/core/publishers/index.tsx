@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { generateResource } from '@resources';
-import { PublishersTable } from './components/table';
+import { PublishersTable } from './components';
 import { CoreNavigation } from '../navigation';
 
 const navigation = (<CoreNavigation />);
