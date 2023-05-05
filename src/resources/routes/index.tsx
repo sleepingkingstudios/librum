@@ -37,6 +37,10 @@ const defaultPages: Record<string, ResourcePageRouteOptions> = {
     member: false,
     route: '/',
   },
+  show: {
+    member: true,
+    route: '/',
+  },
 };
 
 const filterPages = (

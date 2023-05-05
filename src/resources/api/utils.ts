@@ -123,6 +123,7 @@ export const generateUrl = ({
   member,
   resourceName,
   scope,
+  singularName,
   url,
 }: {
   action: string,
@@ -130,6 +131,7 @@ export const generateUrl = ({
   member: boolean,
   resourceName: string,
   scope?: string,
+  singularName?: string,
   url?: string,
 }): string => {
   let generated;
@@ -138,13 +140,15 @@ export const generateUrl = ({
 
   generated = generateBaseUrl({ baseUrl, resourceName, scope });
 
-  if (typeof url === 'string') {
-    if (url.length === 0) { return `/${generated}`; }
-
+  if (typeof url === 'string' && url.length > 0) {
     return `/${generated}/${url}`;
   }
 
-  if (member) { generated = `${generated}/:id`; }
+  if (member) {
+    generated = `${generated}/:${singularName || singularize(resourceName)}Id`;
+  }
+
+  if (url === '') { return `/${generated}`; }
 
   return `/${generated}/${action}`;
 };

@@ -20,24 +20,15 @@ import { MockTable as Table } from './mocks';
 jest.mock('@resources/api', () => require('@resources/api/mocks'));
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
+jest.mock(
+  '@components/page/breadcrumbs',
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('@components/page/breadcrumbs', () => require('@components/page/breadcrumbs/mocks'));
+  () => require('@components/page/breadcrumbs/mocks'),
+);
 
 const mockUseResourceQuery = useResourceQuery as jest.MockedFunction<
   typeof useResourceQuery
 >;
-
-/*
-Tests:
-- configures the request
-- renders the heading
-- renders the content
-- renders the breadcrumbs
-- when response: failure
-- when response: loading
-- when response: success
-- when response: data
-*/
 
 describe('<ResourceIndexPage />', () => {
   const action = 'index';

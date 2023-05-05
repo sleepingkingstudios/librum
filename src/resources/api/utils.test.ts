@@ -692,7 +692,7 @@ describe('Resources API hooks utils', () => {
       const member = true;
 
       it('should generate the resource url', () => {
-        const expected = '/api/rare_books/:id/publish';
+        const expected = '/api/rare_books/:rareBookId/publish';
         const actual = generateUrl({
           action,
           member,
@@ -706,7 +706,7 @@ describe('Resources API hooks utils', () => {
         const baseUrl = 'path/to/rare_tomes';
 
         it('should generate the resource url', () => {
-          const expected = '/path/to/rare_tomes/:id/publish';
+          const expected = '/path/to/rare_tomes/:rareBookId/publish';
           const actual = generateUrl({
             action,
             baseUrl,
@@ -721,7 +721,7 @@ describe('Resources API hooks utils', () => {
           const scope = 'lendingLibrary';
 
           it('should generate the resource url', () => {
-            const expected = '/path/to/rare_tomes/:id/publish';
+            const expected = '/path/to/rare_tomes/:rareBookId/publish';
             const actual = generateUrl({
               action,
               baseUrl,
@@ -734,11 +734,28 @@ describe('Resources API hooks utils', () => {
           });
         });
 
-        describe('with url: a relative url', () => {
-          const url = ':id/publish_book';
+        describe('with singularName: value', () => {
+          const singularName = 'rareTome';
 
           it('should generate the resource url', () => {
-            const expected = '/path/to/rare_tomes/:id/publish_book';
+            const expected = '/path/to/rare_tomes/:rareTomeId/publish';
+            const actual = generateUrl({
+              action,
+              baseUrl,
+              member,
+              resourceName,
+              singularName
+            });
+
+            expect(actual).toEqual(expected);
+          });
+        });
+
+        describe('with url: a relative url', () => {
+          const url = ':rareBookId/publish_book';
+
+          it('should generate the resource url', () => {
+            const expected = '/path/to/rare_tomes/:rareBookId/publish_book';
             const actual = generateUrl({
               action,
               baseUrl,
@@ -752,10 +769,10 @@ describe('Resources API hooks utils', () => {
         });
 
         describe('with url: an absolute url', () => {
-          const url = '/resources/publish/:id/rare_books';
+          const url = '/resources/publish/:rareBookId/rare_books';
 
           it('should generate the resource url', () => {
-            const expected = '/resources/publish/:id/rare_books';
+            const expected = '/resources/publish/:rareBookId/rare_books';
             const actual = generateUrl({
               action,
               baseUrl,
@@ -773,7 +790,8 @@ describe('Resources API hooks utils', () => {
         const scope = 'lendingLibrary';
 
         it('should generate the resource url', () => {
-          const expected = '/api/lending_library/rare_books/:id/publish';
+          const expected =
+            '/api/lending_library/rare_books/:rareBookId/publish';
           const actual = generateUrl({
             action,
             member,
@@ -824,7 +842,7 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the resource url', () => {
           const expected =
-            '/api/lending_library/collections/rare_books/:id/publish';
+            '/api/lending_library/collections/rare_books/:rareBookId/publish';
           const actual = generateUrl({
             action,
             member,
@@ -836,11 +854,27 @@ describe('Resources API hooks utils', () => {
         });
       });
 
-      describe('with url: a relative url', () => {
-        const url = ':id/publish_book';
+      describe('with singularName: value', () => {
+        const singularName = 'rareTome';
 
         it('should generate the resource url', () => {
-          const expected = '/api/rare_books/:id/publish_book';
+          const expected = '/api/rare_books/:rareTomeId/publish';
+          const actual = generateUrl({
+            action,
+            member,
+            resourceName,
+            singularName,
+          });
+
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe('with url: a relative url', () => {
+        const url = ':rareBookId/publish_book';
+
+        it('should generate the resource url', () => {
+          const expected = '/api/rare_books/:rareBookId/publish_book';
           const actual = generateUrl({
             action,
             member,
@@ -853,10 +887,10 @@ describe('Resources API hooks utils', () => {
       });
 
       describe('with url: an absolute url', () => {
-        const url = '/resources/publish/:id/rare_books';
+        const url = '/resources/publish/:rareBookId/rare_books';
 
         it('should generate the resource url', () => {
-          const expected = '/resources/publish/:id/rare_books';
+          const expected = '/resources/publish/:rareBookId/rare_books';
           const actual = generateUrl({
             action,
             member,

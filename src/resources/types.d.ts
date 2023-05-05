@@ -5,6 +5,14 @@ import type {
 import type { ResourcePageOptions } from '@resources/components/page';
 import type { DataTableData } from './data-table';
 
+export type ConfiguredDataBlock =
+  (props: ConfiguredDataBlockProps) => JSX.Element;
+
+export type ConfiguredDataBlockProps = {
+  data: DataBlockData,
+  name: string,
+};
+
 export type ConfiguredDataTable =
   (props: ConfiguredDataTableProps) => JSX.Element;
 
@@ -13,7 +21,10 @@ export type ConfiguredDataTableProps = {
   name: string,
 };
 
+export type DataBlockData = Record<string, Record<string, unknown>>;
+
 export type ResourceConfiguration = {
+  Block?: ConfiguredDataBlock,
   Table?: ConfiguredDataTable,
   baseUrl?: string,
   breadcrumbs?: Breadcrumb[],

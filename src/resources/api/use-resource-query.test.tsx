@@ -173,7 +173,7 @@ describe('Resources API hooks', () => {
         member,
         resourceName,
       };
-      const expectedUrl = '/api/rare_books/:id/publish';
+      const expectedUrl = '/api/rare_books/:rareBookId/publish';
       const expected = {
         alerts,
         url: expectedUrl,
@@ -216,7 +216,7 @@ describe('Resources API hooks', () => {
           member,
           resourceName,
         };
-        const expectedUrl = '/www.example.com/:id/publish';
+        const expectedUrl = '/www.example.com/:rareBookId/publish';
         const expected = {
           alerts,
           url: expectedUrl,
@@ -237,7 +237,8 @@ describe('Resources API hooks', () => {
           resourceName,
           scope,
         };
-        const expectedUrl = '/api/lending_library/rare_books/:id/publish';
+        const expectedUrl =
+          '/api/lending_library/rare_books/:rareBookId/publish';
         const expected = {
           alerts,
           url: expectedUrl,
@@ -251,14 +252,14 @@ describe('Resources API hooks', () => {
       });
 
       describe('with url: value', () => {
-        const url = 'advanced/items/:item_id/publish';
+        const url = 'advanced/items/:itemId/publish';
         const options = {
           action,
           member,
           resourceName,
           url,
         };
-        const expectedUrl = '/api/rare_books/advanced/items/:item_id/publish';
+        const expectedUrl = '/api/rare_books/advanced/items/:itemId/publish';
         const expected = {
           alerts,
           url: expectedUrl,

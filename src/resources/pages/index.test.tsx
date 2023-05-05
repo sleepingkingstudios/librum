@@ -7,6 +7,7 @@ import type { ResourcePageOptions } from '@resources/components/page';
 import { render } from '@test-helpers/rendering';
 import { isElement } from '@utils/react-utils';
 import { MockTable as Table } from './index-page/mocks';
+import { MockBlock as Block } from './show-page/mocks';
 import type {
   ResourcePagesConfiguration,
   ResourceProps,
@@ -18,6 +19,11 @@ jest.mock(
   '@resources/pages/index-page',
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   () => require('@resources/pages/index-page/mocks'),
+);
+jest.mock(
+  '@resources/pages/show-page',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  () => require('@resources/pages/show-page/mocks'),
 );
 
 describe('Resource generateResourcePages()', () => {
@@ -89,39 +95,81 @@ describe('Resource generateResourcePages()', () => {
     IndexPage: React.ComponentType,
     options: ResourceProps,
   }): void => {
-    const page = ((options.pages || {})['index'] || {}) as ResourcePageOptions;
-    const renderIndexPage = () => render(
-      <IndexPage />,
-      { router: true },
-    );
+    describe('should generate the index page', () => {
+      const page = ((options.pages || {})['index'] || {}) as ResourcePageOptions;
+      const renderIndexPage = () => render(
+        <IndexPage />,
+        { router: true },
+      );
 
-    it('should render the contents', () => {
-      const { getByText } = renderIndexPage();
+      it('should render the contents', () => {
+        const { getByText } = renderIndexPage();
 
-      const table = getByText('There are 3 books!');
+        const table = getByText('There are 3 books!');
 
-      expect(table).toBeVisible();
+        expect(table).toBeVisible();
+      });
+
+      it('should match the snapshot', () => {
+        const { asFragment } = renderIndexPage();
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+
+      shouldConfigureThePage({ Page: IndexPage, options, page });
     });
+  };
 
-    it('should match the snapshot', () => {
-      const { asFragment } = renderIndexPage();
+  const shouldGenerateTheShowPage = ({
+    ShowPage,
+    options,
+  }: {
+    ShowPage: React.ComponentType,
+    options: ResourceProps,
+  }): void => {
+    describe('should generate the show page', () => {
+      const page = ((options.pages || {})['show'] || {}) as ResourcePageOptions;
+      const renderShowPage = () => render(
+        <ShowPage />,
+        { router: true },
+      );
 
-      expect(asFragment()).toMatchSnapshot();
+      it('should render the contents', () => {
+        const expectedTerms = ['Name', 'Slug', 'Author'];
+        const expectedDfns  = ['Gideon the Ninth', 'gideon-9', 'Tammsyn Muir'];
+
+        const { getAllByRole } = renderShowPage();
+
+        const terms = getAllByRole('term');
+        const dfns = getAllByRole('definition');
+
+        expect(terms.map(term => term.textContent)).toEqual(expectedTerms);
+        expect(dfns.map(dfn => dfn.textContent)).toEqual(expectedDfns);
+      });
+
+      it('should match the snapshot', () => {
+        const { asFragment } = renderShowPage();
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+
+      shouldConfigureThePage({ Page: ShowPage, options, page });
     });
-
-    shouldConfigureThePage({ Page: IndexPage, options, page });
   };
 
   const shouldGenerateTheStandardPages = ({
     extraPages = [],
     index = true,
     options,
+    show = true,
   }: {
     extraPages?: string[],
     index?: 'skip' | boolean,
     options: ResourceProps,
+    show?: 'skip' | boolean,
   }): void => {
     const generated = generateResourcePages({
+      Block,
       Table,
       resourceName,
       ...options,
@@ -131,6 +179,8 @@ describe('Resource generateResourcePages()', () => {
       const expected = [...extraPages];
 
       if (index) { expected.push('IndexPage'); }
+
+      if (show) { expected.push('ShowPage'); }
 
       expect(Object.keys(generated)).toHaveLength(expected.length);
 
@@ -143,6 +193,12 @@ describe('Resource generateResourcePages()', () => {
       const { IndexPage } = generated;
 
       shouldGenerateTheIndexPage({ IndexPage, options });
+    }
+
+    if (show && !(show === 'skip')) {
+      const { ShowPage } = generated;
+
+      shouldGenerateTheShowPage({ ShowPage, options });
     }
   };
   const pages: ResourcePagesConfiguration = {};
@@ -187,7 +243,7 @@ describe('Resource generateResourcePages()', () => {
 
   describe('with pages: { index: Page }', () => {
     const CustomPage = ({ resourceName }: { resourceName: string }) => (
-      <span>Custom Page for { resourceName }</span>
+      <span>Custom Index Page for { resourceName }</span>
     );
     const pages = { index: { Page: CustomPage } };
     const options = { pages, resourceName };
@@ -203,7 +259,7 @@ describe('Resource generateResourcePages()', () => {
     it('should render the page', () => {
       const { getByText } = render(<IndexPage />);
 
-      expect(getByText('Custom Page for rareBooks')).toBeVisible();
+      expect(getByText('Custom Index Page for rareBooks')).toBeVisible();
     });
 
     it('should match the snapshot', () => {
@@ -223,6 +279,49 @@ describe('Resource generateResourcePages()', () => {
   describe('with pages: { index: value }', () => {
     const index = { title: 'Rare Tomes' };
     const pages = { index };
+    const options = { pages, resourceName };
+
+    shouldGenerateTheStandardPages({ options });
+  });
+
+  describe('with pages: { show: Page }', () => {
+    const CustomPage = ({ resourceName }: { resourceName: string }) => (
+      <span>Custom Show Page for { resourceName }</span>
+    );
+    const pages = { show: { Page: CustomPage } };
+    const options = { pages, resourceName };
+    const generated = generateResourcePages({
+      Table,
+      resourceName,
+      ...options,
+    });
+    const { ShowPage } = generated;
+
+    shouldGenerateTheStandardPages({ show: 'skip', options });
+
+    it('should render the page', () => {
+      const { getByText } = render(<ShowPage />);
+
+      expect(getByText('Custom Show Page for rareBooks')).toBeVisible();
+    });
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(<ShowPage />);
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
+  describe('with pages: { show: false }', () => {
+    const pages: ResourcePagesConfiguration = { show: false };
+    const options = { pages, resourceName };
+
+    shouldGenerateTheStandardPages({ show: false, options });
+  });
+
+  describe('with pages: { show: value }', () => {
+    const show = { title: 'Rare Tome' };
+    const pages = { show };
     const options = { pages, resourceName };
 
     shouldGenerateTheStandardPages({ options });

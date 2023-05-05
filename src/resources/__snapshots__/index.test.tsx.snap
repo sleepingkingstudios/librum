@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Resources generateResource() should generate the index route 1`] = `
+exports[`Resources generateResource() should generate the index route should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="mock-page"
@@ -44,7 +44,61 @@ exports[`Resources generateResource() should generate the index route 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Resources generateResource() with extra pages should generate the index route 1`] = `
+exports[`Resources generateResource() should generate the show route should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Gideon the Ninth
+    </h1>
+    <div
+      class="min-h-[10rem] relative resource-block"
+    >
+      <span
+        class="mock-data-table"
+      >
+        Showing book "Gideon the Ninth"
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/rare-books"
+        >
+          Rare Books
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Gideon the Ninth
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with extra pages should generate the index route should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="mock-page"
@@ -193,7 +247,61 @@ exports[`Resources generateResource() with extra pages should generate the publi
 </DocumentFragment>
 `;
 
-exports[`Resources generateResource() with scope: value should generate the index route 1`] = `
+exports[`Resources generateResource() with extra pages should generate the show route should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Gideon the Ninth
+    </h1>
+    <div
+      class="min-h-[10rem] relative resource-block"
+    >
+      <span
+        class="mock-data-table"
+      >
+        Showing book "Gideon the Ninth"
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/rare-books"
+        >
+          Rare Books
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Gideon the Ninth
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with scope: value should generate the index route should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="mock-page"
@@ -240,6 +348,70 @@ exports[`Resources generateResource() with scope: value should generate the inde
           class="page-breadcrumb-empty"
         >
           Rare Books
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Resources generateResource() with scope: value should generate the show route should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mock-page"
+  >
+    <h1>
+      Gideon the Ninth
+    </h1>
+    <div
+      class="min-h-[10rem] relative resource-block"
+    >
+      <span
+        class="mock-data-table"
+      >
+        Showing book "Gideon the Ninth"
+      </span>
+    </div>
+    <ul
+      class="flex flex-col sm:flex-row page-breadcrumbs"
+    >
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/lending-library"
+        >
+          Lending Library
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <a
+          class="page-breadcrumb-link"
+          href="/lending-library/rare-books"
+        >
+          Rare Books
+        </a>
+      </li>
+      <li
+        class="page-breadcrumb"
+      >
+        <span
+          class="page-breadcrumb-empty"
+        >
+          Gideon the Ninth
         </span>
       </li>
     </ul>

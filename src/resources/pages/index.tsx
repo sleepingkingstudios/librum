@@ -3,18 +3,23 @@ import { pick } from 'lodash';
 
 import { ResourcePage } from '@resources/components/page';
 import type { ResourcePageOptions } from '@resources/components/page';
-import { isComponent } from '@utils/react-utils';
 import { upperCamelCase } from '@utils/text';
 import { ResourceIndexPage } from './index-page';
+import { ResourceShowPage } from './show-page';
 import type {
   ResourceConfiguration,
   ResourcePageComponent,
   ResourcePagesConfiguration,
 } from '../types';
 
+type DefaultPage = {
+  Page: ResourcePageComponent,
+  member: boolean,
+};
+
 type GeneratePage = {
   action: string,
-  defaultPage: React.ComponentType,
+  defaultPage: DefaultPage,
   maybePage: PageConfiguration,
 } & ResourceConfiguration;
 
@@ -26,8 +31,15 @@ type MaybePageConfiguration = false | PageConfiguration;
 
 type PageConfiguration = ResourcePageOptions | React.ComponentType;
 
-const defaultPages: Record<string, React.ComponentType> = {
-  index: ResourceIndexPage,
+const defaultPages: Record<string, DefaultPage> = {
+  index: {
+    Page: ResourceIndexPage,
+    member: false,
+  },
+  show: {
+    Page: ResourceShowPage,
+    member: true,
+  },
 };
 
 const generatePage = ({
@@ -47,17 +59,22 @@ const generatePage = ({
     return Page;
   }
 
+  if (defaultPage) {
+    const { Page, ...pageDefaults } = defaultPage;
+    const page = {
+      ...resourceDefaults,
+      ...pageDefaults,
+      ...(maybePage as ResourcePageOptions),
+    };
+    const PageWithDefaults = (): JSX.Element => (<Page {...config} page={page} />);
+
+    return PageWithDefaults;
+  }
+
   const page: ResourcePageOptions = {
     ...resourceDefaults,
     ...(maybePage as ResourcePageOptions),
   };
-
-  if (isComponent(defaultPage)) {
-    const DefaultPage = defaultPage as ResourcePageComponent;
-    const Page = (): JSX.Element => (<DefaultPage {...config} page={page} />);
-
-    return Page;
-  }
 
   const Page = (): JSX.Element => (
     <ResourcePage {...config} page={page} />
@@ -72,7 +89,10 @@ export const generateResourcePages = ({
 }: GenerateResourcePages): Record<string, React.ComponentType> => {
   const configured: ResourcePagesConfiguration = pages || {};
   const actions = Object.keys({
-    ...{ index: true },
+    ...{
+      index: true,
+      show: true
+    },
     ...configured,
   });
   const generated: Record<string, React.ComponentType> = {};
@@ -81,7 +101,7 @@ export const generateResourcePages = ({
     if (configured[action] === false) { return; }
 
     const key = `${upperCamelCase(action)}Page`;
-    const defaultPage: React.ComponentType = defaultPages[action];
+    const defaultPage: DefaultPage = defaultPages[action];
     const maybePage: MaybePageConfiguration = configured[action] || {};
 
     generated[key] = generatePage({
