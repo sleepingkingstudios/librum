@@ -26,12 +26,13 @@ export const ResourceShowPage = ({
   const {
     baseUrl,
     resourceName,
+    route,
     scope,
     singularName,
   } = config;
   const { member } = page;
   const alerts: AlertDirective[] = generateAlerts({
-    action: 'find',
+    action: 'show',
     member,
     query: true,
     resourceName,
@@ -44,6 +45,7 @@ export const ResourceShowPage = ({
     baseUrl,
     member,
     resourceName,
+    route,
     scope,
     singularName,
     url: '',

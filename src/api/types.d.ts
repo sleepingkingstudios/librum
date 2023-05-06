@@ -1,4 +1,5 @@
 import type { DisplayAlertProps } from '@alerts';
+import type { DataObject } from '@utils/types';
 
 export type AlertDirective = {
   dismiss: string,

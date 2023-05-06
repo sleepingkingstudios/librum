@@ -69,7 +69,7 @@ describe('<ResourceShowPage />', () => {
 
   it('should configure the request', () => {
     const alerts = generateAlerts({
-      action: 'find',
+      action: 'show',
       member: true,
       query: true,
       resourceName,
@@ -321,7 +321,7 @@ describe('<ResourceShowPage />', () => {
 
     it('should configure the request', () => {
       const alerts = generateAlerts({
-        action: 'find',
+        action: 'show',
         member: true,
         query: true,
         resourceName,

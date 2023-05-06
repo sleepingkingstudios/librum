@@ -1,4 +1,5 @@
 import {
+  generateAlertContext,
   generateAlerts,
   generateUrl,
 } from './utils';
@@ -6,6 +7,58 @@ import type { DisplayAlertProps } from '@alerts';
 import type { AlertDirective } from '@api';
 
 describe('Resources API hooks utils', () => {
+  describe('generateAlertContext', () => {
+    const action = 'publish';
+    const resourceName = 'rareBooks';
+
+    it('should be a function', () => {
+      expect(typeof generateAlertContext).toBe('function');
+    });
+
+    it('should generate the alert context', () => {
+      const expected = 'resources:rareBooks:publish:request';
+
+      expect(generateAlertContext({ action, resourceName })).toEqual(expected);
+    });
+
+    describe('with scope: an empty string', () => {
+      const scope = '';
+
+      it('should generate the alert context', () => {
+        const expected = 'resources:rareBooks:publish:request';
+
+        expect(
+          generateAlertContext({ action, resourceName, scope })
+        ).toEqual(expected);
+      });
+    });
+
+    describe('with scope: value', () => {
+      const scope = 'lendingLibrary';
+
+      it('should generate the alert context', () => {
+        const expected = 'resources:lendingLibrary:rareBooks:publish:request';
+
+        expect(
+          generateAlertContext({ action, resourceName, scope })
+        ).toEqual(expected);
+      });
+    });
+
+    describe('with scope: multipart value', () => {
+      const scope = 'lendingLibrary/collections';
+
+      it('should generate the alert context', () => {
+        const expected =
+          'resources:lendingLibrary:collections:rareBooks:publish:request';
+
+        expect(
+          generateAlertContext({ action, resourceName, scope })
+        ).toEqual(expected);
+      });
+    });
+  });
+
   describe('generateAlerts()', () => {
     const action = 'publish';
     const resourceName = 'rareBooks';
@@ -20,12 +73,12 @@ describe('Resources API hooks utils', () => {
 
       it('should generate the alert directives', () => {
         const failureAlert: DisplayAlertProps = {
-          context: 'resources:rareBooks:request',
+          context: 'resources:rareBooks:publish:request',
           message: 'Unable to publish rare books',
           type: 'failure',
         };
         const successAlert: DisplayAlertProps = {
-          context: 'resources:rareBooks:request',
+          context: 'resources:rareBooks:publish:request',
           message: 'Successfully published rare books',
           type: 'success',
         };
@@ -74,12 +127,12 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the alert directives', () => {
           const failureAlert: DisplayAlertProps = {
-            context: 'resources:library:rareBooks:request',
+            context: 'resources:library:rareBooks:publish:request',
             message: 'Unable to publish rare books',
             type: 'failure',
           };
           const successAlert: DisplayAlertProps = {
-            context: 'resources:library:rareBooks:request',
+            context: 'resources:library:rareBooks:publish:request',
             message: 'Successfully published rare books',
             type: 'success',
           };
@@ -115,7 +168,7 @@ describe('Resources API hooks utils', () => {
 
       it('should generate the alert directives', () => {
         const failureAlert: DisplayAlertProps = {
-          context: 'resources:rareBooks:request',
+          context: 'resources:rareBooks:publish:request',
           message: 'Unable to publish rare books',
           type: 'failure',
         };
@@ -164,7 +217,7 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the alert directives', () => {
           const failureAlert: DisplayAlertProps = {
-            context: 'resources:library:rareBooks:request',
+            context: 'resources:library:rareBooks:publish:request',
             message: 'Unable to publish rare books',
             type: 'failure',
           };
@@ -200,12 +253,12 @@ describe('Resources API hooks utils', () => {
 
       it('should generate the alert directives', () => {
         const failureAlert: DisplayAlertProps = {
-          context: 'resources:rareBooks:request',
+          context: 'resources:rareBooks:publish:request',
           message: 'Unable to publish rare book',
           type: 'failure',
         };
         const successAlert: DisplayAlertProps = {
-          context: 'resources:rareBooks:request',
+          context: 'resources:rareBooks:publish:request',
           message: 'Successfully published rare book',
           type: 'success',
         };
@@ -254,12 +307,12 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the alert directives', () => {
           const failureAlert: DisplayAlertProps = {
-            context: 'resources:library:rareBooks:request',
+            context: 'resources:library:rareBooks:publish:request',
             message: 'Unable to publish rare book',
             type: 'failure',
           };
           const successAlert: DisplayAlertProps = {
-            context: 'resources:library:rareBooks:request',
+            context: 'resources:library:rareBooks:publish:request',
             message: 'Successfully published rare book',
             type: 'success',
           };
@@ -293,12 +346,12 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the alert directives', () => {
           const failureAlert: DisplayAlertProps = {
-            context: 'resources:rareBooks:request',
+            context: 'resources:rareBooks:publish:request',
             message: 'Unable to publish unique book',
             type: 'failure',
           };
           const successAlert: DisplayAlertProps = {
-            context: 'resources:rareBooks:request',
+            context: 'resources:rareBooks:publish:request',
             message: 'Successfully published unique book',
             type: 'success',
           };
@@ -334,7 +387,7 @@ describe('Resources API hooks utils', () => {
 
       it('should generate the alert directives', () => {
         const failureAlert: DisplayAlertProps = {
-          context: 'resources:rareBooks:request',
+          context: 'resources:rareBooks:publish:request',
           message: 'Unable to publish rare book',
           type: 'failure',
         };
@@ -383,7 +436,7 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the alert directives', () => {
           const failureAlert: DisplayAlertProps = {
-            context: 'resources:library:rareBooks:request',
+            context: 'resources:library:rareBooks:publish:request',
             message: 'Unable to publish rare book',
             type: 'failure',
           };
@@ -417,7 +470,7 @@ describe('Resources API hooks utils', () => {
 
         it('should generate the alert directives', () => {
           const failureAlert: DisplayAlertProps = {
-            context: 'resources:rareBooks:request',
+            context: 'resources:rareBooks:publish:request',
             message: 'Unable to publish unique book',
             type: 'failure',
           };

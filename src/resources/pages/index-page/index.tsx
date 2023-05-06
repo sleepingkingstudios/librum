@@ -25,6 +25,7 @@ export const ResourceIndexPage = ({
   const {
     baseUrl,
     resourceName,
+    route,
     scope,
   } = config;
   const alerts: AlertDirective[] = generateAlerts({
@@ -40,6 +41,7 @@ export const ResourceIndexPage = ({
     baseUrl,
     member: false,
     resourceName,
+    route,
     scope,
     url: '',
   });

@@ -31,18 +31,24 @@ const generateBaseUrl = ({
   return `api/${formatted}/${snakeCase(resourceName)}`;
 };
 
-const generateContext = ({
+export const generateAlertContext = ({
+  action,
   resourceName,
   scope,
 }: {
+  action: string,
   resourceName: string,
   scope?: string,
 }): string => {
+  const context = `${camelCase(resourceName)}:${action}:request`;
+
   if (scope && scope.length > 0) {
-    return `resources:${camelCase(scope)}:${camelCase(resourceName)}:request`;
+    const formatted = scope.split('/').map(camelCase).join(':');
+
+    return `resources:${formatted}:${context}`;
   }
 
-  return `resources:${camelCase(resourceName)}:request`;
+  return `resources:${context}`;
 };
 
 export const generateAlerts = ({
@@ -64,7 +70,7 @@ export const generateAlerts = ({
 }): AlertDirective[] => {
   if (alerts) { return alerts; }
 
-  const context = generateContext({ resourceName, scope });
+  const context = generateAlertContext({ action, resourceName, scope });
   const friendlyName =
     kebabCase(
       member ?
