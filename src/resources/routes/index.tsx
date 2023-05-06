@@ -11,30 +11,17 @@ import type {
   ResourcePagesConfiguration,
   ResourceRoutesProps,
 } from '../types';
+import { configuredRouteFor } from './utils';
 
 type MaybeOptions = false | ResourcePageRouteOptions;
-
-const configuredRouteFor = ({
-  resourceName,
-  route,
-  scope,
-}: {
-  resourceName: string,
-  route?: string,
-  scope?: string,
-}): string => {
-  if (route && route.length > 0) { return route; }
-
-  if (scope && scope.length > 0) {
-    return `${kebabCase(scope)}/${kebabCase(resourceName)}`;
-  }
-
-  return kebabCase(resourceName);
-};
 
 const defaultPages: Record<string, ResourcePageRouteOptions> = {
   index: {
     member: false,
+    route: '/',
+  },
+  show: {
+    member: true,
     route: '/',
   },
 };

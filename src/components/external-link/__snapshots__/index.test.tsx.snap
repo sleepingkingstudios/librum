@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExternalLink /> with children: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/path/to/resource"
+  >
+    <span>
+      <strong>
+        Link Text
+      </strong>
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with className: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/path/to/resource"
+  >
+    <span
+      class="custom-link"
+    >
+      /path/to/resource
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with label: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/path/to/resource"
+  >
+    <span>
+      Link Text
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: a relative path should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/path/to/resource"
+  >
+    <span>
+      path/to/resource
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: a url should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="https://example.com/path/to/resource"
+  >
+    <span>
+      example.com/path/to/resource
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: a url with a protocol should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="http://example.com/path/to/resource"
+  >
+    <span>
+      http://example.com/path/to/resource
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: a url with a subdomain should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="https://www.example.com/path/to/resource"
+  >
+    <span>
+      www.example.com/path/to/resource
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: an absolute path should match the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/path/to/resource"
+  >
+    <span>
+      /path/to/resource
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: an empty string with children: value should match the snapshot 1`] = `[Function]`;
+
+exports[`<ExternalLink /> with to: an empty string with label: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <span>
+    Link Text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`<ExternalLink /> with to: null with children: value should match the snapshot 1`] = `[Function]`;
+
+exports[`<ExternalLink /> with to: null with label: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <span>
+    Link Text
+  </span>
+</DocumentFragment>
+`;

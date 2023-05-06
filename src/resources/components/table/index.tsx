@@ -1,23 +1,17 @@
 import * as React from 'react';
 
 import type { Response } from '@api';
-import type { DataTableData } from '@components/data-table/types';
+import type { DataTableData } from '@components/data-table';
 import { LoadingOverlay } from '@components/loading-overlay';
+import type { ConfiguredDataTable } from '@resources/types';
 import { titleCase } from '@utils/text';
 
-type DataTableProps = {
-  data: DataTableData,
-  name: string,
-};
-
 type ResourcesTableProps = {
-  Table: DataTableType,
+  Table: ConfiguredDataTable,
   loader?: JSX.Element,
   response: Response,
   resourceName: string,
 };
-
-export type DataTableType = (props: DataTableProps) => JSX.Element;
 
 const renderContent = ({
   Table,
@@ -25,7 +19,7 @@ const renderContent = ({
   resourceName,
   response,
 }: {
-  Table: DataTableType,
+  Table: ConfiguredDataTable,
   loader?: JSX.Element,
   resourceName: string,
   response: Response,

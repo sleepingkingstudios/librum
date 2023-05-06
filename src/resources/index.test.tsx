@@ -8,7 +8,10 @@ import { responseWithData } from '@api';
 import type { DataTableData } from '@components/data-table';
 import { render } from '@test-helpers/rendering';
 import { useResourceQuery } from './api';
-import type { ResourceProps } from './types';
+import type {
+  DataBlockData,
+  ResourceProps,
+} from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('@components/page', () => require('@components/page/mocks'));
@@ -17,6 +20,15 @@ jest.mock('./api');
 const mockUseResourceQuery =
   useResourceQuery as jest.MockedFunction<typeof useResourceQuery>;
 
+const Block = ({ data }: { data: DataBlockData }): JSX.Element => {
+  const book = 'rareBook' in data ? data.rareBook : { name: 'Unknown Book' };
+
+  return (
+    <span className="mock-data-table">
+      { `Showing book "${book.name.toString()}"` }
+    </span>
+  );
+};
 const Table = ({ data }: { data: DataTableData }): JSX.Element => {
   const books = 'rareBooks' in data ? data.rareBooks : [];
 
@@ -35,45 +47,119 @@ describe('Resources generateResource()', () => {
     at?: string,
     resource: ResourceProps,
   }): void => {
-    const refetch = jest.fn();
-    const response = responseWithData({ data: indexData });
-
-    beforeEach(() => {
-      mockUseResourceQuery.mockImplementation(() => [response, refetch]);
-    });
-
-    it('should generate the index route', () => {
+    describe('should generate the index route', () => {
+      const indexData: DataTableData = {
+        rareBooks: [
+          {
+            name: 'Gideon the Ninth',
+          },
+          {
+            name: 'Harrow the Ninth',
+          },
+          {
+            name: 'Nona the Ninth',
+          },
+        ],
+      };
+      const refetch = jest.fn();
+      const response = responseWithData({ data: indexData });
       const { routes } = generateResource(resource);
-      const { asFragment, getByText } = render(
-        <Routes>{ routes() }</Routes>,
-        {
-          initialEntries: [at],
-          router: true,
-          store: true,
-        },
-      );
 
-      expect(getByText('There are 3 books!')).toBeVisible();
+      beforeEach(() => {
+        mockUseResourceQuery.mockImplementation(() => [response, refetch]);
+      });
 
-      expect(asFragment()).toMatchSnapshot();
+      it('should render the content', () => {
+        const { getByText } = render(
+          <Routes>{ routes() }</Routes>,
+          {
+            initialEntries: [at],
+            router: true,
+            store: true,
+          },
+        );
+
+        expect(getByText('There are 3 books!')).toBeVisible();
+      });
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <Routes>{ routes() }</Routes>,
+          {
+            initialEntries: [at],
+            router: true,
+            store: true,
+          },
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
     });
+  };
+  const shouldGenerateTheShowRoute = ({
+    at = '/rare-books/gideon-9',
+    resource,
+  }: {
+    at?: string,
+    resource: ResourceProps,
+  }): void => {
+    describe('should generate the show route', () => {
+      const showData: DataBlockData = {
+        rareBook: {
+          name: 'Gideon the Ninth',
+          slug: 'gideon-9',
+          author: 'Tammsyn Muir',
+        },
+      };
+      const refetch = jest.fn();
+      const response = responseWithData({ data: showData });
+      const { routes } = generateResource(resource);
+
+      beforeEach(() => {
+        mockUseResourceQuery.mockImplementation(() => [response, refetch]);
+      });
+
+      it('should render the content', () => {
+        const { getByText } = render(
+          <Routes>{ routes() }</Routes>,
+          {
+            initialEntries: [at],
+            router: true,
+            store: true,
+          },
+        );
+
+        expect(getByText('Showing book "Gideon the Ninth"')).toBeVisible();
+      });
+
+      it('should match the snapshot', () => {
+        const { asFragment } = render(
+          <Routes>{ routes() }</Routes>,
+          {
+            initialEntries: [at],
+            router: true,
+            store: true,
+          },
+        );
+
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+  };
+  const shouldGenerateTheStandardRoutes = ({
+    at = '/rare-books',
+    resource,
+  }: {
+    at?: string,
+    resource: ResourceProps,
+  }): void => {
+    shouldGenerateTheIndexRoute({ at, resource });
+
+    shouldGenerateTheShowRoute({ at: `${at}/gideon-9`, resource });
   };
 
   const resourceName = 'rareBooks';
-  const resource: ResourceProps = { Table, resourceName };
-  const indexData: DataTableData = {
-    rareBooks: [
-      {
-        title: 'On War',
-      },
-      {
-        title: 'The Art of War',
-      },
-      {
-        title: 'The Prince',
-      },
-    ],
-  };
+  const resource: ResourceProps = { Block, Table, resourceName };
 
   it('should be a function', () => {
     expect(typeof generateResource).toBe('function');
@@ -81,20 +167,20 @@ describe('Resources generateResource()', () => {
 
   it('should generate the resource Pages', () => {
     const { Pages } = generateResource(resource);
-    const expected = ['IndexPage'];
+    const expected = ['IndexPage', 'ShowPage'];
 
     expect(Object.keys(Pages)).toEqual(expected);
   });
 
-  shouldGenerateTheIndexRoute({ resource });
+  shouldGenerateTheStandardRoutes({ resource });
 
   describe('with scope: value', () => {
     const scope = 'lendingLibrary';
-    const resource: ResourceProps = { Table, resourceName, scope };
+    const resource: ResourceProps = { Block, Table, resourceName, scope };
 
-    shouldGenerateTheIndexRoute({
-      resource,
+    shouldGenerateTheStandardRoutes({
       at: '/lending-library/rare-books',
+      resource,
     });
   });
 
@@ -118,6 +204,7 @@ describe('Resources generateResource()', () => {
       },
     };
     const resource = {
+      Block,
       Table,
       endpoints,
       pages,
@@ -126,12 +213,17 @@ describe('Resources generateResource()', () => {
 
     it('should generate the resource Pages', () => {
       const { Pages } = generateResource(resource);
-      const expected = ['IndexPage', 'PublishPage', 'PublishedPage'];
+      const expected = [
+        'IndexPage',
+        'ShowPage',
+        'PublishPage',
+        'PublishedPage',
+      ];
 
       expect(Object.keys(Pages)).toEqual(expected);
     });
 
-    shouldGenerateTheIndexRoute({ resource });
+    shouldGenerateTheStandardRoutes({ resource });
 
     it('should generate the publish route', () => {
       const { routes } = generateResource(resource);

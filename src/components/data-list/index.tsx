@@ -1,13 +1,15 @@
 import * as React from 'react';
 
 import { DataListItem } from './item';
-import type { Literal } from '@utils/types';
+import type { DataListData } from './types';
+
+export type { DataListData } from './types';
 
 export const DataList = ({
   data,
   defaultValue = null,
 }: {
-  data: Record<string, Literal>,
+  data: DataListData,
   defaultValue?: JSX.Element | string,
 }): JSX.Element => {
   const entries = Object.entries(data);
@@ -19,7 +21,12 @@ export const DataList = ({
           const [label, value] = tuple;
 
           return (
-            <DataListItem key={label} defaultValue={defaultValue} label={label} value={value} />
+            <DataListItem
+              key={label}
+              defaultValue={defaultValue}
+              label={label}
+              value={value}
+            />
           );
         })
       }

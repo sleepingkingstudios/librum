@@ -4,8 +4,9 @@ import { DataList } from './index';
 import { render } from '@test-helpers/rendering';
 
 type ExampleObject = {
-  name: string;
-  description?: string;
+  name: string,
+  description?: string,
+  role?: JSX.Element,
 };
 
 describe('<DataList />', () => {
@@ -25,6 +26,7 @@ describe('<DataList />', () => {
     const data: ExampleObject = {
       name: 'Kevin Flynn',
       description: null,
+      role: (<span className="role">User</span>),
     };
 
     it('should match the snapshot', () => {

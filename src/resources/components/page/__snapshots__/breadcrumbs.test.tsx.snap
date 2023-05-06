@@ -1,0 +1,1625 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with action: an empty string should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: empty array should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: empty array with page: { breadcrumbs: empty array } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: empty array with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: empty array with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: value with page: { breadcrumbs: empty array } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: value with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with breadcrumbs: value with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with page: { breadcrumbs: empty array } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with routes wildcards should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Lending Library @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a collection action with wildcards: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with action: an empty string should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with action: an empty string with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with action: an empty string with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with page: { breadcrumbs: empty array } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with page: { breadcrumbs: empty array } with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with page: { breadcrumbs: value } with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with scope: value with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with scope: value with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: empty array with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with page: { breadcrumbs: empty array } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with page: { breadcrumbs: empty array } with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with page: { breadcrumbs: value } with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Published Books (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with scope: value with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with scope: value with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /custom/path/rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with breadcrumbs: value with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Custom
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Path @ /custom/path
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /custom/path/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /custom/path/rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with page: { breadcrumbs: empty array } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with page: { breadcrumbs: empty array } with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with page: { breadcrumbs: value } should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish Book (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with page: { breadcrumbs: value } with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish Book (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with routes wildcards should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with routes wildcards with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with routes wildcards with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /lending-library/rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with scope: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Lending Library @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with scope: value with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Lending Library @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with scope: value with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Lending Library @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /lending-library/rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with singularName: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with singularName: value with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Tome
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with singularName: value with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with status: "failure" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with status: "loading" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with status: "success" with data: value with name and id should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /rare-books/00000000-0000-0000-0000-000000000000
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with status: "success" with data: value with name and slug should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with status: "success" with data: value with name should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with wildcards: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Loading
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with wildcards: value with status: "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Book
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageBreadcrumbs /> with a member action with wildcards: value with status: "success" with data: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    aria-label="breadcrumbs"
+  >
+    <li
+      aria-label="breadcrumb"
+    >
+      Home @ /
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Namespace @ /lending-library
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Rare Books @ /lending-library/rare-books
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      On War @ /lending-library/rare-books/on-war
+    </li>
+    <li
+      aria-label="breadcrumb"
+    >
+      Publish (active)
+    </li>
+  </ul>
+</DocumentFragment>
+`;

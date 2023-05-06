@@ -3,10 +3,29 @@ import type {
   NavigationProps,
 } from '@components/page';
 import type { ResourcePageOptions } from '@resources/components/page';
-import type { DataTableType } from './data-table/types';
+import type { DataTableData } from './data-table';
+
+export type ConfiguredDataBlock =
+  (props: ConfiguredDataBlockProps) => JSX.Element;
+
+export type ConfiguredDataBlockProps = {
+  data: DataBlockData,
+  name: string,
+};
+
+export type ConfiguredDataTable =
+  (props: ConfiguredDataTableProps) => JSX.Element;
+
+export type ConfiguredDataTableProps = {
+  data: DataTableData,
+  name: string,
+};
+
+export type DataBlockData = Record<string, Record<string, unknown>>;
 
 export type ResourceConfiguration = {
-  Table?: DataTableType,
+  Block?: ConfiguredDataBlock,
+  Table?: ConfiguredDataTable,
   baseUrl?: string,
   breadcrumbs?: Breadcrumb[],
   navigation?: JSX.Element | NavigationProps,

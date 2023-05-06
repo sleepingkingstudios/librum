@@ -1,4 +1,5 @@
 import type {
+  ApiError,
   Middleware,
   PerformRequest,
   RequestBody,
@@ -132,12 +133,19 @@ export const withError = <Error = ResponseData>({
   error: Error,
   errorType?: string,
   response?: Response,
-}): Response<ResponseData, Error> => ({
-  ...response,
-  ...(errorType ? { errorType } : {}),
-  error,
-  hasError: true,
-});
+}): Response<ResponseData, Error> => {
+  const type = errorType || (
+    typeof error === 'string' ? undefined : (error as ApiError).type
+  );
+
+  return {
+    ...response,
+    ...(errorType ? { errorType } : {}),
+    error,
+    errorType: type,
+    hasError: true,
+  };
+};
 
 export const withStatus = ({
   response = emptyResponse,

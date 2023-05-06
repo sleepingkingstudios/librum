@@ -1,0 +1,365 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResourcePageHeading /> with a collection action should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Published Rare Books
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a collection action with action: empty string should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Rare Books
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a collection action with buttons: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col sm:flex-row"
+  >
+    <h1>
+      Published Rare Books
+    </h1>
+    <ul
+      class="justify-end flex flex-col grow sm:flex-row btn-list"
+    >
+      <button
+        class="btn btn-primary"
+        type="button"
+      >
+        Rock
+      </button>
+      <button
+        class="btn btn-success"
+        type="button"
+      >
+        Paper
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+      >
+        Scissors
+      </button>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a collection action with label: value should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Custom Label
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action when the status is "failure" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Loading Rare Book
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action when the status is "loading" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Loading Rare Book
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action when the status is "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Publish Rare Book
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action when the status is "success" when the data includes a named resource should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Publish Romance of the Three Kingdoms
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action when the status is "uninitialized" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Loading Rare Book
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with action: empty string when the status is "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Rare Book
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with action: empty string when the status is "success" when the data includes a named resource should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Romance of the Three Kingdoms
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with buttons: value when the status is "failure" should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col sm:flex-row"
+  >
+    <h1>
+      Loading Rare Book
+    </h1>
+    <ul
+      class="justify-end flex flex-col grow sm:flex-row btn-list"
+    >
+      <button
+        class="btn btn-primary"
+        type="button"
+      >
+        Rock
+      </button>
+      <button
+        class="btn btn-success"
+        type="button"
+      >
+        Paper
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+      >
+        Scissors
+      </button>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with buttons: value when the status is "loading" should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col sm:flex-row"
+  >
+    <h1>
+      Loading Rare Book
+    </h1>
+    <ul
+      class="justify-end flex flex-col grow sm:flex-row btn-list"
+    >
+      <button
+        class="btn btn-primary"
+        type="button"
+      >
+        Rock
+      </button>
+      <button
+        class="btn btn-success"
+        type="button"
+      >
+        Paper
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+      >
+        Scissors
+      </button>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with buttons: value when the status is "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col sm:flex-row"
+  >
+    <h1>
+      Publish Rare Book
+    </h1>
+    <ul
+      class="justify-end flex flex-col grow sm:flex-row btn-list"
+    >
+      <button
+        class="btn btn-primary"
+        type="button"
+      >
+        Rock
+      </button>
+      <button
+        class="btn btn-success"
+        type="button"
+      >
+        Paper
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+      >
+        Scissors
+      </button>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with buttons: value when the status is "success" when the data includes a named resource should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col sm:flex-row"
+  >
+    <h1>
+      Publish Romance of the Three Kingdoms
+    </h1>
+    <ul
+      class="justify-end flex flex-col grow sm:flex-row btn-list"
+    >
+      <button
+        class="btn btn-primary"
+        type="button"
+      >
+        Rock
+      </button>
+      <button
+        class="btn btn-success"
+        type="button"
+      >
+        Paper
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+      >
+        Scissors
+      </button>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with buttons: value when the status is "uninitialized" should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col sm:flex-row"
+  >
+    <h1>
+      Loading Rare Book
+    </h1>
+    <ul
+      class="justify-end flex flex-col grow sm:flex-row btn-list"
+    >
+      <button
+        class="btn btn-primary"
+        type="button"
+      >
+        Rock
+      </button>
+      <button
+        class="btn btn-success"
+        type="button"
+      >
+        Paper
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+      >
+        Scissors
+      </button>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with label: value when the status is "failure" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Custom Label
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with label: value when the status is "loading" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Custom Label
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with label: value when the status is "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Custom Label
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with label: value when the status is "success" when the data includes a named resource should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Custom Label
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with label: value when the status is "uninitialized" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Custom Label
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with singularName: value when the status is "failure" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Loading Rare Tome
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with singularName: value when the status is "loading" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Loading Rare Tome
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with singularName: value when the status is "success" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Publish Rare Tome
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with singularName: value when the status is "success" when the data includes a named resource should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Publish Romance of the Three Kingdoms
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`<ResourcePageHeading /> with a member action with singularName: value when the status is "uninitialized" should match the snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    Loading Rare Tome
+  </h1>
+</DocumentFragment>
+`;
