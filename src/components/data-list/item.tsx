@@ -4,13 +4,14 @@ import {
   snakeCase,
 } from 'lodash';
 
+import { isElement } from '@utils/react-utils';
 import type { Literal } from '@utils/types';
 
 type DataListItemProps = {
   defaultValue?: JSX.Element | string;
   label: string;
-  value: Literal;
-}
+  value: JSX.Element | Literal;
+};
 
 const formatLabel = (label: string): string => {
   return snakeCase(label).split('_').map(capitalize).join(' ');
@@ -25,9 +26,19 @@ const renderValue = ({
   value,
 }: {
   defaultValue: JSX.Element | string | null,
-  value: Literal,
+  value: JSX.Element | Literal,
 }): JSX.Element | string => {
-  if (value !== null) { return formatValue(value); }
+  if (isElement(value)) {
+    const element = value as JSX.Element;
+
+    return element;
+  }
+
+  if (value !== null) {
+    const literal = value as Literal;
+
+    return formatValue(literal);
+  }
 
   return defaultValue;
 };

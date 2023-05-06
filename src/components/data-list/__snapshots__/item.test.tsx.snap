@@ -38,6 +38,27 @@ exports[`<DataListItem /> with value: a string should match the snapshot 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<DataListItem /> with value: an element should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="data-list-item"
+  >
+    <dt
+      class="data-list-label"
+    >
+      Components
+    </dt>
+    <dd
+      class="data-list-value"
+    >
+      <span>
+        V, S, M (a glob of ectoplasm)
+      </span>
+    </dd>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`<DataListItem /> with value: false should match the snapshot 1`] = `
 <DocumentFragment>
   <div

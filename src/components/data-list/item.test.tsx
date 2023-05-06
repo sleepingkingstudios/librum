@@ -4,6 +4,19 @@ import { DataListItem } from './item';
 import { render } from '@test-helpers/rendering';
 
 describe('<DataListItem />', () => {
+  describe('with value: an element', () => {
+    const label = 'components';
+    const value = (<span>V, S, M (a glob of ectoplasm)</span>);
+
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <DataListItem label={label} value={value} />
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
+
   describe('with value: a number', () => {
     const label = 'powerLevel';
     const value = 9000;

@@ -115,6 +115,24 @@ exports[`<DataList /> with data: value should match the snapshot 1`] = `
         class="data-list-value"
       />
     </div>
+    <div
+      class="data-list-item"
+    >
+      <dt
+        class="data-list-label"
+      >
+        Role
+      </dt>
+      <dd
+        class="data-list-value"
+      >
+        <span
+          class="role"
+        >
+          User
+        </span>
+      </dd>
+    </div>
   </dl>
 </DocumentFragment>
 `;

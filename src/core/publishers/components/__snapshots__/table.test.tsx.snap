@@ -33,13 +33,23 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
             class="data-table-cell-name"
             data-label="Name"
           >
-            Crystal Sphere Publications
+            <a
+              href="/publishers/crystal-sphere-publications"
+            >
+              Crystal Sphere Publications
+            </a>
           </td>
           <td
             class="data-table-cell-website"
             data-label="Website"
           >
-            www.example.com/crystal-sphere-publications
+            <a
+              href="https://www.example.com/crystal-sphere-publications"
+            >
+              <span>
+                www.example.com/crystal-sphere-publications
+              </span>
+            </a>
           </td>
           <td
             class="data-table-cell-actions"
@@ -53,13 +63,23 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
             class="data-table-cell-name"
             data-label="Name"
           >
-            Flumph Free Press
+            <a
+              href="/publishers/flumph-free-press"
+            >
+              Flumph Free Press
+            </a>
           </td>
           <td
             class="data-table-cell-website"
             data-label="Website"
           >
-            www.example.com/flumph-free-press
+            <a
+              href="https://www.example.com/flumph-free-press"
+            >
+              <span>
+                www.example.com/flumph-free-press
+              </span>
+            </a>
           </td>
           <td
             class="data-table-cell-actions"
@@ -73,13 +93,23 @@ exports[`<PublishersTable /> when there are many rows should match the snapshot 
             class="data-table-cell-name"
             data-label="Name"
           >
-            Spelljammer Monthly
+            <a
+              href="/publishers/spelljammer-monthly"
+            >
+              Spelljammer Monthly
+            </a>
           </td>
           <td
             class="data-table-cell-website"
             data-label="Website"
           >
-            www.example.com/spelljammer-monthly
+            <a
+              href="https://www.example.com/spelljammer-monthly"
+            >
+              <span>
+                www.example.com/spelljammer-monthly
+              </span>
+            </a>
           </td>
           <td
             class="data-table-cell-actions"
