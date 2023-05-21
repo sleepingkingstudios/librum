@@ -4,7 +4,7 @@ module Api::Authentication
   # API controller for managing authentication sessions.
   class SessionsController < ApiController
     # Responder class for authentication responses.
-    class Responder < ApplicationResponder
+    class Responder < Responders::JsonResponder
       action :create do
         match :success do |result|
           render_success(result.value, status: 201)

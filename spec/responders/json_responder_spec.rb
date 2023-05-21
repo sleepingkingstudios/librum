@@ -6,7 +6,7 @@ require 'stannum'
 
 require 'support/contracts/responder_contracts'
 
-RSpec.describe ApplicationResponder do
+RSpec.describe Responders::JsonResponder do
   include Spec::Support::Contracts::ResponderContracts
 
   subject(:responder) { described_class.new(**constructor_options) }

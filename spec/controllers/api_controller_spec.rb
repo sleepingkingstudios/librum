@@ -24,7 +24,7 @@ RSpec.describe ApiController, type: :controller do
   describe '.responders' do
     include_contract 'should respond to',
       :json,
-      using: ApplicationResponder
+      using: Responders::JsonResponder
 
     include_contract 'should not respond to', :html
   end
