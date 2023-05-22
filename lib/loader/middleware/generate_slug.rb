@@ -2,7 +2,7 @@
 
 require 'cuprum/collections/loader'
 
-module Data::Middleware
+module Loader::Middleware
   # Middleware for generating a slug for an entity.
   class GenerateSlug < Cuprum::Collections::Loader::Middleware::EntityMiddleware
     private

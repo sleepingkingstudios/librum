@@ -3,7 +3,7 @@
 require 'cuprum/collections/commands/upsert'
 require 'cuprum/collections/loader'
 
-module Data::Middleware
+module Loader::Middleware
   # Middleware for generating a password credential for a user.
   class GeneratePassword <
         Cuprum::Collections::Loader::Middleware::EntityMiddleware

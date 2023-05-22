@@ -3,7 +3,7 @@
 require 'cuprum/collections/loader'
 require 'cuprum/command'
 
-module Data
+module Loader
   # Loads data for the specified classes in the given order.
   class Load < Cuprum::Command
     # @param data_path [String] The root url of the data files.
@@ -12,10 +12,10 @@ module Data
     def initialize(record_classes:, data_path: nil)
       super()
 
-      @data_path      = data_path || Data::Configuration.data_path
+      @data_path      = data_path || Loader::Configuration.data_path
       @record_classes = record_classes
       @repository     =
-        Data::Configuration.repository(*record_classes)
+        Loader::Configuration.repository(*record_classes)
     end
 
     # @return [String] the root url of the data files.

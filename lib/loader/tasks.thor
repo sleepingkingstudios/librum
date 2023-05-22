@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Data
+module Loader
   # Namespace for Thor tasks that load serialized data.
   class Tasks < ::Thor
     namespace :data
@@ -32,7 +32,7 @@ module Data
         dnd5e:          options['dnd5e']
       )
 
-      Data::Load
+      Loader::Load
         .new(
           data_path:      options['data-path'],
           record_classes: record_classes
@@ -47,15 +47,15 @@ module Data
     end
 
     def scoped_classes(authentication:, core:, dnd5e:)
-      record_classes = core ? Data::Configuration::CORE_CLASSES : []
+      record_classes = core ? Loader::Configuration::CORE_CLASSES : []
 
       if authentication
         raise if Rails.env.production?
 
-        record_classes += Data::Configuration::AUTHENTICATION_CLASSES
+        record_classes += Loader::Configuration::AUTHENTICATION_CLASSES
       end
 
-      record_classes += Data::Configuration::DND5E_CLASSES if dnd5e
+      record_classes += Loader::Configuration::DND5E_CLASSES if dnd5e
 
       record_classes
     end

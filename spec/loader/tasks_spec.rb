@@ -3,18 +3,18 @@
 require 'rails_helper'
 require 'thor'
 
-load 'data/tasks.thor'
+load 'loader/tasks.thor'
 
-RSpec.describe Data::Tasks do
+RSpec.describe Loader::Tasks do
   subject(:tasks) { described_class.new }
 
   describe '#load' do
     let(:data_path) { 'path/to/data' }
-    let(:load_mock) { instance_double(Data::Load, call: nil) }
+    let(:load_mock) { instance_double(Loader::Load, call: nil) }
     let(:options)   { { 'data-path': data_path } }
 
     before(:example) do
-      allow(Data::Load).to receive(:new).and_return(load_mock)
+      allow(Loader::Load).to receive(:new).and_return(load_mock)
     end
 
     def invoke_task
@@ -24,11 +24,11 @@ RSpec.describe Data::Tasks do
     it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
       invoke_task
 
-      expect(Data::Load)
+      expect(Loader::Load)
         .to have_received(:new)
         .with(
           data_path:      data_path,
-          record_classes: Data::Configuration::CORE_CLASSES
+          record_classes: Loader::Configuration::CORE_CLASSES
         )
     end
 
@@ -44,13 +44,13 @@ RSpec.describe Data::Tasks do
       it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
         invoke_task
 
-        expect(Data::Load)
+        expect(Loader::Load)
           .to have_received(:new)
           .with(
             data_path:      data_path,
             record_classes: [
-              *Data::Configuration::CORE_CLASSES,
-              *Data::Configuration::AUTHENTICATION_CLASSES
+              *Loader::Configuration::CORE_CLASSES,
+              *Loader::Configuration::AUTHENTICATION_CLASSES
             ]
           )
       end
@@ -68,7 +68,7 @@ RSpec.describe Data::Tasks do
       it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
         invoke_task
 
-        expect(Data::Load)
+        expect(Loader::Load)
           .to have_received(:new)
           .with(
             data_path:      data_path,
@@ -89,13 +89,13 @@ RSpec.describe Data::Tasks do
       it 'should initialize the loader' do # rubocop:disable RSpec/ExampleLength
         invoke_task
 
-        expect(Data::Load)
+        expect(Loader::Load)
           .to have_received(:new)
           .with(
             data_path:      data_path,
             record_classes: [
-              *Data::Configuration::CORE_CLASSES,
-              *Data::Configuration::DND5E_CLASSES
+              *Loader::Configuration::CORE_CLASSES,
+              *Loader::Configuration::DND5E_CLASSES
             ]
           )
       end

@@ -2,7 +2,7 @@
 
 require 'cuprum/collections/loader/middleware/entity_middleware'
 
-module Data::Middleware
+module Loader::Middleware
   # Finds or creates the Homebrew source for the user.
   class FindOrCreateHomebrew <
         Cuprum::Collections::Loader::Middleware::EntityMiddleware
