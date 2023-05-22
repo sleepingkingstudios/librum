@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'data'
-
-module Data
+module Loader
   # Static configuration for loading record data.
   module Configuration
     # The authentication record classes, for loading user fixtures.

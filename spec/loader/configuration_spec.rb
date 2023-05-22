@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Data::Configuration do
+RSpec.describe Loader::Configuration do
   describe '::AUTHENTICATION_CLASSES' do
     let(:expected) do
       [

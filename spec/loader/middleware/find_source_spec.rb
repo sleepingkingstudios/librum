@@ -4,7 +4,7 @@ require 'rails_helper'
 
 require 'cuprum/rails/repository'
 
-RSpec.describe Data::Middleware::FindSource do
+RSpec.describe Loader::Middleware::FindSource do
   subject(:middleware) do
     described_class.new(
       attribute_name,

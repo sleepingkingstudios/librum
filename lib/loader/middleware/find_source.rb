@@ -2,7 +2,7 @@
 
 require 'cuprum/collections/loader/middleware/find_association'
 
-module Data::Middleware
+module Loader::Middleware
   # Finds the source for a game reference by game system and slug.
   class FindSource < Cuprum::Collections::Loader::Middleware::FindAssociation
     # @param attribute_name [String, Symbol] The name of the attribute.

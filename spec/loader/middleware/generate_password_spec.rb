@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Data::Middleware::GeneratePassword do
+RSpec.describe Loader::Middleware::GeneratePassword do
   subject(:middleware) { described_class.new(repository: repository) }
 
   let(:repository) { Cuprum::Rails::Repository.new }

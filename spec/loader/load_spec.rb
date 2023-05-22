@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Data::Load do
+RSpec.describe Loader::Load do
   subject(:command) { described_class.new(**constructor_options) }
 
   shared_context 'when initialized with many record classes' do
@@ -98,7 +98,7 @@ RSpec.describe Data::Load do
   end
 
   describe '#data_path' do
-    let(:expected) { Data::Configuration.data_path }
+    let(:expected) { Loader::Configuration.data_path }
 
     include_examples 'should define reader', :data_path, -> { be == expected }
 
@@ -122,7 +122,7 @@ RSpec.describe Data::Load do
 
   describe '#repository' do
     let(:expected_keys) do
-      Data::Configuration.repository(*record_classes).keys
+      Loader::Configuration.repository(*record_classes).keys
     end
 
     include_examples 'should define reader',

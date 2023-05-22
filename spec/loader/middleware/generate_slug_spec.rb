@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Data::Middleware::GenerateSlug do
+RSpec.describe Loader::Middleware::GenerateSlug do
   subject(:middleware) { described_class.new(**constructor_options) }
 
   let(:attribute_name)      { 'title' }
