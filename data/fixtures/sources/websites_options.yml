@@ -4,7 +4,7 @@ game_system:
     Cuprum::Collections::Loader::Middleware::FindAssociation:
       find_by: slug
 middleware:
-  Data::Middleware::GenerateSlug:
+  Loader::Middleware::GenerateSlug:
     attribute_name: name
 publisher:
   middleware:

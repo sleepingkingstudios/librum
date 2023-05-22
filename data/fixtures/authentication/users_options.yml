@@ -1,6 +1,6 @@
 ---
 middleware:
-  Data::Middleware::FindOrCreateHomebrew: {}
-  Data::Middleware::GenerateSlug:
+  Loader::Middleware::FindOrCreateHomebrew: {}
+  Loader::Middleware::GenerateSlug:
     attribute_name: username
-  Data::Middleware::GeneratePassword: {}
+  Loader::Middleware::GeneratePassword: {}

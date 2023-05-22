@@ -1,4 +1,4 @@
 ---
 middleware:
-  Data::Middleware::GenerateSlug:
+  Loader::Middleware::GenerateSlug:
     attribute_name: name
