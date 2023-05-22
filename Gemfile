@@ -8,6 +8,7 @@ gem 'rails', '~> 7.0.4'
 
 gem 'pg', '~> 1.5' # Use postgresql as the database for Active Record
 gem 'puma', '~> 6.0' # Use the Puma web server
+gem 'rack-cors', '~> 2.0'
 
 ### Assets
 gem 'importmap-rails' # Use JavaScript with ESM import maps
