@@ -51,7 +51,7 @@ describe('API request hooks', () => {
   });
 
   describe('useApiRequest()', () => {
-    const url = 'www.example.com';
+    const url = '/path/to/resource';
     const defaultOptions: UseApiRequestOptions = { url };
     const expectedConfig: MiddlewareOptions = {
       alerts: mockUseAlerts(),
@@ -65,7 +65,7 @@ describe('API request hooks', () => {
     const expectedOptions: UseRequestOptions = {
       config: expectedConfig,
       middleware: expectedMiddleware,
-      url,
+      url: `${process.env.API_URL}${url}`,
     };
 
     beforeEach(() => {
@@ -99,7 +99,7 @@ describe('API request hooks', () => {
       const expectedOptions: UseRequestOptions = {
         config: expectedConfig,
         middleware: expectedMiddleware,
-        url,
+        url: `${process.env.API_URL}${url}`,
       };
 
       beforeEach(() => {
@@ -141,7 +141,7 @@ describe('API request hooks', () => {
       const expectedOptions: UseRequestOptions = {
         config: expectedConfig,
         middleware: expectedMiddleware,
-        url,
+        url: `${process.env.API_URL}${url}`,
       };
 
       it('should build the alerts middleware', () => {
@@ -180,7 +180,7 @@ describe('API request hooks', () => {
       const expectedOptions: UseRequestOptions = {
         config: expectedConfig,
         middleware: expectedMiddleware,
-        url,
+        url: `${process.env.API_URL}${url}`,
       };
 
       it('should call useRequest with the configured middleware', () => {
@@ -200,6 +200,7 @@ describe('API request hooks', () => {
         ...options,
         config: expectedConfig,
         middleware: expectedMiddleware,
+        url: `${process.env.API_URL}${url}`,
       };
 
       it('should call useRequest with the default middleware', () => {

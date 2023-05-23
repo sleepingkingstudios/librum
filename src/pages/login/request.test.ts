@@ -6,12 +6,7 @@ import {
   createSessionMiddleware,
   useLoginRequest,
 } from './request';
-import { useAlerts as mockUseAlerts } from '@alerts/mocks';
-import {
-  alertsMiddleware,
-  apiDataMiddleware,
-  useRequest,
-} from '@api';
+import { useApiRequest } from '@api';
 import type { PerformRequest } from '@api';
 import {
   withData as responseWithData,
@@ -22,19 +17,11 @@ import type {
   User,
 } from '@session';
 import { actions as sessionActions } from '@session/reducer';
-import { useStoreDispatch } from '@store/hooks';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-jest.mock('@alerts', () => require('@alerts/mocks'));
 jest.mock('@api');
-jest.mock('@store/hooks');
 
-const mockAlertsMiddleware =
-  alertsMiddleware as jest.MockedFunction<typeof alertsMiddleware>;
 const mockUseRequest =
-  useRequest as jest.MockedFunction<typeof useRequest>;
-const mockUseStoreDispatch =
-  useStoreDispatch as jest.MockedFunction<typeof useStoreDispatch>;
+  useApiRequest as jest.MockedFunction<typeof useApiRequest>;
 
 describe('<LoginPage /> request', () => {
   describe('createSessionMiddleware()', () => {
@@ -191,35 +178,10 @@ describe('<LoginPage /> request', () => {
         status: 'failure',
       }
     ];
-    const alertsContext = mockUseAlerts();
-    const alertsMiddleware = jest.fn();
-    const dispatch = jest.fn();
-    const middleware = [
-      apiDataMiddleware,
-      alertsMiddleware,
-      createSessionMiddleware,
-    ];
-
-    beforeEach(() => {
-      mockAlertsMiddleware
-        .mockClear()
-        .mockImplementationOnce(() => alertsMiddleware);
-
-      mockUseAlerts.mockImplementationOnce(() => alertsContext);
-
-      mockUseStoreDispatch
-        .mockClear()
-        .mockImplementationOnce(() => dispatch);
-    });
+    const middleware = [createSessionMiddleware];
 
     it('should be a function', () => {
       expect(typeof useLoginRequest).toBe('function');
-    });
-
-    it('should configure the alerts', () => {
-      renderHook(() => useLoginRequest());
-
-      expect(mockAlertsMiddleware).toHaveBeenCalledWith(alerts);
     });
 
     it('should configure the request', () => {
@@ -230,9 +192,9 @@ describe('<LoginPage /> request', () => {
 
       const options = mockUseRequest.mock.calls[0][0];
       expect(options.url).toBe('/api/authentication/session');
+      expect(options.alerts).toEqual(alerts);
       expect(options.method).toBe('post');
-      expect(options.config.alerts).toEqual(alertsContext);
-      expect(options.config.dispatch).toEqual(dispatch);
+      expect(options.config).toBeUndefined();
       expect(options.middleware).toEqual(middleware);
     });
   });

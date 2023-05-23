@@ -32,6 +32,13 @@ const buildMiddleware = (options: UseApiQueryOptions): Middleware[] => {
   return [...middleware, ...configured];
 };
 
+const buildUrl = (url: string): string => {
+  const apiUrl = process.env.API_URL.replace(/\/$/, '');
+  const configured = url.replace(/^\//, '');
+
+  return `${apiUrl}/${configured}`;
+};
+
 export const useApiQuery: UseApiQuery =
   (options: UseApiQueryOptions): [Response, Refetch] => {
     const alertsContext = useAlerts();
@@ -45,11 +52,12 @@ export const useApiQuery: UseApiQuery =
     };
     const middleware: Middleware[] = buildMiddleware(options);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { alerts, ...rest } = options;
+    const { alerts, url, ...rest } = options;
 
     return useQuery({
       ...rest,
       config,
       middleware,
+      url: buildUrl(url),
     });
   };
