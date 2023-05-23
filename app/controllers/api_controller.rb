@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'cuprum/rails/controller'
-require 'cuprum/rails/responders/json/resource'
 
 # Abstract base class for API controllers.
 class ApiController < ApplicationController
@@ -28,5 +27,5 @@ class ApiController < ApplicationController
 
   middleware Actions::Api::Middleware::Authenticate
 
-  responder :json, ApplicationResponder
+  responder :json, Responders::JsonResponder
 end
