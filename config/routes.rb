@@ -68,10 +68,4 @@ Rails.application.routes.draw do
       controller: 'status',
       only:       :show
   end
-
-  get '*path',
-    to:          'client#index',
-    constraints: { path: /(?!api).*/ }
-
-  root 'client#index'
 end
