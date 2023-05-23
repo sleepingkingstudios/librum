@@ -14,10 +14,11 @@ RSpec.describe Responders::JsonResponder do
   let(:resource) { Cuprum::Rails::Resource.new(resource_name: 'rockets') }
   let(:constructor_options) do
     {
-      action_name:   'launch',
-      member_action: true,
-      resource:      resource,
-      serializers:   Serializers::Json.default_serializers
+      action_name:     'launch',
+      controller_name: 'Spec::CustomController',
+      member_action:   true,
+      resource:        resource,
+      serializers:     Serializers::Json.default_serializers
     }
   end
 

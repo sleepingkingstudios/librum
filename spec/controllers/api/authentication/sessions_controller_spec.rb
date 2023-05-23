@@ -19,10 +19,11 @@ RSpec.describe Api::Authentication::SessionsController, type: :controller do
     let(:resource)    { described_class.resource }
     let(:constructor_options) do
       {
-        action_name:   action_name,
-        member_action: false,
-        resource:      resource,
-        serializers:   Serializers::Json.default_serializers
+        action_name:     action_name,
+        controller_name: 'Api::Authentication::SessionsController',
+        member_action:   false,
+        resource:        resource,
+        serializers:     Serializers::Json.default_serializers
       }
     end
 
