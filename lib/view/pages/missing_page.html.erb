@@ -1,0 +1,25 @@
+<h1>Missing <%= @expected_page %></h1>
+
+<p>
+  The expected page component at
+  <code><%= @expected_page %></code>
+  was not found.
+</p>
+
+<p>
+  The page was rendered from
+  <code><%= @controller_name %>#<%= @action_name %></code>.
+</p>
+
+<h2>Result</h2>
+
+<dl>
+  <dt>Status</dt>
+  <dd><code><%= @status %></code></dd>
+
+  <dt>Value</dt>
+  <dd><pre><%= @value&.as_json || '(none)' %></pre></dd>
+
+  <dt>Error</dt>
+  <dd><pre><%= @error.as_json || '(none)' %></pre></dd>
+</dl>

@@ -41,6 +41,9 @@ gem 'stannum',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/stannum'
 
+### Views
+gem 'view_component', '~> 3.0'
+
 group :development, :test do
   gem 'annotate',
     group: :development,
