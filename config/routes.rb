@@ -68,4 +68,6 @@ Rails.application.routes.draw do
       controller: 'status',
       only:       :show
   end
+
+  root to: 'home#show'
 end

@@ -2,7 +2,7 @@
 
 module View::Pages
   # Page to display when the expected page component is not found.
-  class MissingPage < View::Page
+  class MissingPage < View::Components::Page
     # @param result [Cuprum::Result] the result of calling the controller
     #   action.
     # @param action_name [String] the name of the called action.

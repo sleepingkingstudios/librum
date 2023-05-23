@@ -50,7 +50,7 @@ RSpec.describe Responders::HtmlResponder do
       context 'when the page is defined' do
         let(:component_class) { View::Pages::Custom::Implement }
 
-        example_class 'View::Pages::Custom::Implement', View::Page
+        example_class 'View::Pages::Custom::Implement', View::Components::Page
 
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
@@ -81,7 +81,7 @@ RSpec.describe Responders::HtmlResponder do
       context 'when the page is defined' do
         let(:component_class) { View::Pages::Custom::Implement }
 
-        example_class 'View::Pages::Custom::Implement', View::Page
+        example_class 'View::Pages::Custom::Implement', View::Components::Page
 
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
@@ -137,7 +137,7 @@ RSpec.describe Responders::HtmlResponder do
         end
 
         example_class 'View::Pages::Namespace::Custom::Implement',
-          View::Page
+          View::Components::Page
 
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
@@ -157,7 +157,7 @@ RSpec.describe Responders::HtmlResponder do
     context 'when the Page is defined' do
       let(:component_class) { View::Pages::Custom::Implement }
 
-      example_class 'View::Pages::Custom::Implement', View::Page
+      example_class 'View::Pages::Custom::Implement', View::Components::Page
 
       it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
