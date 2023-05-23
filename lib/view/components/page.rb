@@ -2,8 +2,8 @@
 
 require 'view'
 
-module View
-  # Abstract base class for view pages.
+module View::Components
+  # Abstract base class for view page components.
   class Page < ViewComponent::Base
     # @param result [Cuprum::Result] the result of calling the controller
     #   action.

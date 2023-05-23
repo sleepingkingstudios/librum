@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe View::Page do
+RSpec.describe View::Components::Page do
   subject(:page) { described_class.new(result) }
 
   let(:result) { Cuprum::Result.new }

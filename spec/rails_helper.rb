@@ -14,6 +14,7 @@ if Rails.env.production?
 end
 
 require 'rspec/rails'
+require 'capybara/rspec'
 require 'view_component/test_helpers'
 require 'support/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -30,9 +31,10 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.include Spec::Support::Matchers
+  config.include Capybara::RSpecMatchers,          type: :component
   config.include ViewComponent::SystemTestHelpers, type: :component
   config.include ViewComponent::TestHelpers,       type: :component
+  config.include Spec::Support::Matchers
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
