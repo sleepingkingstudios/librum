@@ -1,5 +1,6 @@
 node_modules
 public
 jest.config.js
-webpack.*.js
+src/server.js
 tailwind.config.js
+webpack.*.js

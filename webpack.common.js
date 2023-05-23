@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const srcPath = (subdir) => path.join(__dirname, "src", subdir);
 
@@ -40,4 +41,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.API_URL': `"${process.env.API_URL}"`,
+    }),
+  ],
 };

@@ -1,3 +1,4 @@
 postgres: postgres
-web:      bundle exec rails server
-webpack:  yarn serve
+react:    yarn server:start
+web:      bundle exec rails server --port=5100
+webpack:  API_URL=http://localhost:5100 yarn client:start

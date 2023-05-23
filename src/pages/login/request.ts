@@ -1,11 +1,6 @@
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 
-import { useAlerts } from '@alerts';
-import {
-  alertsMiddleware,
-  apiDataMiddleware,
-  useRequest as useApiRequest,
-} from '@api';
+import { useApiRequest } from '@api';
 import type {
   AlertDirective,
   Middleware,
@@ -28,7 +23,6 @@ import type {
   Action,
   Dispatch,
 } from '@store';
-import { useStoreDispatch } from '@store/hooks';
 
 const buildSession = (data: ResponseData): Session => {
   if (data === null || data === undefined) { return { authenticated: false }; }
@@ -95,18 +89,10 @@ export const createSessionMiddleware: Middleware =
   };
 
 export const useLoginRequest = () => {
-  const alerts = useAlerts();
-  const dispatch = useStoreDispatch();
-
   return useApiRequest({
-    config: {
-      alerts,
-      dispatch,
-    },
+    alerts: loginAlerts,
     method: 'post',
     middleware: [
-      apiDataMiddleware,
-      alertsMiddleware(loginAlerts),
       createSessionMiddleware,
     ],
     url: '/api/authentication/session',
