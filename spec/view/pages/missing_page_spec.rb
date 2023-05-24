@@ -19,43 +19,7 @@ RSpec.describe View::Pages::MissingPage, type: :component do
   let(:rendered)        { render_inline(page) }
   let(:snapshot) do
     <<~HTML
-      <h1>Missing View::Pages::Scoped::Custom::Execute</h1>
-
-      <p>
-        The expected page component at
-        <code>View::Pages::Scoped::Custom::Execute</code>
-        was not found.
-      </p>
-
-      <p>
-        The page was rendered from
-        <code>Namespace::CustomController#execute</code>.
-      </p>
-
-      <h2>Result</h2>
-
-      <dl>
-        <dt>Status</dt>
-        <dd><code>success</code></dd>
-
-        <dt>Value</dt>
-        <dd><pre>(none)</pre></dd>
-
-        <dt>Error</dt>
-        <dd><pre>(none)</pre></dd>
-      </dl>
-    HTML
-  end
-
-  it 'should match the snapshot' do
-    expect(rendered).to match_snapshot(snapshot)
-  end
-
-  describe 'with a failing result' do
-    let(:error)  { Cuprum::Error.new(message: 'Something went wrong') }
-    let(:result) { Cuprum::Result.new(error: error) }
-    let(:snapshot) do
-      <<~HTML
+      <div class="content">
         <h1>Missing View::Pages::Scoped::Custom::Execute</h1>
 
         <p>
@@ -73,14 +37,54 @@ RSpec.describe View::Pages::MissingPage, type: :component do
 
         <dl>
           <dt>Status</dt>
-          <dd><code>failure</code></dd>
+          <dd><pre>success</pre></dd>
 
           <dt>Value</dt>
           <dd><pre>(none)</pre></dd>
 
           <dt>Error</dt>
-          <dd><pre>{"data"=&gt;{}, "message"=&gt;"Something went wrong", "type"=&gt;"cuprum.error"}</pre></dd>
+          <dd><pre>(none)</pre></dd>
         </dl>
+      </div>
+    HTML
+  end
+
+  it 'should match the snapshot' do
+    expect(rendered).to match_snapshot(snapshot)
+  end
+
+  describe 'with a failing result' do
+    let(:error)  { Cuprum::Error.new(message: 'Something went wrong') }
+    let(:result) { Cuprum::Result.new(error: error) }
+    let(:snapshot) do
+      <<~HTML
+        <div class="content">
+          <h1>Missing View::Pages::Scoped::Custom::Execute</h1>
+
+          <p>
+            The expected page component at
+            <code>View::Pages::Scoped::Custom::Execute</code>
+            was not found.
+          </p>
+
+          <p>
+            The page was rendered from
+            <code>Namespace::CustomController#execute</code>.
+          </p>
+
+          <h2>Result</h2>
+
+          <dl>
+            <dt>Status</dt>
+            <dd><pre>failure</pre></dd>
+
+            <dt>Value</dt>
+            <dd><pre>(none)</pre></dd>
+
+            <dt>Error</dt>
+            <dd><pre>{"data"=&gt;{}, "message"=&gt;"Something went wrong", "type"=&gt;"cuprum.error"}</pre></dd>
+          </dl>
+        </div>
       HTML
     end
 
@@ -94,31 +98,33 @@ RSpec.describe View::Pages::MissingPage, type: :component do
     let(:result) { Cuprum::Result.new(value: value) }
     let(:snapshot) do
       <<~HTML
-        <h1>Missing View::Pages::Scoped::Custom::Execute</h1>
+        <div class="content">
+          <h1>Missing View::Pages::Scoped::Custom::Execute</h1>
 
-        <p>
-          The expected page component at
-          <code>View::Pages::Scoped::Custom::Execute</code>
-          was not found.
-        </p>
+          <p>
+            The expected page component at
+            <code>View::Pages::Scoped::Custom::Execute</code>
+            was not found.
+          </p>
 
-        <p>
-          The page was rendered from
-          <code>Namespace::CustomController#execute</code>.
-        </p>
+          <p>
+            The page was rendered from
+            <code>Namespace::CustomController#execute</code>.
+          </p>
 
-        <h2>Result</h2>
+          <h2>Result</h2>
 
-        <dl>
-          <dt>Status</dt>
-          <dd><code>success</code></dd>
+          <dl>
+            <dt>Status</dt>
+            <dd><pre>success</pre></dd>
 
-          <dt>Value</dt>
-          <dd><pre>{"ok"=&gt;true}</pre></dd>
+            <dt>Value</dt>
+            <dd><pre>{"ok"=&gt;true}</pre></dd>
 
-          <dt>Error</dt>
-          <dd><pre>(none)</pre></dd>
-        </dl>
+            <dt>Error</dt>
+            <dd><pre>(none)</pre></dd>
+          </dl>
+        </div>
       HTML
     end
 

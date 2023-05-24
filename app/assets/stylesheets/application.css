@@ -20,6 +20,20 @@ html, body, body > div.page {
   height: 100%;
 }
 
+.page > .banner {
+  padding: 0 1.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .page > .banner {
+    padding: 0 3rem;
+  }
+}
+
+.page > .banner > .hero-body {
+  padding: 1.5rem 0;
+}
+
 .page > .banner .subtitle {
   margin-bottom: 0;
 }
@@ -38,7 +52,7 @@ html, body, body > div.page {
 }
 
 .page > footer.footer {
-  padding: 1.5rem 1rem 3rem;
+  padding: 1.5rem 1rem 2rem;
 }
 
 /* COMPONENTS */
