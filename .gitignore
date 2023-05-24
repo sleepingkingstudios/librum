@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore Rails engines.
+/engines/*
+
 # Ignore Node modules and generated JavaScript files.
 /node_modules
 /public/javascript/*.bundle.js

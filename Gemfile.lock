@@ -44,6 +44,15 @@ GIT
       stannum (~> 0.2)
 
 GIT
+  remote: https://github.com/sleepingkingstudios/librum-core
+  revision: e9b1fd76e683f5005bf4481a37bc173ba0525981
+  branch: main
+  specs:
+    core (0.1.0)
+      pg (~> 1.5)
+      rails (~> 7.0.4)
+
+GIT
   remote: https://github.com/sleepingkingstudios/stannum
   revision: 677dd802fd32c175e0f01dcd43a6c4845b36ae4f
   branch: main
@@ -312,6 +321,7 @@ DEPENDENCIES
   annotate!
   bcrypt (~> 3.1.18)
   byebug
+  core!
   cuprum!
   cuprum-collections!
   cuprum-collections-loader!
