@@ -13,3 +13,53 @@
  *= require_tree .
  *= require_self
  */
+
+/* LAYOUT */
+
+html, body, body > div.page {
+  height: 100%;
+}
+
+.page > .banner .subtitle {
+  margin-bottom: 0;
+}
+
+.page > .banner hr {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page > section.primary-content {
+  padding-top: 0;
+}
+
+.page > section.primary-content .container h1:first-child {
+  margin-top: 0;
+}
+
+.page > footer.footer {
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* COMPONENTS */
+
+hr.is-fancy-hr {
+  border-top-style: solid;
+  border-top-width: 2px;
+  opacity: 1;
+  overflow: visible;
+}
+
+hr.is-fancy-hr:after {
+  content: ' ';
+
+  /* Display */
+  display: block;
+  border-top-style: solid;
+  border-top-width: 1px;
+  margin: 0 10px;
+
+  /* Positioning */
+  position: relative;
+  top: 2px;
+}
