@@ -5,6 +5,12 @@ require 'rails_helper'
 RSpec.describe Responders::HtmlResponder do
   subject(:responder) { described_class.new(**constructor_options) }
 
+  shared_context 'when the page is defined' do |component_name|
+    let(:component_class) { component_name.constantize }
+
+    example_class component_name, View::Components::Page
+  end
+
   let(:action_name)     { :implement }
   let(:controller_name) { 'CustomController' }
   let(:member_action)   { false }
@@ -47,11 +53,9 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.status).to be :internal_server_error }
 
-      context 'when the page is defined' do
-        let(:component_class) { View::Pages::Custom::Implement }
-
-        example_class 'View::Pages::Custom::Implement', View::Components::Page
-
+      wrap_context 'when the page is defined',
+        'View::Pages::Custom::Implement' \
+      do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
@@ -78,11 +82,9 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.status).to be :internal_server_error }
 
-      context 'when the page is defined' do
-        let(:component_class) { View::Pages::Custom::Implement }
-
-        example_class 'View::Pages::Custom::Implement', View::Components::Page
-
+      wrap_context 'when the page is defined',
+        'View::Pages::Custom::Implement' \
+      do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
@@ -123,29 +125,24 @@ RSpec.describe Responders::HtmlResponder do
 
     it { expect(response.status).to be :internal_server_error }
 
-    context 'when the controller has a namespace' do
-      let(:controller_name) { 'Namespace::CustomController' }
+    context 'when the action has multiple words' do
+      let(:action_name) { :go_fish }
       let(:expected_page) do
-        'View::Pages::Namespace::Custom::Implement'
+        'View::Pages::Custom::GoFish'
       end
 
       it { expect(response.component.expected_page).to be == expected_page }
 
-      context 'when the Page is defined' do
-        let(:component_class) do
-          View::Pages::Namespace::Custom::Implement
-        end
-
-        example_class 'View::Pages::Namespace::Custom::Implement',
-          View::Components::Page
-
+      wrap_context 'when the page is defined',
+        'View::Pages::Custom::GoFish' \
+      do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
 
         it { expect(response.status).to be :ok }
 
-        describe 'with status: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        describe 'with status: value' do
           let(:status)  { :created }
           let(:options) { super().merge(status: status) }
 
@@ -154,18 +151,42 @@ RSpec.describe Responders::HtmlResponder do
       end
     end
 
-    context 'when the Page is defined' do
-      let(:component_class) { View::Pages::Custom::Implement }
+    context 'when the controller has a namespace' do
+      let(:controller_name) { 'Namespace::CustomController' }
+      let(:expected_page) do
+        'View::Pages::Namespace::Custom::Implement'
+      end
 
-      example_class 'View::Pages::Custom::Implement', View::Components::Page
+      it { expect(response.component.expected_page).to be == expected_page }
 
+      wrap_context 'when the page is defined',
+        'View::Pages::Namespace::Custom::Implement' \
+      do
+        it { expect(response).to be_a Responses::Html::RenderComponentResponse }
+
+        it { expect(response.component).to be_a component_class }
+
+        it { expect(response.status).to be :ok }
+
+        describe 'with status: value' do
+          let(:status)  { :created }
+          let(:options) { super().merge(status: status) }
+
+          it { expect(response.status).to be :created }
+        end
+      end
+    end
+
+    wrap_context 'when the page is defined',
+      'View::Pages::Custom::Implement' \
+    do
       it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
       it { expect(response.component).to be_a component_class }
 
       it { expect(response.status).to be :ok }
 
-      describe 'with status: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      describe 'with status: value' do
         let(:status)  { :created }
         let(:options) { super().merge(status: status) }
 

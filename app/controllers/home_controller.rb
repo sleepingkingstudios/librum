@@ -6,5 +6,7 @@ class HomeController < ViewController
     ::Authentication::Resource.new(resource_name: 'home')
   end
 
-  action :show, Actions::RenderView, member: false
+  action :not_found, Actions::RenderView, member: false
+
+  action :show,      Actions::RenderView, member: false
 end

@@ -16,6 +16,11 @@ RSpec.describe HomeController, type: :controller do
   end
 
   include_contract 'should define action',
+    :not_found,
+    Actions::RenderView,
+    member: false
+
+  include_contract 'should define action',
     :show,
     Actions::RenderView,
     member: false

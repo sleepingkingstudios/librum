@@ -12,13 +12,15 @@ RSpec.describe View::Layouts::Page::Banner, type: :component do
     <<~HTML
       <section class="banner hero is-small">
         <div class="hero-body">
-          <p class="title">Librum</p>
+          <div class="container">
+            <p class="title">Librum</p>
 
-          <p class="subtitle">Tabletop Campaign Companion</p>
+            <p class="subtitle">Tabletop Campaign Companion</p>
 
-          <mock name="Navigation"></mock>
+            <mock name="Navigation"></mock>
 
-          <hr class="is-fancy-hr">
+            <hr class="is-fancy-hr">
+          </div>
         </div>
       </section>
     HTML

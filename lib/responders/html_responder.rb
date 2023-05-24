@@ -67,7 +67,7 @@ module Responders
     end
 
     def view_component_name
-      action     = action_name.to_s.camelize.capitalize
+      action     = action_name.to_s.camelize
       scope      = controller_name.sub(/Controller\z/, '')
 
       "View::Pages::#{scope}::#{action}"
