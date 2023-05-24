@@ -14,5 +14,7 @@ class ViewController < ApplicationController
 
   default_format :html
 
+  layout 'page'
+
   responder :html, Responders::HtmlResponder
 end

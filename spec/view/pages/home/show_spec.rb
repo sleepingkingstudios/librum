@@ -9,7 +9,7 @@ RSpec.describe View::Pages::Home::Show, type: :component do
   let(:rendered) { render_inline(page) }
   let(:snapshot) do
     <<~HTML
-      <h1>Greetings, Starfighter!</h1>
+      <h1 class="title">Greetings, Starfighter!</h1>
 
       <p>
         You have been recruited by the Star League to defend the frontier against Xur
