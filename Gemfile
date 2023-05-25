@@ -11,7 +11,7 @@ gem 'puma', '~> 6.0' # Use the Puma web server
 gem 'rack-cors', '~> 2.0'
 
 ### Engines
-gem 'core',
+gem 'librum-core',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/librum-core'
 
