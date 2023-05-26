@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'cuprum'
+require 'librum/core/errors/authentication_error'
 
 module Authentication::Errors
   # Abstract error returned for an invalid authentication token.
-  class InvalidToken < Cuprum::Error
+  class InvalidToken < Librum::Core::Errors::AuthenticationError
     # Short string used to identify the type of error.
     TYPE = 'authentication.errors.invalid_token'
 

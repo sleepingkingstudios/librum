@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'librum/core/actions/destroy'
+require 'librum/core/actions/index'
+require 'librum/core/actions/show'
+
 module Api::Admin::Authentication
   # API controller for managing Authentication::User entities.
-  class UsersController < ApiController
+  class UsersController < Librum::Core::ApiController
     def self.resource
       ::Authentication::Resource.new(
         default_order:        :username,
@@ -27,12 +31,12 @@ module Api::Admin::Authentication
     action :create,
       Actions::Api::Admin::Authentication::Users::Create
     action :destroy,
-      Actions::Api::Destroy,
+      Librum::Core::Actions::Destroy,
       member: true
     action :index,
-      Actions::Api::Index
+      Librum::Core::Actions::Index
     action :show,
-      Actions::Api::Show,
+      Librum::Core::Actions::Show,
       member: true
     action :update,
       Actions::Api::Admin::Authentication::Users::Update,

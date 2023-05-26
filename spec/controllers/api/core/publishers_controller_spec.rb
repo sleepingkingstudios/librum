@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-require 'support/contracts/controller_contracts'
+require 'librum/core/rspec/contracts/controller_contracts'
 
 RSpec.describe Api::Core::PublishersController, type: :controller do
-  include Spec::Support::Contracts::ControllerContracts
+  include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '.resource' do
     subject(:resource) { described_class.resource }
@@ -35,26 +35,26 @@ RSpec.describe Api::Core::PublishersController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Create,
+    Librum::Core::Actions::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::Destroy,
+    Librum::Core::Actions::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Actions::Api::Index,
+    Librum::Core::Actions::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::Show,
+    Librum::Core::Actions::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::Update,
+    Librum::Core::Actions::Update,
     member: true
 end

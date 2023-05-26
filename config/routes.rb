@@ -74,6 +74,4 @@ Rails.application.routes.draw do
   get '*path',
     to:          'home#not_found',
     constraints: { path: /(?!api).*/ }
-
-  root to: 'home#show'
 end

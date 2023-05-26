@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-require 'support/contracts/controller_contracts'
+require 'librum/core/rspec/contracts/controller_contracts'
 
 RSpec.describe ViewController, type: :controller do
-  include Spec::Support::Contracts::ControllerContracts
+  include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '.default_format' do
     it { expect(described_class.default_format).to be :html }
@@ -18,10 +18,10 @@ RSpec.describe ViewController, type: :controller do
   end
 
   describe '.responders' do
-    include_contract 'should respond to',
+    include_contract 'should respond to format',
       :html,
       using: Responders::HtmlResponder
 
-    include_contract 'should not respond to', :json
+    include_contract 'should not respond to format', :json
   end
 end
