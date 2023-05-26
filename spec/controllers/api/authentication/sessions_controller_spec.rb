@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
+require 'librum/core/rspec/contracts/controller_contracts'
 require 'librum/core/rspec/contracts/responders/json_contracts'
 
-require 'support/contracts/controller_contracts'
-
 RSpec.describe Api::Authentication::SessionsController, type: :controller do
-  include Spec::Support::Contracts::ControllerContracts
+  include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '::Responder' do
     include Librum::Core::RSpec::Contracts::Responders::JsonContracts
@@ -75,7 +74,7 @@ RSpec.describe Api::Authentication::SessionsController, type: :controller do
   end
 
   describe '.responders' do
-    include_contract 'should respond to',
+    include_contract 'should respond to format',
       :json,
       using: described_class::Responder
   end

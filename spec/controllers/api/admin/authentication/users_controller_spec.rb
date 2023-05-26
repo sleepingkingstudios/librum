@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-require 'support/contracts/controller_contracts'
+require 'librum/core/rspec/contracts/controller_contracts'
 
 RSpec.describe Api::Admin::Authentication::UsersController do
-  include Spec::Support::Contracts::ControllerContracts
+  include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '.resource' do
     subject(:resource) { described_class.resource }

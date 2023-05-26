@@ -8,7 +8,7 @@ require 'librum/core/actions/update'
 
 module Api::Core
   # API controller for managing GameSystem entities.
-  class GameSystemsController < ApiController
+  class GameSystemsController < Librum::Core::ApiController
     def self.resource
       ::Authentication::Resource.new(
         default_order:        %w[name edition],

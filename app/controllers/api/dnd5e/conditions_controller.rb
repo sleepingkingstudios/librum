@@ -6,7 +6,7 @@ require 'librum/core/actions/show'
 
 module Api::Dnd5e
   # API controller for managing Dnd5e::Condition entities.
-  class ConditionsController < ApiController
+  class ConditionsController < Librum::Core::ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
       ::Authentication::Resource.new(
         default_order:        :name,

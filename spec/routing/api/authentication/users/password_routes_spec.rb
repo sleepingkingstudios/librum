@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-require 'support/contracts/routing_contracts'
+require 'librum/core/rspec/contracts/routing_contracts'
 
 RSpec.describe "#{Api::Authentication::Users::PasswordsController} routes",
   type: :routing \
 do
-  include Spec::Support::Contracts::RoutingContracts
+  include Librum::Core::RSpec::Contracts::RoutingContracts
 
   include_contract 'should route to api resource',
     'authentication/user/password',

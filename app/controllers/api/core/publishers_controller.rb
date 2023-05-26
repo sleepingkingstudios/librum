@@ -8,7 +8,7 @@ require 'librum/core/actions/update'
 
 module Api::Core
   # API controller for managing Publisher entities.
-  class PublishersController < ApiController
+  class PublishersController < Librum::Core::ApiController
     def self.resource
       ::Authentication::Resource.new(
         default_order:        :name,

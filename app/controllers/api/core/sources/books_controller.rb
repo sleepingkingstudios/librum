@@ -8,7 +8,7 @@ require 'librum/core/actions/update'
 
 module Api::Core::Sources
   # API controller for managing Sources::Book entities.
-  class BooksController < ApiController
+  class BooksController < Librum::Core::ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
       ::Authentication::Resource.new(
         default_order:        :name,

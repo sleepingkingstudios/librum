@@ -4,7 +4,7 @@ require 'librum/core/responders/json_responder'
 
 module Api::Authentication
   # API controller for managing authentication sessions.
-  class SessionsController < ApiController
+  class SessionsController < Librum::Core::ApiController
     # Responder class for authentication responses.
     class Responder < Librum::Core::Responders::JsonResponder
       action :create do
