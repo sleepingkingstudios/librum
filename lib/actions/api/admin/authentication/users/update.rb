@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'cuprum/rails/actions/update'
+require 'librum/core/actions/update'
 
 module Actions::Api::Admin::Authentication::Users
   # Show action for the Authentication::User API.
-  class Update < Actions::Api::Update
+  class Update < Librum::Core::Actions::Update
     def slug_attributes
       :username
     end

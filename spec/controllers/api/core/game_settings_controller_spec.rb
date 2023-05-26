@@ -35,26 +35,26 @@ RSpec.describe Api::Core::GameSettingsController, type: :controller do
 
   include_contract 'should define action',
     :create,
-    Actions::Api::Create,
+    Librum::Core::Actions::Create,
     member: false
 
   include_contract 'should define action',
     :destroy,
-    Actions::Api::Destroy,
+    Librum::Core::Actions::Destroy,
     member: true
 
   include_contract 'should define action',
     :index,
-    Actions::Api::Index,
+    Librum::Core::Actions::Index,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::Api::Show,
+    Librum::Core::Actions::Show,
     member: true
 
   include_contract 'should define action',
     :update,
-    Actions::Api::Update,
+    Librum::Core::Actions::Update,
     member: true
 end

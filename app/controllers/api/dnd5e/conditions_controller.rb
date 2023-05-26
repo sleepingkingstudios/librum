@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'librum/core/actions/destroy'
+require 'librum/core/actions/index'
+require 'librum/core/actions/show'
+
 module Api::Dnd5e
   # API controller for managing Dnd5e::Condition entities.
   class ConditionsController < ApiController
@@ -27,9 +31,9 @@ module Api::Dnd5e
 
     # rubocop:disable Layout/ExtraSpacing
     action :create,  Actions::Api::References::Create
-    action :destroy, Actions::Api::Destroy,             member: true
-    action :index,   Actions::Api::Index
-    action :show,    Actions::Api::Show,                member: true
+    action :destroy, Librum::Core::Actions::Destroy,             member: true
+    action :index,   Librum::Core::Actions::Index
+    action :show,    Librum::Core::Actions::Show,       member: true
     action :update,  Actions::Api::References::Update,  member: true
     # rubocop:enable Layout/ExtraSpacing
   end
