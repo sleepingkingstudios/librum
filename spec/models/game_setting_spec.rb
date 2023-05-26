@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-require 'support/contracts/model_contracts'
+require 'librum/core/rspec/contracts/model_contracts'
 
 RSpec.describe GameSetting, type: :model do
-  include Spec::Support::Contracts::ModelContracts
+  include Librum::Core::RSpec::Contracts::ModelContracts
 
   subject(:game_setting) { described_class.new(attributes) }
 
