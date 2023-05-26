@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'librum/core/models/data_properties'
+
 # An abstract source for game materials.
 class Source < ApplicationRecord
-  extend Models::DataProperties
+  extend Librum::Core::Models::DataProperties
 
   ### Validations
   validates :name,

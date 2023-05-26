@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'librum/core/models/queries/find_by_slug'
+
 module Actions::Api
   # Helper for finding an entity by (unique) slug.
   module FindBySlug
@@ -12,7 +14,7 @@ module Actions::Api
       return super if primary_key.match?(UUID_PATTERN)
 
       entity = step do
-        Models::Queries::FindBySlug
+        Librum::Core::Models::Queries::FindBySlug
           .new(collection: collection)
           .call(slug: primary_key)
       end
@@ -23,7 +25,7 @@ module Actions::Api
     def find_entity(primary_key:)
       return super if primary_key.match?(UUID_PATTERN)
 
-      Models::Queries::FindBySlug
+      Librum::Core::Models::Queries::FindBySlug
         .new(collection: collection)
         .call(slug: primary_key)
     end

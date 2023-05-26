@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'librum/core/models/data_properties'
+
 # An identifier used to authenticate a user.
 class Authentication::Credential < ApplicationRecord
-  extend Models::DataProperties
+  extend Librum::Core::Models::DataProperties
 
   self.table_name = 'authentication_credentials'
 

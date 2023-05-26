@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require 'librum/core/models/attributes/generate_slug'
+
 RSpec.describe Actions::Api::GenerateSlug do
   subject(:action) { described_class.new(action_name) }
 
@@ -35,9 +37,12 @@ RSpec.describe Actions::Api::GenerateSlug do
   end
 
   describe '#call' do
-    let(:command_class) { Models::Attributes::GenerateSlug }
+    let(:command_class) { Librum::Core::Models::Attributes::GenerateSlug }
     let(:command) do
-      instance_double(Models::Attributes::GenerateSlug, call: result)
+      instance_double(
+        Librum::Core::Models::Attributes::GenerateSlug,
+        call: result
+      )
     end
     let(:result) do
       Cuprum::Result.new(value: 'example-slug')
