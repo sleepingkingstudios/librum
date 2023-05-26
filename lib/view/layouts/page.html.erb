@@ -1,0 +1,11 @@
+<div class="page is-flex is-flex-direction-column">
+  <%= render(::View::Layouts::Page::Banner.new) %>
+
+  <section class="section primary-content is-flex-grow-1">
+    <div class="container">
+      <%= content %>
+    </div>
+  </section>
+
+  <%= render(::View::Layouts::Page::Footer.new) %>
+</div>

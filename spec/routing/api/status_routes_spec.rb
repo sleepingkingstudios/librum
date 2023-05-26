@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe "#{Api::StatusController} routes", type: :routing do
-  describe 'GET /api/status' do
-    let(:controller) { 'api/status' }
+  let(:controller) { 'api/status' }
 
+  describe 'GET /api/status' do
     it 'should route to Api::StatusController#show' do
       expect(get: '/api/status').to route_to(
         controller: controller,

@@ -2,8 +2,12 @@
 
 module Spec::Support
   module Matchers
-    def be_callable
-      respond_to(:process, true)
+    extend RSpec::Matchers::DSL
+
+    matcher :match_snapshot do |snapshot|
+      match do |actual|
+        actual.to_s == snapshot
+      end
     end
   end
 end

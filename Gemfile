@@ -41,12 +41,17 @@ gem 'stannum',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/stannum'
 
+### Views
+gem 'view_component', '~> 3.0'
+
 group :development, :test do
   gem 'annotate',
     group: :development,
     git:   'https://github.com/sleepingkingstudios/annotate_models'
 
   gem 'byebug'
+
+  gem 'capybara', '~> 3.39'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

@@ -68,4 +68,12 @@ Rails.application.routes.draw do
       controller: 'status',
       only:       :show
   end
+
+  get '/', to: 'home#show'
+
+  get '*path',
+    to:          'home#not_found',
+    constraints: { path: /(?!api).*/ }
+
+  root to: 'home#show'
 end
