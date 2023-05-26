@@ -10,6 +10,11 @@ gem 'pg', '~> 1.5' # Use postgresql as the database for Active Record
 gem 'puma', '~> 6.0' # Use the Puma web server
 gem 'rack-cors', '~> 2.0'
 
+### Engines
+gem 'librum-core',
+  branch: 'main',
+  git:    'https://github.com/sleepingkingstudios/librum-core'
+
 ### Assets
 gem 'importmap-rails' # Use JavaScript with ESM import maps
 gem 'sprockets-rails' # The original asset pipeline for Rails

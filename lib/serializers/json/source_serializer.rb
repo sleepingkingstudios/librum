@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require 'librum/core/serializers/json/record_serializer'
+
 module Serializers::Json
   # Serializes Sources as JSON.
-  class SourceSerializer < RecordSerializer
+  class SourceSerializer <
+        Librum::Core::Serializers::Json::RecordSerializer
     attributes \
       :game_setting_id,
       :game_system_id,

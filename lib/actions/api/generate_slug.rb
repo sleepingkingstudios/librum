@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'librum/core/models/attributes/generate_slug'
+
 module Actions::Api
   # Helper for generating a slug for an entity.
   module GenerateSlug
@@ -16,7 +18,7 @@ module Actions::Api
     def generate_slug(attributes)
       return success(attributes['slug']) if attributes['slug'].present?
 
-      Models::Attributes::GenerateSlug
+      Librum::Core::Models::Attributes::GenerateSlug
         .new(attribute_names: slug_attributes)
         .call(attributes: attributes)
     end

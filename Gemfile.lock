@@ -44,6 +44,19 @@ GIT
       stannum (~> 0.2)
 
 GIT
+  remote: https://github.com/sleepingkingstudios/librum-core
+  revision: f89d6aa45460681cf3b16c8499956f221f636bee
+  branch: main
+  specs:
+    librum-core (0.1.0)
+      cuprum (~> 1.1)
+      cuprum-collections
+      cuprum-rails
+      pg (~> 1.5)
+      rails (~> 7.0.4)
+      stannum
+
+GIT
   remote: https://github.com/sleepingkingstudios/stannum
   revision: 677dd802fd32c175e0f01dcd43a6c4845b36ae4f
   branch: main
@@ -320,6 +333,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   importmap-rails
   jwt (~> 2.7)
+  librum-core!
   pg (~> 1.5)
   puma (~> 6.0)
   rack-cors (~> 2.0)

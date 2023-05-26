@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-require 'support/contracts/model_contracts'
+require 'librum/core/rspec/contracts/model_contracts'
 
 RSpec.describe Authentication::User, type: :model do
-  include Spec::Support::Contracts::ModelContracts
+  include Librum::Core::RSpec::Contracts::ModelContracts
 
   subject(:user) { described_class.new(attributes) }
 

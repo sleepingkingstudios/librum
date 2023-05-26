@@ -2,6 +2,8 @@
 
 require 'cuprum/rails/controller'
 
+require 'librum/core/responders/json_responder'
+
 # Abstract base class for API controllers.
 class ApiController < ApplicationController
   include Cuprum::Rails::Controller
@@ -27,5 +29,5 @@ class ApiController < ApplicationController
 
   middleware Actions::Api::Middleware::Authenticate
 
-  responder :json, Responders::JsonResponder
+  responder :json, Librum::Core::Responders::JsonResponder
 end

@@ -2,6 +2,8 @@
 
 require 'cuprum/rails'
 
+require 'librum/core/serializers/json'
+
 module Serializers
   # Namespace for JSON serializers and configuration.
   module Json
@@ -10,17 +12,7 @@ module Serializers
     # @return [Hash<Class, Cuprum::Rails::Serializers::Json::Serializer>] the
     #   default serializers.
     def self.default_serializers
-      date_time_serializer = Serializers::Json::DateTimeSerializer.instance
-
-      @default_serializers ||=
-        Cuprum::Rails::Serializers::Json
-        .default_serializers
-        .merge(
-          ActiveSupport::TimeWithZone => date_time_serializer,
-          Date                        => date_time_serializer,
-          DateTime                    => date_time_serializer,
-          Time                        => date_time_serializer
-        )
+      Librum::Core::Serializers::Json.default_serializers
     end
   end
 end

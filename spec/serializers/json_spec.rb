@@ -30,22 +30,22 @@ RSpec.describe Serializers::Json do
 
     it 'should define the ActiveSupport::TimeWithZone serializer' do
       expect(default_serializers[ActiveSupport::TimeWithZone])
-        .to be_a Serializers::Json::DateTimeSerializer
+        .to be_a Librum::Core::Serializers::Json::DateTimeSerializer
     end
 
     it 'should define the Date serializer' do
       expect(default_serializers[Date])
-        .to be_a Serializers::Json::DateTimeSerializer
+        .to be_a Librum::Core::Serializers::Json::DateTimeSerializer
     end
 
     it 'should define the DateTime serializer' do
       expect(default_serializers[DateTime])
-        .to be_a Serializers::Json::DateTimeSerializer
+        .to be_a Librum::Core::Serializers::Json::DateTimeSerializer
     end
 
     it 'should define the Time serializer' do
       expect(default_serializers[Time])
-        .to be_a Serializers::Json::DateTimeSerializer
+        .to be_a Librum::Core::Serializers::Json::DateTimeSerializer
     end
   end
 end

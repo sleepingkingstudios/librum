@@ -2,13 +2,15 @@
 
 require 'cuprum/collections/loader'
 
+require 'librum/core/models/attributes/generate_slug'
+
 module Loader::Middleware
   # Middleware for generating a slug for an entity.
   class GenerateSlug < Cuprum::Collections::Loader::Middleware::EntityMiddleware
     private
 
     def generate_slug(attributes)
-      Models::Attributes::GenerateSlug
+      Librum::Core::Models::Attributes::GenerateSlug
         .new(attribute_names: options[:attribute_name])
         .call(attributes: attributes)
     end

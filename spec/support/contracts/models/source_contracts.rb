@@ -2,16 +2,15 @@
 
 require 'rspec/sleeping_king_studios/contract'
 
-require 'support/contracts/model_contracts'
+require 'librum/core/rspec/contracts/model_contracts'
+require 'librum/core/rspec/contracts/models/data_properties_contracts'
+
 require 'support/contracts/models'
-require 'support/contracts/models/attributes_contracts'
-require 'support/contracts/models/data_properties_contracts'
-require 'support/contracts/models/validation_contracts'
 
 module Spec::Support::Contracts::Models
   module SourceContracts
-    include Spec::Support::Contracts::ModelContracts
-    include Spec::Support::Contracts::Models::DataPropertiesContracts
+    include Librum::Core::RSpec::Contracts::ModelContracts
+    include Librum::Core::RSpec::Contracts::Models::DataPropertiesContracts
 
     module ShouldBeASourceContract
       extend RSpec::SleepingKingStudios::Contract

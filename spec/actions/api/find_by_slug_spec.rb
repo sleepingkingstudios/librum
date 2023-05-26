@@ -4,6 +4,8 @@ require 'rails_helper'
 
 require 'cuprum/rails/resource'
 
+require 'librum/core/models/queries/find_by_slug'
+
 RSpec.describe Actions::Api::FindBySlug do
   subject(:action) { described_class.new(collection, action_name) }
 
@@ -45,9 +47,9 @@ RSpec.describe Actions::Api::FindBySlug do
   end
 
   describe '#call' do
-    let(:query_class) { Models::Queries::FindBySlug }
+    let(:query_class) { Librum::Core::Models::Queries::FindBySlug }
     let(:query) do
-      instance_double(Models::Queries::FindBySlug, call: nil)
+      instance_double(Librum::Core::Models::Queries::FindBySlug, call: nil)
     end
 
     before(:example) do

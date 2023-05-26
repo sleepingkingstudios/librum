@@ -2,14 +2,15 @@
 
 require 'rails_helper'
 
+require 'librum/core/rspec/contracts/responders/json_contracts'
+
 require 'support/contracts/controller_contracts'
-require 'support/contracts/responder_contracts'
 
 RSpec.describe Api::Authentication::SessionsController, type: :controller do
   include Spec::Support::Contracts::ControllerContracts
 
   describe '::Responder' do
-    include Spec::Support::Contracts::ResponderContracts
+    include Librum::Core::RSpec::Contracts::Responders::JsonContracts
 
     subject(:responder) do
       described_class::Responder.new(**constructor_options)
@@ -33,7 +34,7 @@ RSpec.describe Api::Authentication::SessionsController, type: :controller do
         let(:value)  { { 'secret' => '12345' } }
         let(:result) { Cuprum::Result.new(value: value) }
 
-        include_contract 'should respond with', 200 do
+        include_contract 'should respond with json', 200 do
           { 'ok' => true, 'data' => value }
         end
       end
@@ -42,7 +43,7 @@ RSpec.describe Api::Authentication::SessionsController, type: :controller do
         let(:error)  { Authentication::Errors::InvalidLogin.new }
         let(:result) { Cuprum::Result.new(error: error) }
 
-        include_contract 'should respond with', 422 do
+        include_contract 'should respond with json', 422 do
           { 'ok' => false, 'error' => error.as_json }
         end
       end
@@ -54,7 +55,7 @@ RSpec.describe Api::Authentication::SessionsController, type: :controller do
           let(:value)  { { 'secret' => '12345' } }
           let(:result) { Cuprum::Result.new(value: value) }
 
-          include_contract 'should respond with', 201 do
+          include_contract 'should respond with json', 201 do
             { 'ok' => true, 'data' => value }
           end
         end
