@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'cuprum'
+require 'librum/core/errors/authentication_error'
 
 module Authentication::Errors
   # Error returned when a user does not have a password credential.
-  class MissingPassword < Cuprum::Error
+  class MissingPassword < Librum::Core::Errors::AuthenticationError
     # Short string used to identify the type of error.
     TYPE = 'authentication.errors.missing_password'
 

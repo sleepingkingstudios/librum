@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'cuprum'
+require 'librum/core/errors/authentication_error'
 
 module Authentication::Errors
   # Error returned when parsing a token with an expired credential.
-  class ExpiredCredential < Cuprum::Error
+  class ExpiredCredential < Librum::Core::Errors::AuthenticationError
     # Short string used to identify the type of error.
     TYPE = 'authentication.errors.expired_credential'
 
