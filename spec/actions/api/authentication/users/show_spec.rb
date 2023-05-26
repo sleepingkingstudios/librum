@@ -35,7 +35,7 @@ RSpec.describe Actions::Api::Authentication::Users::Show do
     describe 'with an unauthenticated request' do
       let(:request) { Cuprum::Rails::Request.new }
       let(:expected_error) do
-        Errors::AuthenticationFailed.new
+        Librum::Core::Errors::AuthenticationFailed.new
       end
 
       it 'should return a failing result' do

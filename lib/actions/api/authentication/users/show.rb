@@ -2,6 +2,8 @@
 
 require 'cuprum/rails/action'
 
+require 'librum/core/errors/authentication_failed'
+
 module Actions::Api::Authentication::Users
   # Action to show the current authenticated user.
   class Show < Cuprum::Rails::Action
@@ -18,7 +20,7 @@ module Actions::Api::Authentication::Users
     def require_session
       return request.session if request.respond_to?(:session) && request.session
 
-      error = Errors::AuthenticationFailed.new
+      error = Librum::Core::Errors::AuthenticationFailed.new
 
       failure(error)
     end

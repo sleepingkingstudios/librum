@@ -7,6 +7,8 @@ require 'stannum/contracts/indifferent_hash_contract'
 require 'stannum/constraints/presence'
 require 'stannum/constraints/properties/match_property'
 
+require 'librum/core/errors/authentication_failed'
+
 module Actions::Api::Authentication::Users::Passwords
   # Action to update the password for the current authenticated user.
   class Update < Cuprum::Rails::Action
@@ -54,7 +56,7 @@ module Actions::Api::Authentication::Users::Passwords
     def require_session
       return request.session if request.respond_to?(:session) && request.session
 
-      error = Errors::AuthenticationFailed.new
+      error = Librum::Core::Errors::AuthenticationFailed.new
 
       failure(error)
     end
