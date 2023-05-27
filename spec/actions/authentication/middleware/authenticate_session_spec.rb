@@ -2,20 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Actions::Api::Middleware::Authenticate do
+RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
   subject(:middleware) do
     described_class.new(repository: repository, resource: resource)
   end
 
-  let(:repository) do
-    repository = Cuprum::Rails::Repository.new
-
-    repository.find_or_create(record_class: Authentication::Credential)
-    repository.find_or_create(record_class: Authentication::User)
-
-    repository
-  end
-  let(:resource) { Authentication::Resource.new(resource_name: 'rockets') }
+  let(:repository) { Cuprum::Rails::Repository.new }
+  let(:resource)   { Authentication::Resource.new(resource_name: 'rockets') }
 
   describe '.new' do
     it 'should define the constructor' do
@@ -26,7 +19,7 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
     end
   end
 
-  describe '#call' do
+  describe '#call' do # rubocop:disable RSpec/MultipleMemoizedHelpers
     let(:result)       { Cuprum::Result.new(value: { 'ok' => true }) }
     let(:next_command) { instance_double(Cuprum::Command, call: result) }
     let(:credential)   { FactoryBot.build(:generic_credential) }
@@ -38,11 +31,19 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
         call: mock_result
       )
     end
+    let(:native_session) do
+      instance_double(
+        ActionDispatch::Request::Session,
+        '[]': nil,
+        key?: false
+      )
+    end
     let(:request) do
       instance_double(
         Cuprum::Rails::Request,
-        action_name: 'launch',
-        properties:  { action_name: 'launch' }
+        action_name:    'launch',
+        properties:     { action_name: 'launch' },
+        native_session: native_session
       )
     end
     let(:expected_request) do
@@ -55,7 +56,7 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
     end
 
     before(:example) do
-      allow(Authentication::Strategies::RequestToken)
+      allow(Authentication::Strategies::SessionToken)
         .to receive(:new)
         .and_return(mock_strategy)
     end
@@ -67,16 +68,10 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
         .and_keywords(:request)
     end
 
-    it 'should return a passing result' do
-      expect(middleware.call(next_command, request: request))
-        .to be_a_passing_result
-        .with_value(result.value)
-    end
-
     it 'should authenticate the request' do
       middleware.call(next_command, request: request)
 
-      expect(mock_strategy).to have_received(:call).with(request)
+      expect(mock_strategy).to have_received(:call).with(request.native_session)
     end
 
     it 'should call the action' do
@@ -100,7 +95,9 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
       it 'should authenticate the request' do
         middleware.call(next_command, request: request)
 
-        expect(mock_strategy).to have_received(:call).with(request)
+        expect(mock_strategy)
+          .to have_received(:call)
+          .with(request.native_session)
       end
 
       it 'should not call the action' do
@@ -110,17 +107,19 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
       end
     end
 
-    context 'when initialized with resource: a Cuprum::Rails::Resource' do
+    context 'when initialized with resource: a Cuprum::Rails::Resource' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:resource) { Cuprum::Rails::Resource.new(resource_name: 'rockets') }
 
       it 'should authenticate the request' do
         middleware.call(next_command, request: request)
 
-        expect(mock_strategy).to have_received(:call).with(request)
+        expect(mock_strategy)
+          .to have_received(:call)
+          .with(request.native_session)
       end
     end
 
-    context 'when the resource does not authenticate the action' do
+    context 'when the resource does not authenticate the action' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:resource) do
         Authentication::Resource.new(
           resource_name:       'rockets',

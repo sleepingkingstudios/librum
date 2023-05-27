@@ -11,6 +11,11 @@ RSpec.describe ViewController, type: :controller do
     it { expect(described_class.default_format).to be :html }
   end
 
+  describe '.middleware' do
+    include_contract 'should define middleware',
+      Actions::Authentication::Middleware::AuthenticateSession
+  end
+
   describe '.repository' do
     subject(:repository) { described_class.repository }
 
