@@ -33,7 +33,10 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
     let(:session)      { Authentication::Session.new(credential: credential) }
     let(:mock_result)  { Cuprum::Result.new(value: session) }
     let(:mock_strategy) do
-      instance_double(Authentication::Strategies::Token, call: mock_result)
+      instance_double(
+        Authentication::Strategies::RequestToken,
+        call: mock_result
+      )
     end
     let(:request) do
       instance_double(
@@ -52,7 +55,7 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
     end
 
     before(:example) do
-      allow(Authentication::Strategies::Token)
+      allow(Authentication::Strategies::RequestToken)
         .to receive(:new)
         .and_return(mock_strategy)
     end

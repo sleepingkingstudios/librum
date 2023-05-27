@@ -27,7 +27,7 @@ module Actions::Api::Middleware
     private
 
     def authenticate_request(request)
-      Authentication::Strategies::Token
+      Authentication::Strategies::RequestToken
         .new(repository: repository)
         .call(request)
     end
