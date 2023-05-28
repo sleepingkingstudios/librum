@@ -1,11 +1,15 @@
 <section class="banner hero is-small">
   <div class="hero-body">
     <div class="container">
-      <p class="title">Librum</p>
+      <div>
+        <p class="title">Librum</p>
 
-      <p class="subtitle">Tabletop Campaign Companion</p>
+        <p class="subtitle">Tabletop Campaign Companion</p>
 
-      <%= render(::View::Layouts::Page::Navigation.new) %>
+        <% if navigation %>
+        <%= render(::View::Layouts::Page::Navigation.new) %>
+        <% end %>
+      </div>
 
       <hr class="is-fancy-hr">
     </div>

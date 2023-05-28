@@ -51,6 +51,8 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.result).to be result }
 
+      it { expect(response.layout).to be nil }
+
       it { expect(response.status).to be :internal_server_error }
 
       wrap_context 'when the page is defined',
@@ -60,8 +62,28 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component).to be_a component_class }
 
+        it { expect(response.layout).to be nil }
+
         it { expect(response.status).to be :internal_server_error }
       end
+    end
+
+    describe 'with a failing result with an AuthenticationError' do
+      let(:error) do
+        Librum::Core::Errors::AuthenticationError
+          .new(message: 'Unable to log in')
+      end
+      let(:result) { Cuprum::Result.new(error: error) }
+
+      it { expect(response).to be_a Responses::Html::RenderComponentResponse }
+
+      it { expect(response.component).to be_a View::Pages::LoginPage }
+
+      it { expect(response.component.result).to be result }
+
+      it { expect(response.layout).to be == 'login' }
+
+      it { expect(response.status).to be :unauthorized }
     end
 
     describe 'with a passing result' do
@@ -80,6 +102,8 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.result).to be result }
 
+      it { expect(response.layout).to be nil }
+
       it { expect(response.status).to be :internal_server_error }
 
       wrap_context 'when the page is defined',
@@ -88,6 +112,8 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
+
+        it { expect(response.layout).to be nil }
 
         it { expect(response.status).to be :ok }
       end
@@ -123,6 +149,8 @@ RSpec.describe Responders::HtmlResponder do
 
     it { expect(response.component.result).to be result }
 
+    it { expect(response.layout).to be nil }
+
     it { expect(response.status).to be :internal_server_error }
 
     context 'when the action has multiple words' do
@@ -140,7 +168,16 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component).to be_a component_class }
 
+        it { expect(response.layout).to be nil }
+
         it { expect(response.status).to be :ok }
+
+        describe 'with layout: value' do
+          let(:layout)  { 'custom_layout' }
+          let(:options) { super().merge(layout: layout) }
+
+          it { expect(response.layout).to be == layout }
+        end
 
         describe 'with status: value' do
           let(:status)  { :created }
@@ -166,7 +203,16 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component).to be_a component_class }
 
+        it { expect(response.layout).to be nil }
+
         it { expect(response.status).to be :ok }
+
+        describe 'with layout: value' do
+          let(:layout)  { 'custom_layout' }
+          let(:options) { super().merge(layout: layout) }
+
+          it { expect(response.layout).to be == layout }
+        end
 
         describe 'with status: value' do
           let(:status)  { :created }
@@ -184,7 +230,16 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component).to be_a component_class }
 
+      it { expect(response.layout).to be nil }
+
       it { expect(response.status).to be :ok }
+
+      describe 'with layout: value' do
+        let(:layout)  { 'custom_layout' }
+        let(:options) { super().merge(layout: layout) }
+
+        it { expect(response.layout).to be == layout }
+      end
 
       describe 'with status: value' do
         let(:status)  { :created }
@@ -192,6 +247,13 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.status).to be :created }
       end
+    end
+
+    describe 'with layout: value' do
+      let(:layout)  { 'custom_layout' }
+      let(:options) { super().merge(layout: layout) }
+
+      it { expect(response.layout).to be == layout }
     end
 
     describe 'with status: value' do
@@ -211,7 +273,45 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component).to be component }
 
+      it { expect(response.layout).to be nil }
+
       it { expect(response.status).to be :ok }
+
+      describe 'with layout: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:layout)  { 'custom_layout' }
+        let(:options) { super().merge(layout: layout) }
+
+        it { expect(response.layout).to be == layout }
+      end
+
+      describe 'with status: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:status)  { :created }
+        let(:options) { super().merge(status: status) }
+
+        it { expect(response.status).to be status }
+      end
+    end
+
+    describe 'with a ViewComponent' do
+      let(:component) { Spec::CustomComponent.new }
+      let(:response)  { responder.render_component(component, **options) }
+
+      example_class 'Spec::CustomComponent', ViewComponent::Base
+
+      it { expect(response).to be_a Responses::Html::RenderComponentResponse }
+
+      it { expect(response.component).to be component }
+
+      it { expect(response.layout).to be nil }
+
+      it { expect(response.status).to be :ok }
+
+      describe 'with layout: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:layout)  { 'custom_layout' }
+        let(:options) { super().merge(layout: layout) }
+
+        it { expect(response.layout).to be == layout }
+      end
 
       describe 'with status: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
         let(:status)  { :created }

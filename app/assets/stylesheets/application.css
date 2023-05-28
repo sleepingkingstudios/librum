@@ -38,6 +38,16 @@ html, body, body > div.page {
   margin-bottom: 0;
 }
 
+.page > .banner .subtitle:last-child {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .page > .banner nav.navbar .navbar-brand {
+    margin-left: 0;
+  }
+}
+
 .page > .banner hr {
   margin-top: 0;
   margin-bottom: 0;

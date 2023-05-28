@@ -16,6 +16,14 @@ module Responders
       render_component(result)
     end
 
+    match :failure, error: Librum::Core::Errors::AuthenticationError do |result|
+      render_component(
+        View::Pages::LoginPage.new(result),
+        layout: 'login',
+        status: :unauthorized
+      )
+    end
+
     match :failure do
       render_component(result, status: :internal_server_error)
     end
@@ -31,16 +39,22 @@ module Responders
     # Creates a Response based on the given result and options.
     #
     # @param result [Cuprum::Result] the result to render.
+    # @param layout [String, nil] the layout to render.
     # @param status [Integer, Symbol] the HTTP status of the response.
     #
     # @return [Responses::Html::RenderComponentResponse] the response.
-    def render_component(result, status: :ok)
+    def render_component(result, layout: nil, status: :ok) # rubocop:disable Metrics/MethodLength
       component = build_view_component(result)
 
-      Responses::Html::RenderComponentResponse.new(component, status: status)
+      Responses::Html::RenderComponentResponse.new(
+        component,
+        layout: layout,
+        status: status
+      )
     rescue NameError
       Responses::Html::RenderComponentResponse.new(
         missing_page_component(result),
+        layout: layout,
         status: :internal_server_error
       )
     end
@@ -48,6 +62,8 @@ module Responders
     private
 
     def build_view_component(result)
+      return result if result.is_a?(ViewComponent::Base)
+
       return result.value if result.value.is_a?(ViewComponent::Base)
 
       view_component_class.new(result)
