@@ -22,6 +22,20 @@ module View::Layouts
 
     class Navigation < ViewComponent::Base; end
 
+    # Renders the current session.
+    class Session < ViewComponent::Base
+      # @param current_user [Authentication::User, nil] the current authenticated
+      #   user.
+      def initialize(current_user:)
+        super()
+
+        @current_user = current_user
+      end
+
+      # @return [Authentication::User] the current authenticated user.
+      attr_reader :current_user
+    end
+
     # @param current_user [Authentication::User, nil] the current authenticated
     #   user.
     # @param navigation [Array, false] the configured navigation, or false if

@@ -54,6 +54,7 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
         )
       )
     end
+    let(:expected_value) { result.value.merge('_session' => session) }
 
     before(:example) do
       allow(Authentication::Strategies::SessionToken)
@@ -80,6 +81,12 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
       expect(next_command)
         .to have_received(:call)
         .with(request: expected_request)
+    end
+
+    it 'should return the result with the session metadata' do
+      expect(middleware.call(next_command, request: request))
+        .to be_a_passing_result
+        .with_value(expected_value)
     end
 
     context 'when the authentication fails' do # rubocop:disable RSpec/MultipleMemoizedHelpers
@@ -145,6 +152,43 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
         expect(next_command)
           .to have_received(:call)
           .with(request: request)
+      end
+    end
+
+    context 'when the result is failing' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:error) do
+        Cuprum::Error.new(message: 'Something went wrong')
+      end
+      let(:result)         { Cuprum::Result.new(error: error) }
+      let(:expected_value) { { '_session' => session } }
+
+      it 'should return the result with the session metadata' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_failing_result
+          .with_error(error)
+          .and_value(expected_value)
+      end
+    end
+
+    context 'when the result value is nil' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:result)         { Cuprum::Result.new }
+      let(:expected_value) { { '_session' => session } }
+
+      it 'should return the result with the session metadata' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_passing_result
+          .with_value(expected_value)
+      end
+    end
+
+    context 'when the result value is not a Hash' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:value)  { Object.new.freeze }
+      let(:result) { Cuprum::Result.new(value: value) }
+
+      it 'should return the result' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_passing_result
+          .with_value(value)
       end
     end
   end

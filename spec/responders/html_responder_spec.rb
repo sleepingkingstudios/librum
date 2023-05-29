@@ -51,6 +51,8 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.result).to be result }
 
+      it { expect(response.assigns).to be == {} }
+
       it { expect(response.layout).to be nil }
 
       it { expect(response.status).to be :internal_server_error }
@@ -61,6 +63,8 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
+
+        it { expect(response.assigns).to be == {} }
 
         it { expect(response.layout).to be nil }
 
@@ -80,6 +84,8 @@ RSpec.describe Responders::HtmlResponder do
       it { expect(response.component).to be_a View::Pages::LoginPage }
 
       it { expect(response.component.result).to be result }
+
+      it { expect(response.assigns).to be == {} }
 
       it { expect(response.layout).to be == 'login' }
 
@@ -102,6 +108,8 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.result).to be result }
 
+      it { expect(response.assigns).to be == {} }
+
       it { expect(response.layout).to be nil }
 
       it { expect(response.status).to be :internal_server_error }
@@ -112,6 +120,8 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
+
+        it { expect(response.assigns).to be == {} }
 
         it { expect(response.layout).to be nil }
 
@@ -149,6 +159,8 @@ RSpec.describe Responders::HtmlResponder do
 
     it { expect(response.component.result).to be result }
 
+    it { expect(response.assigns).to be == {} }
+
     it { expect(response.layout).to be nil }
 
     it { expect(response.status).to be :internal_server_error }
@@ -167,6 +179,8 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
+
+        it { expect(response.assigns).to be == {} }
 
         it { expect(response.layout).to be nil }
 
@@ -203,6 +217,8 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component).to be_a component_class }
 
+        it { expect(response.assigns).to be == {} }
+
         it { expect(response.layout).to be nil }
 
         it { expect(response.status).to be :ok }
@@ -223,6 +239,28 @@ RSpec.describe Responders::HtmlResponder do
       end
     end
 
+    context 'when the result value is a Hash with metadata' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:value) do
+        {
+          'book'     => {
+            title:  'Gideon the Ninth',
+            author: 'Tammsyn Muir'
+          },
+          '_page'    => { title: 'The Locked Tomb Series' },
+          '_session' => { token: '12345' }
+        }
+      end
+      let(:result) { Cuprum::Result.new(value: value) }
+      let(:expected_assigns) do
+        {
+          'page'    => { title: 'The Locked Tomb Series' },
+          'session' => { token: '12345' }
+        }
+      end
+
+      it { expect(response.assigns).to be == expected_assigns }
+    end
+
     wrap_context 'when the page is defined',
       'View::Pages::Custom::Implement' \
     do
@@ -230,9 +268,33 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component).to be_a component_class }
 
+      it { expect(response.assigns).to be == {} }
+
       it { expect(response.layout).to be nil }
 
       it { expect(response.status).to be :ok }
+
+      context 'when the result value is a Hash with metadata' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:value) do
+          {
+            'book'     => {
+              title:  'Gideon the Ninth',
+              author: 'Tammsyn Muir'
+            },
+            '_page'    => { title: 'The Locked Tomb Series' },
+            '_session' => { token: '12345' }
+          }
+        end
+        let(:result) { Cuprum::Result.new(value: value) }
+        let(:expected_assigns) do
+          {
+            'page'    => { title: 'The Locked Tomb Series' },
+            'session' => { token: '12345' }
+          }
+        end
+
+        it { expect(response.assigns).to be == expected_assigns }
+      end
 
       describe 'with layout: value' do
         let(:layout)  { 'custom_layout' }
@@ -271,6 +333,8 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
+      it { expect(response.assigns).to be == {} }
+
       it { expect(response.component).to be component }
 
       it { expect(response.layout).to be nil }
@@ -301,6 +365,8 @@ RSpec.describe Responders::HtmlResponder do
       it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
       it { expect(response.component).to be component }
+
+      it { expect(response.assigns).to be == {} }
 
       it { expect(response.layout).to be nil }
 

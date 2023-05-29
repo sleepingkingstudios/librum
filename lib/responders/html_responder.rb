@@ -48,14 +48,16 @@ module Responders
 
       Responses::Html::RenderComponentResponse.new(
         component,
-        layout: layout,
-        status: status
+        assigns: extract_assigns(result),
+        layout:  layout,
+        status:  status
       )
     rescue NameError
       Responses::Html::RenderComponentResponse.new(
         missing_page_component(result),
-        layout: layout,
-        status: :internal_server_error
+        assigns: extract_assigns(result),
+        layout:  layout,
+        status:  :internal_server_error
       )
     end
 
@@ -67,6 +69,19 @@ module Responders
       return result.value if result.value.is_a?(ViewComponent::Base)
 
       view_component_class.new(result)
+    end
+
+    def extract_assigns(result)
+      return {} unless result.respond_to?(:to_cuprum_result)
+
+      value = result.to_cuprum_result.value
+
+      return {} unless value.is_a?(Hash)
+
+      value
+        .each
+        .select { |key, _| key.to_s.start_with?('_') }
+        .to_h { |(key, assign)| [key.to_s.sub(/\A_/, ''), assign] }
     end
 
     def missing_page_component(result)

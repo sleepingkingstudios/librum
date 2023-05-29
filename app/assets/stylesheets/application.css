@@ -14,57 +14,6 @@
  *= require_self
  */
 
-/* LAYOUT */
-
-html, body, body > div.page {
-  height: 100%;
-}
-
-.page > .banner {
-  padding: 0 1.5rem;
-}
-
-@media screen and (min-width: 1024px) {
-  .page > .banner {
-    padding: 0 3rem;
-  }
-}
-
-.page > .banner > .hero-body {
-  padding: 1.5rem 0;
-}
-
-.page > .banner .subtitle {
-  margin-bottom: 0;
-}
-
-.page > .banner .subtitle:last-child {
-  margin-bottom: 1.5rem;
-}
-
-@media screen and (min-width: 1024px) {
-  .page > .banner nav.navbar .navbar-brand {
-    margin-left: 0;
-  }
-}
-
-.page > .banner hr {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.page > section.primary-content {
-  padding-top: 0;
-}
-
-.page > section.primary-content .container h1:first-child {
-  margin-top: 0;
-}
-
-.page > footer.footer {
-  padding: 1.5rem 1rem 2rem;
-}
-
 /* COMPONENTS */
 
 hr.is-fancy-hr {

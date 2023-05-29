@@ -5,9 +5,10 @@ require 'rails_helper'
 require 'support/components/mock_component'
 
 RSpec.describe View::Layouts::Page, type: :component do
-  subject(:component) { described_class.new.with_content(content) }
+  subject(:component) { described_class.new(**options).with_content(content) }
 
   let(:content)  { 'Greetings, Starfighter!' }
+  let(:options)  { {} }
   let(:rendered) { render_inline(component) }
   let(:snapshot) do
     <<~HTML
@@ -16,6 +17,7 @@ RSpec.describe View::Layouts::Page, type: :component do
 
         <section class="section primary-content is-flex-grow-1">
           <div class="container">
+
             Greetings, Starfighter!
           </div>
         </section>
@@ -37,6 +39,10 @@ RSpec.describe View::Layouts::Page, type: :component do
     allow(View::Layouts::Page::Footer)
       .to receive(:new)
       .and_return(Spec::Support::Components::MockComponent.new('Footer'))
+
+    allow(View::Layouts::Page::Session)
+      .to receive(:new)
+      .and_return(Spec::Support::Components::MockComponent.new('Session'))
   end
 
   it 'should render the content' do
@@ -45,5 +51,28 @@ RSpec.describe View::Layouts::Page, type: :component do
 
   it 'should match the snapshot' do
     expect(prettify(rendered)).to match_snapshot(snapshot)
+  end
+
+  describe 'with current_user: true' do
+    let(:snapshot) do
+      <<~HTML
+        <div class="page is-flex is-flex-direction-column">
+          <mock name="Banner"></mock>
+
+          <section class="section primary-content is-flex-grow-1">
+            <div class="container">
+
+              Greetings, Starfighter!
+            </div>
+          </section>
+
+          <mock name="Footer"></mock>
+        </div>
+      HTML
+    end
+
+    it 'should match the snapshot' do
+      expect(prettify(rendered)).to match_snapshot(snapshot)
+    end
   end
 end

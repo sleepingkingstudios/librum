@@ -1,0 +1,18 @@
+<div class="block user-session">
+  <div class="icon-text">
+    <span class="icon mr-1">
+      <i class="fa-solid fa-user"></i>
+    </span>
+
+    You are currently logged in as <%= current_user.username %>.
+
+    <%=
+      form_with url: authentication_session_path,
+        method: :delete,
+        class:  'destroy_session_form' do |form| %>
+      <div class="buttons is-right">
+        <%= form.submit "Log Out", class: "button is-danger is-inverted" %>
+      </div>
+    <% end %>
+  </div>
+</div>

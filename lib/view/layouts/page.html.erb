@@ -3,6 +3,12 @@
 
   <section class="section primary-content is-flex-grow-1">
     <div class="container">
+      <% if current_user %>
+      <%=
+        render(::View::Layouts::Page::Session.new(current_user: current_user))
+      %>
+      <% end %>
+
       <%= content %>
     </div>
   </section>

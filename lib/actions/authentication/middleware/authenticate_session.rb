@@ -32,14 +32,32 @@ module Actions::Authentication::Middleware
         .call(request.native_session)
     end
 
+    def merge_result(result:, value:)
+      Cuprum::Result.new(
+        error:  result.error,
+        status: result.status,
+        value:  value
+      )
+    end
+
+    def merge_value(session:, value:)
+      return { '_session' => session } if value.nil?
+
+      return value unless value.is_a?(Hash)
+
+      value.merge('_session' => session)
+    end
+
     def process(next_command, request:)
       return super if skip_authentication?(request)
 
       session = step { authenticate_request(request) }
       request =
         Authentication::Request.new(session: session, **request.properties)
+      result  = next_command.call(request: request)
+      value   = merge_value(session: session, value: result.value)
 
-      next_command.call(request: request)
+      merge_result(result: result, value: value)
     end
 
     def skip_authentication?(request)
