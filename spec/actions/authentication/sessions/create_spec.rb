@@ -45,6 +45,14 @@ RSpec.describe Actions::Authentication::Sessions::Create do
         params:         params
       )
     end
+    let(:contract) do
+      constraint = Stannum::Constraints::Presence.new(message: "can't be blank")
+
+      Stannum::Contracts::HashContract.new(allow_extra_keys: true) do
+        key 'username', constraint
+        key 'password', constraint
+      end
+    end
 
     it 'should define the method' do
       expect(action)
@@ -54,6 +62,11 @@ RSpec.describe Actions::Authentication::Sessions::Create do
     end
 
     describe 'with empty params' do
+      let(:expected_errors) { contract.errors_for(params) }
+      let(:expected_error) do
+        Authentication::Errors::InvalidLogin.new(errors: expected_errors)
+      end
+
       it 'should return a failing result' do
         expect(action.call(request: request))
           .to be_a_failing_result
@@ -69,6 +82,10 @@ RSpec.describe Actions::Authentication::Sessions::Create do
 
     describe 'with a password' do
       let(:params) { { 'password' => 'password' } }
+      let(:expected_errors) { contract.errors_for(params) }
+      let(:expected_error) do
+        Authentication::Errors::InvalidLogin.new(errors: expected_errors)
+      end
 
       it 'should return a failing result' do
         expect(action.call(request: request))
@@ -85,6 +102,10 @@ RSpec.describe Actions::Authentication::Sessions::Create do
 
     describe 'with a username' do
       let(:params) { { 'username' => 'Alan Bradley' } }
+      let(:expected_errors) { contract.errors_for(params) }
+      let(:expected_error) do
+        Authentication::Errors::InvalidLogin.new(errors: expected_errors)
+      end
 
       it 'should return a failing result' do
         expect(action.call(request: request))

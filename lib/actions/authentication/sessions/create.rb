@@ -1,10 +1,19 @@
 # frozen_string_literal: true
 
 require 'cuprum/rails/action'
+require 'stannum/contracts/hash_contract'
 
 module Actions::Authentication::Sessions
   # Action for creating an authentication session.
   class Create < Cuprum::Rails::Action
+    CONTRACT = Stannum::Contracts::HashContract.new(allow_extra_keys: true) do
+      key 'username',
+        Stannum::Constraints::Presence.new(message: "can't be blank")
+      key 'password',
+        Stannum::Constraints::Presence.new(message: "can't be blank")
+    end
+    private_constant :CONTRACT
+
     private
 
     def build_token(session)
@@ -24,6 +33,8 @@ module Actions::Authentication::Sessions
     def process(request:)
       super
 
+      step { validate_parameters }
+
       credential = step { find_credential }
       session    = Authentication::Session.new(credential: credential)
       token      = step { build_token(session) }
@@ -31,6 +42,16 @@ module Actions::Authentication::Sessions
       write_session(token)
 
       {}
+    end
+
+    def validate_parameters
+      match, errors = CONTRACT.match(params)
+
+      return success(nil) if match
+
+      error = Authentication::Errors::InvalidLogin.new(errors: errors)
+
+      failure(error)
     end
 
     def write_session(token)

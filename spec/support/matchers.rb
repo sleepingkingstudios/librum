@@ -6,7 +6,7 @@ module Spec::Support
 
     matcher :match_snapshot do |snapshot|
       match do |actual|
-        actual.to_s == snapshot
+        actual.to_s.strip == snapshot.strip
       end
     end
   end
