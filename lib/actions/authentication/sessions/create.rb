@@ -2,8 +2,8 @@
 
 require 'cuprum/rails/action'
 
-module Actions::Api::Authentication::Sessions
-  # Create action for Sessions API.
+module Actions::Authentication::Sessions
+  # Action for creating an authentication session.
   class Create < Cuprum::Rails::Action
     private
 
@@ -17,6 +17,10 @@ module Actions::Api::Authentication::Sessions
         .call(username: params['username'], password: params['password'])
     end
 
+    def native_session
+      request.native_session
+    end
+
     def process(request:)
       super
 
@@ -24,10 +28,13 @@ module Actions::Api::Authentication::Sessions
       session    = Authentication::Session.new(credential: credential)
       token      = step { build_token(session) }
 
-      {
-        'token' => token,
-        'user'  => session.current_user
-      }
+      write_session(token)
+
+      {}
+    end
+
+    def write_session(token)
+      native_session['auth_token'] = token
     end
   end
 end

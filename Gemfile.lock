@@ -7,14 +7,6 @@ GIT
       rake (>= 10.4, < 14.0)
 
 GIT
-  remote: https://github.com/sleepingkingstudios/cuprum
-  revision: 4333c3adb555e767a9e270ce66307b4090adbc06
-  branch: main
-  specs:
-    cuprum (1.1.0)
-      sleeping_king_studios-tools (~> 1.0)
-
-GIT
   remote: https://github.com/sleepingkingstudios/cuprum-collections
   revision: 67b23dd7648f8175cd96936c472c1d4bf216f028
   branch: main
@@ -34,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/cuprum-rails
-  revision: 868d90770002db933c0b06a0a4de54e9ef3cd3a3
+  revision: 1d1deac48af60b777499962bac89a1b26b84b8af
   branch: main
   specs:
     cuprum-rails (0.2.0.alpha)
@@ -55,14 +47,6 @@ GIT
       pg (~> 1.5)
       rails (~> 7.0.4)
       stannum (~> 0.3)
-
-GIT
-  remote: https://github.com/sleepingkingstudios/stannum
-  revision: 677dd802fd32c175e0f01dcd43a6c4845b36ae4f
-  branch: main
-  specs:
-    stannum (0.3.0)
-      sleeping_king_studios-tools (~> 1.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -150,6 +134,8 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    cuprum (1.1.0)
+      sleeping_king_studios-tools (~> 1.0)
     date (3.3.3)
     debug (1.4.0)
       irb (>= 1.3.6)
@@ -315,6 +301,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stannum (0.3.0)
+      sleeping_king_studios-tools (~> 1.1.0)
     thor (1.2.2)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -345,7 +333,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.18)
   byebug
   capybara (~> 3.39)
-  cuprum!
+  cuprum (~> 1.1)
   cuprum-collections!
   cuprum-collections-loader!
   cuprum-rails!
@@ -368,7 +356,7 @@ DEPENDENCIES
   simplecov (~> 0.21)
   sleeping_king_studios-tasks (~> 0.4, >= 0.4.1)
   sprockets-rails
-  stannum!
+  stannum (~> 0.3)
   view_component (~> 3.0)
   web-console
 
