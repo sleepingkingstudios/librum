@@ -9,6 +9,10 @@
       %>
       <% end %>
 
+      <% if alerts.present? %>
+      <%= render(::View::Layouts::Page::Alerts.new(alerts: alerts)) %>
+      <% end %>
+
       <%= content %>
     </div>
   </section>

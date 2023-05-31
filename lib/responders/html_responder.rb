@@ -39,16 +39,18 @@ module Responders
     # Creates a Response based on the given result and options.
     #
     # @param result [Cuprum::Result] the result to render.
+    # @param flash [Hash] the flash messages to set.
     # @param layout [String, nil] the layout to render.
     # @param status [Integer, Symbol] the HTTP status of the response.
     #
     # @return [Responses::Html::RenderComponentResponse] the response.
-    def render_component(result, layout: nil, status: :ok) # rubocop:disable Metrics/MethodLength
+    def render_component(result, flash: {}, layout: nil, status: :ok) # rubocop:disable Metrics/MethodLength
       component = build_view_component(result)
 
       Responses::Html::RenderComponentResponse.new(
         component,
         assigns: extract_assigns(result),
+        flash:   flash,
         layout:  layout,
         status:  status
       )
@@ -56,6 +58,7 @@ module Responders
       Responses::Html::RenderComponentResponse.new(
         missing_page_component(result),
         assigns: extract_assigns(result),
+        flash:   flash,
         layout:  layout,
         status:  :internal_server_error
       )

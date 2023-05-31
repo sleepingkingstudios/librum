@@ -12,8 +12,14 @@ module Authentication
 
         match :failure, error: ::Authentication::Errors::InvalidLogin \
         do |result|
+          alert = {
+            icon:    'user-xmark',
+            message: 'Invalid username or password.'
+          }
+
           render_component(
             View::Pages::LoginPage.new(result),
+            flash:  { danger: alert },
             layout: 'login',
             status: :unprocessable_entity
           )
@@ -22,7 +28,15 @@ module Authentication
 
       action :destroy do
         match :success do
-          redirect_to '/'
+          alert = {
+            icon:    'user-xmark',
+            message: 'You have successfully logged out.'
+          }
+
+          redirect_to(
+            '/',
+            flash: { warning: alert }
+          )
         end
       end
     end

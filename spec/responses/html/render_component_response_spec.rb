@@ -13,7 +13,7 @@ RSpec.describe Responses::Html::RenderComponentResponse do
       expect(described_class)
         .to be_constructible
         .with(1).argument
-        .and_keywords(:assigns, :layout, :status)
+        .and_keywords(:assigns, :flash, :layout, :status)
     end
   end
 
@@ -29,9 +29,16 @@ RSpec.describe Responses::Html::RenderComponentResponse do
   end
 
   describe '#call' do
+    let(:renderer_flash) do
+      instance_double(
+        ActionDispatch::Flash::FlashHash,
+        now: instance_double(ActionDispatch::Flash::FlashNow, '[]=': nil)
+      )
+    end
     let(:renderer) do
       instance_double(
         ActionController::Base,
+        flash:                 renderer_flash,
         instance_variable_set: nil,
         render:                nil
       )
@@ -62,6 +69,32 @@ RSpec.describe Responses::Html::RenderComponentResponse do
           expect(renderer)
             .to have_received(:instance_variable_set)
             .with("@#{key}", value)
+        end
+      end
+
+      it 'should render the component' do
+        response.call(renderer)
+
+        expect(renderer).to have_received(:render).with(component, **expected)
+      end
+    end
+
+    context 'when initialized with flash: a Hash' do
+      let(:flash) do
+        {
+          alert:  'Reactor temperature critical',
+          notice: 'Initializing activation sequence'
+        }
+      end
+      let(:options) { super().merge(flash: flash) }
+
+      it 'should assign the flash', :aggregate_failures do # rubocop:disable RSpec/ExampleLength
+        response.call(renderer)
+
+        flash.each do |key, value|
+          expect(renderer_flash.now)
+            .to have_received(:[]=)
+            .with(key, value)
         end
       end
 
@@ -111,6 +144,22 @@ RSpec.describe Responses::Html::RenderComponentResponse do
 
   describe '#component' do
     include_examples 'should define reader', :component, -> { component }
+  end
+
+  describe '#flash' do
+    include_examples 'should define reader', :flash, {}
+
+    context 'when initialized with flash: a Hash' do
+      let(:flash) do
+        {
+          alert:  'Reactor temperature critical',
+          notice: 'Initializing activation sequence'
+        }
+      end
+      let(:options) { super().merge(flash: flash) }
+
+      it { expect(response.flash).to be == flash }
+    end
   end
 
   describe '#layout' do

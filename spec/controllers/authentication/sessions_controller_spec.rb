@@ -42,9 +42,18 @@ RSpec.describe Authentication::SessionsController, type: :controller do
         describe 'with a failing result with an InvalidLogin error' do
           let(:error)  { Authentication::Errors::InvalidLogin.new }
           let(:result) { Cuprum::Result.new(error: error) }
+          let(:flash) do
+            {
+              danger: {
+                icon:    'user-xmark',
+                message: 'Invalid username or password.'
+              }
+            }
+          end
 
           include_contract 'should render component',
             View::Pages::LoginPage,
+            flash:  -> { flash },
             layout: 'login',
             status: :unprocessable_entity do
               it { expect(response.component.result).to be result }
@@ -57,8 +66,16 @@ RSpec.describe Authentication::SessionsController, type: :controller do
 
         describe 'with a passing result' do
           let(:result) { Cuprum::Result.new(status: :success) }
+          let(:flash) do
+            {
+              warning: {
+                icon:    'user-xmark',
+                message: 'You have successfully logged out.'
+              }
+            }
+          end
 
-          include_contract 'should redirect to', '/'
+          include_contract 'should redirect to', '/', flash: -> { flash }
         end
       end
     end

@@ -144,7 +144,7 @@ RSpec.describe Responders::HtmlResponder do
       expect(responder)
         .to respond_to(:render_component)
         .with(1).argument
-        .and_keywords(:status)
+        .and_keywords(:flash, :status)
     end
 
     it { expect(response).to be_a Responses::Html::RenderComponentResponse }
@@ -160,6 +160,8 @@ RSpec.describe Responders::HtmlResponder do
     it { expect(response.component.result).to be result }
 
     it { expect(response.assigns).to be == {} }
+
+    it { expect(response.flash).to be == {} }
 
     it { expect(response.layout).to be nil }
 
@@ -181,6 +183,8 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response.component).to be_a component_class }
 
         it { expect(response.assigns).to be == {} }
+
+        it { expect(response.flash).to be == {} }
 
         it { expect(response.layout).to be nil }
 
@@ -218,6 +222,8 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response.component).to be_a component_class }
 
         it { expect(response.assigns).to be == {} }
+
+        it { expect(response.flash).to be == {} }
 
         it { expect(response.layout).to be nil }
 
@@ -270,6 +276,8 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.assigns).to be == {} }
 
+      it { expect(response.flash).to be == {} }
+
       it { expect(response.layout).to be nil }
 
       it { expect(response.status).to be :ok }
@@ -296,6 +304,18 @@ RSpec.describe Responders::HtmlResponder do
         it { expect(response.assigns).to be == expected_assigns }
       end
 
+      describe 'with flash: value' do
+        let(:flash) do
+          {
+            alert:  'Reactor temperature critical',
+            notice: 'Initializing activation sequence'
+          }
+        end
+        let(:options) { super().merge(flash: flash) }
+
+        it { expect(response.flash).to be == flash }
+      end
+
       describe 'with layout: value' do
         let(:layout)  { 'custom_layout' }
         let(:options) { super().merge(layout: layout) }
@@ -309,6 +329,18 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.status).to be :created }
       end
+    end
+
+    describe 'with flash: value' do
+      let(:flash) do
+        {
+          alert:  'Reactor temperature critical',
+          notice: 'Initializing activation sequence'
+        }
+      end
+      let(:options) { super().merge(flash: flash) }
+
+      it { expect(response.flash).to be == flash }
     end
 
     describe 'with layout: value' do
@@ -337,9 +369,23 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component).to be component }
 
+      it { expect(response.flash).to be == {} }
+
       it { expect(response.layout).to be nil }
 
       it { expect(response.status).to be :ok }
+
+      describe 'with flash: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:flash) do
+          {
+            alert:  'Reactor temperature critical',
+            notice: 'Initializing activation sequence'
+          }
+        end
+        let(:options) { super().merge(flash: flash) }
+
+        it { expect(response.flash).to be == flash }
+      end
 
       describe 'with layout: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
         let(:layout)  { 'custom_layout' }
@@ -368,9 +414,23 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.assigns).to be == {} }
 
+      it { expect(response.flash).to be == {} }
+
       it { expect(response.layout).to be nil }
 
       it { expect(response.status).to be :ok }
+
+      describe 'with flash: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:flash) do
+          {
+            alert:  'Reactor temperature critical',
+            notice: 'Initializing activation sequence'
+          }
+        end
+        let(:options) { super().merge(flash: flash) }
+
+        it { expect(response.flash).to be == flash }
+      end
 
       describe 'with layout: value' do # rubocop:disable RSpec/MultipleMemoizedHelpers
         let(:layout)  { 'custom_layout' }

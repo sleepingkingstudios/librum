@@ -13,7 +13,14 @@
   </head>
 
   <body>
-    <%= render(View::Layouts::Page.new(current_user: @session&.current_user)) do %>
+    <%=
+      render(
+        View::Layouts::Page.new(
+          alerts:       flash.each.to_h,
+          current_user: @session&.current_user
+        )
+      ) do
+    %>
       <%= yield %>
     <% end %>
   </body>

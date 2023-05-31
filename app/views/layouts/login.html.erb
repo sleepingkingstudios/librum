@@ -13,7 +13,14 @@
   </head>
 
   <body>
-    <%= render(View::Layouts::Page.new(navigation: false)) do %>
+    <%=
+      render(
+        View::Layouts::Page.new(
+          alerts:     flash.each.to_h,
+          navigation: false
+        )
+      ) do
+    %>
       <%= yield %>
     <% end %>
   </body>
