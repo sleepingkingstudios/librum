@@ -69,6 +69,10 @@ Rails.application.routes.draw do
       only:       :show
   end
 
+  namespace :authentication do
+    resource :session, only: %i[create destroy]
+  end
+
   get '/', to: 'home#show'
 
   get '*path',

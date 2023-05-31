@@ -5,19 +5,22 @@ require 'rails_helper'
 require 'support/components/mock_component'
 
 RSpec.describe View::Layouts::Page::Banner, type: :component do
-  subject(:component) { described_class.new }
+  subject(:component) { described_class.new(**options) }
 
+  let(:options)  { {} }
   let(:rendered) { render_inline(component) }
   let(:snapshot) do
     <<~HTML
       <section class="banner hero is-small">
         <div class="hero-body">
           <div class="container">
-            <p class="title">Librum</p>
+            <div>
+              <p class="title">Librum</p>
 
-            <p class="subtitle">Tabletop Campaign Companion</p>
+              <p class="subtitle">Tabletop Campaign Companion</p>
 
-            <mock name="Navigation"></mock>
+              <mock name="Navigation"></mock>
+            </div>
 
             <hr class="is-fancy-hr">
           </div>
@@ -46,5 +49,31 @@ RSpec.describe View::Layouts::Page::Banner, type: :component do
 
   it 'should match the snapshot' do
     expect(prettify(rendered)).to match_snapshot(snapshot)
+  end
+
+  describe 'with navigation: false' do
+    let(:options) { super().merge(navigation: false) }
+    let(:snapshot) do
+      <<~HTML
+        <section class="banner hero is-small">
+          <div class="hero-body">
+            <div class="container">
+              <div>
+                <p class="title">Librum</p>
+
+                <p class="subtitle">Tabletop Campaign Companion</p>
+
+              </div>
+
+              <hr class="is-fancy-hr">
+            </div>
+          </div>
+        </section>
+      HTML
+    end
+
+    it 'should match the snapshot' do
+      expect(prettify(rendered)).to match_snapshot(snapshot)
+    end
   end
 end

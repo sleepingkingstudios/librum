@@ -2,9 +2,9 @@
 
 require 'cuprum/middleware'
 
-module Actions::Api::Middleware
-  # Middleware for authenticating the current user.
-  class Authenticate < Cuprum::Command
+module Actions::Authentication::Middleware
+  # Middleware for authenticating the current user from the request.
+  class AuthenticateRequest < Cuprum::Command
     include Cuprum::Middleware
 
     # @param repository [Cuprum::Collections::Repository] The repository used to
@@ -27,7 +27,7 @@ module Actions::Api::Middleware
     private
 
     def authenticate_request(request)
-      Authentication::Strategies::Token
+      Authentication::Strategies::RequestToken
         .new(repository: repository)
         .call(request)
     end

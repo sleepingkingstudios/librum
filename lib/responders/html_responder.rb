@@ -16,6 +16,14 @@ module Responders
       render_component(result)
     end
 
+    match :failure, error: Librum::Core::Errors::AuthenticationError do |result|
+      render_component(
+        View::Pages::LoginPage.new(result),
+        layout: 'login',
+        status: :unauthorized
+      )
+    end
+
     match :failure do
       render_component(result, status: :internal_server_error)
     end
@@ -31,26 +39,52 @@ module Responders
     # Creates a Response based on the given result and options.
     #
     # @param result [Cuprum::Result] the result to render.
+    # @param flash [Hash] the flash messages to set.
+    # @param layout [String, nil] the layout to render.
     # @param status [Integer, Symbol] the HTTP status of the response.
     #
     # @return [Responses::Html::RenderComponentResponse] the response.
-    def render_component(result, status: :ok)
+    def render_component(result, flash: {}, layout: nil, status: :ok) # rubocop:disable Metrics/MethodLength
       component = build_view_component(result)
 
-      Responses::Html::RenderComponentResponse.new(component, status: status)
+      Responses::Html::RenderComponentResponse.new(
+        component,
+        assigns: extract_assigns(result),
+        flash:   flash,
+        layout:  layout,
+        status:  status
+      )
     rescue NameError
       Responses::Html::RenderComponentResponse.new(
         missing_page_component(result),
-        status: :internal_server_error
+        assigns: extract_assigns(result),
+        flash:   flash,
+        layout:  layout,
+        status:  :internal_server_error
       )
     end
 
     private
 
     def build_view_component(result)
+      return result if result.is_a?(ViewComponent::Base)
+
       return result.value if result.value.is_a?(ViewComponent::Base)
 
       view_component_class.new(result)
+    end
+
+    def extract_assigns(result)
+      return {} unless result.respond_to?(:to_cuprum_result)
+
+      value = result.to_cuprum_result.value
+
+      return {} unless value.is_a?(Hash)
+
+      value
+        .each
+        .select { |key, _| key.to_s.start_with?('_') }
+        .to_h { |(key, assign)| [key.to_s.sub(/\A_/, ''), assign] }
     end
 
     def missing_page_component(result)

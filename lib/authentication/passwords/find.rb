@@ -21,7 +21,7 @@ module Authentication::Passwords
     private
 
     def credentials_collection
-      repository['authentication/credentials']
+      repository.find_or_create(record_class: Authentication::Credential)
     end
 
     def find_credential(user)
@@ -56,7 +56,7 @@ module Authentication::Passwords
     end
 
     def users_collection
-      repository['authentication/users']
+      repository.find_or_create(record_class: Authentication::User)
     end
 
     def validate_credential(credential:, password:)

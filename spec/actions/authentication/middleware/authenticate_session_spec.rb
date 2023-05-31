@@ -2,20 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Actions::Api::Middleware::Authenticate do
+RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
   subject(:middleware) do
     described_class.new(repository: repository, resource: resource)
   end
 
-  let(:repository) do
-    repository = Cuprum::Rails::Repository.new
-
-    repository.find_or_create(record_class: Authentication::Credential)
-    repository.find_or_create(record_class: Authentication::User)
-
-    repository
-  end
-  let(:resource) { Authentication::Resource.new(resource_name: 'rockets') }
+  let(:repository) { Cuprum::Rails::Repository.new }
+  let(:resource)   { Authentication::Resource.new(resource_name: 'rockets') }
 
   describe '.new' do
     it 'should define the constructor' do
@@ -26,20 +19,31 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
     end
   end
 
-  describe '#call' do
+  describe '#call' do # rubocop:disable RSpec/MultipleMemoizedHelpers
     let(:result)       { Cuprum::Result.new(value: { 'ok' => true }) }
     let(:next_command) { instance_double(Cuprum::Command, call: result) }
     let(:credential)   { FactoryBot.build(:generic_credential) }
     let(:session)      { Authentication::Session.new(credential: credential) }
     let(:mock_result)  { Cuprum::Result.new(value: session) }
     let(:mock_strategy) do
-      instance_double(Authentication::Strategies::Token, call: mock_result)
+      instance_double(
+        Authentication::Strategies::RequestToken,
+        call: mock_result
+      )
+    end
+    let(:native_session) do
+      instance_double(
+        ActionDispatch::Request::Session,
+        '[]': nil,
+        key?: false
+      )
     end
     let(:request) do
       instance_double(
         Cuprum::Rails::Request,
-        action_name: 'launch',
-        properties:  { action_name: 'launch' }
+        action_name:    'launch',
+        properties:     { action_name: 'launch' },
+        native_session: native_session
       )
     end
     let(:expected_request) do
@@ -50,9 +54,10 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
         )
       )
     end
+    let(:expected_value) { result.value.merge('_session' => session) }
 
     before(:example) do
-      allow(Authentication::Strategies::Token)
+      allow(Authentication::Strategies::SessionToken)
         .to receive(:new)
         .and_return(mock_strategy)
     end
@@ -64,16 +69,10 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
         .and_keywords(:request)
     end
 
-    it 'should return a passing result' do
-      expect(middleware.call(next_command, request: request))
-        .to be_a_passing_result
-        .with_value(result.value)
-    end
-
     it 'should authenticate the request' do
       middleware.call(next_command, request: request)
 
-      expect(mock_strategy).to have_received(:call).with(request)
+      expect(mock_strategy).to have_received(:call).with(request.native_session)
     end
 
     it 'should call the action' do
@@ -82,6 +81,12 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
       expect(next_command)
         .to have_received(:call)
         .with(request: expected_request)
+    end
+
+    it 'should return the result with the session metadata' do
+      expect(middleware.call(next_command, request: request))
+        .to be_a_passing_result
+        .with_value(expected_value)
     end
 
     context 'when the authentication fails' do # rubocop:disable RSpec/MultipleMemoizedHelpers
@@ -97,7 +102,9 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
       it 'should authenticate the request' do
         middleware.call(next_command, request: request)
 
-        expect(mock_strategy).to have_received(:call).with(request)
+        expect(mock_strategy)
+          .to have_received(:call)
+          .with(request.native_session)
       end
 
       it 'should not call the action' do
@@ -107,17 +114,19 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
       end
     end
 
-    context 'when initialized with resource: a Cuprum::Rails::Resource' do
+    context 'when initialized with resource: a Cuprum::Rails::Resource' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:resource) { Cuprum::Rails::Resource.new(resource_name: 'rockets') }
 
       it 'should authenticate the request' do
         middleware.call(next_command, request: request)
 
-        expect(mock_strategy).to have_received(:call).with(request)
+        expect(mock_strategy)
+          .to have_received(:call)
+          .with(request.native_session)
       end
     end
 
-    context 'when the resource does not authenticate the action' do
+    context 'when the resource does not authenticate the action' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:resource) do
         Authentication::Resource.new(
           resource_name:       'rockets',
@@ -143,6 +152,43 @@ RSpec.describe Actions::Api::Middleware::Authenticate do
         expect(next_command)
           .to have_received(:call)
           .with(request: request)
+      end
+    end
+
+    context 'when the result is failing' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:error) do
+        Cuprum::Error.new(message: 'Something went wrong')
+      end
+      let(:result)         { Cuprum::Result.new(error: error) }
+      let(:expected_value) { { '_session' => session } }
+
+      it 'should return the result with the session metadata' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_failing_result
+          .with_error(error)
+          .and_value(expected_value)
+      end
+    end
+
+    context 'when the result value is nil' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:result)         { Cuprum::Result.new }
+      let(:expected_value) { { '_session' => session } }
+
+      it 'should return the result with the session metadata' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_passing_result
+          .with_value(expected_value)
+      end
+    end
+
+    context 'when the result value is not a Hash' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:value)  { Object.new.freeze }
+      let(:result) { Cuprum::Result.new(value: value) }
+
+      it 'should return the result' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_passing_result
+          .with_value(value)
       end
     end
   end

@@ -5,6 +5,8 @@ require 'cuprum/rails/action'
 module Actions::Api::Authentication::Sessions
   # Create action for Sessions API.
   class Create < Cuprum::Rails::Action
+    private
+
     def build_token(session)
       Authentication::Jwt::Generate.new.call(session)
     end

@@ -10,9 +10,14 @@ RSpec.describe View::Layouts::Page::Navigation, type: :component do
     <<~HTML
       <nav class="navbar is-size-5" role="navigation" aria-label="main-navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <i class="fa-solid fa-dice-d20 mr-1"></i>
-            Home
+          <a class="navbar-item pl-1" href="/">
+            <span class="icon-text">
+              <span class="icon mr-1">
+                <i class="fa-solid fa-dice-d20"></i>
+              </span>
+
+              Home
+            </span>
           </a>
 
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

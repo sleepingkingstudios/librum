@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require 'stannum'
+
 RSpec.describe Authentication::Errors::InvalidLogin do
   subject(:error) { described_class.new(**constructor_options) }
 
@@ -27,6 +29,35 @@ RSpec.describe Authentication::Errors::InvalidLogin do
     end
 
     it { expect(error.as_json).to be == expected }
+
+    context 'when initialized with errors: value' do
+      let(:errors) do
+        Stannum::Errors
+          .new
+          .add('spec.example_error')
+      end
+      let(:constructor_options) { super().merge(errors: errors) }
+      let(:expected) do
+        super().merge('data' => { 'errors' => errors.as_json })
+      end
+
+      it { expect(error.as_json).to be == expected }
+    end
+  end
+
+  describe '#errors' do
+    include_examples 'should define reader', :errors, nil
+
+    context 'when initialized with errors: value' do
+      let(:errors) do
+        Stannum::Errors
+          .new
+          .add('spec.example_error')
+      end
+      let(:constructor_options) { super().merge(errors: errors) }
+
+      it { expect(error.errors).to be errors }
+    end
   end
 
   describe '#message' do

@@ -14,7 +14,9 @@ class ViewController < ApplicationController
 
   default_format :html
 
-  layout 'page'
-
   responder :html, Responders::HtmlResponder
+
+  middleware Actions::Authentication::Middleware::AuthenticateSession
+
+  layout 'page'
 end

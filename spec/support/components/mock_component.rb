@@ -4,12 +4,26 @@ require 'support/components'
 
 module Spec::Support::Components
   class MockComponent < ViewComponent::Base
-    def initialize(name)
+    def initialize(name, **options)
       super()
 
-      @name = name
+      @name    = name
+      @options = options
     end
 
-    attr_reader :name
+    attr_reader \
+      :name,
+      :options
+
+    def format_options
+      return '' if options.empty?
+
+      formatted =
+        options
+        .map { |key, value| "#{key}=#{value.inspect}" }
+        .join(' ')
+
+      " #{formatted}"
+    end
   end
 end

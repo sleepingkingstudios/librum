@@ -24,9 +24,7 @@ gem 'bcrypt', '~> 3.1.18'
 gem 'jwt',    '~> 2.7'
 
 ### Commands
-gem 'cuprum',
-  branch: 'main',
-  git:    'https://github.com/sleepingkingstudios/cuprum'
+gem 'cuprum', '~> 1.1'
 gem 'cuprum-collections',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/cuprum-collections'
@@ -37,9 +35,7 @@ gem 'cuprum-collections-loader',
 gem 'cuprum-rails',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/cuprum-rails'
-gem 'stannum',
-  branch: 'main',
-  git:    'https://github.com/sleepingkingstudios/stannum'
+gem 'stannum', '~> 0.3'
 
 ### Views
 gem 'view_component', '~> 3.0'
