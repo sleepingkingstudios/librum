@@ -22,6 +22,17 @@ RSpec.describe View::Components::Page do
     end
   end
 
+  describe '#metadata' do
+    include_examples 'should define reader', :metadata, nil
+
+    context 'when initialized with a result with metadata' do
+      let(:metadata) { { session: { token: '12345' } } }
+      let(:result)   { Cuprum::Rails::Result.new(metadata: metadata) }
+
+      it { expect(page.metadata).to be == metadata }
+    end
+  end
+
   describe '#result' do
     include_examples 'should define reader', :result, -> { result }
   end

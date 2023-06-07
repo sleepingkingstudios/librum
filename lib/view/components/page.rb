@@ -10,14 +10,18 @@ module View::Components
     def initialize(result)
       super()
 
-      @result = result
-      @error  = result.error
-      @status = result.status
-      @value  = result.value
+      @result   = result
+      @error    = result.error
+      @status   = result.status
+      @value    = result.value
+      @metadata = result.respond_to?(:metadata) ? result.metadata : nil
     end
 
     # @return [Cuprum::Result] the result error.
     attr_reader :error
+
+    # @return [Hash{Symbol=>Object}] the result metadata.
+    attr_reader :metadata
 
     # @return [Cuprum::Result] the result of calling the controller action.
     attr_reader :result

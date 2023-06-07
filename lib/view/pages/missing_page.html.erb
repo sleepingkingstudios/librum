@@ -14,14 +14,19 @@
 
   <h2>Result</h2>
 
-  <dl>
-    <dt>Status</dt>
-    <dd><pre><%= @status %></pre></dd>
+  <p><strong>Status</strong></p>
 
-    <dt>Value</dt>
-    <dd><pre><%= @value&.as_json || '(none)' %></pre></dd>
+  <pre><%= @status.inspect %></pre>
 
-    <dt>Error</dt>
-    <dd><pre><%= @error.as_json || '(none)' %></pre></dd>
-  </dl>
+  <p><strong>Value</strong></p>
+
+  <pre><%= @value&.as_json&.pretty_inspect&.strip || '(none)' %></pre>
+
+  <p><strong>Error</strong></p>
+
+  <pre><%= @error&.as_json&.pretty_inspect&.strip || '(none)' %></pre>
+
+  <p><strong>Metadata</strong></p>
+
+  <pre><%= @metadata&.pretty_inspect&.strip || '(none)' %></pre>
 </div>
