@@ -66,6 +66,22 @@ module Responders
 
     private
 
+    def assigns_from_metadata(result)
+      return {} unless result.respond_to?(:metadata)
+
+      result.metadata.stringify_keys
+    end
+
+    def assigns_from_value(result)
+      return {} unless result.value.is_a?(Hash)
+
+      result
+        .value
+        .each
+        .select { |key, _| key.to_s.start_with?('_') }
+        .to_h { |(key, assign)| [key.to_s.sub(/\A_/, ''), assign] }
+    end
+
     def build_view_component(result)
       return result if result.is_a?(ViewComponent::Base)
 
@@ -77,14 +93,8 @@ module Responders
     def extract_assigns(result)
       return {} unless result.respond_to?(:to_cuprum_result)
 
-      value = result.to_cuprum_result.value
-
-      return {} unless value.is_a?(Hash)
-
-      value
-        .each
-        .select { |key, _| key.to_s.start_with?('_') }
-        .to_h { |(key, assign)| [key.to_s.sub(/\A_/, ''), assign] }
+      assigns_from_metadata(result)
+        .merge(assigns_from_value(result))
     end
 
     def missing_page_component(result)

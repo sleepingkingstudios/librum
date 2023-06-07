@@ -245,6 +245,34 @@ RSpec.describe Responders::HtmlResponder do
       end
     end
 
+    context 'when the result has metadata' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:value) do
+        {
+          'book' => {
+            title:  'Gideon the Ninth',
+            author: 'Tammsyn Muir'
+          }
+        }
+      end
+      let(:metadata) do
+        {
+          page:    { title: 'The Locked Tomb Series' },
+          session: { token: '12345' }
+        }
+      end
+      let(:result) do
+        Cuprum::Rails::Result.new(value: value, metadata: metadata)
+      end
+      let(:expected_assigns) do
+        {
+          'page'    => { title: 'The Locked Tomb Series' },
+          'session' => { token: '12345' }
+        }
+      end
+
+      it { expect(response.assigns).to be == expected_assigns }
+    end
+
     context 'when the result value is a Hash with metadata' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:value) do
         {
