@@ -8,7 +8,9 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateRequest do
   end
 
   let(:repository) { Cuprum::Rails::Repository.new }
-  let(:resource)   { Authentication::Resource.new(resource_name: 'rockets') }
+  let(:resource) do
+    Librum::Core::Resources::BaseResource.new(resource_name: 'rockets')
+  end
 
   describe '.new' do
     it 'should define the constructor' do
@@ -115,7 +117,7 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateRequest do
 
     context 'when the resource does not authenticate the action' do
       let(:resource) do
-        Authentication::Resource.new(
+        Librum::Core::Resources::BaseResource.new(
           resource_name:       'rockets',
           skip_authentication: true
         )

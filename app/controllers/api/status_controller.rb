@@ -4,7 +4,7 @@ module Api
   # API controller providing a status check endpoint.
   class StatusController < Librum::Core::ApiController
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         resource_name:       'status',
         singular:            true,
         skip_authentication: true

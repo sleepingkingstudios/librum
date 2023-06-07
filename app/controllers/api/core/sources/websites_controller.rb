@@ -10,7 +10,7 @@ module Api::Core::Sources
   # API controller for managing Sources::Website entities.
   class WebsitesController < Librum::Core::ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         default_order:        :name,
         permitted_attributes: %w[
           game_system_id

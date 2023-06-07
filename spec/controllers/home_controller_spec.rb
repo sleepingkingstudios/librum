@@ -10,7 +10,7 @@ RSpec.describe HomeController, type: :controller do
   describe '.resource' do
     subject(:resource) { described_class.resource }
 
-    it { expect(resource).to be_a Authentication::Resource }
+    it { expect(resource).to be_a Librum::Core::Resources::BaseResource }
 
     it { expect(resource.resource_name).to be == 'home' }
   end

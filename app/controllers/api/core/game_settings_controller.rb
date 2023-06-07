@@ -10,7 +10,7 @@ module Api::Core
   # API controller for managing GameSetting entities.
   class GameSettingsController < Librum::Core::ApiController
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         default_order:        :name,
         permitted_attributes: %w[
           name

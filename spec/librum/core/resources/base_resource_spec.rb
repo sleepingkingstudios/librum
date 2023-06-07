@@ -2,25 +2,30 @@
 
 require 'rails_helper'
 
-require 'cuprum/rails/resource'
+require 'librum/core/resources/base_resource'
 
-RSpec.describe Authentication::Resource do
+RSpec.describe Librum::Core::Resources::BaseResource do
   subject(:resource) { described_class.new(**constructor_options) }
 
-  let(:described_class)     { Spec::AuthenticatedResource }
   let(:constructor_options) { { resource_name: 'rockets' } }
 
-  example_class 'Spec::AuthenticatedResource', Cuprum::Rails::Resource \
-  do |klass|
-    klass.include Authentication::Resource # rubocop:disable RSpec/DescribedClass
-  end
-
   describe '.new' do
+    let(:expected_keywords) do
+      %i[
+        collection
+        resource_class
+        resource_name
+        routes
+        singular
+        skip_authentication
+      ]
+    end
+
     it 'should define the constructor' do
       expect(described_class)
         .to be_constructible
         .with(0).arguments
-        .and_keywords(:skip_authentication)
+        .and_keywords(*expected_keywords)
         .and_any_keywords
     end
   end

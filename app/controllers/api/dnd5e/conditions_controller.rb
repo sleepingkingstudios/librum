@@ -8,7 +8,7 @@ module Api::Dnd5e
   # API controller for managing Dnd5e::Condition entities.
   class ConditionsController < Librum::Core::ApiController
     def self.resource # rubocop:disable Metrics/MethodLength
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         default_order:        :name,
         permitted_attributes: %w[
           source_id

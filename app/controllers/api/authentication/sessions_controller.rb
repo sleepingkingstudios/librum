@@ -20,7 +20,7 @@ module Api::Authentication
     end
 
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         resource_name:       'sessions',
         skip_authentication: :create
       )

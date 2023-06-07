@@ -14,7 +14,7 @@ RSpec.describe Api::Admin::Authentication::UsersController do
       %w[email role slug username]
     end
 
-    it { expect(resource).to be_a Authentication::Resource }
+    it { expect(resource).to be_a Librum::Core::Resources::BaseResource }
 
     it { expect(resource.default_order).to be :username }
 

@@ -10,7 +10,7 @@ module Api::Core
   # API controller for managing GameSystem entities.
   class GameSystemsController < Librum::Core::ApiController
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         default_order:        %w[name edition],
         permitted_attributes: %w[
           publisher_id

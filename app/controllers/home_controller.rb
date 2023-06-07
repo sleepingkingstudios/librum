@@ -3,7 +3,7 @@
 # Basic controller for showing the Home page.
 class HomeController < ViewController
   def self.resource
-    ::Authentication::Resource.new(resource_name: 'home')
+    Librum::Core::Resources::BaseResource.new(resource_name: 'home')
   end
 
   action :not_found, Actions::RenderView, member: false
