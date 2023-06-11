@@ -9,5 +9,6 @@ RSpec.describe "#{Api::Admin::Authentication::UsersController} routes",
 do
   include Librum::Core::RSpec::Contracts::RoutingContracts
 
-  include_contract 'should route to api resource', 'admin/authentication/users'
+  include_contract 'should route to api resource',
+    'api/admin/authentication/users'
 end

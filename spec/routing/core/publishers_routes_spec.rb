@@ -4,8 +4,10 @@ require 'rails_helper'
 
 require 'librum/core/rspec/contracts/routing_contracts'
 
-RSpec.describe "#{Api::Core::GameSettingsController} routes", type: :routing do
+RSpec.describe "#{Core::PublishersController} routes", type: :routing do
   include Librum::Core::RSpec::Contracts::RoutingContracts
 
-  include_contract 'should route to api resource', 'api/core/game_settings'
+  include_contract 'should route to view resource',
+    'core/publishers',
+    only: %i[index]
 end
