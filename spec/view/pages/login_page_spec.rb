@@ -2,8 +2,6 @@
 
 require 'rails_helper'
 
-require 'support/components/mock_component'
-
 RSpec.describe View::Pages::LoginPage, type: :component do
   subject(:page) { described_class.new(result) }
 
@@ -13,8 +11,8 @@ RSpec.describe View::Pages::LoginPage, type: :component do
     <<~HTML
       <h1 class="title">Log In</h1>
       <form action="/authentication/session" accept-charset="UTF-8" method="post">
-        <mock name="FormField" icon='"user"' errors="nil"></mock>
-        <mock name="FormField" icon='"key"' errors="nil" type='"password"'></mock>
+        <mock name="username" icon="user" errors="nil"></mock>
+        <mock name="password" icon="key" errors="nil" type="password"></mock>
         <div class="field">
           <div class="control">
             <button type="submit" class="button is-primary">Log In</button>
@@ -30,7 +28,7 @@ RSpec.describe View::Pages::LoginPage, type: :component do
 
   before(:example) do
     allow(View::Components::FormField).to receive(:new) do |name, options|
-      Spec::Support::Components::MockComponent.new(
+      View::Components::MockComponent.new(
         'FormField',
         name: name,
         **options
@@ -57,8 +55,8 @@ RSpec.describe View::Pages::LoginPage, type: :component do
       <<~HTML
         <h1 class="title">Log In</h1>
         <form action="/authentication/session" accept-charset="UTF-8" method="post">
-          <mock name="FormField" icon='"user"' errors="(Stannum::Errors)"></mock>
-          <mock name="FormField" icon='"key"' errors="(Stannum::Errors)" type='"password"'></mock>
+          <mock name="username" icon="user" errors="(Stannum::Errors)"></mock>
+          <mock name="password" icon="key" errors="(Stannum::Errors)" type="password"></mock>
           <div class="field">
             <div class="control">
               <button type="submit" class="button is-primary">Log In</button>

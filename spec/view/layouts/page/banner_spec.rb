@@ -2,8 +2,6 @@
 
 require 'rails_helper'
 
-require 'support/components/mock_component'
-
 RSpec.describe View::Layouts::Page::Banner, type: :component do
   subject(:component) { described_class.new(**options) }
 
@@ -36,7 +34,7 @@ RSpec.describe View::Layouts::Page::Banner, type: :component do
   before(:example) do
     allow(View::Layouts::Page::Navigation)
       .to receive(:new)
-      .and_return(Spec::Support::Components::MockComponent.new('Navigation'))
+      .and_return(View::Components::MockComponent.new('Navigation'))
   end
 
   it 'should render the title' do
