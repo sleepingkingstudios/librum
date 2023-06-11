@@ -30,7 +30,7 @@ RSpec.describe Responders::HtmlResponder do
     let(:result)   { Cuprum::Result.new }
     let(:response) { responder.call(result) }
     let(:expected_page) do
-      'View::Pages::Custom::Implement'
+      'View::Pages::Custom::ImplementPage'
     end
 
     it { expect(responder).to respond_to(:call).with(1).argument }
@@ -58,7 +58,7 @@ RSpec.describe Responders::HtmlResponder do
       it { expect(response.status).to be :internal_server_error }
 
       wrap_context 'when the page is defined',
-        'View::Pages::Custom::Implement' \
+        'View::Pages::Custom::ImplementPage' \
       do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
@@ -115,7 +115,7 @@ RSpec.describe Responders::HtmlResponder do
       it { expect(response.status).to be :internal_server_error }
 
       wrap_context 'when the page is defined',
-        'View::Pages::Custom::Implement' \
+        'View::Pages::Custom::ImplementPage' \
       do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
@@ -138,7 +138,7 @@ RSpec.describe Responders::HtmlResponder do
     let(:result)        { Cuprum::Result.new }
     let(:options)       { {} }
     let(:response)      { responder.render_component(result, **options) }
-    let(:expected_page) { 'View::Pages::Custom::Implement' }
+    let(:expected_page) { 'View::Pages::Custom::ImplementPage' }
 
     it 'should define the method' do
       expect(responder)
@@ -157,6 +157,8 @@ RSpec.describe Responders::HtmlResponder do
 
     it { expect(response.component.expected_page).to be == expected_page }
 
+    it { expect(response.component.resource).to be nil }
+
     it { expect(response.component.result).to be result }
 
     it { expect(response.assigns).to be == {} }
@@ -170,17 +172,19 @@ RSpec.describe Responders::HtmlResponder do
     context 'when the action has multiple words' do
       let(:action_name) { :go_fish }
       let(:expected_page) do
-        'View::Pages::Custom::GoFish'
+        'View::Pages::Custom::GoFishPage'
       end
 
       it { expect(response.component.expected_page).to be == expected_page }
 
       wrap_context 'when the page is defined',
-        'View::Pages::Custom::GoFish' \
+        'View::Pages::Custom::GoFishPage' \
       do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
+
+        it { expect(response.component.resource).to be resource }
 
         it { expect(response.assigns).to be == {} }
 
@@ -209,17 +213,19 @@ RSpec.describe Responders::HtmlResponder do
     context 'when the controller has a namespace' do
       let(:controller_name) { 'Namespace::CustomController' }
       let(:expected_page) do
-        'View::Pages::Namespace::Custom::Implement'
+        'View::Pages::Namespace::Custom::ImplementPage'
       end
 
       it { expect(response.component.expected_page).to be == expected_page }
 
       wrap_context 'when the page is defined',
-        'View::Pages::Namespace::Custom::Implement' \
+        'View::Pages::Namespace::Custom::ImplementPage' \
       do
         it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
         it { expect(response.component).to be_a component_class }
+
+        it { expect(response.component.resource).to be resource }
 
         it { expect(response.assigns).to be == {} }
 
@@ -296,11 +302,13 @@ RSpec.describe Responders::HtmlResponder do
     end
 
     wrap_context 'when the page is defined',
-      'View::Pages::Custom::Implement' \
+      'View::Pages::Custom::ImplementPage' \
     do
       it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
       it { expect(response.component).to be_a component_class }
+
+      it { expect(response.component.resource).to be resource }
 
       it { expect(response.assigns).to be == {} }
 
@@ -322,6 +330,34 @@ RSpec.describe Responders::HtmlResponder do
           }
         end
         let(:result) { Cuprum::Result.new(value: value) }
+        let(:expected_assigns) do
+          {
+            'page'    => { title: 'The Locked Tomb Series' },
+            'session' => { token: '12345' }
+          }
+        end
+
+        it { expect(response.assigns).to be == expected_assigns }
+      end
+
+      context 'when the result has metadata' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+        let(:value) do
+          {
+            'book' => {
+              title:  'Gideon the Ninth',
+              author: 'Tammsyn Muir'
+            }
+          }
+        end
+        let(:metadata) do
+          {
+            page:    { title: 'The Locked Tomb Series' },
+            session: { token: '12345' }
+          }
+        end
+        let(:result) do
+          Cuprum::Rails::Result.new(value: value, metadata: metadata)
+        end
         let(:expected_assigns) do
           {
             'page'    => { title: 'The Locked Tomb Series' },

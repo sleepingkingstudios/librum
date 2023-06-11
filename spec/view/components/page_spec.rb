@@ -3,12 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe View::Components::Page do
-  subject(:page) { described_class.new(result) }
+  subject(:page) { described_class.new(result, **constructor_options) }
 
-  let(:result) { Cuprum::Result.new }
+  let(:result)              { Cuprum::Result.new }
+  let(:constructor_options) { {} }
 
   describe '.new' do
-    it { expect(described_class).to be_constructible.with(1).argument }
+    it 'should define the constructor' do
+      expect(described_class)
+        .to be_constructible
+        .with(1).argument
+        .and_keywords(:resource)
+        .and_any_keywords
+    end
   end
 
   describe '#error' do
@@ -30,6 +37,29 @@ RSpec.describe View::Components::Page do
       let(:result)   { Cuprum::Rails::Result.new(metadata: metadata) }
 
       it { expect(page.metadata).to be == metadata }
+    end
+  end
+
+  describe '#options' do
+    include_examples 'should define reader', :options, {}
+
+    context 'when initialized with options' do
+      let(:constructor_options) { { key: 'value' } }
+
+      it { expect(page.options).to be == constructor_options }
+    end
+  end
+
+  describe '#resource' do
+    include_examples 'should define reader', :resource, {}
+
+    context 'when initialized with resource: value' do
+      let(:resource) { Cuprum::Rails::Resource.new(resource_name: 'rockets') }
+      let(:constructor_options) do
+        super().merge(resource: resource)
+      end
+
+      it { expect(page.resource).to be resource }
     end
   end
 

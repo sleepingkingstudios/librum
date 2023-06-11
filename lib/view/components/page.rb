@@ -7,10 +7,14 @@ module View::Components
   class Page < ViewComponent::Base
     # @param result [Cuprum::Result] the result of calling the controller
     #   action.
-    def initialize(result)
+    # @param resource [Cuprum::Rails::Resource] the current controller resource.
+    # @param options [Hash{Symbol=>Object}] additional options for the page.
+    def initialize(result, resource: nil, **options)
       super()
 
       @result   = result
+      @resource = resource
+      @options  = options
       @error    = result.error
       @status   = result.status
       @value    = result.value
@@ -22,6 +26,12 @@ module View::Components
 
     # @return [Hash{Symbol=>Object}] the result metadata.
     attr_reader :metadata
+
+    # @return [Hash{Symbol=>Object}] additional options for the page.
+    attr_reader :options
+
+    # @return [Cuprum::Rails::Resource] the current controller resource.
+    attr_reader :resource
 
     # @return [Cuprum::Result] the result of calling the controller action.
     attr_reader :result

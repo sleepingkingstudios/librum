@@ -45,7 +45,7 @@ module Responders
     #
     # @return [Responses::Html::RenderComponentResponse] the response.
     def render_component(result, flash: {}, layout: nil, status: :ok) # rubocop:disable Metrics/MethodLength
-      component = build_view_component(result)
+      component = view_component_for(result)
 
       Responses::Html::RenderComponentResponse.new(
         component,
@@ -83,11 +83,7 @@ module Responders
     end
 
     def build_view_component(result)
-      return result if result.is_a?(ViewComponent::Base)
-
-      return result.value if result.value.is_a?(ViewComponent::Base)
-
-      view_component_class.new(result)
+      view_component_class.new(result, resource: resource)
     end
 
     def extract_assigns(result)
@@ -110,11 +106,19 @@ module Responders
       view_component_name.constantize
     end
 
+    def view_component_for(result)
+      return result if result.is_a?(ViewComponent::Base)
+
+      return result.value if result.value.is_a?(ViewComponent::Base)
+
+      build_view_component(result)
+    end
+
     def view_component_name
       action     = action_name.to_s.camelize
       scope      = controller_name.sub(/Controller\z/, '')
 
-      "View::Pages::#{scope}::#{action}"
+      "View::Pages::#{scope}::#{action}Page"
     end
   end
 end
