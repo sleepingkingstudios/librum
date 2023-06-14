@@ -9,5 +9,5 @@ RSpec.describe "#{Core::PublishersController} routes", type: :routing do
 
   include_contract 'should route to view resource',
     'core/publishers',
-    only: %i[index]
+    only: %i[index show]
 end

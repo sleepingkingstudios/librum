@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   end
 
   namespace :core do
-    resources :publishers, only: %i[index]
+    resources :publishers, only: %i[index show]
   end
 
   get '/', to: 'home#show'

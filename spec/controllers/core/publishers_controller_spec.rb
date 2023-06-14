@@ -46,4 +46,9 @@ RSpec.describe Core::PublishersController, type: :controller do
     :index,
     Librum::Core::Actions::Index,
     member: false
+
+  include_contract 'should define action',
+    :show,
+    Librum::Core::Actions::Show,
+    member: true
 end
