@@ -3,51 +3,8 @@
 module View::Components
   # Component for rendering tabular data.
   class Table < ViewComponent::Base
-    # Data object representing configuration for a table column.
-    class ColumnDefinition
-      # @param key [String] the data key corresponding to the cell contents.
-      # @param default [String, Proc] the default value for the column.
-      # @param icon [String] the name of the icon, if any, to display.
-      # @param label [String] the label for the column. Defaults to the key.
-      # @param type [Symbol] the type of column.
-      # @param value [Proc, ViewComponent::Base] the custom column value.
-      def initialize( # rubocop:disable Metrics/ParameterLists
-        key:,
-        default: nil,
-        icon:    nil,
-        label:   nil,
-        type:    :text,
-        value:   nil
-      )
-        @key     = key
-        @default = default
-        @label   = label || key.titleize
-        @icon    = icon
-        @type    = type
-        @value   = value
-      end
-
-      # @return [String, Proc] the default value for the column.
-      attr_reader :default
-
-      # @return [String] the name of the icon, if any, to display.
-      attr_reader :icon
-
-      # @return [String] the data key corresponding to the cell contents.
-      attr_reader :key
-
-      # @return [String] the label for the column. Defaults to the key.
-      attr_reader :label
-
-      # @return [Symbol] the type of column.
-      attr_reader :type
-
-      # @return [Proc, ViewComponent::Base] the custom column value.
-      attr_reader :value
-    end
-
-    # @param columns [Array<ColumnDefinition>] the columns used to render the
-    #   table.
+    # @param columns [Array<View::Components::DataField::FieldDefinition>] the
+    #   columns used to render the table.
     # @param data [Array<Hash{String=>Object}>] the table data to render.
     # @param class_names [Array<String>] additional class names to add to the
     #   rendered HTML.
@@ -96,7 +53,8 @@ module View::Components
     # @returen [ViewComponent::Base] the component to render each table cell.
     attr_reader :cell_component
 
-    # @return [Array<ColumnDefinition>] the columns used to render the table.
+    # @return [Array<View::Components::DataField::FieldDefinition>] the columns
+    #   used to render the table.
     attr_reader :columns
 
     # @return data [Array<Hash{String=>Object}>] the table data to render.

@@ -42,14 +42,6 @@ RSpec.describe View::Components::Table, type: :component do
 
       klass.define_method(:initialize) { |**options| super(name, **options) }
     end
-
-    before(:example) do
-      table.columns.each do |column|
-        allow(column)
-          .to receive(:inspect)
-          .and_return(%(#<Column key="#{column.key}">))
-      end
-    end
   end
 
   let(:columns) do
@@ -64,10 +56,8 @@ RSpec.describe View::Components::Table, type: :component do
   end
   let(:data) { [] }
   let(:constructor_options) do
-    mapped = columns.map { |col| described_class::ColumnDefinition.new(**col) }
-
     {
-      columns: mapped,
+      columns: columns,
       data:    data
     }
   end
@@ -93,115 +83,6 @@ RSpec.describe View::Components::Table, type: :component do
 
   def prettify(html)
     html.to_s.gsub(/\n\s+$/, "\n").gsub(/\n{2,}/, "\n")
-  end
-
-  describe '::ColumnDefinition' do
-    subject(:column) { described_class.new(key: key, **options) }
-
-    let(:described_class) { super()::ColumnDefinition }
-    let(:key)             { 'name' }
-    let(:options)         { {} }
-
-    describe '.new' do
-      let(:expected_keywords) do
-        %i[
-          default
-          icon
-          key
-          label
-          type
-          value
-        ]
-      end
-
-      it 'should define the constructor' do
-        expect(described_class)
-          .to be_constructible
-          .with(0).arguments
-          .and_keywords(*expected_keywords)
-      end
-    end
-
-    describe '#default' do
-      include_examples 'should define reader', :default, nil
-
-      context 'when initialized with default: a Proc' do
-        let(:default) { ->(item) { "#{item.first_name} #{item.last_name}" } }
-        let(:options) { super().merge(default: default) }
-
-        it { expect(column.default).to be default }
-      end
-
-      context 'when initialized with default: a String' do
-        let(:default) { 'N/A' }
-        let(:options) { super().merge(default: default) }
-
-        it { expect(column.default).to be default }
-      end
-    end
-
-    describe '#icon' do
-      include_examples 'should define reader', :icon, nil
-
-      context 'when initialized with icon: value' do
-        let(:icon)    { 'radiation' }
-        let(:options) { super().merge(icon: icon) }
-
-        it { expect(column.icon).to be == icon }
-      end
-    end
-
-    describe '#key' do
-      include_examples 'should define reader', :key, -> { key }
-    end
-
-    describe '#label' do
-      include_examples 'should define reader', :label, 'Name'
-
-      context 'when initialized with key: multi-word String' do
-        let(:key) { 'full_name' }
-
-        it { expect(column.label).to be == 'Full Name' }
-      end
-
-      context 'when initialized with label: value' do
-        let(:label)   { 'Custom Label' }
-        let(:options) { super().merge(label: label) }
-
-        it { expect(column.label).to be == label }
-      end
-    end
-
-    describe '#type' do
-      include_examples 'should define reader', :type, :text
-
-      context 'when initialized with type: value' do
-        let(:type)    { :link }
-        let(:options) { super().merge(type: type) }
-
-        it { expect(column.type).to be :link }
-      end
-    end
-
-    describe '#value' do
-      include_examples 'should define reader', :value, nil
-
-      context 'when initialized with value: a Proc' do
-        let(:value)   { ->(item) { "#{item.first_name} #{item.last_name}" } }
-        let(:options) { super().merge(value: value) }
-
-        it { expect(column.value).to be value }
-      end
-
-      context 'when initialized with value: a ViewComponent' do
-        let(:value)   { Spec::CustomComponent.new }
-        let(:options) { super().merge(value: value) }
-
-        example_class 'Spec::CustomComponent', ViewComponent::Base
-
-        it { expect(column.value).to be value }
-      end
-    end
   end
 
   describe '.new' do
@@ -301,7 +182,7 @@ RSpec.describe View::Components::Table, type: :component do
             <th>Role</th>
           </tr>
         </thead>
-          <mock name="body" cell_component="nil" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' data='[{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}, {"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}, {"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}]' empty_message="nil" row_component="nil"></mock>
+          <mock name="body" cell_component="nil" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name", :label=&gt;"Surname"}, {:key=&gt;"role"}]' data='[{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}, {"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}, {"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}]' empty_message="nil" row_component="nil"></mock>
         </table>
       HTML
     end
@@ -327,19 +208,19 @@ RSpec.describe View::Components::Table, type: :component do
         </thead>
           <tbody>
           <tr>
-          <mock name="cell" column='#&lt;Column key="first_name"&gt;' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="last_name"&gt;' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="role"&gt;' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"first_name"}' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"last_name", :label=&gt;"Surname"}' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"role"}' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
         </tr>
           <tr>
-          <mock name="cell" column='#&lt;Column key="first_name"&gt;' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="last_name"&gt;' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="role"&gt;' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"first_name"}' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"last_name", :label=&gt;"Surname"}' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"role"}' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
         </tr>
           <tr>
-          <mock name="cell" column='#&lt;Column key="first_name"&gt;' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
-          <mock name="cell" column='#&lt;Column key="last_name"&gt;' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
-          <mock name="cell" column='#&lt;Column key="role"&gt;' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="cell" column='{:key=&gt;"first_name"}' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="cell" column='{:key=&gt;"last_name", :label=&gt;"Surname"}' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="cell" column='{:key=&gt;"role"}' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
         </tr>
         </tbody>
         </table>
@@ -439,7 +320,7 @@ RSpec.describe View::Components::Table, type: :component do
     let(:snapshot) do
       <<~HTML
         <table class="table">
-          <mock name="header" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]'></mock>
+          <mock name="header" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name", :label=&gt;"Surname"}, {:key=&gt;"role"}]'></mock>
           <tbody>
           <tr>
           <td colspan="3">There are no matching items.</td>
@@ -469,9 +350,9 @@ RSpec.describe View::Components::Table, type: :component do
           </tr>
         </thead>
           <tbody>
-          <mock name="row" cell_component="View::Components::Table::Cell" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
-          <mock name="row" cell_component="View::Components::Table::Cell" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
-          <mock name="row" cell_component="View::Components::Table::Cell" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="row" cell_component="View::Components::Table::Cell" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name", :label=&gt;"Surname"}, {:key=&gt;"role"}]' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="row" cell_component="View::Components::Table::Cell" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name", :label=&gt;"Surname"}, {:key=&gt;"role"}]' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="row" cell_component="View::Components::Table::Cell" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name", :label=&gt;"Surname"}, {:key=&gt;"role"}]' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
         </tbody>
         </table>
       HTML

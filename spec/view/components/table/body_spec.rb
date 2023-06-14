@@ -36,12 +36,8 @@ RSpec.describe View::Components::Table::Body, type: :component do
   end
   let(:data) { [] }
   let(:constructor_options) do
-    mapped = columns.map do |col|
-      View::Components::Table::ColumnDefinition.new(**col)
-    end
-
     {
-      columns: mapped,
+      columns: columns,
       data:    data
     }
   end
@@ -139,19 +135,19 @@ RSpec.describe View::Components::Table::Body, type: :component do
       <<~HTML
         <tbody>
           <tr>
-          <mock name="cell" column='#&lt;Column key="first_name"&gt;' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="last_name"&gt;' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="role"&gt;' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"first_name"}' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"last_name"}' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"role"}' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
         </tr>
           <tr>
-          <mock name="cell" column='#&lt;Column key="first_name"&gt;' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="last_name"&gt;' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
-          <mock name="cell" column='#&lt;Column key="role"&gt;' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"first_name"}' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"last_name"}' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="cell" column='{:key=&gt;"role"}' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
         </tr>
           <tr>
-          <mock name="cell" column='#&lt;Column key="first_name"&gt;' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
-          <mock name="cell" column='#&lt;Column key="last_name"&gt;' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
-          <mock name="cell" column='#&lt;Column key="role"&gt;' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="cell" column='{:key=&gt;"first_name"}' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="cell" column='{:key=&gt;"last_name"}' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="cell" column='{:key=&gt;"role"}' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
         </tr>
         </tbody>
       HTML
@@ -160,14 +156,6 @@ RSpec.describe View::Components::Table::Body, type: :component do
     example_class 'Spec::CellComponent', View::Components::MockComponent \
     do |klass|
       klass.define_method(:initialize) { |**options| super('cell', **options) }
-    end
-
-    before(:example) do
-      body.columns.each do |column|
-        allow(column)
-          .to receive(:inspect)
-          .and_return(%(#<Column key="#{column.key}">))
-      end
     end
 
     it 'should match the snapshot' do
@@ -223,9 +211,9 @@ RSpec.describe View::Components::Table::Body, type: :component do
     let(:snapshot) do
       <<~HTML
         <tbody>
-          <mock name="row" cell_component="View::Components::Table::Cell" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' item='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
-          <mock name="row" cell_component="View::Components::Table::Cell" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' item='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
-          <mock name="row" cell_component="View::Components::Table::Cell" columns='[#&lt;Column key="first_name"&gt;, #&lt;Column key="last_name"&gt;, #&lt;Column key="role"&gt;]' item='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
+          <mock name="row" cell_component="View::Components::Table::Cell" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name"}, {:key=&gt;"role"}]' data='{"first_name"=&gt;"Alan", "last_name"=&gt;"Bradley", "role"=&gt;"user"}'></mock>
+          <mock name="row" cell_component="View::Components::Table::Cell" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name"}, {:key=&gt;"role"}]' data='{"first_name"=&gt;"Kevin", "last_name"=&gt;"Flynn", "role"=&gt;"user"}'></mock>
+          <mock name="row" cell_component="View::Components::Table::Cell" columns='[{:key=&gt;"first_name"}, {:key=&gt;"last_name"}, {:key=&gt;"role"}]' data='{"first_name"=&gt;"Ed", "last_name"=&gt;"Dillinger", "role"=&gt;"admin"}'></mock>
         </tbody>
       HTML
     end
@@ -233,14 +221,6 @@ RSpec.describe View::Components::Table::Body, type: :component do
     example_class 'Spec::RowComponent', View::Components::MockComponent \
     do |klass|
       klass.define_method(:initialize) { |**options| super('row', **options) }
-    end
-
-    before(:example) do
-      body.columns.each do |column|
-        allow(column)
-          .to receive(:inspect)
-          .and_return(%(#<Column key="#{column.key}">))
-      end
     end
 
     it 'should match the snapshot' do

@@ -5,18 +5,18 @@ require 'view/components/table'
 module View::Components
   # Component for rendering a table row.
   class Table::Row < ViewComponent::Base
-    # @param columns [Array<ColumnDefinition>] the columns used to render the
-    #   table.
-    # @param item [Hash{String=>Object}] the data object for the row.
+    # @param columns [Array<View::Components::DataField::FieldDefinition>] the
+    #   columns used to render the table.
+    # @param data [Hash{String=>Object}] the data object for the row.
     # @param cell_component [ViewComponent::Base] the component to render each
     #   table cell. Defaults to View::Components::Table::Cell.
     # @param options [Hash{Symbol=>Object}] additional options to pass to the
     #   rendered row.
-    def initialize(columns:, item:, cell_component: nil, **options)
+    def initialize(columns:, data:, cell_component: nil, **options)
       super()
 
       @columns        = columns
-      @item           = item
+      @data           = data
       @cell_component = cell_component || View::Components::Table::Cell
       @options        = options
     end
@@ -24,11 +24,12 @@ module View::Components
     # @return [ViewComponent::Base] the component to render each table cell.
     attr_reader :cell_component
 
-    # @return [Array<ColumnDefinition>] the columns used to render the table.
+    # @return [View::Components::DataField::FieldDefinition] the columns used to
+    #   render the table.
     attr_reader :columns
 
     # @return [Array<Hash{String=>Object}>] the table data to render.
-    attr_reader :item
+    attr_reader :data
 
     # @return [Hash{Symbol=>Object}] additional options to pass to the rendered
     #   cell.
@@ -37,7 +38,7 @@ module View::Components
     private
 
     def build_cell(column:)
-      cell_component.new(column: column, item: item, **options)
+      cell_component.new(column: column, data: data, **options)
     end
 
     def render_cell(column:)

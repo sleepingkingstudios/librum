@@ -3,8 +3,8 @@
 module View::Components
   # Component for rendering a table body.
   class Table::Body < ViewComponent::Base
-    # @param columns [Array<ColumnDefinition>] the columns used to render the
-    #   table.
+    # @param columns [Array<View::Components::DataField::FieldDefinition>] the
+    #   columns used to render the table.
     # @param data [Array<Hash{String=>Object}>] the table data to render.
     # @param empty_message [String, ViewComponent::Base] the message or
     #   component to display when the table has no data.
@@ -35,7 +35,8 @@ module View::Components
     # @return [ViewComponent::Base] the component to render each table cell.
     attr_reader :cell_component
 
-    # @return [Array<ColumnDefinition>] the columns used to render the table.
+    # @return [Array<View::Components::DataField::FieldDefinition>] the columns
+    #   used to render the table.
     attr_reader :columns
 
     # @return [Array<Hash{String=>Object}>] the table data to render.
@@ -66,7 +67,7 @@ module View::Components
       row_component.new(
         cell_component: cell_component,
         columns:        columns,
-        item:           item,
+        data:           item,
         **options
       )
     end

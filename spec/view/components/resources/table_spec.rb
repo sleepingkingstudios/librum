@@ -40,12 +40,8 @@ RSpec.describe View::Components::Resources::Table, type: :component do
   let(:data)     { [] }
   let(:resource) { Cuprum::Rails::Resource.new(resource_name: 'users') }
   let(:constructor_options) do
-    mapped = columns.map do |col|
-      View::Components::Table::ColumnDefinition.new(**col)
-    end
-
     {
-      columns:  mapped,
+      columns:  columns,
       data:     data,
       resource: resource
     }

@@ -5,8 +5,8 @@ module View::Components::Resources
   class Table < View::Components::Table
     extend Forwardable
 
-    # @param columns [Array<ColumnDefinition>] the columns used to render the
-    #   table.
+    # @param columns [Array<View::Components::DataField::FieldDefinition>] the
+    #   columns used to render the table.
     # @param data [Array<Hash{String=>Object}>] the table data to render.
     # @param resource [Cuprum::Rails::Resource] the controller resource.
     def initialize(columns:, data:, resource:)

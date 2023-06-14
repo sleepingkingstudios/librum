@@ -3,8 +3,8 @@
 module View::Components
   # Component for rendering an empty table body.
   class Table::EmptyMessage < ViewComponent::Base
-    # @param columns [Array<ColumnDefinition>] the columns used to render the
-    #   table.
+    # @param columns [Array<View::Components::DataField::FieldDefinition>] the
+    #   columns used to render the table.
     # @param empty_message [String] the message to display when the table has no
     #   data.
     def initialize(columns:, empty_message: nil, **)
@@ -14,7 +14,8 @@ module View::Components
       @empty_message = empty_message || 'There are no matching items.'
     end
 
-    # @return [Array<ColumnDefinition>] the columns used to render the table.
+    # @return [Array<View::Components::DataField::FieldDefinition>] the columns
+    #   used to render the table.
     attr_reader :columns
 
     # @return [String] the message to display when the table has no data.

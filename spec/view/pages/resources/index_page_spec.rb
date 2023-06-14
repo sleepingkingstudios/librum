@@ -89,12 +89,10 @@ RSpec.describe View::Pages::Resources::IndexPage, type: :component do
 
     example_class 'Spec::TableComponent', View::Components::Resources::Table \
     do |klass|
-      mapped = columns.map do |col|
-        View::Components::Table::ColumnDefinition.new(**col)
-      end
+      configured = columns
 
       klass.define_method(:initialize) do |data:, resource:|
-        super(columns: mapped, data: data, resource: resource)
+        super(columns: configured, data: data, resource: resource)
       end
     end
 

@@ -26,7 +26,7 @@ module View::Components::Core::Publishers
     # @param resource [Cuprum::Rails::Resource] the controller resource.
     def initialize(data:, resource:)
       super(
-        columns:  COLUMNS.map { |options| ColumnDefinition.new(**options) },
+        columns:  COLUMNS,
         data:     data,
         resource: resource
       )

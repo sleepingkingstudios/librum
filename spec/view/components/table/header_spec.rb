@@ -16,11 +16,7 @@ RSpec.describe View::Components::Table::Header, type: :component do
     ]
   end
   let(:constructor_options) do
-    mapped = columns.map do |col|
-      View::Components::Table::ColumnDefinition.new(**col)
-    end
-
-    { columns: mapped }
+    { columns: columns }
   end
   let(:rendered) { render_inline(header) }
   let(:snapshot) do
@@ -51,5 +47,17 @@ RSpec.describe View::Components::Table::Header, type: :component do
 
   it 'should match the snapshot' do
     expect(prettify(rendered)).to match_snapshot(snapshot)
+  end
+
+  describe 'with columns: field definitions' do
+    let(:columns) do
+      super().map do |column|
+        View::Components::DataField::FieldDefinition.new(**column)
+      end
+    end
+
+    it 'should match the snapshot' do
+      expect(prettify(rendered)).to match_snapshot(snapshot)
+    end
   end
 end
