@@ -2,11 +2,17 @@
 
 require 'rails_helper'
 
+require 'cuprum/rails/resource'
+
 RSpec.describe Authentication::Resource do
   subject(:resource) { described_class.new(**constructor_options) }
 
-  let(:constructor_options) do
-    { resource_name: 'rockets' }
+  let(:described_class)     { Spec::AuthenticatedResource }
+  let(:constructor_options) { { resource_name: 'rockets' } }
+
+  example_class 'Spec::AuthenticatedResource', Cuprum::Rails::Resource \
+  do |klass|
+    klass.include Authentication::Resource # rubocop:disable RSpec/DescribedClass
   end
 
   describe '.new' do

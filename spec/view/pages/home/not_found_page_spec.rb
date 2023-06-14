@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe View::Pages::Home::NotFound, type: :component do
+RSpec.describe View::Pages::Home::NotFoundPage, type: :component do
   subject(:page) { described_class.new(result) }
 
   let(:result)   { Cuprum::Result.new }

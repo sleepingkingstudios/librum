@@ -9,6 +9,6 @@ FactoryBot.define do
     end
 
     name { "Publisher #{publisher_index}" }
-    slug { "publisher-#{publisher_index}" }
+    slug { name.tr(' ', '_').underscore.tr('_', '-') }
   end
 end

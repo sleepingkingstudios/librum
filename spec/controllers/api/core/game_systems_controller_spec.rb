@@ -14,7 +14,7 @@ RSpec.describe Api::Core::GameSystemsController do
       %w[publisher_id name slug edition]
     end
 
-    it { expect(resource).to be_a Authentication::Resource }
+    it { expect(resource).to be_a Librum::Core::Resources::BaseResource }
 
     it { expect(resource.default_order).to be == %w[name edition] }
 

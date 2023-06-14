@@ -10,7 +10,7 @@ do
   include Librum::Core::RSpec::Contracts::RoutingContracts
 
   include_contract 'should route to api resource',
-    'authentication/user/password',
+    'api/authentication/user/password',
     controller: 'api/authentication/users/passwords',
     only:       %i[update],
     singular:   true

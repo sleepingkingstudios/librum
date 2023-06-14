@@ -2,15 +2,13 @@
 
 require 'set'
 
-require 'cuprum/rails/resource'
-
 module Authentication
-  # Value object representing an authenticated controller resource.
-  class Resource < Cuprum::Rails::Resource
+  # Methods for configuring controller authentication.
+  module Resource
     # @param skip_authentication [true, false, Array<String, Symbol>] The
     #   specified actions (or all actions, if set to true) will be set to permit
     #   unauthenticated requests.
-    # @param options [Hash<Symbol>] The default options for a resource.
+    # @param options [Hash<Symbol>] the default options for a resource.
     def initialize(skip_authentication: false, **options)
       super(**options)
 

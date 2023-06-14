@@ -4,7 +4,7 @@ module Api::Authentication::Users
   # API controller for managing Authentication::PasswordCredential.
   class PasswordsController < Librum::Core::ApiController
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         resource_class: ::Authentication::Credential,
         singular:       true
       )

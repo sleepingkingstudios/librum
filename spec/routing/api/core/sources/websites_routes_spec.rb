@@ -9,5 +9,5 @@ RSpec.describe "#{Api::Core::Sources::WebsitesController} routes",
 do
   include Librum::Core::RSpec::Contracts::RoutingContracts
 
-  include_contract 'should route to api resource', 'core/sources/websites'
+  include_contract 'should route to api resource', 'api/core/sources/websites'
 end

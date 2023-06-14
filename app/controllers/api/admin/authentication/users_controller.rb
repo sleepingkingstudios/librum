@@ -8,7 +8,7 @@ module Api::Admin::Authentication
   # API controller for managing Authentication::User entities.
   class UsersController < Librum::Core::ApiController
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         default_order:        :username,
         permitted_attributes: %w[
           email

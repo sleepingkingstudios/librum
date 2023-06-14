@@ -32,20 +32,15 @@ module Actions::Authentication::Middleware
         .call(request.native_session)
     end
 
-    def merge_result(result:, value:)
-      Cuprum::Result.new(
-        error:  result.error,
-        status: result.status,
-        value:  value
+    def merge_result(result:, session:)
+      metadata = result.respond_to?(:metadata) ? (result.metadata || {}) : {}
+
+      Cuprum::Rails::Result.new(
+        error:    result.error,
+        metadata: metadata.merge(session: session),
+        status:   result.status,
+        value:    result.value
       )
-    end
-
-    def merge_value(session:, value:)
-      return { '_session' => session } if value.nil?
-
-      return value unless value.is_a?(Hash)
-
-      value.merge('_session' => session)
     end
 
     def process(next_command, request:)
@@ -55,9 +50,8 @@ module Actions::Authentication::Middleware
       request =
         Authentication::Request.new(session: session, **request.properties)
       result  = next_command.call(request: request)
-      value   = merge_value(session: session, value: result.value)
 
-      merge_result(result: result, value: value)
+      merge_result(result: result, session: session)
     end
 
     def skip_authentication?(request)

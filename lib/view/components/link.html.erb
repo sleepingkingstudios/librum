@@ -1,0 +1,12 @@
+<a href="<%= url_with_protocol %>" target="<%= target %>">
+  <% if icon %>
+  <span class="icon-text">
+    <span class="icon">
+      <i class="fas fa-<%= icon %>"></i>
+    </span>
+    <span><%= label %></span>
+  </span>
+  <% else %>
+  <%= label %>
+  <% end %>
+</a>

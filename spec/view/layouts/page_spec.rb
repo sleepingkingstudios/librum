@@ -2,8 +2,6 @@
 
 require 'rails_helper'
 
-require 'support/components/mock_component'
-
 RSpec.describe View::Layouts::Page, type: :component do
   subject(:component) { described_class.new(**options).with_content(content) }
 
@@ -30,12 +28,12 @@ RSpec.describe View::Layouts::Page, type: :component do
 
   before(:example) do
     allow(View::Layouts::Page::Banner).to receive(:new) do |options|
-      Spec::Support::Components::MockComponent.new('Banner', **options)
+      View::Components::MockComponent.new('Banner', **options)
     end
 
     allow(View::Layouts::Page::Footer)
       .to receive(:new)
-      .and_return(Spec::Support::Components::MockComponent.new('Footer'))
+      .and_return(View::Components::MockComponent.new('Footer'))
   end
 
   describe '.new' do
@@ -84,7 +82,7 @@ RSpec.describe View::Layouts::Page, type: :component do
     before(:example) do
       allow(View::Layouts::Page::Alerts)
         .to receive(:new)
-        .and_return(Spec::Support::Components::MockComponent.new('Alerts'))
+        .and_return(View::Components::MockComponent.new('Alerts'))
     end
 
     it 'should match the snapshot' do
@@ -103,7 +101,7 @@ RSpec.describe View::Layouts::Page, type: :component do
           <mock name="Banner" navigation="[]"></mock>
           <section class="section primary-content is-flex-grow-1">
             <div class="container">
-              <mock name="Session" current_user='"Alan' bradley></mock>
+              <mock name="Session" current_user="Alan Bradley"></mock>
               Greetings, Starfighter!
             </div>
           </section>
@@ -114,7 +112,7 @@ RSpec.describe View::Layouts::Page, type: :component do
 
     before(:example) do
       allow(View::Layouts::Page::Session).to receive(:new) do |options|
-        Spec::Support::Components::MockComponent
+        View::Components::MockComponent
           .new('Session', current_user: options[:current_user].username)
       end
     end

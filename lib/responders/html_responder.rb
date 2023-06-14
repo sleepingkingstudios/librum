@@ -45,7 +45,7 @@ module Responders
     #
     # @return [Responses::Html::RenderComponentResponse] the response.
     def render_component(result, flash: {}, layout: nil, status: :ok) # rubocop:disable Metrics/MethodLength
-      component = build_view_component(result)
+      component = view_component_for(result)
 
       Responses::Html::RenderComponentResponse.new(
         component,
@@ -66,25 +66,31 @@ module Responders
 
     private
 
+    def assigns_from_metadata(result)
+      return {} unless result.respond_to?(:metadata)
+
+      result.metadata.stringify_keys
+    end
+
+    def assigns_from_value(result)
+      return {} unless result.value.is_a?(Hash)
+
+      result
+        .value
+        .each
+        .select { |key, _| key.to_s.start_with?('_') }
+        .to_h { |(key, assign)| [key.to_s.sub(/\A_/, ''), assign] }
+    end
+
     def build_view_component(result)
-      return result if result.is_a?(ViewComponent::Base)
-
-      return result.value if result.value.is_a?(ViewComponent::Base)
-
-      view_component_class.new(result)
+      view_component_class.new(result, resource: resource)
     end
 
     def extract_assigns(result)
       return {} unless result.respond_to?(:to_cuprum_result)
 
-      value = result.to_cuprum_result.value
-
-      return {} unless value.is_a?(Hash)
-
-      value
-        .each
-        .select { |key, _| key.to_s.start_with?('_') }
-        .to_h { |(key, assign)| [key.to_s.sub(/\A_/, ''), assign] }
+      assigns_from_metadata(result)
+        .merge(assigns_from_value(result))
     end
 
     def missing_page_component(result)
@@ -100,11 +106,19 @@ module Responders
       view_component_name.constantize
     end
 
+    def view_component_for(result)
+      return result if result.is_a?(ViewComponent::Base)
+
+      return result.value if result.value.is_a?(ViewComponent::Base)
+
+      build_view_component(result)
+    end
+
     def view_component_name
       action     = action_name.to_s.camelize
       scope      = controller_name.sub(/Controller\z/, '')
 
-      "View::Pages::#{scope}::#{action}"
+      "View::Pages::#{scope}::#{action}Page"
     end
   end
 end

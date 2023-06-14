@@ -8,7 +8,9 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
   end
 
   let(:repository) { Cuprum::Rails::Repository.new }
-  let(:resource)   { Authentication::Resource.new(resource_name: 'rockets') }
+  let(:resource) do
+    Librum::Core::Resources::BaseResource.new(resource_name: 'rockets')
+  end
 
   describe '.new' do
     it 'should define the constructor' do
@@ -54,7 +56,6 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
         )
       )
     end
-    let(:expected_value) { result.value.merge('_session' => session) }
 
     before(:example) do
       allow(Authentication::Strategies::SessionToken)
@@ -85,8 +86,9 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
 
     it 'should return the result with the session metadata' do
       expect(middleware.call(next_command, request: request))
-        .to be_a_passing_result
-        .with_value(expected_value)
+        .to be_a_passing_result(Cuprum::Rails::Result)
+        .with_value(result.value)
+        .and_metadata({ session: session })
     end
 
     context 'when the authentication fails' do # rubocop:disable RSpec/MultipleMemoizedHelpers
@@ -128,7 +130,7 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
 
     context 'when the resource does not authenticate the action' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:resource) do
-        Authentication::Resource.new(
+        Librum::Core::Resources::BaseResource.new(
           resource_name:       'rockets',
           skip_authentication: true
         )
@@ -159,25 +161,25 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
       let(:error) do
         Cuprum::Error.new(message: 'Something went wrong')
       end
-      let(:result)         { Cuprum::Result.new(error: error) }
-      let(:expected_value) { { '_session' => session } }
+      let(:result) { Cuprum::Result.new(error: error) }
 
       it 'should return the result with the session metadata' do
         expect(middleware.call(next_command, request: request))
           .to be_a_failing_result
           .with_error(error)
-          .and_value(expected_value)
+          .and_value(nil)
+          .and_metadata({ session: session })
       end
     end
 
     context 'when the result value is nil' do # rubocop:disable RSpec/MultipleMemoizedHelpers
-      let(:result)         { Cuprum::Result.new }
-      let(:expected_value) { { '_session' => session } }
+      let(:result) { Cuprum::Result.new }
 
       it 'should return the result with the session metadata' do
         expect(middleware.call(next_command, request: request))
           .to be_a_passing_result
-          .with_value(expected_value)
+          .with_value(nil)
+          .and_metadata({ session: session })
       end
     end
 
@@ -185,10 +187,28 @@ RSpec.describe Actions::Authentication::Middleware::AuthenticateSession do
       let(:value)  { Object.new.freeze }
       let(:result) { Cuprum::Result.new(value: value) }
 
-      it 'should return the result' do
+      it 'should return the result with the session metadata' do
         expect(middleware.call(next_command, request: request))
           .to be_a_passing_result
           .with_value(value)
+          .and_metadata({ session: session })
+      end
+    end
+
+    context 'when the result has metadata' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+      let(:metadata) { { secret: '12345' } }
+      let(:result) do
+        Cuprum::Rails::Result.new(value: { ok: true }, metadata: metadata)
+      end
+      let(:expected_metadata) do
+        metadata.merge(session: session)
+      end
+
+      it 'should return the result with the session metadata' do
+        expect(middleware.call(next_command, request: request))
+          .to be_a_passing_result
+          .with_value(result.value)
+          .and_metadata(expected_metadata)
       end
     end
   end

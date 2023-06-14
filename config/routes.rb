@@ -73,6 +73,10 @@ Rails.application.routes.draw do
     resource :session, only: %i[create destroy]
   end
 
+  namespace :core do
+    resources :publishers, only: %i[index show]
+  end
+
   get '/', to: 'home#show'
 
   get '*path',

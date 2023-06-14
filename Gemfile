@@ -24,7 +24,9 @@ gem 'bcrypt', '~> 3.1.18'
 gem 'jwt',    '~> 2.7'
 
 ### Commands
-gem 'cuprum', '~> 1.1'
+gem 'cuprum',
+  branch: 'main',
+  git:    'https://github.com/sleepingkingstudios/cuprum'
 gem 'cuprum-collections',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/cuprum-collections'

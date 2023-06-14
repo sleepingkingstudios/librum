@@ -4,7 +4,7 @@ module Api::Authentication
   # API controller for managing Authentication::User entities.
   class UsersController < Librum::Core::ApiController
     def self.resource
-      ::Authentication::Resource.new(
+      Librum::Core::Resources::BaseResource.new(
         resource_class: ::Authentication::User
       )
     end

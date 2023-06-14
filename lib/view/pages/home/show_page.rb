@@ -2,5 +2,5 @@
 
 module View::Pages::Home
   # Home page for the Librum application.
-  class Show < ViewComponent::Base; end
+  class ShowPage < ViewComponent::Base; end
 end
