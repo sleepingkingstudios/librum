@@ -10,7 +10,7 @@ RSpec.describe View::Components::Link, type: :component do
   let(:rendered) { render_inline(link) }
   let(:snapshot) do
     <<~HTML
-      <a href="path/to/resource" target="_self">
+      <a class="has-text-link" href="path/to/resource" target="_self">
         path/to/resource
       </a>
     HTML
@@ -37,7 +37,7 @@ RSpec.describe View::Components::Link, type: :component do
     let(:url) { '/path/to/resource' }
     let(:snapshot) do
       <<~HTML
-        <a href="/path/to/resource" target="_self">
+        <a class="has-text-link" href="/path/to/resource" target="_self">
           /path/to/resource
         </a>
       HTML
@@ -52,7 +52,7 @@ RSpec.describe View::Components::Link, type: :component do
     let(:url) { 'www.example.com' }
     let(:snapshot) do
       <<~HTML
-        <a href="https://www.example.com" target="_blank">
+        <a class="has-text-link" href="https://www.example.com" target="_blank">
           www.example.com
         </a>
       HTML
@@ -67,8 +67,38 @@ RSpec.describe View::Components::Link, type: :component do
     let(:url) { 'http://www.example.com' }
     let(:snapshot) do
       <<~HTML
-        <a href="http://www.example.com" target="_blank">
+        <a class="has-text-link" href="http://www.example.com" target="_blank">
           http://www.example.com
+        </a>
+      HTML
+    end
+
+    it 'should match the snapshot' do
+      expect(prettify(rendered)).to match_snapshot(snapshot)
+    end
+  end
+
+  describe 'with class_names: value' do
+    let(:options) { super().merge(class_names: %w[custom-class]) }
+    let(:snapshot) do
+      <<~HTML
+        <a class="custom-class has-text-link" href="path/to/resource" target="_self">
+          path/to/resource
+        </a>
+      HTML
+    end
+
+    it 'should match the snapshot' do
+      expect(prettify(rendered)).to match_snapshot(snapshot)
+    end
+  end
+
+  describe 'with color: value' do
+    let(:options) { super().merge(color: 'danger') }
+    let(:snapshot) do
+      <<~HTML
+        <a class="has-text-danger" href="path/to/resource" target="_self">
+          path/to/resource
         </a>
       HTML
     end
@@ -83,13 +113,13 @@ RSpec.describe View::Components::Link, type: :component do
     let(:options) { super().merge(icon: icon) }
     let(:snapshot) do
       <<~HTML
-        <a href="path/to/resource" target="_self">
+        <a class="has-text-link" href="path/to/resource" target="_self">
           <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-radiation"></i>
-            </span>
-            <span>path/to/resource</span>
+          <span class="icon">
+            <i class="fas fa-radiation"></i>
           </span>
+          <span>path/to/resource</span>
+        </span>
         </a>
       HTML
     end
@@ -104,7 +134,7 @@ RSpec.describe View::Components::Link, type: :component do
     let(:options) { super().merge(label: label) }
     let(:snapshot) do
       <<~HTML
-        <a href="path/to/resource" target="_self">
+        <a class="has-text-link" href="path/to/resource" target="_self">
           Resource Name
         </a>
       HTML

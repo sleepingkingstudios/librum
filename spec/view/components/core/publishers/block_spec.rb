@@ -76,13 +76,13 @@ RSpec.describe View::Components::Core::Publishers::Block, type: :component do
           <div class="block">
             <p class="has-text-weight-semibold mb-1">Website</p>
             <p>
-          <a href="https://www.example.com" target="_blank">
+          <a class="has-text-link" href="https://www.example.com" target="_blank">
           <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-link"></i>
-            </span>
-            <span>www.example.com</span>
+          <span class="icon">
+            <i class="fas fa-link"></i>
           </span>
+          <span>www.example.com</span>
+        </span>
         </a>
         </p>
           </div>

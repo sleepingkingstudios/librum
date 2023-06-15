@@ -41,13 +41,13 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
         <p class="has-text-centered">Rendered in View::Pages::Resources::ShowPage</p>
       </div>
       <p>
-        <a href="/rockets" target="_self">
+        <a class="has-text-link" href="/rockets" target="_self">
         <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-left-long"></i>
-          </span>
-          <span>Back to Rockets</span>
+        <span class="icon">
+          <i class="fas fa-left-long"></i>
         </span>
+        <span>Back to Rockets</span>
+      </span>
       </a>
       </p>
     HTML
@@ -87,13 +87,13 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
         <h1 class="title">Rockets</h1>
         <mock name="block" data="{}" resource="#&lt;ViewResource&gt;"></mock>
         <p>
-          <a href="/rockets" target="_self">
+          <a class="has-text-link" href="/rockets" target="_self">
           <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-left-long"></i>
-            </span>
-            <span>Back to Rockets</span>
+          <span class="icon">
+            <i class="fas fa-left-long"></i>
           </span>
+          <span>Back to Rockets</span>
+        </span>
         </a>
         </p>
       HTML
@@ -113,13 +113,13 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
           <h1 class="title">Imp IV</h1>
           <mock name="block" data='{"name"=&gt;"Imp IV"}' resource="#&lt;ViewResource&gt;"></mock>
           <p>
-            <a href="/rockets" target="_self">
+            <a class="has-text-link" href="/rockets" target="_self">
             <span class="icon-text">
-              <span class="icon">
-                <i class="fas fa-left-long"></i>
-              </span>
-              <span>Back to Rockets</span>
+            <span class="icon">
+              <i class="fas fa-left-long"></i>
             </span>
+            <span>Back to Rockets</span>
+          </span>
           </a>
           </p>
         HTML
@@ -139,13 +139,13 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
           <h1 class="title">Imp IV</h1>
           <mock name="block" data='{"name"=&gt;"Imp IV"}' resource="#&lt;ViewResource&gt;"></mock>
           <p>
-            <a href="/rockets" target="_self">
+            <a class="has-text-link" href="/rockets" target="_self">
             <span class="icon-text">
-              <span class="icon">
-                <i class="fas fa-left-long"></i>
-              </span>
-              <span>Back to Rockets</span>
+            <span class="icon">
+              <i class="fas fa-left-long"></i>
             </span>
+            <span>Back to Rockets</span>
+          </span>
           </a>
           </p>
         HTML

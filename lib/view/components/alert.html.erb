@@ -1,12 +1,3 @@
 <div class="<%= class_names %>">
-  <% if icon %>
-  <span class="icon-text">
-    <span class="icon">
-      <i class="fas fa-<%= icon %>"></i>
-    </span>
-    <span><%= message %></span>
-  </span>
-  <% else %>
-  <%= message %>
-  <% end %>
+  <%= render(View::Components::IconText.new(icon: icon, label: message)) %>
 </div>
