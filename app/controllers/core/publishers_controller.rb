@@ -9,6 +9,7 @@ module Core
   class PublishersController < ViewController
     def self.resource # rubocop:disable Metrics/MethodLength
       Librum::Core::Resources::ViewResource.new(
+        base_path:            '/core/publishers',
         default_order:        :name,
         permitted_attributes: %w[
           name
