@@ -6,12 +6,12 @@ module View::Layouts
     # @param alerts [Hash{String=>String}] the alerts to display.
     # @param current_user [Authentication::User, nil] the current authenticated
     #   user.
-    # @param navigation [Array, false] the configured navigation, or false if
+    # @param navigation [Hash, false] the configured navigation, or false if
     #   the navigation bar is hidden.
     def initialize(
       alerts:       nil,
       current_user: nil,
-      navigation:   [],
+      navigation:   false,
       **
     )
       super()
