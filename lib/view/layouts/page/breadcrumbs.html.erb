@@ -1,0 +1,7 @@
+<nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+  <ul>
+    <% breadcrumbs.each do |breadcrumb| %>
+    <%= render(View::Layouts::Page::Breadcrumb.new(breadcrumb: breadcrumb)) %>
+    <% end %>
+  </ul>
+</nav>

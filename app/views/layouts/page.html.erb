@@ -17,7 +17,8 @@
       render(
         View::Layouts::Page.new(
           alerts:       flash.each.to_h,
-          current_user: @session&.current_user
+          current_user: @session&.current_user,
+          **@result.metadata.fetch(:page, {})
         )
       ) do
     %>

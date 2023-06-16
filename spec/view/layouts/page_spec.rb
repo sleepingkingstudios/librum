@@ -13,7 +13,7 @@ RSpec.describe View::Layouts::Page, type: :component do
       expect(described_class)
         .to be_constructible
         .with(0).arguments
-        .and_keywords(:alerts, :current_user, :navigation)
+        .and_keywords(:alerts, :breadcrumbs, :current_user, :navigation)
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe View::Layouts::Page, type: :component do
               Greetings, Starfighter!
             </div>
           </section>
-          <mock name="Footer"></mock>
+          <mock name="Footer" breadcrumbs="false"></mock>
         </div>
       HTML
     end
@@ -42,9 +42,9 @@ RSpec.describe View::Layouts::Page, type: :component do
         View::Components::MockComponent.new('Banner', **options)
       end
 
-      allow(View::Layouts::Page::Footer)
-        .to receive(:new)
-        .and_return(View::Components::MockComponent.new('Footer'))
+      allow(View::Layouts::Page::Footer).to receive(:new) do |options|
+        View::Components::MockComponent.new('Footer', **options)
+      end
     end
 
     it 'should match the snapshot' do
@@ -72,7 +72,7 @@ RSpec.describe View::Layouts::Page, type: :component do
                 Greetings, Starfighter!
               </div>
             </section>
-            <mock name="Footer"></mock>
+            <mock name="Footer" breadcrumbs="false"></mock>
           </div>
         HTML
       end
@@ -81,6 +81,28 @@ RSpec.describe View::Layouts::Page, type: :component do
         allow(View::Layouts::Page::Alerts)
           .to receive(:new)
           .and_return(View::Components::MockComponent.new('Alerts'))
+      end
+
+      it 'should match the snapshot' do
+        expect(prettify(rendered)).to match_snapshot(snapshot)
+      end
+    end
+
+    describe 'with breadcrumbs: value' do
+      let(:breadcrumbs) { [{ label: 'Home', url: '/' }] }
+      let(:options)     { super().merge(breadcrumbs: breadcrumbs) }
+      let(:snapshot) do
+        <<~HTML
+          <div class="page is-flex is-flex-direction-column">
+            <mock name="Banner" navigation="false"></mock>
+            <section class="section primary-content is-flex-grow-1">
+              <div class="container">
+                Greetings, Starfighter!
+              </div>
+            </section>
+            <mock name="Footer" breadcrumbs='[{:label=&gt;"Home", :url=&gt;"/"}]'></mock>
+          </div>
+        HTML
       end
 
       it 'should match the snapshot' do
@@ -103,7 +125,7 @@ RSpec.describe View::Layouts::Page, type: :component do
                 Greetings, Starfighter!
               </div>
             </section>
-            <mock name="Footer"></mock>
+            <mock name="Footer" breadcrumbs="false"></mock>
           </div>
         HTML
       end
@@ -132,7 +154,7 @@ RSpec.describe View::Layouts::Page, type: :component do
                 Greetings, Starfighter!
               </div>
             </section>
-            <mock name="Footer"></mock>
+            <mock name="Footer" breadcrumbs="false"></mock>
           </div>
         HTML
       end

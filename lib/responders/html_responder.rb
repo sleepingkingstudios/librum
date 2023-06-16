@@ -89,7 +89,8 @@ module Responders
     def extract_assigns(result)
       return {} unless result.respond_to?(:to_cuprum_result)
 
-      assigns_from_metadata(result)
+      { 'result' => result }
+        .merge(assigns_from_metadata(result))
         .merge(assigns_from_value(result))
     end
 

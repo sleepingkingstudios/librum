@@ -51,7 +51,7 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.result).to be result }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.layout).to be nil }
 
@@ -64,7 +64,7 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component).to be_a component_class }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.layout).to be nil }
 
@@ -108,7 +108,7 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.result).to be result }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.layout).to be nil }
 
@@ -121,7 +121,7 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component).to be_a component_class }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.layout).to be nil }
 
@@ -161,7 +161,7 @@ RSpec.describe Responders::HtmlResponder do
 
     it { expect(response.component.result).to be result }
 
-    it { expect(response.assigns).to be == {} }
+    it { expect(response.assigns).to be == { 'result' => result } }
 
     it { expect(response.flash).to be == {} }
 
@@ -186,7 +186,7 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component.resource).to be resource }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.flash).to be == {} }
 
@@ -227,7 +227,7 @@ RSpec.describe Responders::HtmlResponder do
 
         it { expect(response.component.resource).to be resource }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.flash).to be == {} }
 
@@ -272,6 +272,7 @@ RSpec.describe Responders::HtmlResponder do
       let(:expected_assigns) do
         {
           'page'    => { title: 'The Locked Tomb Series' },
+          'result'  => result,
           'session' => { token: '12345' }
         }
       end
@@ -294,6 +295,7 @@ RSpec.describe Responders::HtmlResponder do
       let(:expected_assigns) do
         {
           'page'    => { title: 'The Locked Tomb Series' },
+          'result'  => result,
           'session' => { token: '12345' }
         }
       end
@@ -310,7 +312,7 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response.component.resource).to be resource }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.flash).to be == {} }
 
@@ -333,6 +335,7 @@ RSpec.describe Responders::HtmlResponder do
         let(:expected_assigns) do
           {
             'page'    => { title: 'The Locked Tomb Series' },
+            'result'  => result,
             'session' => { token: '12345' }
           }
         end
@@ -361,6 +364,7 @@ RSpec.describe Responders::HtmlResponder do
         let(:expected_assigns) do
           {
             'page'    => { title: 'The Locked Tomb Series' },
+            'result'  => result,
             'session' => { token: '12345' }
           }
         end
@@ -429,7 +433,7 @@ RSpec.describe Responders::HtmlResponder do
 
       it { expect(response).to be_a Responses::Html::RenderComponentResponse }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.component).to be component }
 

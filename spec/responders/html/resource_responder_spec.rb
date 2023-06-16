@@ -51,7 +51,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
       it { expect(response.component.result).to be result }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.layout).to be nil }
 
@@ -67,7 +67,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
         it { expect(response.component.resource).to be resource }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.flash).to be == {} }
 
@@ -86,7 +86,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
         it { expect(response.component.resource).to be resource }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.flash).to be == {} }
 
@@ -132,7 +132,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
       it { expect(response.component.result).to be result }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.layout).to be nil }
 
@@ -148,7 +148,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
         it { expect(response.component.resource).to be resource }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.flash).to be == {} }
 
@@ -167,7 +167,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
         it { expect(response.component.resource).to be resource }
 
-        it { expect(response.assigns).to be == {} }
+        it { expect(response.assigns).to be == { 'result' => result } }
 
         it { expect(response.flash).to be == {} }
 
@@ -209,7 +209,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
     it { expect(response.component.result).to be result }
 
-    it { expect(response.assigns).to be == {} }
+    it { expect(response.assigns).to be == { 'result' => result } }
 
     it { expect(response.flash).to be == {} }
 
@@ -227,7 +227,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
       it { expect(response.component.resource).to be resource }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.flash).to be == {} }
 
@@ -246,7 +246,7 @@ RSpec.describe Responders::Html::ResourceResponder do
 
       it { expect(response.component.resource).to be resource }
 
-      it { expect(response.assigns).to be == {} }
+      it { expect(response.assigns).to be == { 'result' => result } }
 
       it { expect(response.flash).to be == {} }
 
