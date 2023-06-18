@@ -6,7 +6,20 @@ require 'librum/core/resources/view_resource'
 
 module Core
   # View controller for managing Publisher entities.
-  class PublishersController < ViewController
+  class PublishersController < CoreController
+    def self.breadcrumbs
+      @breadcrumbs ||= [
+        {
+          label: 'Home',
+          url:   '/'
+        },
+        {
+          label: 'Publishers',
+          url:   '/core/publishers'
+        }
+      ]
+    end
+
     def self.resource # rubocop:disable Metrics/MethodLength
       Librum::Core::Resources::ViewResource.new(
         base_path:            '/core/publishers',
@@ -21,6 +34,11 @@ module Core
         table_component:      View::Components::Core::Publishers::Table
       )
     end
+
+    middleware Actions::View::Middleware::ResourceBreadcrumbs.new(
+      breadcrumbs: breadcrumbs,
+      resource:    resource
+    )
 
     responder :html, Responders::Html::ResourceResponder
 
