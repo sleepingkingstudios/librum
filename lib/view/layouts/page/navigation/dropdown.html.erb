@@ -1,0 +1,5 @@
+<div class="navbar-dropdown">
+  <% items.each do |item| %>
+  <%= render(View::Layouts::Page::Navigation::DropdownItem.new(item: item)) %>
+  <% end %>
+</div>

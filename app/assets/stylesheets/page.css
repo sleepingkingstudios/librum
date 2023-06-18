@@ -61,5 +61,6 @@ html, body, body > div.page {
 /* FOOTER */
 
 .page > footer.footer {
+  background-color: #fff;
   padding: 1.5rem 1rem 2rem;
 }

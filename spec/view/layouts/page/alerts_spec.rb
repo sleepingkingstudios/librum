@@ -19,11 +19,11 @@ RSpec.describe View::Layouts::Page::Alerts, type: :component do
     <<~HTML
       <div class="notification is-danger">
         <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-radiation"></i>
-          </span>
-          <span>Reactor temperature critical</span>
+        <span class="icon">
+          <i class="fas fa-radiation"></i>
         </span>
+        <span>Reactor temperature critical</span>
+      </span>
       </div>
       <div class="notification is-info">
         Initializing activation sequence

@@ -4,7 +4,7 @@
       <i class="fa-solid fa-user"></i>
     </span>
 
-    You are currently logged in as <%= current_user.username %>.
+    <span>You are currently logged in as <%= current_user.username %>.</span>
 
     <%=
       form_with url: authentication_session_path,

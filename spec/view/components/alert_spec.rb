@@ -56,11 +56,11 @@ RSpec.describe View::Components::Alert, type: :component do
       <<~HTML
         <div class="notification">
           <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-radiation"></i>
-            </span>
-            <span>Reactor temperature critical</span>
+          <span class="icon">
+            <i class="fas fa-radiation"></i>
           </span>
+          <span>Reactor temperature critical</span>
+        </span>
         </div>
       HTML
     end

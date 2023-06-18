@@ -17,7 +17,7 @@ RSpec.describe View::Layouts::Page::Session, type: :component do
             <i class="fa-solid fa-user"></i>
           </span>
 
-          You are currently logged in as Alan Bradley.
+          <span>You are currently logged in as Alan Bradley.</span>
 
           <form class="destroy_session_form" action="/authentication/session" accept-charset="UTF-8" method="post">
       <input type="hidden" name="_method" value="delete" autocomplete="off">

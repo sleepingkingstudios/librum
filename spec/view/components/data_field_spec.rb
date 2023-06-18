@@ -249,7 +249,7 @@ RSpec.describe View::Components::DataField, type: :component do
     let(:data)   { Struct.new(:url).new('example.com/users/alan-bradley') }
     let(:snapshot) do
       <<~HTML
-        <a href="https://example.com/users/alan-bradley" target="_blank">
+        <a class="has-text-link" href="https://example.com/users/alan-bradley" target="_blank">
           example.com/users/alan-bradley
         </a>
       HTML
@@ -263,13 +263,13 @@ RSpec.describe View::Components::DataField, type: :component do
       let(:field) { { key: 'url', type: :link, icon: 'globe' } }
       let(:snapshot) do
         <<~HTML
-          <a href="https://example.com/users/alan-bradley" target="_blank">
+          <a class="has-text-link" href="https://example.com/users/alan-bradley" target="_blank">
             <span class="icon-text">
-              <span class="icon">
-                <i class="fas fa-globe"></i>
-              </span>
-              <span>example.com/users/alan-bradley</span>
+            <span class="icon">
+              <i class="fas fa-globe"></i>
             </span>
+            <span>example.com/users/alan-bradley</span>
+          </span>
           </a>
         HTML
       end

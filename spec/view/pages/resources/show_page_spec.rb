@@ -40,6 +40,16 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
         <h2 class="title has-text-centered has-text-danger">Missing Component Block</h2>
         <p class="has-text-centered">Rendered in View::Pages::Resources::ShowPage</p>
       </div>
+      <p>
+        <a class="has-text-link" href="/rockets" target="_self">
+        <span class="icon-text">
+        <span class="icon">
+          <i class="fas fa-left-long"></i>
+        </span>
+        <span>Back to Rockets</span>
+      </span>
+      </a>
+      </p>
     HTML
   end
 
@@ -76,6 +86,16 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
       <<~HTML
         <h1 class="title">Rockets</h1>
         <mock name="block" data="{}" resource="#&lt;ViewResource&gt;"></mock>
+        <p>
+          <a class="has-text-link" href="/rockets" target="_self">
+          <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-left-long"></i>
+          </span>
+          <span>Back to Rockets</span>
+        </span>
+        </a>
+        </p>
       HTML
     end
 
@@ -92,6 +112,16 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
         <<~HTML
           <h1 class="title">Imp IV</h1>
           <mock name="block" data='{"name"=&gt;"Imp IV"}' resource="#&lt;ViewResource&gt;"></mock>
+          <p>
+            <a class="has-text-link" href="/rockets" target="_self">
+            <span class="icon-text">
+            <span class="icon">
+              <i class="fas fa-left-long"></i>
+            </span>
+            <span>Back to Rockets</span>
+          </span>
+          </a>
+          </p>
         HTML
       end
 
@@ -108,7 +138,70 @@ RSpec.describe View::Pages::Resources::ShowPage, type: :component do
         <<~HTML
           <h1 class="title">Imp IV</h1>
           <mock name="block" data='{"name"=&gt;"Imp IV"}' resource="#&lt;ViewResource&gt;"></mock>
+          <p>
+            <a class="has-text-link" href="/rockets" target="_self">
+            <span class="icon-text">
+            <span class="icon">
+              <i class="fas fa-left-long"></i>
+            </span>
+            <span>Back to Rockets</span>
+          </span>
+          </a>
+          </p>
         HTML
+      end
+
+      it 'should match the snapshot' do
+        expect(prettify(rendered)).to match_snapshot(snapshot)
+      end
+    end
+  end
+
+  describe 'with a singular resource' do
+    let(:resource) do
+      Cuprum::Rails::Resource.new(
+        resource_name: 'space_program',
+        singular:      true
+      )
+    end
+    let(:snapshot) do
+      <<~HTML
+        <h1 class="title">Space Program</h1>
+        <div class="box">
+          <p class="has-text-centered">
+            <span class="icon is-large has-text-danger">
+              <i class="fas fa-2x fa-bug"></i>
+            </span>
+          </p>
+          <h2 class="title has-text-centered has-text-danger">Missing Component Block</h2>
+          <p class="has-text-centered">Rendered in View::Pages::Resources::ShowPage</p>
+        </div>
+      HTML
+    end
+
+    it 'should match the snapshot' do
+      expect(prettify(rendered)).to match_snapshot(snapshot)
+    end
+
+    describe 'with a resource with block_component: value' do
+      include_context 'with mock component', 'block'
+
+      let(:resource) do
+        Librum::Core::Resources::ViewResource.new(
+          block_component: Spec::BlockComponent,
+          resource_name:   'space_program',
+          singular:        true
+        )
+      end
+      let(:snapshot) do
+        <<~HTML
+          <h1 class="title">Space Program</h1>
+          <mock name="block" data="{}" resource="#&lt;Resource&gt;"></mock>
+        HTML
+      end
+
+      before(:example) do
+        allow(resource).to receive(:inspect).and_return('#<Resource>')
       end
 
       it 'should match the snapshot' do

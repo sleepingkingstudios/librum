@@ -81,24 +81,24 @@ RSpec.describe View::Components::Core::Publishers::Table, type: :component do
           <tbody>
           <tr>
           <td>
-          <a href="/core/publishers/free-stars-gazette" target="_self">
+          <a class="has-text-link" href="/core/publishers/free-stars-gazette" target="_self">
           Free Stars Gazette
         </a>
         </td>
           <td>
-          <a href="https://www.example.com" target="_blank">
+          <a class="has-text-link" href="https://www.example.com" target="_blank">
           <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-link"></i>
-            </span>
-            <span>www.example.com</span>
+          <span class="icon">
+            <i class="fas fa-link"></i>
           </span>
+          <span>www.example.com</span>
+        </span>
         </a>
         </td>
         </tr>
           <tr>
           <td>
-          <a href="/core/publishers/summerlands-press" target="_self">
+          <a class="has-text-link" href="/core/publishers/summerlands-press" target="_self">
           Summerlands Press
         </a>
         </td>
@@ -108,7 +108,7 @@ RSpec.describe View::Components::Core::Publishers::Table, type: :component do
         </tr>
           <tr>
           <td>
-          <a href="/core/publishers/underhill-publishing" target="_self">
+          <a class="has-text-link" href="/core/publishers/underhill-publishing" target="_self">
           Underhill Publishing
         </a>
         </td>

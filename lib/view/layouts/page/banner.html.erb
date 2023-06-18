@@ -7,7 +7,7 @@
         <p class="subtitle">Tabletop Campaign Companion</p>
 
         <% if navigation %>
-        <%= render(::View::Layouts::Page::Navigation.new) %>
+        <%= render(::View::Layouts::Page::Navigation.new(config: navigation)) %>
         <% end %>
       </div>
 
