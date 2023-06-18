@@ -20,16 +20,7 @@ You must specify which groups of data files to load by passing options to `thor`
 
 ### Client
 
+- CSS Framework:
+  - [Bulma](https://bulma.io/documentation/)
 - Icons:
   - [FontAwesome Icons](https://fontawesome.com/search?m=free)
-- Querying:
-  - [RTK Query](https://redux-toolkit.js.org/tutorials/typescript)
-- Tailwind CSS:
-  - [Official Docs](https://tailwindcss.com/docs/installation)
-- TypeScript
-  - [React Cheat Sheet](https://github.com/typescript-cheatsheets/react)
-
-#### Testing
-
-- Queries:
-  - [Testing Library Queries](https://testing-library.com/docs/queries/about)

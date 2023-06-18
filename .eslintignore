@@ -1,6 +1,0 @@
-node_modules
-public
-jest.config.js
-src/server.js
-tailwind.config.js
-webpack.*.js
