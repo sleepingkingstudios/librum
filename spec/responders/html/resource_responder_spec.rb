@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require 'cuprum/collections'
+
 RSpec.describe Responders::Html::ResourceResponder do
   subject(:responder) { described_class.new(**constructor_options) }
 
@@ -15,7 +17,7 @@ RSpec.describe Responders::Html::ResourceResponder do
   let(:controller_name) { 'CustomController' }
   let(:member_action)   { false }
   let(:resource) do
-    Cuprum::Rails::Resource.new(resource_name: 'resource')
+    Cuprum::Rails::Resource.new(resource_name: 'rockets')
   end
   let(:constructor_options) do
     {
@@ -114,6 +116,36 @@ RSpec.describe Responders::Html::ResourceResponder do
       it { expect(response.layout).to be == 'login' }
 
       it { expect(response.status).to be :unauthorized }
+    end
+
+    describe 'with a failing result with a NotFound error' do
+      let(:error) do
+        Cuprum::Collections::Errors::NotFound.new(
+          attribute_name:  'slug',
+          attribute_value: 'imp-iv',
+          collection_name: 'rockets'
+        )
+      end
+      let(:result) { Cuprum::Result.new(error: error) }
+      let(:expected_flash) do
+        {
+          warning: {
+            icon:    'exclamation-triangle',
+            message: 'Rocket not found with key "imp-iv"'
+          }
+        }
+      end
+
+      it 'should return a redirect response' do
+        expect(response)
+          .to be_a Cuprum::Rails::Responses::Html::RedirectResponse
+      end
+
+      it { expect(response.flash).to be == expected_flash }
+
+      it { expect(response.path).to be == resource.routes.index_path }
+
+      it { expect(response.status).to be 302 } # rubocop:disable RSpec/Rails/HaveHttpStatus
     end
 
     describe 'with a passing result' do
