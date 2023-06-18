@@ -3,6 +3,19 @@
 module Responders::Html
   # Delegates missing pages to View::Pages::Resources.
   class ResourceResponder < Responders::HtmlResponder
+    match :failure, error: Cuprum::Collections::Errors::NotFound do |result|
+      message = Kernel.format(
+        '%<resource>s not found with key "%<value>s"',
+        resource: resource.singular_resource_name.titleize,
+        value:    result.error.attribute_value
+      )
+
+      redirect_to(
+        resource.routes.index_path,
+        flash: { warning: { icon: 'exclamation-triangle', message: message } }
+      )
+    end
+
     private
 
     def build_view_component(result)
