@@ -3,14 +3,13 @@
 require 'rails_helper'
 
 require 'librum/core/rspec/contracts/controller_contracts'
-
-require 'support/contracts/responder_contracts'
+require 'librum/core/rspec/contracts/responders/html_contracts'
 
 RSpec.describe Authentication::SessionsController, type: :controller do
   include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '::Responder' do
-    include Spec::Support::Contracts::ResponderContracts
+    include Librum::Core::RSpec::Contracts::Responders::HtmlContracts
 
     subject(:responder) do
       described_class::Responder.new(**constructor_options)
@@ -28,6 +27,8 @@ RSpec.describe Authentication::SessionsController, type: :controller do
     end
 
     describe '#call' do
+      let(:response) { responder.call(result) }
+
       it { expect(responder).to respond_to(:call).with(1).argument }
 
       describe 'with action: create' do
@@ -53,11 +54,13 @@ RSpec.describe Authentication::SessionsController, type: :controller do
 
           include_contract 'should render component',
             View::Pages::LoginPage,
-            flash:  -> { flash },
-            layout: 'login',
-            status: :unprocessable_entity do
-              it { expect(response.component.result).to be result }
-            end
+            assigns:     {},
+            flash:       -> { flash },
+            http_status: :unprocessable_entity,
+            layout:      'login' \
+          do
+            it { expect(response.component.result).to be result }
+          end
         end
       end
 

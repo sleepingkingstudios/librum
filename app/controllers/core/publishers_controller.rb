@@ -3,6 +3,7 @@
 require 'librum/core/actions/index'
 require 'librum/core/actions/show'
 require 'librum/core/resources/view_resource'
+require 'librum/core/responders/html/resource_responder'
 
 module Core
   # View controller for managing Publisher entities.
@@ -40,7 +41,7 @@ module Core
       resource:    resource
     )
 
-    responder :html, Responders::Html::ResourceResponder
+    responder :html, Librum::Core::Responders::Html::ResourceResponder
 
     action :index, Librum::Core::Actions::Index
 

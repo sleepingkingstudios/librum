@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require 'librum/core/responders/html/view_responder'
+
 module Authentication
   # Controller for managing authentication sessions.
   class SessionsController < ViewController
     # Responder class for authentication responses.
-    class Responder < Responders::HtmlResponder
+    class Responder < Librum::Core::Responders::Html::ViewResponder
       action :create do
         match :success do
           redirect_back

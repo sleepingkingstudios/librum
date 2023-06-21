@@ -65,7 +65,7 @@ RSpec.describe Core::PublishersController, type: :controller do
   describe '.responders' do
     include_contract 'should respond to format',
       :html,
-      using: Responders::Html::ResourceResponder
+      using: Librum::Core::Responders::Html::ResourceResponder
 
     include_contract 'should not respond to format', :json
   end

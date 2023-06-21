@@ -25,7 +25,7 @@ RSpec.describe ViewController, type: :controller do
   describe '.responders' do
     include_contract 'should respond to format',
       :html,
-      using: Responders::HtmlResponder
+      using: Librum::Core::Responders::Html::ViewResponder
 
     include_contract 'should not respond to format', :json
   end

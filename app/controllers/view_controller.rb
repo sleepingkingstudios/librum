@@ -2,6 +2,8 @@
 
 require 'cuprum/rails/controller'
 
+require 'librum/core/responders/html/view_responder'
+
 # Abstract base class for HTML controllers.
 class ViewController < ApplicationController
   include Cuprum::Rails::Controller
@@ -14,7 +16,7 @@ class ViewController < ApplicationController
 
   default_format :html
 
-  responder :html, Responders::HtmlResponder
+  responder :html, Librum::Core::Responders::Html::ViewResponder
 
   middleware Actions::Authentication::Middleware::AuthenticateSession
 
