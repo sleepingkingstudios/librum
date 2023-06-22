@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'librum/core/actions/view/middleware/page_navigation'
+
 # Abstract base class for HTML controllers for core resources.
-class CoreController < ViewController
+class CoreController < Librum::Core::ViewController
   def self.navigation
     @navigation ||= {
       icon:  'dice-d20',
@@ -15,7 +17,7 @@ class CoreController < ViewController
     }
   end
 
-  middleware Actions::View::Middleware::PageNavigation.new(
+  middleware Librum::Core::Actions::View::Middleware::PageNavigation.new(
     navigation: navigation
   )
 end

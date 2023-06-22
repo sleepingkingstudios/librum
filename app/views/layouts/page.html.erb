@@ -16,8 +16,7 @@
     <%=
       render(
         Librum::Core::View::Layouts::Page.new(
-          alerts:       flash.each.to_h,
-          current_user: @session&.current_user,
+          alerts: flash.each.to_h,
           **@result.metadata.fetch(:page, {})
         )
       ) do |component|

@@ -5,7 +5,7 @@ require 'librum/core/view/layouts/page'
 
 module Authentication
   # Controller for managing authentication sessions.
-  class SessionsController < ViewController
+  class SessionsController < Librum::Core::ViewController
     # Responder class for authentication responses.
     class Responder < Librum::Core::Responders::Html::ViewResponder
       action :create do

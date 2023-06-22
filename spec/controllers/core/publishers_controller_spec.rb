@@ -30,7 +30,7 @@ RSpec.describe Core::PublishersController, type: :controller do
 
   describe '.middleware' do
     include_contract 'should define middleware', lambda {
-      be_a(Actions::View::Middleware::ResourceBreadcrumbs)
+      be_a(Librum::Core::Actions::View::Middleware::ResourceBreadcrumbs)
         .and have_attributes(breadcrumbs: described_class.breadcrumbs)
     }
   end

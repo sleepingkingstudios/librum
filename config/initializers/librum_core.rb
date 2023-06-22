@@ -11,6 +11,11 @@ Librum::Core::Engine.instance_exec do
       Actions::Authentication::Middleware::AuthenticateRequest
     )
 
+    # Authenticate View requests.
+    Librum::Core::ViewController.middleware(
+      Actions::Authentication::Middleware::AuthenticateSession
+    )
+
     # Add authentication config to all controller resources.
     Librum::Core::Resources::BaseResource.include(Authentication::Resource)
 
