@@ -31,15 +31,7 @@ RSpec.describe View::Pages::Home::NotFoundPage, type: :component do
     HTML
   end
 
-  it 'should display the heading' do
-    expect(rendered).to have_text 'Not Found'
-  end
-
-  it 'should display the warning message' do
-    expect(rendered).to have_text 'This is not a place of honor.'
-  end
-
   it 'should match the snapshot' do
-    expect(rendered).to match_snapshot(snapshot)
+    expect(rendered.to_s).to match_snapshot(snapshot)
   end
 end

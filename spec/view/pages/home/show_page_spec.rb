@@ -18,10 +18,6 @@ RSpec.describe View::Pages::Home::ShowPage, type: :component do
     HTML
   end
 
-  it 'should display the heading' do
-    expect(rendered).to have_text 'Greetings, Starfighter!'
-  end
-
   it 'should match the snapshot' do
     expect(rendered).to match_snapshot(snapshot)
   end

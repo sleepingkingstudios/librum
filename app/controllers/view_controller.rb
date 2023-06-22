@@ -3,6 +3,7 @@
 require 'cuprum/rails/controller'
 
 require 'librum/core/responders/html/view_responder'
+require 'librum/core/view/layouts/page'
 
 # Abstract base class for HTML controllers.
 class ViewController < ApplicationController

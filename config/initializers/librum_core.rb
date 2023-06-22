@@ -2,6 +2,7 @@
 
 require 'librum/core/resources/base_resource'
 require 'librum/core/responders/html/view_responder'
+require 'librum/core/view/layouts/page'
 
 Librum::Core::Engine.instance_exec do
   config.after_initialize do

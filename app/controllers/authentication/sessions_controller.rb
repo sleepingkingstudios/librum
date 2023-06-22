@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'librum/core/responders/html/view_responder'
+require 'librum/core/view/layouts/page'
 
 module Authentication
   # Controller for managing authentication sessions.

@@ -8,7 +8,7 @@ RSpec.describe View::Pages::LoginPage, type: :component do
   let(:result)   { Cuprum::Result.new }
   let(:rendered) { render_inline(page) }
   let(:snapshot) do
-    <<~HTML
+    <<~HTML.strip
       <h1 class="title">Log In</h1>
       <form action="/authentication/session" accept-charset="UTF-8" method="post">
         <mock name="username" icon="user" errors="nil"></mock>
@@ -52,7 +52,7 @@ RSpec.describe View::Pages::LoginPage, type: :component do
     let(:error)  { Authentication::Errors::InvalidLogin.new(errors: errors) }
     let(:result) { Cuprum::Result.new(error: error) }
     let(:snapshot) do
-      <<~HTML
+      <<~HTML.strip
         <h1 class="title">Log In</h1>
         <form action="/authentication/session" accept-charset="UTF-8" method="post">
           <mock name="username" icon="user" errors="(Stannum::Errors)"></mock>
