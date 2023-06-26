@@ -10,7 +10,7 @@ RSpec.describe CoreController, type: :controller do
   describe '.middleware' do
     include_contract 'should define middleware',
       lambda {
-        be_a(Actions::View::Middleware::PageNavigation)
+        be_a(Librum::Core::Actions::View::Middleware::PageNavigation)
           .and have_attributes(navigation: described_class.navigation)
       }
   end

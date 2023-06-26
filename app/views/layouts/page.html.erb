@@ -15,13 +15,22 @@
   <body>
     <%=
       render(
-        View::Layouts::Page.new(
-          alerts:       flash.each.to_h,
-          current_user: @session&.current_user,
+        Librum::Core::View::Layouts::Page.new(
+          alerts: flash.each.to_h,
           **@result.metadata.fetch(:page, {})
         )
-      ) do
+      ) do |component|
     %>
+      <% component.with_before_content do %>
+        <%=
+          render(
+            View::Components::Authentication::CurrentSession.new(
+              session: @session
+            )
+          )
+        %>
+      <% end %>
+
       <%= yield %>
     <% end %>
   </body>

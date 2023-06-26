@@ -15,7 +15,7 @@
   <body>
     <%=
       render(
-        View::Layouts::Page.new(
+        Librum::Core::View::Layouts::Page.new(
           alerts:     flash.each.to_h,
           navigation: false
         )

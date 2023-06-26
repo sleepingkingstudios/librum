@@ -8,7 +8,7 @@ RSpec.describe HomeController, type: :controller do
   include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '.breadcrumbs' do
-    let(:expected) { [{ label: 'Home', url: '/' }] }
+    let(:expected) { [{ active: true, label: 'Home', url: '/' }] }
 
     it 'should define the class reader' do
       expect(described_class)
@@ -19,12 +19,12 @@ RSpec.describe HomeController, type: :controller do
 
   describe '.middleware' do
     include_contract 'should define middleware', lambda {
-      be_a(Actions::View::Middleware::PageBreadcrumbs)
+      be_a(Librum::Core::Actions::View::Middleware::PageBreadcrumbs)
         .and have_attributes(breadcrumbs: described_class.breadcrumbs)
     }
 
     include_contract 'should define middleware', lambda {
-      be_a(Actions::View::Middleware::PageNavigation)
+      be_a(Librum::Core::Actions::View::Middleware::PageNavigation)
         .and have_attributes(navigation: CoreController.navigation)
     }
   end
@@ -39,11 +39,11 @@ RSpec.describe HomeController, type: :controller do
 
   include_contract 'should define action',
     :not_found,
-    Actions::RenderView,
+    Librum::Core::Actions::View::RenderPage,
     member: false
 
   include_contract 'should define action',
     :show,
-    Actions::RenderView,
+    Librum::Core::Actions::View::RenderPage,
     member: false
 end

@@ -2,7 +2,9 @@
 
 require 'librum/core/actions/index'
 require 'librum/core/actions/show'
+require 'librum/core/actions/view/middleware/resource_breadcrumbs'
 require 'librum/core/resources/view_resource'
+require 'librum/core/responders/html/resource_responder'
 
 module Core
   # View controller for managing Publisher entities.
@@ -35,12 +37,12 @@ module Core
       )
     end
 
-    middleware Actions::View::Middleware::ResourceBreadcrumbs.new(
+    middleware Librum::Core::Actions::View::Middleware::ResourceBreadcrumbs.new(
       breadcrumbs: breadcrumbs,
       resource:    resource
     )
 
-    responder :html, Responders::Html::ResourceResponder
+    responder :html, Librum::Core::Responders::Html::ResourceResponder
 
     action :index, Librum::Core::Actions::Index
 

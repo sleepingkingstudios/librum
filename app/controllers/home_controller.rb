@@ -1,24 +1,28 @@
 # frozen_string_literal: true
 
+require 'librum/core/actions/view/middleware/page_breadcrumbs'
+require 'librum/core/actions/view/middleware/page_navigation'
+require 'librum/core/actions/view/render_page'
+
 # Basic controller for showing the Home page.
-class HomeController < ViewController
+class HomeController < Librum::Core::ViewController
   def self.breadcrumbs
-    @breadcrumbs ||= [{ label: 'Home', url: '/' }]
+    @breadcrumbs ||= [{ active: true, label: 'Home', url: '/' }]
   end
 
   def self.resource
     Librum::Core::Resources::BaseResource.new(resource_name: 'home')
   end
 
-  middleware Actions::View::Middleware::PageBreadcrumbs.new(
+  middleware Librum::Core::Actions::View::Middleware::PageBreadcrumbs.new(
     breadcrumbs: breadcrumbs
   )
 
-  middleware Actions::View::Middleware::PageNavigation.new(
+  middleware Librum::Core::Actions::View::Middleware::PageNavigation.new(
     navigation: CoreController.navigation
   )
 
-  action :not_found, Actions::RenderView, member: false
+  action :not_found, Librum::Core::Actions::View::RenderPage, member: false
 
-  action :show,      Actions::RenderView, member: false
+  action :show,      Librum::Core::Actions::View::RenderPage, member: false
 end

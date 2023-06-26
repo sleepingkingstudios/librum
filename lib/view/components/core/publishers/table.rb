@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
+require 'librum/core/view/components/link'
+require 'librum/core/view/components/resources/table'
+
 module View::Components::Core::Publishers
   # Component for rending a table of Publisher records.
-  class Table < View::Components::Resources::Table
+  class Table < Librum::Core::View::Components::Resources::Table
     COLUMNS = [
       {
         key:   'name',
         value: lambda { |item|
-          View::Components::Link.new(
+          Librum::Core::View::Components::Link.new(
             "/core/publishers/#{item.slug}",
             label: item.name
           )
