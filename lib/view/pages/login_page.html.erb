@@ -9,7 +9,7 @@
 <%= form_with url: authentication_session_path do |form| %>
   <%=
     render(
-      View::Components::FormField.new(
+      Librum::Core::View::Components::FormField.new(
         'username',
         icon:   'user',
         errors: form_errors
@@ -19,7 +19,7 @@
 
   <%=
     render(
-      View::Components::FormField.new(
+      Librum::Core::View::Components::FormField.new(
         'password',
         icon:   'key',
         errors: form_errors,
@@ -32,7 +32,7 @@
     <div class="control">
       <%=
         render(
-          View::Components::Button.new(
+          Librum::Core::View::Components::Button.new(
             color: 'primary',
             label: 'Log In',
             type:  'submit'

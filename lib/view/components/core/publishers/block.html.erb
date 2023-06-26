@@ -1,1 +1,5 @@
-<%= render(View::Components::DataList.new(data: data, fields: fields)) %>
+<%=
+  render(
+    Librum::Core::View::Components::DataList.new(data: data, fields: fields)
+  )
+%>

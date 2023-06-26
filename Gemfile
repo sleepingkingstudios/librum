@@ -12,7 +12,7 @@ gem 'rack-cors', '~> 2.0'
 
 ### Engines
 gem 'librum-core',
-  branch: 'feature/view-components',
+  branch: 'main',
   git:    'https://github.com/sleepingkingstudios/librum-core'
 
 ### Assets

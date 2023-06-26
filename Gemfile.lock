@@ -45,8 +45,8 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-core
-  revision: 3ff4860b9c3c8750a72450cbb021b6ea18abd7df
-  branch: feature/view-components
+  revision: 8fac6bff556469afb7a58fd79fca4d99ebceda1b
+  branch: main
   specs:
     librum-core (0.1.0)
       cuprum (~> 1.1)

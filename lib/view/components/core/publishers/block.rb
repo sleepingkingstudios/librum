@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'librum/core/view/components/data_list'
+
 module View::Components::Core::Publishers
   # Component for displaying a single publisher record.
   class Block < ViewComponent::Base
