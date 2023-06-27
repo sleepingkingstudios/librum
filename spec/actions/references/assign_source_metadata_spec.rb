@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Actions::Api::References::AssignSourceMetadata do
+RSpec.describe Actions::References::AssignSourceMetadata do
   subject(:action) { described_class.new(action_name, entity) }
 
   let(:action_name)     { :create }
@@ -10,7 +10,7 @@ RSpec.describe Actions::Api::References::AssignSourceMetadata do
   let(:described_class) { Spec::Action }
 
   example_class 'Spec::Action', Cuprum::Command do |klass|
-    klass.prepend(Actions::Api::References::AssignSourceMetadata) # rubocop:disable RSpec/DescribedClass
+    klass.prepend(Actions::References::AssignSourceMetadata) # rubocop:disable RSpec/DescribedClass
 
     klass.define_method(:initialize) do |action, entity = nil|
       @action = action
