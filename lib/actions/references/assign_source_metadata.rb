@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Actions::Api::References
+module Actions::References
   # Helper for assigning source metadata to a reference.
   module AssignSourceMetadata
     private
