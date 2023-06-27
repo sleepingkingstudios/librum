@@ -41,7 +41,7 @@ RSpec.describe Authentication::SessionsController, type: :controller do
         end
 
         describe 'with a failing result with an InvalidLogin error' do
-          let(:error)  { Authentication::Errors::InvalidLogin.new }
+          let(:error)  { Librum::Iam::Authentication::Errors::InvalidLogin.new }
           let(:result) { Cuprum::Result.new(error: error) }
           let(:flash) do
             {

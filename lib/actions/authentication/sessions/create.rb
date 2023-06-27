@@ -3,6 +3,11 @@
 require 'cuprum/rails/action'
 require 'stannum/contracts/hash_contract'
 
+require 'librum/iam/authentication/errors/invalid_login'
+require 'librum/iam/authentication/jwt/generate'
+require 'librum/iam/authentication/passwords/find'
+require 'librum/iam/session'
+
 module Actions::Authentication::Sessions
   # Action for creating an authentication session.
   class Create < Cuprum::Rails::Action
@@ -17,11 +22,11 @@ module Actions::Authentication::Sessions
     private
 
     def build_token(session)
-      Authentication::Jwt::Generate.new.call(session)
+      Librum::Iam::Authentication::Jwt::Generate.new.call(session)
     end
 
     def find_credential
-      Authentication::Passwords::Find
+      Librum::Iam::Authentication::Passwords::Find
         .new(repository: repository)
         .call(username: params['username'], password: params['password'])
     end
@@ -36,7 +41,7 @@ module Actions::Authentication::Sessions
       step { validate_parameters }
 
       credential = step { find_credential }
-      session    = Authentication::Session.new(credential: credential)
+      session    = Librum::Iam::Session.new(credential: credential)
       token      = step { build_token(session) }
 
       write_session(token)
@@ -49,7 +54,8 @@ module Actions::Authentication::Sessions
 
       return success(nil) if match
 
-      error = Authentication::Errors::InvalidLogin.new(errors: errors)
+      error =
+        Librum::Iam::Authentication::Errors::InvalidLogin.new(errors: errors)
 
       failure(error)
     end

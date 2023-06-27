@@ -9,6 +9,6 @@ RSpec.describe Librum::Core::ViewController do # rubocop:disable RSpec/FilePath
 
   describe '.middleware' do
     include_contract 'should define middleware',
-      Actions::Authentication::Middleware::AuthenticateSession
+      Librum::Iam::Authentication::Middleware::AuthenticateSession
   end
 end

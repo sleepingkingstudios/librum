@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require 'librum/iam/session'
+
 RSpec.describe View::Components::Authentication::CurrentSession, \
   type: :component \
 do
@@ -12,7 +14,7 @@ do
       FactoryBot.create(:authentication_user, username: 'Alan Bradley')
     end
     let(:credential) { FactoryBot.create(:generic_credential, user: user) }
-    let(:session)    { Authentication::Session.new(credential: credential) }
+    let(:session)    { Librum::Iam::Session.new(credential: credential) }
   end
 
   let(:session) { nil }

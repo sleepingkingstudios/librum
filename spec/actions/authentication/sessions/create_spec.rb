@@ -32,7 +32,7 @@ RSpec.describe Actions::Authentication::Sessions::Create do
 
   describe '#call' do
     let(:expected_error) do
-      Authentication::Errors::InvalidLogin.new
+      Librum::Iam::Authentication::Errors::InvalidLogin.new
     end
     let(:params) { {} }
     let(:native_session) do
@@ -64,7 +64,8 @@ RSpec.describe Actions::Authentication::Sessions::Create do
     describe 'with empty params' do
       let(:expected_errors) { contract.errors_for(params) }
       let(:expected_error) do
-        Authentication::Errors::InvalidLogin.new(errors: expected_errors)
+        Librum::Iam::Authentication::Errors::InvalidLogin
+          .new(errors: expected_errors)
       end
 
       it 'should return a failing result' do
@@ -84,7 +85,8 @@ RSpec.describe Actions::Authentication::Sessions::Create do
       let(:params) { { 'password' => 'password' } }
       let(:expected_errors) { contract.errors_for(params) }
       let(:expected_error) do
-        Authentication::Errors::InvalidLogin.new(errors: expected_errors)
+        Librum::Iam::Authentication::Errors::InvalidLogin
+          .new(errors: expected_errors)
       end
 
       it 'should return a failing result' do
@@ -104,7 +106,8 @@ RSpec.describe Actions::Authentication::Sessions::Create do
       let(:params) { { 'username' => 'Alan Bradley' } }
       let(:expected_errors) { contract.errors_for(params) }
       let(:expected_error) do
-        Authentication::Errors::InvalidLogin.new(errors: expected_errors)
+        Librum::Iam::Authentication::Errors::InvalidLogin
+          .new(errors: expected_errors)
       end
 
       it 'should return a failing result' do

@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require 'librum/iam/authentication/passwords/match'
+
 RSpec.describe Loader::Middleware::GeneratePassword do
   subject(:middleware) { described_class.new(repository: repository) }
 
@@ -65,11 +67,12 @@ RSpec.describe Loader::Middleware::GeneratePassword do
           .by(1)
       end
 
-      it 'should set the password' do
+      it 'should set the password' do # rubocop:disable RSpec/ExampleLength
         _, user    = middleware.call(next_command, attributes: attributes).value
         credential = user.credentials.last
         command    =
-          Authentication::Passwords::Match.new(credential.encrypted_password)
+          Librum::Iam::Authentication::Passwords::Match
+          .new(credential.encrypted_password)
 
         expect(command.call(password)).to be_a_passing_result
       end

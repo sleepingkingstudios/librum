@@ -45,7 +45,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-core
-  revision: 8fac6bff556469afb7a58fd79fca4d99ebceda1b
+  revision: 04f85c47315218184340ef189207314a4f7f010b
   branch: main
   specs:
     librum-core (0.1.0)
@@ -60,13 +60,14 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-iam
-  revision: 9f7517a586fb64e8f5f4227f63cbe3a0a5260164
+  revision: bc94b5bac4c77bbd86f6c98b2c7f7f44a21dc627
   branch: main
   specs:
     librum-iam (0.1.0)
       bcrypt (~> 3.1.19)
       cuprum (~> 1.1)
       cuprum-rails (~> 0.1)
+      jwt (~> 2.7)
       librum-core
       pg (~> 1.5)
       rails (~> 7.0.5)

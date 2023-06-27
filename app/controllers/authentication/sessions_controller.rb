@@ -2,6 +2,7 @@
 
 require 'librum/core/responders/html/view_responder'
 require 'librum/core/view/layouts/page'
+require 'librum/iam/authentication/errors/invalid_login'
 
 module Authentication
   # Controller for managing authentication sessions.
@@ -13,7 +14,8 @@ module Authentication
           redirect_back
         end
 
-        match :failure, error: ::Authentication::Errors::InvalidLogin \
+        match :failure,
+          error: Librum::Iam::Authentication::Errors::InvalidLogin \
         do |result|
           alert = {
             icon:    'user-xmark',

@@ -56,7 +56,9 @@ RSpec.describe View::Pages::LoginPage, type: :component do
           .tap { |err| err['username'].add('invalid', message: 'is invalid') }
           .tap { |err| err['password'].add('missing', message: 'is missing') }
       end
-      let(:error)  { Authentication::Errors::InvalidLogin.new(errors: errors) }
+      let(:error) do
+        Librum::Iam::Authentication::Errors::InvalidLogin.new(errors: errors)
+      end
       let(:result) { Cuprum::Result.new(error: error) }
       let(:snapshot) do
         <<~HTML

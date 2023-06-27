@@ -4,7 +4,7 @@ require 'rails_helper'
 
 require 'librum/core/rspec/contracts/model_contracts'
 
-RSpec.describe Librum::Iam::User, type: :model do
+RSpec.describe Librum::Iam::User, type: :model do # rubocop:disable RSpec/FilePath
   include Librum::Core::RSpec::Contracts::ModelContracts
 
   subject(:user) { described_class.new(attributes) }
