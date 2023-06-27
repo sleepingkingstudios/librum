@@ -10,8 +10,8 @@ module Authentication::Passwords
   class Update < Cuprum::Command
     # @param repository [Cuprum::Collections::Repository] the repository used to
     #   query the credential.
-    # @param user [Authentication::User] the user for whom the password
-    #   credential should be updated.
+    # @param user [Librum::Iam::User] the user for whom the password credential
+    #   should be updated.
     def initialize(repository:, user:)
       super()
 
@@ -23,7 +23,7 @@ module Authentication::Passwords
     #   credential.
     attr_reader :repository
 
-    # @return [Authentication::User] the user for whom the password credential
+    # @return [Librum::Iam::User] the user for whom the password credential
     #   should be updated.
     attr_reader :user
 
@@ -34,7 +34,7 @@ module Authentication::Passwords
         'active'             => true,
         'encrypted_password' => step { encrypt_password(password) },
         'expires_at'         => 1.year.from_now,
-        'type'               => Authentication::PasswordCredential.name,
+        'type'               => 'Librum::Iam::PasswordCredential',
         'user'               => user
       }
 
@@ -44,7 +44,7 @@ module Authentication::Passwords
     end
 
     def credentials_collection
-      repository['authentication/credentials']
+      repository.find_or_create(record_class: Librum::Iam::Credential)
     end
 
     def deactivate_credential(credential:)
@@ -77,7 +77,7 @@ module Authentication::Passwords
         .call(
           attributes: {
             active:  true,
-            type:    'Authentication::PasswordCredential',
+            type:    'Librum::Iam::PasswordCredential',
             user_id: user.id
           }
         )
@@ -102,7 +102,7 @@ module Authentication::Passwords
     def transaction(&block)
       result = nil
 
-      Authentication::Credential.transaction do
+      Librum::Iam::Credential.transaction do
         result = steps(&block)
 
         raise ActiveRecord::Rollback if result.failure?

@@ -5,9 +5,9 @@ require 'authentication'
 module Authentication
   # Encapsulates the current user(s) and the credential used to authenticate.
   class Session
-    # @param authenticated_user [Authentication::User] The user used to
+    # @param authenticated_user [Librum::Iam::User] The user used to
     #   authenticate to the system. Defaults to the authorized user.
-    # @param credential [Authentication::Credential] The credential used to
+    # @param credential [Librum::Iam::Credential] The credential used to
     #   authenticate to the system.
     # @param expires_at [ActiveSupport::TimeWithZone] The time the session
     #   expires. Defaults to one day from session creation. If the credential
@@ -27,16 +27,15 @@ module Authentication
       ].min
     end
 
-    # @return [Authentication::User] the user used to authenticate to the
-    #   system.
+    # @return [Librum::Iam::User] the user used to authenticate to the system.
     attr_reader :authenticated_user
 
-    # @return [Authentication::User] the user authorized to access the system.
+    # @return [Librum::Iam::User] the user authorized to access the system.
     attr_reader :authorized_user
     alias current_user authorized_user
 
-    # @return [Authentication::Credential] The credential used to authenticate
-    #   to the system.
+    # @return [Librum::Iam::Credential] The credential used to authenticate to
+    #   the system.
     attr_reader :credential
 
     # @return [ActiveSupport::TimeWithZone] the time the session expires.

@@ -7,8 +7,8 @@ RSpec.describe Authentication::Passwords::Update do
 
   let(:repository) do
     Cuprum::Rails::Repository.new.tap do |repository|
-      repository.find_or_create(record_class: Authentication::Credential)
-      repository.find_or_create(record_class: Authentication::User)
+      repository.find_or_create(record_class: Librum::Iam::Credential)
+      repository.find_or_create(record_class: Librum::Iam::User)
     end
   end
   let(:user) { FactoryBot.build(:authentication_user) }
@@ -129,14 +129,14 @@ RSpec.describe Authentication::Passwords::Update do
         expect do
           command.call(new_password: new_password, old_password: old_password)
         end
-          .to change(Authentication::PasswordCredential, :count)
+          .to change(Librum::Iam::PasswordCredential, :count)
           .by(1)
       end
 
       it 'should set the password credential attributes', :aggregate_failures do
         command.call(new_password: new_password, old_password: old_password)
 
-        credential = Authentication::PasswordCredential.order(:created_at).last
+        credential = Librum::Iam::PasswordCredential.order(:created_at).last
 
         expect(credential.active?).to be true
         expect(credential.user).to be == user
@@ -146,7 +146,7 @@ RSpec.describe Authentication::Passwords::Update do
       it 'should set the encrypted password' do
         command.call(new_password: new_password, old_password: old_password)
 
-        credential = Authentication::PasswordCredential.order(:created_at).last
+        credential = Librum::Iam::PasswordCredential.order(:created_at).last
         password   = BCrypt::Password.new(credential.encrypted_password)
 
         expect(password).to be == new_password
@@ -194,14 +194,14 @@ RSpec.describe Authentication::Passwords::Update do
         expect do
           command.call(new_password: new_password, old_password: old_password)
         end
-          .to change(Authentication::PasswordCredential, :count)
+          .to change(Librum::Iam::PasswordCredential, :count)
           .by(1)
       end
 
       it 'should set the password credential attributes', :aggregate_failures do
         command.call(new_password: new_password, old_password: old_password)
 
-        credential = Authentication::PasswordCredential.order(:created_at).last
+        credential = Librum::Iam::PasswordCredential.order(:created_at).last
 
         expect(credential.active?).to be true
         expect(credential.user).to be == user
@@ -211,7 +211,7 @@ RSpec.describe Authentication::Passwords::Update do
       it 'should set the encrypted password' do
         command.call(new_password: new_password, old_password: old_password)
 
-        credential = Authentication::PasswordCredential.order(:created_at).last
+        credential = Librum::Iam::PasswordCredential.order(:created_at).last
         password   = BCrypt::Password.new(credential.encrypted_password)
 
         expect(password).to be == new_password

@@ -3,7 +3,7 @@
 # A representation of a user's body of custom work.
 class Sources::Homebrew < Source
   ### Associations
-  belongs_to :user, class_name: 'Authentication::User'
+  belongs_to :user, class_name: 'Librum::Iam::User'
 
   ### Validations
   validates :game_setting_id, absence: true

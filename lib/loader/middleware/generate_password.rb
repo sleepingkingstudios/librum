@@ -15,7 +15,7 @@ module Loader::Middleware
         active:     true,
         data:       { 'encrypted_password' => encrypted_password },
         expires_at: 100.years.from_now,
-        type:       'Authentication::PasswordCredential',
+        type:       'Librum::Iam::PasswordCredential',
         user_id:    user.id
       }
 
@@ -23,7 +23,7 @@ module Loader::Middleware
     end
 
     def credentials_collection
-      repository.find_or_create(record_class: Authentication::Credential)
+      repository.find_or_create(record_class: Librum::Iam::Credential)
     end
 
     def encrypt_password(password)

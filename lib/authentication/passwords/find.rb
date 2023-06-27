@@ -21,7 +21,7 @@ module Authentication::Passwords
     private
 
     def credentials_collection
-      repository.find_or_create(record_class: Authentication::Credential)
+      repository.find_or_create(record_class: Librum::Iam::Credential)
     end
 
     def find_credential(user)
@@ -30,7 +30,7 @@ module Authentication::Passwords
         .call(
           attributes: {
             active:  true,
-            type:    'Authentication::PasswordCredential',
+            type:    'Librum::Iam::PasswordCredential',
             user_id: user.id
           }
         )
@@ -56,7 +56,7 @@ module Authentication::Passwords
     end
 
     def users_collection
-      repository.find_or_create(record_class: Authentication::User)
+      repository.find_or_create(record_class: Librum::Iam::User)
     end
 
     def validate_credential(credential:, password:)

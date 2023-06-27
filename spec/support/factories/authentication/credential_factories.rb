@@ -3,7 +3,7 @@
 require 'bcrypt'
 
 FactoryBot.define do
-  factory :authentication_credential, class: 'Authentication::Credential' do
+  factory :authentication_credential, class: 'Librum::Iam::Credential' do
     id { SecureRandom.uuid }
 
     data       { {} }
@@ -28,11 +28,11 @@ FactoryBot.define do
   end
 
   factory :generic_credential,
-    class:  'Authentication::GenericCredential',
+    class:  'Librum::Iam::GenericCredential',
     parent: :authentication_credential
 
   factory :password_credential,
-    class:  'Authentication::PasswordCredential',
+    class:  'Librum::Iam::PasswordCredential',
     parent: :authentication_credential \
   do
     transient do

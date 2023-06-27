@@ -5,7 +5,7 @@ module Loader
   module Configuration
     # The authentication record classes, for loading user fixtures.
     AUTHENTICATION_CLASSES = [
-      ::Authentication::User
+      ::Librum::Iam::User
     ].freeze
 
     # The core Librum record classes, required to load any system data.
