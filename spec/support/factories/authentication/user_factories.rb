@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :authentication_user, class: 'Authentication::User' do
+  factory :authentication_user, class: 'Librum::Iam::User' do
     id { SecureRandom.uuid }
 
     transient do
@@ -11,18 +11,18 @@ FactoryBot.define do
     email    { "user.#{user_index}@example.com" }
     username { "User #{user_index}" }
     slug     { "user-#{user_index}" }
-    role     { Authentication::User::Roles::USER }
+    role     { Librum::Iam::User::Roles::USER }
 
     trait :admin do
-      role { Authentication::User::Roles::ADMIN }
+      role { Librum::Iam::User::Roles::ADMIN }
     end
 
     trait :guest do
-      role { Authentication::User::Roles::GUEST }
+      role { Librum::Iam::User::Roles::GUEST }
     end
 
     trait :superadmin do
-      role { Authentication::User::Roles::SUPERADMIN }
+      role { Librum::Iam::User::Roles::SUPERADMIN }
     end
 
     trait :with_homebrew do

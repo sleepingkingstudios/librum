@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+require 'librum/iam/authentication/passwords/match'
+
 RSpec.describe Loader::Middleware::GeneratePassword do
   subject(:middleware) { described_class.new(repository: repository) }
 
@@ -19,7 +21,7 @@ RSpec.describe Loader::Middleware::GeneratePassword do
   describe '#call' do
     let(:next_command) do
       Cuprum::Command.new do |attributes:|
-        [:create, Authentication::User.create!(attributes)]
+        [:create, Librum::Iam::User.create!(attributes)]
       end
     end
     let(:attributes) do
@@ -27,14 +29,14 @@ RSpec.describe Loader::Middleware::GeneratePassword do
         email:    'user@example.com',
         slug:     'user',
         username: 'User',
-        role:     Authentication::User::Roles::USER
+        role:     Librum::Iam::User::Roles::USER
       }
     end
     let(:expected_attributes) { attributes }
     let(:expected_value) do
       [
         :create,
-        an_instance_of(Authentication::User).and(
+        an_instance_of(Librum::Iam::User).and(
           have_attributes(expected_attributes)
         )
       ]
@@ -61,15 +63,16 @@ RSpec.describe Loader::Middleware::GeneratePassword do
 
       it 'should create the password credential' do
         expect { middleware.call(next_command, attributes: attributes) }
-          .to change(Authentication::Credential, :count)
+          .to change(Librum::Iam::Credential, :count)
           .by(1)
       end
 
-      it 'should set the password' do
+      it 'should set the password' do # rubocop:disable RSpec/ExampleLength
         _, user    = middleware.call(next_command, attributes: attributes).value
         credential = user.credentials.last
         command    =
-          Authentication::Passwords::Match.new(credential.encrypted_password)
+          Librum::Iam::Authentication::Passwords::Match
+          .new(credential.encrypted_password)
 
         expect(command.call(password)).to be_a_passing_result
       end

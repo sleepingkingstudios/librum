@@ -1,6 +1,6 @@
 <h1 class="title">Log In</h1>
 
-<% if error.is_a?(Authentication::Errors::InvalidLogin) %>
+<% if error.is_a?(Librum::Iam::Authentication::Errors::InvalidLogin) %>
 <% form_errors = error.errors&.with_messages %>
 <% else %>
 <% form_errors = nil %>

@@ -3,21 +3,18 @@
 require 'librum/core/resources/base_resource'
 require 'librum/core/responders/html/view_responder'
 require 'librum/core/view/layouts/page'
+require 'librum/iam/authentication/middleware/authenticate_session'
+require 'librum/iam/resource'
 
 Librum::Core::Engine.instance_exec do
   config.after_initialize do
-    # Authenticate API requests.
-    Librum::Core::ApiController.middleware(
-      Actions::Authentication::Middleware::AuthenticateRequest
-    )
-
     # Authenticate View requests.
     Librum::Core::ViewController.middleware(
-      Actions::Authentication::Middleware::AuthenticateSession
+      Librum::Iam::Authentication::Middleware::AuthenticateSession
     )
 
     # Add authentication config to all controller resources.
-    Librum::Core::Resources::BaseResource.include(Authentication::Resource)
+    Librum::Core::Resources::BaseResource.include(Librum::Iam::Resource)
 
     # Render the login page after an authentication failure.
     Librum::Core::Responders::Html::ViewResponder.match :failure,

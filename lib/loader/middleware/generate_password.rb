@@ -3,6 +3,8 @@
 require 'cuprum/collections/commands/upsert'
 require 'cuprum/collections/loader'
 
+require 'librum/iam/authentication/passwords/generate'
+
 module Loader::Middleware
   # Middleware for generating a password credential for a user.
   class GeneratePassword <
@@ -15,7 +17,7 @@ module Loader::Middleware
         active:     true,
         data:       { 'encrypted_password' => encrypted_password },
         expires_at: 100.years.from_now,
-        type:       'Authentication::PasswordCredential',
+        type:       'Librum::Iam::PasswordCredential',
         user_id:    user.id
       }
 
@@ -23,11 +25,11 @@ module Loader::Middleware
     end
 
     def credentials_collection
-      repository.find_or_create(record_class: Authentication::Credential)
+      repository.find_or_create(record_class: Librum::Iam::Credential)
     end
 
     def encrypt_password(password)
-      Authentication::Passwords::Generate.new.call(password)
+      Librum::Iam::Authentication::Passwords::Generate.new.call(password)
     end
 
     def process(next_command, attributes:) # rubocop:disable Metrics/MethodLength

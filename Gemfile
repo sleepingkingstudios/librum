@@ -14,6 +14,9 @@ gem 'rack-cors', '~> 2.0'
 gem 'librum-core',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/librum-core'
+gem 'librum-iam',
+  branch: 'main',
+  git:    'https://github.com/sleepingkingstudios/librum-iam'
 
 ### Assets
 gem 'importmap-rails' # Use JavaScript with ESM import maps
