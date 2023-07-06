@@ -2,28 +2,31 @@
 
 require 'rails_helper'
 
+require 'cuprum/rails/rspec/contracts/responder_contracts'
+
 require 'librum/core/responders/html/view_responder'
 require 'librum/core/rspec/contracts/responders/html_contracts'
 
 RSpec.describe Librum::Core::Responders::Html::ViewResponder do
+  include Cuprum::Rails::RSpec::Contracts::ResponderContracts
   include Librum::Core::RSpec::Contracts::Responders::HtmlContracts
 
   subject(:responder) { described_class.new(**constructor_options) }
 
-  let(:action_name)     { :implement }
-  let(:controller_name) { 'CustomController' }
-  let(:member_action)   { false }
-  let(:resource) do
-    Cuprum::Rails::Resource.new(resource_name: 'rockets')
-  end
+  let(:action_name) { 'implement' }
+  let(:controller)  { CustomController.new }
+  let(:request)     { Cuprum::Rails::Request.new }
+  let(:resource)    { Cuprum::Rails::Resource.new(resource_name: 'rockets') }
   let(:constructor_options) do
     {
-      action_name:     action_name,
-      controller_name: controller_name,
-      member_action:   member_action,
-      resource:        resource
+      action_name: action_name,
+      controller:  controller,
+      request:     request
     }
   end
+
+  include_contract 'should implement the responder methods',
+    controller_name: 'CustomController'
 
   describe '#call' do
     let(:response) { responder.call(result) }

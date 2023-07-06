@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   namespace :authentication do
-    resource :session,
-      controller: '/librum/iam/view/sessions',
-      only:       %i[create destroy]
+    resource :session, only: %i[create destroy]
+    resource :user,    only: %i[show] do
+      get 'password', to: 'users/passwords#edit'
+
+      resource :password,
+        controller: 'users/passwords',
+        only:       %i[update]
+    end
   end
 
   namespace :core do
