@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/cuprum-rails
-  revision: 046dfb41967dad81ecb811e943f13fd9d1f2c9a1
+  revision: e357a6fa32d23aea57450a48f18d3d0f763f35e4
   branch: main
   specs:
     cuprum-rails (0.2.0.alpha)
@@ -45,7 +45,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-core
-  revision: 04f85c47315218184340ef189207314a4f7f010b
+  revision: f4a17b020864e4ce64910b968b30dd1927aebc8c
   branch: main
   specs:
     librum-core (0.1.0)
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-iam
-  revision: b30750f325347b1e2b713182f2b831770d0accd5
+  revision: 54c2a65090adafa23de9012289386b7362220628
   branch: main
   specs:
     librum-iam (0.1.0)

@@ -27,8 +27,8 @@ module View::Components::Core::Publishers
     # @return [Publisher] the publisher to display.
     attr_reader :data
 
-    # @return [Array<View::Components::DataField::FieldDefinition>] the
-    #   configuration objects for rendering the publisher.
+    # @return [Array<DataField::FieldDefinition>] the configuration objects for
+    #   rendering the publisher.
     def fields
       FIELDS
     end

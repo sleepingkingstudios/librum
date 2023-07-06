@@ -36,7 +36,7 @@ RSpec.describe Librum::Core::Responders::Html::ViewResponder do
       let(:result) { Cuprum::Result.new(error: error) }
 
       include_contract 'should render page',
-        View::Pages::LoginPage,
+        Librum::Iam::View::Pages::LoginPage,
         assigns:     {},
         http_status: :unauthorized,
         layout:      'login',

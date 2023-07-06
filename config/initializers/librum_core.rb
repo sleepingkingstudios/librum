@@ -5,6 +5,7 @@ require 'librum/core/responders/html/view_responder'
 require 'librum/core/view/layouts/page'
 require 'librum/iam/authentication/middleware/authenticate_session'
 require 'librum/iam/resource'
+require 'librum/iam/view/pages/login_page'
 
 Librum::Core::Engine.instance_exec do
   config.after_initialize do
@@ -21,7 +22,7 @@ Librum::Core::Engine.instance_exec do
       error: Librum::Core::Errors::AuthenticationError \
     do |result|
       render_component(
-        View::Pages::LoginPage.new(result),
+        Librum::Iam::View::Pages::LoginPage.new(result),
         layout: 'login',
         status: :unauthorized
       )
