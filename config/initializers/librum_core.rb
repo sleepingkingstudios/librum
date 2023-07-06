@@ -2,7 +2,6 @@
 
 require 'librum/core/resources/base_resource'
 require 'librum/core/responders/html/view_responder'
-require 'librum/core/view/layouts/page'
 require 'librum/iam/authentication/middleware/authenticate_session'
 require 'librum/iam/resource'
 require 'librum/iam/view/pages/login_page'

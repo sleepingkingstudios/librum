@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-iam
-  revision: deb4179cab61d855d9877f5a1e33dda0faab8abb
+  revision: 599324809d2cfde5335a21fbdb1df2b8e3d6bcb8
   branch: main
   specs:
     librum-iam (0.1.0)

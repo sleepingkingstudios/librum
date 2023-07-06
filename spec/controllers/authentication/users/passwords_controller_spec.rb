@@ -105,6 +105,10 @@ RSpec.describe Authentication::Users::PasswordsController, type: :controller do
         be_a(Librum::Core::Actions::View::Middleware::PageNavigation)
           .and have_attributes(navigation: CoreController.navigation)
       }
+
+    include_contract 'should define middleware',
+      Librum::Iam::Authentication::Middleware::RegenerateSession,
+      only: %i[update]
   end
 
   describe '.resource' do

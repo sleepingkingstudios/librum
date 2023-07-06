@@ -2,6 +2,7 @@
 
 require 'librum/core/actions/view/middleware/page_breadcrumbs'
 require 'librum/core/actions/view/middleware/page_navigation'
+require 'librum/iam/authentication/middleware/regenerate_session'
 
 module Authentication::Users
   # Controller for managing the current user's password.
@@ -63,5 +64,8 @@ module Authentication::Users
       breadcrumbs: breadcrumbs,
       resource:    resource
     )
+
+    middleware Librum::Iam::Authentication::Middleware::RegenerateSession,
+      only: %i[update]
   end
 end
