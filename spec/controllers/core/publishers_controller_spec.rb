@@ -56,6 +56,11 @@ RSpec.describe Core::PublishersController, type: :controller do
 
     it { expect(resource.resource_name).to be == 'publishers' }
 
+    it 'should define the block component' do
+      expect(resource.block_component)
+        .to be View::Components::Core::Publishers::Block
+    end
+
     it 'should define the table component' do
       expect(resource.table_component)
         .to be View::Components::Core::Publishers::Table

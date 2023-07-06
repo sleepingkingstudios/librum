@@ -21,29 +21,35 @@ RSpec.describe View::Components::Core::Publishers::Block, type: :component do
     let(:rendered) { render_inline(block) }
     let(:snapshot) do
       <<~HTML
-        <div class="content">
-          <div class="block">
-            <p class="has-text-weight-semibold mb-1">Name</p>
+        <div class="block content">
+          <div class="columns mb-0">
+            <div class="column is-2 has-text-weight-semibold mb-1">
+              Name
+            </div>
 
-            <p>
+            <div class="column">
               Custom Publisher
-            </p>
+            </div>
           </div>
 
-          <div class="block">
-            <p class="has-text-weight-semibold mb-1">Slug</p>
+          <div class="columns mb-0">
+            <div class="column is-2 has-text-weight-semibold mb-1">
+              Slug
+            </div>
 
-            <p>
+            <div class="column">
               custom-publisher
-            </p>
+            </div>
           </div>
 
-          <div class="block">
-            <p class="has-text-weight-semibold mb-1">Website</p>
+          <div class="columns mb-0">
+            <div class="column is-2 has-text-weight-semibold mb-1">
+              Website
+            </div>
 
-            <p>
+            <div class="column">
               —
-            </p>
+            </div>
           </div>
         </div>
       HTML
@@ -61,27 +67,33 @@ RSpec.describe View::Components::Core::Publishers::Block, type: :component do
       end
       let(:snapshot) do
         <<~HTML
-          <div class="content">
-            <div class="block">
-              <p class="has-text-weight-semibold mb-1">Name</p>
+          <div class="block content">
+            <div class="columns mb-0">
+              <div class="column is-2 has-text-weight-semibold mb-1">
+                Name
+              </div>
 
-              <p>
+              <div class="column">
                 Custom Publisher
-              </p>
+              </div>
             </div>
 
-            <div class="block">
-              <p class="has-text-weight-semibold mb-1">Slug</p>
+            <div class="columns mb-0">
+              <div class="column is-2 has-text-weight-semibold mb-1">
+                Slug
+              </div>
 
-              <p>
+              <div class="column">
                 custom-publisher
-              </p>
+              </div>
             </div>
 
-            <div class="block">
-              <p class="has-text-weight-semibold mb-1">Website</p>
+            <div class="columns mb-0">
+              <div class="column is-2 has-text-weight-semibold mb-1">
+                Website
+              </div>
 
-              <p>
+              <div class="column">
                 <a class="has-text-link" href="https://www.example.com" target="_blank">
                   <span class="icon-text">
                     <span class="icon">
@@ -91,7 +103,7 @@ RSpec.describe View::Components::Core::Publishers::Block, type: :component do
                     <span>www.example.com</span>
                   </span>
                 </a>
-              </p>
+              </div>
             </div>
           </div>
         HTML

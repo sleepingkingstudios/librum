@@ -13,6 +13,8 @@
   </head>
 
   <body>
+    <% require 'librum/iam/view/components/authentication/current_session' %>
+
     <%=
       render(
         Librum::Core::View::Layouts::Page.new(
@@ -24,7 +26,7 @@
       <% component.with_before_content do %>
         <%=
           render(
-            View::Components::Authentication::CurrentSession.new(
+            Librum::Iam::View::Components::Authentication::CurrentSession.new(
               session: @session
             )
           )

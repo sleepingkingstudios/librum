@@ -23,18 +23,19 @@ module Core
     end
 
     def self.resource # rubocop:disable Metrics/MethodLength
-      Librum::Core::Resources::ViewResource.new(
-        base_path:            '/core/publishers',
-        default_order:        :name,
-        permitted_attributes: %w[
-          name
-          slug
-          website
-        ],
-        resource_class:       ::Publisher,
-        block_component:      View::Components::Core::Publishers::Block,
-        table_component:      View::Components::Core::Publishers::Table
-      )
+      @resource ||=
+        Librum::Core::Resources::ViewResource.new(
+          base_path:            '/core/publishers',
+          default_order:        :name,
+          permitted_attributes: %w[
+            name
+            slug
+            website
+          ],
+          resource_class:       ::Publisher,
+          block_component:      View::Components::Core::Publishers::Block,
+          table_component:      View::Components::Core::Publishers::Table
+        )
     end
 
     middleware Librum::Core::Actions::View::Middleware::ResourceBreadcrumbs.new(

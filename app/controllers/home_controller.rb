@@ -11,7 +11,8 @@ class HomeController < Librum::Core::ViewController
   end
 
   def self.resource
-    Librum::Core::Resources::BaseResource.new(resource_name: 'home')
+    @resource ||=
+      Librum::Core::Resources::BaseResource.new(resource_name: 'home')
   end
 
   middleware Librum::Core::Actions::View::Middleware::PageBreadcrumbs.new(

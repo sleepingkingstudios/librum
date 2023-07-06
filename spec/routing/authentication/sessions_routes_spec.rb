@@ -2,10 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe "#{Librum::Iam::View::SessionsController} routes",
-  type: :routing \
-do
-  let(:controller) { 'librum/iam/view/sessions' }
+RSpec.describe "#{Authentication::SessionsController} routes", type: :routing do
+  let(:controller) { 'authentication/sessions' }
 
   describe 'DELETE /authentication/session' do
     it 'should route to Authentication::SessionsController#create' do
