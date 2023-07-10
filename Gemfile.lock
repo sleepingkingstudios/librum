@@ -7,23 +7,6 @@ GIT
       rake (>= 10.4, < 14.0)
 
 GIT
-  remote: https://github.com/sleepingkingstudios/cuprum
-  revision: c1347d641297c7251cd09c7ad1cc3d74c8874336
-  branch: main
-  specs:
-    cuprum (1.2.0.rc.0)
-      sleeping_king_studios-tools (~> 1.0)
-
-GIT
-  remote: https://github.com/sleepingkingstudios/cuprum-collections
-  revision: 0f89851aa9dc1d0eba8ce065809f50188d5d8ae3
-  branch: main
-  specs:
-    cuprum-collections (0.3.0)
-      cuprum (~> 1.1)
-      stannum (~> 0.3)
-
-GIT
   remote: https://github.com/sleepingkingstudios/cuprum-collections-loader
   revision: fa3dc75cdf1ec98bea65564d84ed327820a55b37
   branch: main
@@ -158,6 +141,11 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    cuprum (1.2.0)
+      sleeping_king_studios-tools (~> 1.0)
+    cuprum-collections (0.3.0)
+      cuprum (~> 1.1)
+      stannum (~> 0.3)
     date (3.3.3)
     debug (1.4.0)
       irb (>= 1.3.6)
@@ -358,8 +346,8 @@ DEPENDENCIES
   bcrypt (~> 3.1.18)
   byebug
   capybara (~> 3.39)
-  cuprum!
-  cuprum-collections!
+  cuprum (~> 1.2)
+  cuprum-collections (~> 0.3)
   cuprum-collections-loader!
   cuprum-rails!
   debug
