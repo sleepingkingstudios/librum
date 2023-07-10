@@ -29,5 +29,8 @@ module Librum
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Configure autoload path.s
+    config.autoload_paths << "#{root}/lib"
   end
 end
