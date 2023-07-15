@@ -28,6 +28,8 @@ rescue ActiveRecord::PendingMigrationError => e
   # :nocov:
 end
 
+Librum::Tabletop::RSpec::Factories.define_factories
+
 RSpec.configure do |config|
   config.include Librum::Core::RSpec::ComponentHelpers, type: :component
 

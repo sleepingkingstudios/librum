@@ -7,6 +7,6 @@ Librum::Iam::Engine.instance_exec do
 
   config.to_prepare do
     # Add #homebrew_source association to User model.
-    Librum::Iam::User.include(HomebrewUser)
+    Librum::Iam::User.include(Librum::Tabletop::HomebrewUser)
   end
 end

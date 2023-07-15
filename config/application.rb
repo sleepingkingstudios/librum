@@ -30,7 +30,8 @@ module Librum
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Configure autoload path.s
+    # Configure autoload paths.
     config.autoload_paths << "#{root}/lib"
+    config.autoload_paths << "#{Librum::Tabletop::Engine.root}/lib"
   end
 end

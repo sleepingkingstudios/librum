@@ -110,7 +110,7 @@ RSpec.describe Actions::References::AssignSourceMetadata do
         FactoryBot.create(:website, :with_game_system, :with_publisher)
       end
       let(:entity) do
-        FactoryBot.create(:generic_reference, source: existing_source)
+        FactoryBot.create(:'dnd5e/condition', source: existing_source)
       end
 
       describe 'with an empty attributes Hash' do

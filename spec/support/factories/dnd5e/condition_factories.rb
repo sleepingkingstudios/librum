@@ -7,7 +7,7 @@ FactoryBot.define do
     end
 
     name { "Condition #{condition_index}" }
-    slug { "Condition-#{condition_index}" }
+    slug { name.tr(' ', '_').underscore.tr('_', '-') }
 
     short_description do
       'A short description of the condition.'

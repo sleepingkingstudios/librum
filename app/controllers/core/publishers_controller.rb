@@ -32,7 +32,7 @@ module Core
             slug
             website
           ],
-          resource_class:       ::Publisher,
+          resource_class:       Librum::Tabletop::Publisher,
           block_component:      View::Components::Core::Publishers::Block,
           table_component:      View::Components::Core::Publishers::Table
         )

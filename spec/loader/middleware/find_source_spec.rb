@@ -34,11 +34,15 @@ RSpec.describe Loader::Middleware::FindSource do
 
   describe '#call' do
     shared_context 'when the game systems collection exists' do
-      before(:example) { repository.find_or_create(record_class: GameSystem) }
+      before(:example) do
+        repository.find_or_create(record_class: Librum::Tabletop::GameSystem)
+      end
     end
 
     shared_context 'when the sources collection exists' do
-      before(:example) { repository.find_or_create(record_class: Source) }
+      before(:example) do
+        repository.find_or_create(record_class: Librum::Tabletop::Source)
+      end
     end
 
     shared_context 'with a valid game system' do
@@ -60,7 +64,7 @@ RSpec.describe Loader::Middleware::FindSource do
       context 'when the game systems collection does not exist' do
         let(:expected_error) do
           Cuprum::Collections::Loader::Errors::CollectionError.new(
-            qualified_name: 'game_systems',
+            qualified_name: 'librum/tabletop/game_systems',
             repository:     repository
           )
         end
@@ -88,7 +92,7 @@ RSpec.describe Loader::Middleware::FindSource do
 
         let(:expected_error) do
           Cuprum::Collections::Loader::Errors::CollectionError.new(
-            qualified_name: 'sources',
+            qualified_name: 'librum/tabletop/sources',
             repository:     repository
           )
         end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_27_180011) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_134638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -89,6 +89,58 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_27_180011) do
     t.index ["email"], name: "index_librum_iam_users_on_email", unique: true
     t.index ["slug"], name: "index_librum_iam_users_on_slug", unique: true
     t.index ["username"], name: "index_librum_iam_users_on_username", unique: true
+  end
+
+  create_table "librum_tabletop_game_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "publisher_id"
+    t.index ["name"], name: "index_librum_tabletop_game_settings_on_name", unique: true
+    t.index ["publisher_id"], name: "index_librum_tabletop_game_settings_on_publisher_id"
+    t.index ["slug"], name: "index_librum_tabletop_game_settings_on_slug", unique: true
+  end
+
+  create_table "librum_tabletop_game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.string "edition", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "publisher_id"
+    t.index ["name", "edition"], name: "index_librum_tabletop_game_systems_on_name_and_edition", unique: true
+    t.index ["publisher_id"], name: "index_librum_tabletop_game_systems_on_publisher_id"
+    t.index ["slug"], name: "index_librum_tabletop_game_systems_on_slug", unique: true
+  end
+
+  create_table "librum_tabletop_publishers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.string "website", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_librum_tabletop_publishers_on_name", unique: true
+    t.index ["slug"], name: "index_librum_tabletop_publishers_on_slug", unique: true
+  end
+
+  create_table "librum_tabletop_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
+    t.jsonb "data", default: {}, null: false
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "game_setting_id"
+    t.uuid "game_system_id"
+    t.uuid "publisher_id"
+    t.uuid "user_id"
+    t.index ["game_setting_id"], name: "index_librum_tabletop_sources_on_game_setting_id"
+    t.index ["game_system_id"], name: "index_librum_tabletop_sources_on_game_system_id"
+    t.index ["name", "game_system_id", "publisher_id"], name: "index_tabletop_sources_on_name_and_system_and_publisher_ids", unique: true
+    t.index ["publisher_id"], name: "index_librum_tabletop_sources_on_publisher_id"
+    t.index ["slug", "game_system_id"], name: "index_tabletop_sources_on_slug_and_game_system_id", unique: true
+    t.index ["user_id"], name: "index_librum_tabletop_sources_on_user_id"
   end
 
   create_table "publishers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

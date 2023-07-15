@@ -52,7 +52,7 @@ RSpec.describe Core::PublishersController, type: :controller do
 
     it { expect(resource.permitted_attributes).to be == permitted_attributes }
 
-    it { expect(resource.resource_class).to be == Publisher }
+    it { expect(resource.resource_class).to be == Librum::Tabletop::Publisher }
 
     it { expect(resource.resource_name).to be == 'publishers' }
 

@@ -33,7 +33,7 @@ module Actions::References
     end
 
     def sources_collection
-      repository.find_or_create(record_class: Source)
+      repository.find_or_create(record_class: Librum::Tabletop::Source)
     end
 
     def update_entity(attributes:)
