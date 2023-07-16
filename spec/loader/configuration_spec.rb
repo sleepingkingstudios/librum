@@ -18,11 +18,11 @@ RSpec.describe Loader::Configuration do
   describe '::CORE_CLASSES' do
     let(:expected) do
       [
-        Publisher,
-        GameSetting,
-        GameSystem,
-        Sources::Book,
-        Sources::Website
+        Librum::Tabletop::Publisher,
+        Librum::Tabletop::GameSetting,
+        Librum::Tabletop::GameSystem,
+        Librum::Tabletop::Sources::Book,
+        Librum::Tabletop::Sources::Website
       ]
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Loader::Configuration do
   describe '.repository' do
     let(:expected_classes) do
       [
-        Source,
+        Librum::Tabletop::Source,
         *described_class::CORE_CLASSES
       ]
     end

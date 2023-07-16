@@ -20,7 +20,7 @@ module Authentication
     end
 
     middleware Librum::Core::Actions::View::Middleware::PageNavigation.new(
-      navigation: CoreController.navigation
+      navigation: Librum::Tabletop::Engine.config.page_navigation
     )
 
     middleware Librum::Core::Actions::View::Middleware::ResourceBreadcrumbs.new(

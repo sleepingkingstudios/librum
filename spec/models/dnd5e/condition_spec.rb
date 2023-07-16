@@ -2,10 +2,8 @@
 
 require 'rails_helper'
 
-require 'support/contracts/models/reference_contracts'
-
 RSpec.describe Dnd5e::Condition, type: :model do
-  include Spec::Support::Contracts::Models::ReferenceContracts
+  include Librum::Tabletop::RSpec::Contracts::Models::ReferenceContracts
 
   subject(:reference) { described_class.new(attributes) }
 
@@ -27,7 +25,7 @@ RSpec.describe Dnd5e::Condition, type: :model do
     }
   end
 
-  include_contract 'should be a reference', type: nil
+  include_contract 'should be a reference', type: 'Dnd5e::Condition'
 
   include_contract 'should define attribute',
     :description,

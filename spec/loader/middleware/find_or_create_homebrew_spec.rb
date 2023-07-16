@@ -49,7 +49,7 @@ RSpec.describe Loader::Middleware::FindOrCreateHomebrew do
 
       it 'should create a homebrew source' do
         expect { call_middleware }
-          .to change(Sources::Homebrew, :count)
+          .to change(Librum::Tabletop::Sources::Homebrew, :count)
           .by(1)
       end
 
@@ -79,7 +79,10 @@ RSpec.describe Loader::Middleware::FindOrCreateHomebrew do
 
       before(:example) { homebrew.save(validate: false) }
 
-      it { expect { call_middleware }.not_to change(Sources::Homebrew, :count) }
+      it 'should not create a homebrew source' do
+        expect { call_middleware }
+          .not_to change(Librum::Tabletop::Sources::Homebrew, :count)
+      end
 
       it 'should set the source attributes' do
         call_middleware

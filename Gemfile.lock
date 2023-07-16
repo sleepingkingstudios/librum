@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-core
-  revision: f4a17b020864e4ce64910b968b30dd1927aebc8c
+  revision: 72a9cd1b269f67aa0a75f81705a1f6540f7d7546
   branch: main
   specs:
     librum-core (0.1.0)
@@ -54,6 +54,16 @@ GIT
       librum-core
       pg (~> 1.5)
       rails (~> 7.0.5)
+
+GIT
+  remote: https://github.com/sleepingkingstudios/librum-tabletop
+  revision: d11ee9888baf951bb91bc5a2e065f0327d960b55
+  branch: main
+  specs:
+    librum-tabletop (0.1.0)
+      librum-core
+      pg (~> 1.5)
+      rails (~> 7.0.6)
 
 GEM
   remote: https://rubygems.org/
@@ -356,6 +366,7 @@ DEPENDENCIES
   jwt (~> 2.7)
   librum-core!
   librum-iam!
+  librum-tabletop!
   pg (~> 1.5)
   puma (~> 6.0)
   rack-cors (~> 2.0)

@@ -17,6 +17,9 @@ gem 'librum-core',
 gem 'librum-iam',
   branch: 'main',
   git:    'https://github.com/sleepingkingstudios/librum-iam'
+gem 'librum-tabletop',
+  branch: 'main',
+  git:    'https://github.com/sleepingkingstudios/librum-tabletop'
 
 ### Assets
 gem 'importmap-rails' # Use JavaScript with ESM import maps

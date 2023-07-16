@@ -16,9 +16,10 @@ module Loader::Middleware
     )
       super(
         attribute_name,
-        find_by:    'slug',
-        optional:   false,
-        repository: repository
+        find_by:        'slug',
+        optional:       false,
+        qualified_name: 'librum/tabletop/sources',
+        repository:     repository
       )
 
       @game_system_slug = game_system
@@ -58,8 +59,10 @@ module Loader::Middleware
     def game_systems_collection
       return @game_systems_collection if @game_systems_collection
 
-      if repository.key?('game_systems')
-        return @game_systems_collection = repository['game_systems']
+      if repository.key?('librum/tabletop/game_systems')
+        collection = repository['librum/tabletop/game_systems']
+
+        return @game_systems_collection = collection
       end
 
       failure(game_systems_collection_error)
@@ -67,7 +70,7 @@ module Loader::Middleware
 
     def game_systems_collection_error
       Cuprum::Collections::Loader::Errors::CollectionError.new(
-        qualified_name: 'game_systems',
+        qualified_name: 'librum/tabletop/game_systems',
         repository:     repository
       )
     end

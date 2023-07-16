@@ -5,16 +5,16 @@ module Loader
   module Configuration
     # The authentication record classes, for loading user fixtures.
     AUTHENTICATION_CLASSES = [
-      ::Librum::Iam::User
+      Librum::Iam::User
     ].freeze
 
     # The core Librum record classes, required to load any system data.
     CORE_CLASSES = [
-      ::Publisher,
-      ::GameSetting,
-      ::GameSystem,
-      ::Sources::Book,
-      ::Sources::Website
+      Librum::Tabletop::Publisher,
+      Librum::Tabletop::GameSetting,
+      Librum::Tabletop::GameSystem,
+      Librum::Tabletop::Sources::Book,
+      Librum::Tabletop::Sources::Website
     ].freeze
 
     # The reference classes defined for D&D Fifth Edition.
@@ -34,7 +34,7 @@ module Loader
     def self.repository(*record_classes)
       repository = Cuprum::Rails::Repository.new
 
-      repository.find_or_create(record_class: Source)
+      repository.find_or_create(record_class: Librum::Tabletop::Source)
 
       CORE_CLASSES.each do |record_class|
         repository.find_or_create(record_class: record_class)

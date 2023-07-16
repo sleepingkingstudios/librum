@@ -20,7 +20,7 @@ class HomeController < Librum::Core::ViewController
   )
 
   middleware Librum::Core::Actions::View::Middleware::PageNavigation.new(
-    navigation: CoreController.navigation
+    navigation: Librum::Tabletop::Engine.config.page_navigation
   )
 
   action :not_found, Librum::Core::Actions::View::RenderPage, member: false

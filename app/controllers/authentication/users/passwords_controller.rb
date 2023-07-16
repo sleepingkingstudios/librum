@@ -57,7 +57,7 @@ module Authentication::Users
     responder :html, Authentication::Users::PasswordsController::Responder
 
     middleware Librum::Core::Actions::View::Middleware::PageNavigation.new(
-      navigation: CoreController.navigation
+      navigation: Librum::Tabletop::Engine.config.page_navigation
     )
 
     middleware Librum::Core::Actions::View::Middleware::PageBreadcrumbs.new(

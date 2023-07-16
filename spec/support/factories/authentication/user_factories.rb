@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :authentication_user, class: 'Librum::Iam::User' do
+  factory :authentication_user,
+    class:   'Librum::Iam::User',
+    aliases: %i[user] \
+  do
     id { SecureRandom.uuid }
 
     transient do

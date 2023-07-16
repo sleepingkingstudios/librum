@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  mount Librum::Tabletop::Engine, at: '/core'
+
   namespace :authentication do
     resource :session, only: %i[create destroy]
     resource :user,    only: %i[show] do
@@ -12,10 +14,6 @@ Rails.application.routes.draw do
         controller: 'users/passwords',
         only:       %i[update]
     end
-  end
-
-  namespace :core do
-    resources :publishers, only: %i[index show]
   end
 
   get '/', to: 'home#show'
