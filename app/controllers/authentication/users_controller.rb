@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'librum/core/actions/view/middleware/page_navigation'
-require 'librum/core/actions/view/middleware/resource_breadcrumbs'
-
 module Authentication
   # Controller for managing the current user.
   class UsersController < Librum::Iam::View::UsersController

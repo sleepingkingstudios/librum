@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-core
-  revision: 72a9cd1b269f67aa0a75f81705a1f6540f7d7546
+  revision: 89031bb081044c66ad28c57ca36965e724b63b27
   branch: main
   specs:
     librum-core (0.1.0)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-iam
-  revision: 599324809d2cfde5335a21fbdb1df2b8e3d6bcb8
+  revision: ea2cb19f9e18e2825a2c2f78309646139404e957
   branch: main
   specs:
     librum-iam (0.1.0)
@@ -57,7 +57,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-tabletop
-  revision: d11ee9888baf951bb91bc5a2e065f0327d960b55
+  revision: 919a9961b22bbeea1f9c652edf97d16595fe6e8a
   branch: main
   specs:
     librum-tabletop (0.1.0)

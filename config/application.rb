@@ -32,6 +32,8 @@ module Librum
 
     # Configure autoload paths.
     config.autoload_paths << "#{root}/lib"
+    config.autoload_paths << "#{Librum::Core::Engine.root}/lib"
+    config.autoload_paths << "#{Librum::Iam::Engine.root}/lib"
     config.autoload_paths << "#{Librum::Tabletop::Engine.root}/lib"
   end
 end
