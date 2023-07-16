@@ -103,7 +103,9 @@ RSpec.describe Authentication::Users::PasswordsController, type: :controller do
     include_contract 'should define middleware',
       lambda {
         be_a(Librum::Core::Actions::View::Middleware::PageNavigation)
-          .and have_attributes(navigation: CoreController.navigation)
+          .and have_attributes(
+            navigation: Librum::Tabletop::Engine.config.page_navigation
+          )
       }
 
     include_contract 'should define middleware',

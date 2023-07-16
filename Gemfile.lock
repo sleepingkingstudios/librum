@@ -57,7 +57,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-tabletop
-  revision: 74773d5188bcaf28c662d754df76f67c84574c13
+  revision: d11ee9888baf951bb91bc5a2e065f0327d960b55
   branch: main
   specs:
     librum-tabletop (0.1.0)
