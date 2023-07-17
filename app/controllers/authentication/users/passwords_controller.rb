@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'librum/core/actions/view/middleware/page_breadcrumbs'
-require 'librum/core/actions/view/middleware/page_navigation'
-require 'librum/iam/authentication/middleware/regenerate_session'
-
 module Authentication::Users
   # Controller for managing the current user's password.
   class PasswordsController < Librum::Iam::View::Users::PasswordsController

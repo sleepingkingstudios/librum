@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'librum/core/actions/view/middleware/page_breadcrumbs'
-require 'librum/core/actions/view/middleware/page_navigation'
-require 'librum/core/actions/view/render_page'
-
 # Basic controller for showing the Home page.
 class HomeController < Librum::Core::ViewController
   def self.breadcrumbs

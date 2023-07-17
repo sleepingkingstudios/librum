@@ -3,8 +3,6 @@
 require 'cuprum/collections/commands/upsert'
 require 'cuprum/collections/loader'
 
-require 'librum/iam/authentication/passwords/generate'
-
 module Loader::Middleware
   # Middleware for generating a password credential for a user.
   class GeneratePassword <

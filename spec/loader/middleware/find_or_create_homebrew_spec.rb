@@ -8,9 +8,9 @@ RSpec.describe Loader::Middleware::FindOrCreateHomebrew do
   let(:repository) { Cuprum::Rails::Repository.new }
 
   describe '#call' do
-    let(:attributes)   { FactoryBot.attributes_for(:authentication_user) }
+    let(:attributes)   { FactoryBot.attributes_for(:user) }
     let(:action)       { 'create' }
-    let(:user)         { FactoryBot.create(:authentication_user) }
+    let(:user)         { FactoryBot.create(:user) }
     let(:result)       { Cuprum::Result.new(value: [action, user]) }
     let(:next_command) { instance_double(Cuprum::Command, call: result) }
 

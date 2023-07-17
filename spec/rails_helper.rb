@@ -14,7 +14,6 @@ if Rails.env.production?
 end
 
 require 'rspec/rails'
-require 'librum/core/rspec/component_helpers'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Checks for pending migrations and applies them before tests are run.
@@ -28,6 +27,7 @@ rescue ActiveRecord::PendingMigrationError => e
   # :nocov:
 end
 
+Librum::Iam::RSpec::Factories.define_factories
 Librum::Tabletop::RSpec::Factories.define_factories
 
 RSpec.configure do |config|

@@ -2,8 +2,6 @@
 
 require 'rails_helper'
 
-require 'librum/iam/authentication/passwords/match'
-
 RSpec.describe Loader::Middleware::GeneratePassword do
   subject(:middleware) { described_class.new(repository: repository) }
 
