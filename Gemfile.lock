@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/cuprum-rails
-  revision: dd3fb62911a71e9d4d3f385e567e96ee4e09b4e9
+  revision: a1165ae57b936b8dc8249bfe1b450a29e138f34b
   branch: main
   specs:
     cuprum-rails (0.2.0.alpha)
@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-core
-  revision: 89031bb081044c66ad28c57ca36965e724b63b27
+  revision: 065a2f774a1b49c7829d74c6399666cd6eb13dc1
   branch: main
   specs:
     librum-core (0.1.0)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-iam
-  revision: ea2cb19f9e18e2825a2c2f78309646139404e957
+  revision: 5b74a9d7adcedb2e82840c5adb90d97f98e428d0
   branch: main
   specs:
     librum-iam (0.1.0)
@@ -57,7 +57,7 @@ GIT
 
 GIT
   remote: https://github.com/sleepingkingstudios/librum-tabletop
-  revision: 919a9961b22bbeea1f9c652edf97d16595fe6e8a
+  revision: 2ea4c3e06cae235e9f93f424792b580632ad9ef6
   branch: main
   specs:
     librum-tabletop (0.1.0)
@@ -194,8 +194,8 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.18.1)
-    net-imap (0.3.6)
+    minitest (5.19.0)
+    net-imap (0.3.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -340,12 +340,12 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    websocket-driver (0.7.5)
+    websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.8)
+    zeitwerk (2.6.9)
 
 PLATFORMS
   x86_64-darwin-20

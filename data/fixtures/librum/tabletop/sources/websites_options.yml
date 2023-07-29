@@ -1,14 +1,22 @@
 ---
+game_setting:
+  middleware:
+    Cuprum::Collections::Loader::Middleware::FindAssociation:
+      find_by:        slug
+      optional:       true
+      qualified_name: librum/tabletop/game_settings
 game_system:
   middleware:
     Cuprum::Collections::Loader::Middleware::FindAssociation:
-      find_by: slug
+      find_by:        slug
+      qualified_name: librum/tabletop/game_systems
 middleware:
   Loader::Middleware::GenerateSlug:
     attribute_name: name
 publisher:
   middleware:
     Cuprum::Collections::Loader::Middleware::FindAssociation:
-      find_by: slug
+      find_by:        slug
+      qualified_name: librum/tabletop/publishers
 require:
   - cuprum/collections/loader/middleware/find_association

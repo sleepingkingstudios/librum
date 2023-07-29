@@ -1,11 +1,10 @@
 ---
-- name:      Marbles
-  publisher: crystal-sphere-publications
-- name:      Nothing To Lose But Your Tentacles
-  slug:      nothing-to-lose-but-your-tentacles-1e
-  edition:   1st Edition
-  publisher: flumph-free-press
-- name:      Nothing To Lose But Your Tentacles
-  slug:      nothing-to-lose-but-your-tentacles-2e
-  edition:   2nd Edition
-  publisher: flumph-free-press
+- name:      'Gnome: The Anklebiting'
+  publisher: underhill-publishing
+- name:      Escape Velocity
+  slug:      escape-velocity
+  publisher: free-stars-gazette
+- name:      Escape Velocity
+  slug:      escape-velocity-override
+  edition:   Override
+  publisher: free-stars-gazette
