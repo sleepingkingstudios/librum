@@ -1,22 +1,22 @@
 ---
-- name:        Squamous Reference Document
-  game_system: nothing-to-lose-but-your-tentacles-2e
-  publisher:   flumph-free-press
+- name:        User Manual
+  game_system: escape-velocity
+  publisher:   free-stars-gazette
+  legacy:      true
+  official:    true
+  playtest:    false
+  base_url:    www.example.com/escape-velocity-user-manual
+- name:        User Manual
+  game_system: escape-velocity-override
+  publisher:   free-stars-gazette
   legacy:      false
   official:    true
   playtest:    false
-  base_url:    www.example.com/squamous-reference-document
-- name:        Unearthed Abominations
-  game_system: nothing-to-lose-but-your-tentacles-2e
-  publisher:   flumph-free-press
-  legacy:      false
-  official:    true
-  playtest:    true
-  base_url:    www.example.com/unearthed-abominations
-- name:        Secrets of the Flumph
-  game_system: nothing-to-lose-but-your-tentacles-2e
-  publisher:   spelljammer-monthly
+  base_url:    www.example.com/escape-velocity-override-user-manual
+- name:        Modding Reference Document
+  game_system: escape-velocity-override
+  publisher:   free-stars-gazette
   legacy:      false
   official:    false
-  playtest:    false
-  base_url:    www.example.com/unearthed-abominations
+  playtest:    true
+  base_url:    www.example.com/modding-reference-document
