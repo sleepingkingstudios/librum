@@ -4,11 +4,10 @@ source 'https://rubygems.org'
 
 ruby '3.2.2'
 
-gem 'rails', '~> 7.0.4'
+gem 'rails', '~> 7.0.7', '>= 7.0.7.1'
 
 gem 'pg', '~> 1.5' # Use postgresql as the database for Active Record
-gem 'puma', '~> 6.0' # Use the Puma web server
-gem 'rack-cors', '~> 2.0'
+gem 'puma', '~> 6.3', '>= 6.3.1' # Use the Puma web server
 
 ### Engines
 gem 'librum-core',
