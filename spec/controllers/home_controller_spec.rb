@@ -39,11 +39,11 @@ RSpec.describe HomeController, type: :controller do
 
   include_contract 'should define action',
     :not_found,
-    Librum::Core::Actions::View::RenderPage,
+    Librum::Core::Actions::View::NotFound,
     member: false
 
   include_contract 'should define action',
     :show,
-    Librum::Core::Actions::View::RenderPage,
+    Cuprum::Rails::Action,
     member: false
 end

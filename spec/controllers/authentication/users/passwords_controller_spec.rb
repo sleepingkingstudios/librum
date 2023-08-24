@@ -145,7 +145,7 @@ RSpec.describe Authentication::Users::PasswordsController, type: :controller do
 
   include_contract 'should define action',
     :edit,
-    Librum::Core::Actions::View::RenderPage,
+    Cuprum::Rails::Action,
     member: false
 
   include_contract 'should define action',

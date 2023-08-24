@@ -19,7 +19,7 @@ class HomeController < Librum::Core::ViewController
     navigation: Librum::Tabletop::Engine.config.page_navigation
   )
 
-  action :not_found, Librum::Core::Actions::View::RenderPage, member: false
+  action :not_found, Librum::Core::Actions::View::NotFound, member: false
 
-  action :show,      Librum::Core::Actions::View::RenderPage, member: false
+  action :show,      Cuprum::Rails::Action,                 member: false
 end

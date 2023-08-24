@@ -18,11 +18,11 @@ html, body, body > div.page {
   padding: 1.5rem 0;
 }
 
-.page > .banner .subtitle {
+.page > .banner .title {
   margin-bottom: 0;
 }
 
-.page > .banner .subtitle:last-child {
+.page > .banner .title:last-child {
   margin-bottom: 1.5rem;
 }
 
