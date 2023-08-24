@@ -16,7 +16,9 @@
     <%=
       render(
         Librum::Core::View::Layouts::Page.new(
-          alerts: flash.each.to_h,
+          alerts:   flash.each.to_h,
+          subtitle: 'Tabletop Companion',
+          title:    'Librum',
           **@result.metadata.fetch(:page, {})
         )
       ) do |component|

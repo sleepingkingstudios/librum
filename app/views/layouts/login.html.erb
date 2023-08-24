@@ -17,7 +17,9 @@
       render(
         Librum::Core::View::Layouts::Page.new(
           alerts:     flash.each.to_h,
-          navigation: false
+          navigation: false,
+          subtitle:   'Tabletop Companion',
+          title:      'Librum'
         )
       ) do
     %>
