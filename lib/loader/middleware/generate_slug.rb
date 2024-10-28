@@ -18,7 +18,7 @@ module Loader::Middleware
         attributes['slug'] = step { generate_slug(attributes) }
       end
 
-      super(next_command, attributes: attributes)
+      super
     end
   end
 end

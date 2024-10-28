@@ -8,7 +8,7 @@
 if Rails.env.development?
   require 'annotate'
 
-  task :set_annotation_options do # rubocop:disable Metrics/BlockLength, Rake/Desc, Rails/RakeEnvironment
+  task :set_annotation_options do # rubocop:disable Metrics/BlockLength, Rails/RakeEnvironment
     # rubocop:disable Layout/HashAlignment
 
     # You can override any of these by setting an environment variable of the
