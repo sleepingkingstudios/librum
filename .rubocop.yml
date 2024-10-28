@@ -1,8 +1,9 @@
 require:
   - rubocop-capybara
+  - rubocop-factory_bot
   - rubocop-rails
-  - rubocop-rake
   - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   NewCops: enable
@@ -34,6 +35,9 @@ RSpec:
         - xinclude_contract
         - xinclude_examples
         - xwrap_examples
+
+FactoryBot/SyntaxMethods:
+  Enabled: false
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
@@ -69,10 +73,10 @@ Metrics/ModuleLength:
 RSpec/BeNil:
   Enabled: false
 
-RSpec/ExampleWording:
+RSpec/Eq:
   Enabled: false
 
-RSpec/FactoryBot/SyntaxMethods:
+RSpec/ExampleWording:
   Enabled: false
 
 RSpec/HookArgument:
@@ -88,7 +92,7 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Max: 5
 
-RSpec/Rails/InferredSpecType:
+RSpecRails/InferredSpecType:
   Enabled: false
 
 Style/ClassAndModuleChildren:

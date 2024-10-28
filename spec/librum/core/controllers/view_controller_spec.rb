@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Librum::Core::ViewController do # rubocop:disable RSpec/FilePath
+RSpec.describe Librum::Core::ViewController do # rubocop:disable RSpec/SpecFilePathFormat
   include Librum::Core::RSpec::Contracts::ControllerContracts
 
   describe '.middleware' do

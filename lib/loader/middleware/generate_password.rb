@@ -31,9 +31,7 @@ module Loader::Middleware
     end
 
     def process(next_command, attributes:) # rubocop:disable Metrics/MethodLength
-      if attributes['password'].blank?
-        return super(next_command, attributes: attributes)
-      end
+      return super if attributes['password'].blank?
 
       attributes   = attributes.dup
       password     = attributes.delete('password')
