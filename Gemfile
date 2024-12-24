@@ -2,9 +2,9 @@
 
 source 'https://rubygems.org'
 
-ruby '3.3.5'
+ruby '3.3.6'
 
-gem 'rails', '~> 7.0.8', '>= 7.0.8.6'
+gem 'rails', '~> 7.0.8', '>= 7.0.8.7'
 
 gem 'pg', '~> 1.5' # Use postgresql as the database for Active Record
 gem 'puma', '~> 6.4', '>= 6.4.3' # Use the Puma web server
@@ -54,11 +54,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0'
   gem 'rspec-sleeping_king_studios', '~> 2.7'
 
-  gem 'rubocop', '~> 1.67'
+  gem 'rubocop', '~> 1.69', '>= 1.69.2'
   gem 'rubocop-capybara', '~> 2.21'
-  gem 'rubocop-factory_bot', '~> 2.26'
+  gem 'rubocop-factory_bot', '~> 2.26', '>= 2.26.1'
   gem 'rubocop-rails', '~> 2.27' # https://docs.rubocop.org/rubocop-rails/
-  gem 'rubocop-rspec', '~> 3.2'  # https://docs.rubocop.org/rubocop-rspec/
+  gem 'rubocop-rspec', '~> 3.3'  # https://docs.rubocop.org/rubocop-rspec/
   gem 'rubocop-rspec_rails', '~> 2.30'
 
   gem 'simplecov', '~> 0.21'
