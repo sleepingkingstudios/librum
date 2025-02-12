@@ -54,11 +54,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0'
   gem 'rspec-sleeping_king_studios', '~> 2.7'
 
-  gem 'rubocop', '~> 1.69', '>= 1.69.2'
+  gem 'rubocop', '~> 1.71'
   gem 'rubocop-capybara', '~> 2.21'
-  gem 'rubocop-factory_bot', '~> 2.26', '>= 2.26.1'
-  gem 'rubocop-rails', '~> 2.27' # https://docs.rubocop.org/rubocop-rails/
-  gem 'rubocop-rspec', '~> 3.3'  # https://docs.rubocop.org/rubocop-rspec/
+  gem 'rubocop-factory_bot', '~> 2.26'
+  gem 'rubocop-rails', '~> 2.29' # https://docs.rubocop.org/rubocop-rails/
+  gem 'rubocop-rspec', '~> 3.4'  # https://docs.rubocop.org/rubocop-rspec/
   gem 'rubocop-rspec_rails', '~> 2.30'
 
   gem 'simplecov', '~> 0.21'
