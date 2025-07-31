@@ -1,9 +1,12 @@
-require:
+plugins:
   - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-rails
   - rubocop-rspec
   - rubocop-rspec_rails
+
+inherit_gem:
+  rspec-sleeping_king_studios: config/rubocop-rspec.yml
 
 AllCops:
   NewCops: enable
@@ -81,6 +84,9 @@ RSpec/ExampleWording:
 
 RSpec/HookArgument:
   EnforcedStyle: example
+
+RSpec/IncludeExamples:
+  Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
   Max: 10

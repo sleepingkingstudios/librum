@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.3.8'
+ruby '3.3.9'
 
 gem 'rails', '~> 7.0.8', '>= 7.0.8.7'
 
@@ -52,14 +52,14 @@ group :development, :test do
 
   gem 'rspec', '~> 3.10'
   gem 'rspec-rails', '~> 5.0'
-  gem 'rspec-sleeping_king_studios', '~> 2.7'
+  gem 'rspec-sleeping_king_studios', '~> 2.8'
 
-  gem 'rubocop', '~> 1.71'
-  gem 'rubocop-capybara', '~> 2.21'
-  gem 'rubocop-factory_bot', '~> 2.26'
-  gem 'rubocop-rails', '~> 2.29' # https://docs.rubocop.org/rubocop-rails/
-  gem 'rubocop-rspec', '~> 3.4'  # https://docs.rubocop.org/rubocop-rspec/
-  gem 'rubocop-rspec_rails', '~> 2.30'
+  gem 'rubocop', '~> 1.79'
+  gem 'rubocop-capybara', '~> 2.22'
+  gem 'rubocop-factory_bot', '~> 2.27'
+  gem 'rubocop-rails', '~> 2.32' # https://docs.rubocop.org/rubocop-rails/
+  gem 'rubocop-rspec', '~> 3.6'  # https://docs.rubocop.org/rubocop-rspec/
+  gem 'rubocop-rspec_rails', '~> 2.31'
 
   gem 'simplecov', '~> 0.21'
 end
